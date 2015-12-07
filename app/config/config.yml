@@ -35,6 +35,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'ESocialAdminBundle:Form:esocial.theme.fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -80,6 +82,6 @@ swiftmailer:
     spool:     { type: memory }
 
 fos_user:
-   db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-   firewall_name: main
-   user_class: Vallas\ModelBundle\Entity\User
+    db_driver: orm
+    firewall_name: main
+    user_class: ESocial\ModelBundle\Entity\User
