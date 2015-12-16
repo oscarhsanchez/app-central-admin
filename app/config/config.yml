@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -84,4 +84,17 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: ESocial\ModelBundle\Entity\User
+    user_class: Vallas\ModelBundle\Entity\User
+
+e_social_admin:
+    role_class: Vallas\ModelBundle\Entity\Role
+
+jms_translation:
+    configs:
+        app:
+            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+            output_dir: %kernel.root_dir%/Resources/translations
+            ignored_domains: [routes]
+            excluded_names: []
+            excluded_dirs: [cache, data, logs]
+            extractors: []

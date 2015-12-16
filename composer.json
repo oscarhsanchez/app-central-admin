@@ -22,7 +22,9 @@
         "esocial/esocial-admin-bundle": "dev-master",
         "esocial/esocial-model-bundle": "dev-master",
         "esocial/esocial-utils-bundle": "dev-master",
-        "vallas/model-bundle": "dev-master"
+        "vallas/model-bundle": "dev-master",
+        "jms/translation-bundle": "dev-master",
+        "jms/di-extra-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

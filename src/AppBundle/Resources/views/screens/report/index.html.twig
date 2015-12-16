@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Informes{% endblock %}
+{% block page_breadcrumb %}
+    <li class="active">
+        <strong>Informes</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Informes</h5>
+        </div>
+        <div class="ibox-content">
+
+            <div class="margin-b">
+                <a class="btn btn-white" title="Nuevo usuario" href="{{ path('report_add') }}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <strong>Añadir informe</strong>
+                </a>
+            </div>
+
+            <table id="dt-report-list" class="table table-striped table-bordered table-hover dataTables-example" >
+                <thead>
+                <tr>
+                    <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Habilitado</th>
+                    <th>Activo</th>
+                    <th>Fecha alta</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var report_list = null;
+        $(document).ready(function() {
+            var table_columns = [
+                {
+                    "mData": function (source) {
+                        return '<input type="checkbox" class="i-checks" value="'+source.token+'" />';
+                    }
+                },
+                {"mData": "name"},
+                {"mData": "surnames"},
+                {
+                    "mData": function (source){
+                        return source.enabled ? '<span class="glyphicon glyphicon-ok"></span>' : '';
+                    }
+                },
+                {
+                    "mData": function (source){
+                        return source.active ? '<span class="glyphicon glyphicon-ok"></span>' : '';
+                    }
+                },
+                {"mData": "created_at"},
+                {
+                    "mData": function (source) {
+                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_edit', { token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; Editar</a>&nbsp; ';
+                        if (source.enabled)
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'disable', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-off"></span> &nbsp; Deshabilitar</a>&nbsp; ';
+                        else
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'enable', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-off"></span> &nbsp; Habilitar</a>&nbsp; ';
+
+                        if (source.active)
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'deactivate', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-minus-sign"></span> &nbsp; Desactivar</a>&nbsp; ';
+                        else
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'activate', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-plus-sign"></span> &nbsp; Activar</a>&nbsp; ';
+                        return actions;
+                    }
+                }
+            ];
+
+            jQuery(document).ready(function(){
+                report_list = TableManaged.init(
+                        '#dt-report-list',
+                        '{{ url('report_list_json') }}',
+                        null,
+                        [],
+                        table_columns,
+                        '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+                );
+            });
+        });
+
+        function report_list_reload(){
+            report_list.api().ajax.reload();
+        }
+    </script>
+{% endblock %}
