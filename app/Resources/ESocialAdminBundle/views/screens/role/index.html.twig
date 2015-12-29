@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'esocial_admin.menu.title.users'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li class="active">
+        <strong>{{ 'esocial_admin.menu.title.roles'|trans }}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{{ 'esocial_admin.menu.title.roles'|trans }}</h5>
+        </div>
+        <div class="ibox-content">
+
+            <table id="dt-role-list" class="table table-striped table-bordered table-hover dataTables-example" >
+                <thead>
+                <tr>
+                    <th>{{ 'esocial_admin.screens.roles.datatable.code'|trans }}</th>
+                    <th>{{ 'esocial_admin.screens.roles.datatable.name'|trans }}</th>
+                    <th>{{ 'screens.roles.datatable.actions'|trans }}</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var role_list = null;
+        $(document).ready(function() {
+            var table_columns = [
+                {"mData": "code"},
+                {"mData": "name"},
+                {
+                    "mData": function (source){
+                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('role_permissions_list', { id: source.token, _locale: '{{ app.request.get('_locale') }}' }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; {{ 'screens.roles.actions.edit_permissions'|trans }}</a>&nbsp; ';
+                        return actions;
+                    }
+                }
+            ];
+
+            jQuery(document).ready(function () {
+                role_list = TableManaged.init(
+                        '#dt-role-list',
+                        '{{ url('esocial_admin_role_list_json') }}',
+                        null,
+                        [],
+                        table_columns,
+                        '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+                );
+            });
+        });
+
+        function role_list_reload(){
+            role_list.api().ajax.reload();
+        }
+
+    </script>
+{% endblock %}

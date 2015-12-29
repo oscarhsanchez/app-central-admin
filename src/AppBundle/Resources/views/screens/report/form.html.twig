@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'menu.title.reports'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li>
+        <strong><a href="{{ path('report_list') }}">{{ 'menu.title.reports'|trans }}</a></strong>
+    </li>
+    <li class="active">
+        <strong>{% if entity is defined and entity.id is not empty %}{{ entity.name }}{% else %}{{ 'screens.reports.actions.add'|trans }}{% endif %}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{% if entity is defined and entity.id is not empty %}{{ entity.name }}{% else %}{{ 'screens.reports.actions.add'|trans }}{% endif %}</h5>
+        </div>
+        <div class="ibox-content">
+
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+            {% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+            {{ form_start(form, { method: 'POST', action: entity is defined and entity.id is not empty ? path('report_update', {id: entity.token }) : path('report_create') }) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.jasper_report_id) }}
+            {{ form_row(form.route) }}
+
+            <div class="clearfix">
+                <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
