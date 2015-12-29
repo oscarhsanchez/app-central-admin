@@ -7,3 +7,10 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    kernel.listener.RequestListener:
+            class: VallasSecurityBundle\EventListener\RequestListener
+            tags:
+                - { name: kernel.event_listener, event: kernel.controller, method: onFilterController }
+                - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+            arguments: [@service_container, @security.context, @doctrine.orm.entity_manager, @annotations.reader, @router, @templating]
