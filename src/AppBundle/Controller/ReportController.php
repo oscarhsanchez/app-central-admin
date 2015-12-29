@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Form\ReportType;
 use ESocial\UtilBundle\Util\DataTables\EntityJsonList;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 
 /**
@@ -33,7 +34,7 @@ class ReportController extends VallasAdminController
         $repository = $em->getRepository('VallasModelBundle:Report');
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'id', 'name', ));
+        $jsonList->setFieldsToGet(array('token', 'id', 'name', 'jasper_report_id', 'route', 'active'));
         $jsonList->setSearchFields(array('name'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($repository->getAllQueryBuilder());
@@ -48,6 +49,8 @@ class ReportController extends VallasAdminController
      * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="report_list_json")
      *
      * @Method("GET")
+     * @RequiresPermission(submodule="reports", permissions="C,R,W,P")
+     * @RequiresPermission(submodule="administracion", permissions="U,W")
      */
     public function listJsonAction(Request $request)
     {
@@ -65,11 +68,13 @@ class ReportController extends VallasAdminController
     /**
      * @Route("/", name="report_list")
      * @Method("GET")
+     * @RequiresPermission(submodule="reports", permissions="C,R,W,P")
+     * @RequiresPermission(submodule="administracion", permissions="U,W")
      */
     public function indexAction(Request $request)
     {
 
-        return $this->render('VallasAdminBundle:screens/report:index.html.twig', array(
+        return $this->render('AppBundle:screens/report:index.html.twig', array(
 
         ));
     }
@@ -83,14 +88,14 @@ class ReportController extends VallasAdminController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id, array('translations' => null));
+        $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id);
         $this->initLanguagesForEntity($entity);
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Report entity.');
         }
 
-        return $this->render('VallasAdminBundle:screens/report:form.html.twig', array(
+        return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
             'form' => $this->createForm(new ReportType(), $entity)->createView()
         ));
@@ -108,11 +113,7 @@ class ReportController extends VallasAdminController
 
                 $post = $this->postVar($form->getName());
 
-                foreach($entity->getCategories() as $c){
-                    $entity->removeCategory($c);
-                }
-                if ($post['category']) $entity->addCategory($em->getRepository('VallasModelBundle:Category')->find($post['category']));
-                if ($post['subcategory']) $entity->addCategory($em->getRepository('VallasModelBundle:Category')->find($post['subcategory']));
+                $entity->setActive(true);
 
                 $em->persist($entity);
                 $em->flush();
@@ -138,7 +139,7 @@ class ReportController extends VallasAdminController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id, array('translations' => null));
+        $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id);
         $this->initLanguagesForEntity($entity);
 
         if (!$entity){
@@ -153,7 +154,7 @@ class ReportController extends VallasAdminController
             return $this->redirect($this->generateUrl('report_edit', array('id' => $entity->getToken())));
         }
 
-        return $this->render('VallasAdminBundle:screens/report:form.html.twig', array(
+        return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView()
         ));
@@ -180,7 +181,7 @@ class ReportController extends VallasAdminController
             return $this->redirect($this->generateUrl('report_edit', array('id' => $entity->getToken())));
         }
 
-        return $this->render('VallasAdminBundle:screens/report:form.html.twig', array(
+        return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView()
         ));
@@ -198,7 +199,7 @@ class ReportController extends VallasAdminController
         $entity = new Report();
         $this->initLanguagesForEntity($entity);
 
-        return $this->render('VallasAdminBundle:screens/report:form.html.twig', array(
+        return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
             'form' => $this->createForm(new ReportType(), $entity)->createView()
         ));
@@ -211,9 +212,31 @@ class ReportController extends VallasAdminController
     public function selectAction(Request $request)
     {
 
-        return $this->render('VallasAdminBundle:screens/report:select.html.twig', array(
+        return $this->render('AppBundle:screens/report:select.html.twig', array(
             'getVars' => $this->getVar()
         ));
+    }
+
+    /**
+     * @Route("/{id}/delete", name="report_delete", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id);
+        if ($entity){
+            $entity->setActive(0);
+            $em->persist($entity);
+            $em->flush($entity);
+            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('form.notice.deleted_success'));
+        }else{
+            $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('form.notice.deleted_error'));
+        }
+
+        return $this->redirect($this->generateUrl('report_list'));
     }
 
 }

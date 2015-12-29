@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2015-12-17T10:07:13Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="0c4ddae17c4486030bc3bf951be64902b5c61802" resname="form.notice.saved_error">
+        <source>form.notice.saved_error</source>
+        <target>An error has ocurred</target>
+        <jms:reference-file line="125">AppBundle/Controller/ReportController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8a1b430ca014351ab9bf7844086318ec655238db" resname="form.notice.saved_success">
+        <source>form.notice.saved_success</source>
+        <target>Data have been saved correctly</target>
+        <jms:reference-file line="120">AppBundle/Controller/ReportController.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

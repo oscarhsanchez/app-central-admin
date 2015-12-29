@@ -12,6 +12,8 @@ class VallasAdminController extends ESocialController
 {
 
     public function initLanguagesForEntity($entity){
+        if (!$this->container->hasParameter('languages')) return;
+
         $languages = $this->container->getParameter('languages');
         $translationEntityClass = $entity->getTranslationEntityClass();
 

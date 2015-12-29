@@ -14,6 +14,8 @@
         </div>
         <div class="ibox-content">
 
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+
             <div class="margin-b">
                 <a class="btn btn-white" title="Nuevo usuario" href="{{ path('report_add') }}">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -26,10 +28,9 @@
                 <tr>
                     <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
                     <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Habilitado</th>
+                    <th>Jasper ID</th>
+                    <th>Ruta</th>
                     <th>Activo</th>
-                    <th>Fecha alta</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -46,30 +47,18 @@
                     }
                 },
                 {"mData": "name"},
-                {"mData": "surnames"},
-                {
-                    "mData": function (source){
-                        return source.enabled ? '<span class="glyphicon glyphicon-ok"></span>' : '';
-                    }
-                },
+                {"mData": "jasper_report_id"},
+                {"mData": "route"},
                 {
                     "mData": function (source){
                         return source.active ? '<span class="glyphicon glyphicon-ok"></span>' : '';
                     }
                 },
-                {"mData": "created_at"},
                 {
                     "mData": function (source) {
-                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_edit', { token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; Editar</a>&nbsp; ';
-                        if (source.enabled)
-                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'disable', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-off"></span> &nbsp; Deshabilitar</a>&nbsp; ';
-                        else
-                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'enable', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-off"></span> &nbsp; Habilitar</a>&nbsp; ';
+                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_edit', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; Editar</a>&nbsp; ';
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_delete', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-remove"></span> &nbsp; Eliminar</a>&nbsp; ';
 
-                        if (source.active)
-                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'deactivate', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-minus-sign"></span> &nbsp; Desactivar</a>&nbsp; ';
-                        else
-                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_action', { action: 'activate', token: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-plus-sign"></span> &nbsp; Activar</a>&nbsp; ';
                         return actions;
                     }
                 }
