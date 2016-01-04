@@ -21,3 +21,8 @@ parameters:
       version: '0.1'
       name: 'Vallas Admin Panel'
       logo: 'Your App logo path'
+
+      customization:
+        css:
+          primary_color: #1ab394
+          primary_color_hover: #18a689
