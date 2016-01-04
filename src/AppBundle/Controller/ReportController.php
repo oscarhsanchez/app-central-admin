@@ -49,7 +49,7 @@ class ReportController extends VallasAdminController
      * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="report_list_json")
      *
      * @Method("GET")
-     * @RequiresPermission(submodule="reports", permissions="C,R,W,P")
+     * @RequiresPermission(submodule="submodule_3", permissions="C,R,W,P")
      * @RequiresPermission(submodule="administracion", permissions="U,W")
      */
     public function listJsonAction(Request $request)
@@ -68,7 +68,7 @@ class ReportController extends VallasAdminController
     /**
      * @Route("/", name="report_list")
      * @Method("GET")
-     * @RequiresPermission(submodule="reports", permissions="C,R,W,P")
+     * @RequiresPermission(submodule="submodule_3", permissions="C,R,W,P")
      * @RequiresPermission(submodule="administracion", permissions="U,W")
      */
     public function indexAction(Request $request)
@@ -89,7 +89,7 @@ class ReportController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id);
-        $this->initLanguagesForEntity($entity);
+        //$this->initLanguagesForEntity($entity);
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Report entity.');
@@ -140,7 +140,7 @@ class ReportController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('VallasModelBundle:Report')->getOneByToken($id);
-        $this->initLanguagesForEntity($entity);
+        //$this->initLanguagesForEntity($entity);
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Report entity.');
@@ -170,7 +170,7 @@ class ReportController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
 
         $entity = new Report();
-        $this->initLanguagesForEntity($entity);
+        //$this->initLanguagesForEntity($entity);
         $params_original = array();
 
         $form = $this->createForm(new ReportType(), $entity);
@@ -197,7 +197,7 @@ class ReportController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
 
         $entity = new Report();
-        $this->initLanguagesForEntity($entity);
+        //$this->initLanguagesForEntity($entity);
 
         return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,

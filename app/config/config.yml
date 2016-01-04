@@ -37,6 +37,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'ESocialAdminBundle:Form:esocial.theme.fields.html.twig'
+    globals:
+        app_info: %app_info%
+        languages: %languages%
 
 # Assetic Configuration
 assetic:

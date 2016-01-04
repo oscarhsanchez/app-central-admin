@@ -15,6 +15,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        esocial_custom:
+            pattern: ^/custom/
+            security: false
         main:
             pattern: ^/
             form_login:

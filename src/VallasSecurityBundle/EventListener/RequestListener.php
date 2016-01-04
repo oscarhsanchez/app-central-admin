@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Vallas\ModelBundle\Entity\User;
 use VallasSecurityBundle\Annotation\RequiresPermission;
 use VallasSecurityBundle\Annotation\AvoidPermission;
 use VallasSecurityBundle\Exception\ControllerNotPermissionException;
@@ -79,10 +80,10 @@ class RequestListener
         if ($hasPermissionAnnotations){
 
             $allMethodAnnotations = $this->annotationReader->getMethodAnnotations($reflectionMethod);
-            $arrUserPermissions = array(
-                'submodulo1' => explode(',', 'C,R,U,D'),
-                'reports' => explode(',', 'P,T')
-            );
+
+            $user_roles = $user->getRoles();
+            $role = $this->entityManager->getRepository('VallasModelBundle:Role')->findOneBy(array('code' => $user_roles[0]));
+            $arrUserPermissions = $this->entityManager->getRepository('VallasModelBundle:SecuritySubmodulePermission')->getAllByRoleAndUser($role->getId(), $user->getId());
 
             //$hasPermission = $this->entityManager->getRepository('ModelBundle:SeguridadUsuarioAccion')->checkRequestUser($request, $this->security_context);
             $requiredPermissions = array();
