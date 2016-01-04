@@ -88,6 +88,7 @@ fos_user:
 
 e_social_admin:
     role_class: Vallas\ModelBundle\Entity\Role
+    user_type: AppBundle\Form\VallasUserType
 
 jms_translation:
     configs:

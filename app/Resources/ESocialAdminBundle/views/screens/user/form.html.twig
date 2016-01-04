@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'esocial_admin.menu.title.users'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li>
+        <strong><a href="{{ path('esocial_admin_user_list') }}">{{ 'esocial_admin.menu.title.users'|trans }}</a></strong>
+    </li>
+    <li class="active">
+        <strong>{% if entity is defined and entity.id is not empty %}{{ entity.name }} {{ entity.surnames }}{% else %}{{ 'esocial_admin.screens.users.actions.add'|trans }}{% endif %}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{% if entity is defined and entity.id is not empty %}{{ entity.name }} {{ entity.surnames }}{% else %}{{ 'esocial_admin.screens.users.actions.add'|trans }}{% endif %}</h5>
+        </div>
+        <div class="ibox-content">
+
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+            {% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+            {{ form_start(form, { method: 'POST', action: entity is defined and entity.id is not empty ? path('esocial_admin_user_update', {token: entity.token }) : path('esocial_admin_user_create') }) }}
+
+            {{ include('ESocialUtilBundle:Components:tabNavigation.html.twig', {
+                'entity': entity is defined ? entity : null,
+                'tab_selected' : 'general_data',
+                'template_path' : 'ESocialAdminBundle:screens/user/formtabs',
+                'tabs' : {
+                    'general_data': {
+                        'title': 'General data',
+                    },
+                    'permissions': {
+                        'title': 'Permissions'
+                    }
+                }
+            })
+            }}
+
+            <div class="clearfix">
+                <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'esocial_admin.screens.actions.save'|trans }}</strong></button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

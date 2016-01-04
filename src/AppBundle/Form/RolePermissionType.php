@@ -20,7 +20,7 @@ class RolePermissionType extends ESocialType {
     {
         parent::buildForm($builder, $options);
 
-        $post = $options['post'];
+        $user = array_key_exists('user', $options) ? $options['user'] : null;
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($builder){
             $form = $event->getForm();
@@ -34,7 +34,7 @@ class RolePermissionType extends ESocialType {
             $form->get('permission_D')->setData(in_array('D', $arrPermissions));
         });
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($builder, $post){
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($builder, $user){
             $form = $event->getForm();
             $data = $event->getData();
 
@@ -45,8 +45,8 @@ class RolePermissionType extends ESocialType {
             if (array_key_exists('permission_D', $data) && $data['permission_D'] == '1') $arrCRUD[] = 'D';
 
             $form->getData()->setPermissions(implode(',', $arrCRUD));
+            if ($user) $form->getData()->setUser($user);
         });
-
 
         $builder
             ->add('submodule', 'hidden_entity', array('label' => 'form.role_permissions.label.submodule', 'class' => 'VallasModelBundle:SecuritySubmodule'))
@@ -66,7 +66,7 @@ class RolePermissionType extends ESocialType {
     {
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\SecuritySubmodulePermission',
-            'post' => array(),
+            'user' => null
         ));
     }
 

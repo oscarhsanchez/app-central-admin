@@ -29,8 +29,7 @@ class RolePermissionsType extends ESocialType {
                 'allow_delete'   => false,
                 'allow_add'      => false,
                 'options' => array(
-                    'required' => true,
-                    'post' => $this->getPost()
+                    'required' => true
                 ),
             ));
     }
