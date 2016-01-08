@@ -17,6 +17,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    languages:
+      es: Español
+      en: English
+
     app_info:
       version: '0.1'
       name: 'Vallas Admin Panel'
