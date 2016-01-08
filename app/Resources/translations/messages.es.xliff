@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-01-08T16:40:19Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
+  <file date="2016-01-08T17:48:26Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -24,13 +24,13 @@
         <source>form.actions.execute</source>
         <target>Ejecutar</target>
         <jms:reference-file line="64">screens/report/index.html.twig</jms:reference-file>
-        <jms:reference-file line="42">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="44">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="60304cbc3122ba1cd083fbf49d186576f65516bd" resname="form.label.actions">
         <source>form.label.actions</source>
         <target>Acciones</target>
         <jms:reference-file line="36">screens/report/index.html.twig</jms:reference-file>
-        <jms:reference-file line="27">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="29">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="31">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="19">screens/report_subcategory/index.html.twig</jms:reference-file>
       </trans-unit>
@@ -70,7 +70,7 @@
         <source>form.report.label.category</source>
         <target>Categoría de informe</target>
         <jms:reference-file line="30">screens/report/index.html.twig</jms:reference-file>
-        <jms:reference-file line="24">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="26">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="32613abc2b4f39be1ca6ee49b9a04a67888767a1" resname="form.report.label.jasper_report_id">
         <source>form.report.label.jasper_report_id</source>
@@ -83,7 +83,7 @@
         <target>Nombre</target>
         <jms:reference-file line="47">AppBundle/Form/ReportType.php</jms:reference-file>
         <jms:reference-file line="32">screens/report/index.html.twig</jms:reference-file>
-        <jms:reference-file line="26">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="28">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c0b9bda0487d2f33876feb4286311efe68fd602b" resname="form.report.label.route">
         <source>form.report.label.route</source>
@@ -95,7 +95,7 @@
         <source>form.report.label.subcategory</source>
         <target>Subcategoría de informe</target>
         <jms:reference-file line="31">screens/report/index.html.twig</jms:reference-file>
-        <jms:reference-file line="25">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="27">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b89a2920d1dbaa3a21783de51d69d0e27f87ad19" resname="form.report_category.label.category">
         <source>form.report_category.label.category</source>
@@ -135,6 +135,13 @@
         <jms:reference-file line="13">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="6">screens/report_subcategory/form.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="e53118c8ff43ce2d7fb65d3c2bf989307854e289" resname="menu.title.report_execution">
+        <source>menu.title.report_execution</source>
+        <target>Ejecución de informes</target>
+        <jms:reference-file line="3">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="6">screens/report/list_for_execution.html.twig</jms:reference-file>
+        <jms:reference-file line="13">screens/report/list_for_execution.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="8693d9be16506ef2d26c6fb369800a2abae0b930" resname="menu.title.report_subcategories">
         <source>menu.title.report_subcategories</source>
         <target>Subcategorías de informe</target>
@@ -149,9 +156,6 @@
         <jms:reference-file line="3">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="6">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/report/index.html.twig</jms:reference-file>
-        <jms:reference-file line="3">screens/report/list_for_execution.html.twig</jms:reference-file>
-        <jms:reference-file line="6">screens/report/list_for_execution.html.twig</jms:reference-file>
-        <jms:reference-file line="13">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fade5716f6f7edd4411f68dd6027b18ace4a3990" resname="report.buttons.add">
         <source>report.buttons.add</source>
