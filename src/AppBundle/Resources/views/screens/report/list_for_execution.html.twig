@@ -1,21 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title %}{{ 'menu.title.reports'|trans }}{% endblock %}
+{% block page_title %}{{ 'menu.title.report_execution'|trans }}{% endblock %}
 {% block page_breadcrumb %}
     <li class="active">
-        <strong>{{ 'menu.title.reports'|trans }}</strong>
+        <strong>{{ 'menu.title.report_execution'|trans }}</strong>
     </li>
 {% endblock %}
 
 {% block body %}
     <div class="ibox">
         <div class="ibox-title">
-            <h5>{{ 'menu.title.reports'|trans }}</h5>
+            <h5>{{ 'menu.title.report_execution'|trans }}</h5>
         </div>
         <div class="ibox-content">
 
             <div class="margin-b">
-                
+                <form id="report-execution-form">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{ form_row(searchForm.category) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(searchForm.subcategory) }}
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <table id="dt-report-list" class="table table-striped table-bordered table-hover" >
@@ -60,5 +69,22 @@
         function report_list_reload(){
             report_list.api().ajax.reload();
         }
+        $('#report_search_category').bind("change", function() {
+            //refresh list
+            var refreshURL = Routing.generate('report_list_json', { _locale: '{{ app.request.locale }}', _all: 'active', category_id: $(this).val()});
+            report_list.api().ajax.url(refreshURL).load();
+
+            if (!$(this).val()){
+                $('#report_search_subcategory').empty().append('<option value="">{{ 'form.label.choice_empty_value'|trans }}</option>');
+                return;
+            }
+            //refresh subcategory select
+            refreshSubSelect($(this).attr('id'), 'report_search_subcategory', Routing.generate('report_subcategories_by_category', { _locale: '{{ app.request.locale }}', id: $(this).val()}));
+        });
+        $('#report_search_subcategory').bind("change", function() {
+            //refresh list
+            var refreshURL = Routing.generate('report_list_json', { _locale: '{{ app.request.locale }}', _all: 'active', subcategory_id: $(this).val()});
+            report_list.api().ajax.url(refreshURL).load();
+        });
     </script>
 {% endblock %}

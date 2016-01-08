@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\ReportSearchType;
 use ESocial\UtilBundle\Controller\ESocialController;
 use ESocial\UtilBundle\Util\Database;
 use ESocial\UtilBundle\Util\Files;
@@ -29,13 +30,20 @@ class ReportController extends VallasAdminController
     /**
      * @return EntityJsonList
      */
-    private function getDatatableManager($boolActive=false)
+    private function getDatatableManager($boolActive=false, $category_id=null, $subcategory_id=null)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Report');
         $qb = $repository->getAllQueryBuilder();
         if ($boolActive){
             $qb->andWhere('p.active = 1');
+        }
+        if ($category_id){
+            $qb->leftJoin('p.subcategory', 'subcategory')->leftJoin('subcategory.category', 'category')
+                ->andWhere('category = :cat')->setParameter('cat', $category_id);
+        }
+        if ($subcategory_id){
+            $qb->andWhere('p.subcategory = :subcat')->setParameter('subcat', $subcategory_id);
         }
 
         /** @var EntityJsonList $jsonList */
@@ -52,13 +60,17 @@ class ReportController extends VallasAdminController
      * Returns a list of Report entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/{_all}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="report_list_json")
+     * @Route("/async/{_all}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="report_list_json", options={"expose"=true})
      *
      * @Method("GET")
      */
     public function listJsonAction(Request $request, $_all)
     {
-        $response = $this->getDatatableManager($_all!='all')->getResults();
+        $request = $this->get('request_stack')->getCurrentRequest();
+        $category_id = $request->query->get('category_id', null);
+        $subcategory_id = $request->query->get('subcategory_id', null);
+
+        $response = $this->getDatatableManager($_all!='all', $category_id, $subcategory_id)->getResults();
 
         foreach($response['aaData'] as $key=>$row){
             $reg = $response['aaData'][$key];
@@ -355,13 +367,9 @@ class ReportController extends VallasAdminController
     {
 
         return $this->render('AppBundle:screens/report:list_for_execution.html.twig', array(
-            ''
+            'searchForm' => $this->createForm(new ReportSearchType())->createView()
         ));
 
-
-
     }
-
-
 
 }
