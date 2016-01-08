@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Informes{% endblock %}
+{% block page_breadcrumb %}
+    <li>Informes</li>
+    <li class="active">
+        <strong>{{ report_name }}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{{ report_name }}</h5>
+        </div>
+        <div class="ibox-content">
+            <div id="form-report-results">
+                {{ knp_pagination_render(rowsPaged) }}
+                <iframe id="ifrReportResults" name="ifrReportResults" style="border:none; width:100%; height:500px" src="{{ path('report_execute_by_request_id', { id: executionId, format: format }) }}"></iframe>
+                {{ knp_pagination_render(rowsPaged) }}
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var links = $('#form-report-results').find(".pagination span a");
+
+        $(links).each(function(){
+            $(this).attr("target", "ifrReportResults");
+            $(this).click(function(){
+                $("#ifrReportResults").attr("src", $(this).attr("href"));
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

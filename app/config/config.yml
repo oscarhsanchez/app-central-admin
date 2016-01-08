@@ -93,6 +93,12 @@ e_social_admin:
     role_class: Vallas\ModelBundle\Entity\Role
     user_type: AppBundle\Form\VallasUserType
 
+e_social_util:
+    jasper_reports:
+        host: '192.162.12.50:8080'
+        username: jasperadmin
+        password: ahy761q85d
+
 jms_translation:
     configs:
         app:

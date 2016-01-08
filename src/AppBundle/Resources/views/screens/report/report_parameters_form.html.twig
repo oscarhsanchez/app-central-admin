@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Informes{% endblock %}
+{% block page_breadcrumb %}
+    <li>Informes</li>
+    <li class="active">
+        <strong>{{ report_name }}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>{{ report_name }}</h5>
+    </div>
+    <div class="ibox-content">
+        {{ renderedForm|raw }}
+    </div>
+</div>
+{% endblock %}
