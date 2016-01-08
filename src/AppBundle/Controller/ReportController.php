@@ -29,16 +29,21 @@ class ReportController extends VallasAdminController
     /**
      * @return EntityJsonList
      */
-    private function getDatatableManager()
+    private function getDatatableManager($boolActive=false)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Report');
+        $qb = $repository->getAllQueryBuilder();
+        if ($boolActive){
+            $qb->andWhere('p.active = 1');
+        }
+
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'id', 'name', 'jasper_report_id', 'route', 'active'));
-        $jsonList->setSearchFields(array('name'));
+        $jsonList->setFieldsToGet(array('token', 'id', 'subcategory__category__name', 'subcategory__name', 'name', 'jasper_report_id', 'route', 'active'));
+        $jsonList->setSearchFields(array('subcategory__category__name', 'subcategory__name', 'name'));
         $jsonList->setRepository($repository);
-        $jsonList->setQueryBuilder($repository->getAllQueryBuilder());
+        $jsonList->setQueryBuilder($qb);
 
         return $jsonList;
     }
@@ -47,13 +52,13 @@ class ReportController extends VallasAdminController
      * Returns a list of Report entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="report_list_json")
+     * @Route("/async/{_all}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="report_list_json")
      *
      * @Method("GET")
      */
-    public function listJsonAction(Request $request)
+    public function listJsonAction(Request $request, $_all)
     {
-        $response = $this->getDatatableManager()->getResults();
+        $response = $this->getDatatableManager($_all!='all')->getResults();
 
         foreach($response['aaData'] as $key=>$row){
             $reg = $response['aaData'][$key];
@@ -341,5 +346,22 @@ class ReportController extends VallasAdminController
         }
 
     }
+
+    /**
+     * @Route("/list-execution", name="report_execution_list")
+     * @Method("GET")
+     */
+    public function executionListAction(Request $request)
+    {
+
+        return $this->render('AppBundle:screens/report:list_for_execution.html.twig', array(
+            ''
+        ));
+
+
+
+    }
+
+
 
 }

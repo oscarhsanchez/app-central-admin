@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'menu.title.report_categories'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li>
+        <strong><a href="{{ path('report_category_list') }}">{{ 'menu.title.report_categories'|trans }}</a></strong>
+    </li>
+    <li class="active">
+        <strong>{% if entity is defined and entity.id is not empty %}{{ entity.name }}{% else %}{{ 'report_categories.buttons.add'|trans }}{% endif %}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{% if entity is defined and entity.id is not empty %}{{ entity.name }}{% else %}{{ 'report_categories.buttons.add'|trans }}{% endif %}</h5>
+        </div>
+        <div class="ibox-content">
+
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+            {% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+            {{ form_start(form, { method: 'POST', action: entity is defined and entity.id is not empty ? path('report_category_update', {id: entity.token }) : path('report_category_create') }) }}
+
+            {{ form_row(form.name) }}
+
+                <div class="clearfix">
+                    <button class="btn btn-primary pull-right" type="submit"><strong>Guardar</strong></button>
+                </div>
+
+            {{ form_end(form) }}
+
+            {% if entity.id is not empty %}
+                {% include 'AppBundle:screens/report_subcategory:index.html.twig' with { category: entity } %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

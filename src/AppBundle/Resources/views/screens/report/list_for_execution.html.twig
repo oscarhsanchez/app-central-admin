@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'menu.title.reports'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li class="active">
+        <strong>{{ 'menu.title.reports'|trans }}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{{ 'menu.title.reports'|trans }}</h5>
+        </div>
+        <div class="ibox-content">
+
+            <div class="margin-b">
+                
+            </div>
+
+            <table id="dt-report-list" class="table table-striped table-bordered table-hover" >
+                <thead>
+                <tr>
+                    <th>{{ 'form.report.label.category'|trans }}</th>
+                    <th>{{ 'form.report.label.subcategory'|trans }}</th>
+                    <th>{{ 'form.report.label.name'|trans }}</th>
+                    <th>{{ 'form.label.actions'|trans }}</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var report_list = null;
+        $(document).ready(function() {
+            var table_columns = [
+                {"mData": "subcategory__category__name"},
+                {"mData": "subcategory__name"},
+                {"mData": "name"},
+                {
+                    "mData": function (source) {
+                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_execute', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-chevron-right"></span> &nbsp; {{ 'form.actions.execute'|trans }}</a>&nbsp; ';
+                        return actions;
+                    }
+                }
+            ];
+
+            jQuery(document).ready(function(){
+                report_list = TableManaged.init(
+                        '#dt-report-list',
+                        '{{ url('report_list_json', { _all: 'active' }) }}',
+                        null,
+                        [],
+                        table_columns,
+                        '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+                );
+            });
+        });
+
+        function report_list_reload(){
+            report_list.api().ajax.reload();
+        }
+    </script>
+{% endblock %}

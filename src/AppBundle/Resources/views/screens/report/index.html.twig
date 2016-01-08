@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title %}Informes{% endblock %}
+{% block page_title %}{{ 'menu.title.reports'|trans }}{% endblock %}
 {% block page_breadcrumb %}
     <li class="active">
-        <strong>Informes</strong>
+        <strong>{{ 'menu.title.reports'|trans }}</strong>
     </li>
 {% endblock %}
 
 {% block body %}
     <div class="ibox">
         <div class="ibox-title">
-            <h5>Informes</h5>
+            <h5>{{ 'menu.title.reports'|trans }}</h5>
         </div>
         <div class="ibox-content">
 
             {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
 
             <div class="margin-b">
-                <a class="btn btn-white" title="Nuevo usuario" href="{{ path('report_add') }}">
+                <a class="btn btn-white" title="{{ 'report.buttons.add'|trans }}" href="{{ path('report_add') }}">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <strong>Añadir informe</strong>
+                    <strong>{{ 'report.buttons.add'|trans }}</strong>
                 </a>
             </div>
 
@@ -27,11 +27,13 @@
                 <thead>
                 <tr>
                     <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
-                    <th>Nombre</th>
-                    <th>Jasper ID</th>
-                    <th>Ruta</th>
-                    <th>Activo</th>
-                    <th>Acciones</th>
+                    <th>{{ 'form.report.label.category'|trans }}</th>
+                    <th>{{ 'form.report.label.subcategory'|trans }}</th>
+                    <th>{{ 'form.report.label.name'|trans }}</th>
+                    <th>{{ 'form.report.label.jasper_report_id'|trans }}</th>
+                    <th>{{ 'form.report.label.route'|trans }}</th>
+                    <th>{{ 'form.report.label.active'|trans }}</th>
+                    <th>{{ 'form.label.actions'|trans }}</th>
                 </tr>
                 </thead>
             </table>
@@ -46,6 +48,8 @@
                         return '<input type="checkbox" class="i-checks" value="'+source.token+'" />';
                     }
                 },
+                {"mData": "subcategory__category__name"},
+                {"mData": "subcategory__name"},
                 {"mData": "name"},
                 {"mData": "jasper_report_id"},
                 {"mData": "route"},
@@ -56,8 +60,9 @@
                 },
                 {
                     "mData": function (source) {
-                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_edit', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; Editar</a>&nbsp; ';
-                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_delete', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-remove"></span> &nbsp; Eliminar</a>&nbsp; ';
+                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_edit', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; {{ 'form.actions.edit'|trans }}</a>&nbsp; ';
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_execute', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-chevron-right"></span> &nbsp; {{ 'form.actions.execute'|trans }}</a>&nbsp; ';
+                            actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('report_delete', { id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-remove"></span> &nbsp; {{ 'form.actions.delete'|trans }}</a>&nbsp; ';
 
                         return actions;
                     }
