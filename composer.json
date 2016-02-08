@@ -29,7 +29,10 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "symfony/phpunit-bridge": "~2.7"
+        "symfony/phpunit-bridge": "~2.7",
+        "doctrine/data-fixtures": "^1.1",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "hautelook/alice-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
