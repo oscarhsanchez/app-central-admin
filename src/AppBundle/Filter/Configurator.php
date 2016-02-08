@@ -48,10 +48,10 @@ class Configurator
 
         if (array_key_exists('country_filter',$queryBuilderParameters)){
 
-            $filter = $filters->getFilter('country_filter');
-            $filter->reset();
-
             if ($filters->isEnabled('country_filter')){
+
+                $filter = $filters->getFilter('country_filter');
+                $filter->reset();
 
                 $boolFiltering = true;
 

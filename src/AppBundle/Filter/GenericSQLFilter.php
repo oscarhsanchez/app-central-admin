@@ -28,7 +28,6 @@ class GenericSQLFilter extends SQLFilter
 
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-
         if (!$this->filter_parameters) return '';
         if (!$this->getParameter('id')) return '';
 

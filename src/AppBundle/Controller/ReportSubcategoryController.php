@@ -198,6 +198,7 @@ class ReportSubcategoryController extends VallasAdminController
 
         $entity = new ReportSubcategory();
         $entity->setCategory($category);
+        $entity->setPais($this->getSessionCountry());
         //$this->initLanguagesForEntity($entity);
         $params_original = array();
 
@@ -227,6 +228,7 @@ class ReportSubcategoryController extends VallasAdminController
 
         $entity = new ReportSubcategory();
         $entity->setCategory($category);
+        $entity->setPais($this->getSessionCountry());
 
         //$this->initLanguagesForEntity($entity);
 

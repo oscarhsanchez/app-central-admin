@@ -28,4 +28,17 @@ class VallasAdminController extends ESocialController
 
     }
 
+    public function getSessionCountry(){
+
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->get('request_stack')->getCurrentRequest();
+        $session = $request->getSession();
+        $vallas_country = $session->get('vallas_country');
+        $vallas_country_id = $vallas_country ? $vallas_country['code'] : null;
+        if ($vallas_country_id){
+            return $em->getRepository('VallasModelBundle:Pais')->find($vallas_country_id);
+        }
+        return null;
+     }
+
 }

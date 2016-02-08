@@ -24,6 +24,19 @@ use Vallas\ModelBundle\Entity\User;
  */
 class VallasUserController extends UserController {
 
+    public function getSessionCountry(){
+
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->get('request_stack')->getCurrentRequest();
+        $session = $request->getSession();
+        $vallas_country = $session->get('vallas_country');
+        $vallas_country_id = $vallas_country ? $vallas_country['code'] : null;
+        if ($vallas_country_id){
+            return $em->getRepository('VallasModelBundle:Pais')->find($vallas_country_id);
+        }
+        return null;
+    }
+
     private function prepareRolePermissions($entity){
 
         $em = $this->getDoctrine()->getManager();
@@ -115,6 +128,64 @@ class VallasUserController extends UserController {
         $this->prepareRolePermissions($entity);
 
         $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+
+        return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/add", name="esocial_admin_user_add")
+     * @Method("GET")
+     */
+    public function addAction(){
+
+        $em = $this->getDoctrine()->getManager();
+        $esocialAdminUserClass = $this->getESocialAdminUserClass();
+        $esocialAdminUserType = $this->getEsocialAdminUserType();
+
+        $entity = new $esocialAdminUserClass();
+        $entity->addUserPaise($this->getSessionCountry());
+        $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+
+        return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView()
+        ));
+
+    }
+
+    /**
+     * @Route("/create", name="esocial_admin_user_create")
+     * @Method("POST")
+     */
+    public function createAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $esocialAdminUserClass = $this->getESocialAdminUserClass();
+        $esocialAdminUserType = $this->getEsocialAdminUserType();
+
+        $entity = new $esocialAdminUserClass();
+        $entity->addUserPaise($this->getSessionCountry());
+        $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+
+        if ($request->getMethod() == 'POST'){
+
+            $form->handleRequest($request);
+            if ($form->isValid()){
+
+                $this->get('session')->getFlashBag()->add('notice', 'Los datos del usuario han sido guardados correctamente.');
+                Database::saveEntity($em, $entity);
+
+                return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
+
+            }else{
+                $this->get('session')->getFlashBag()->add('error', 'Revise los campos, por favor.');
+            }
+
+        }
 
         return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
             'entity' => $entity,

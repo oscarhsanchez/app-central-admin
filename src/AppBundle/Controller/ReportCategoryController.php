@@ -190,6 +190,7 @@ class ReportCategoryController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
 
         $entity = new ReportCategory();
+        $entity->setPais($this->getSessionCountry());
         //$this->initLanguagesForEntity($entity);
         $params_original = array();
 
@@ -217,6 +218,7 @@ class ReportCategoryController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
 
         $entity = new ReportCategory();
+        $entity->setPais($this->getSessionCountry());
         //$this->initLanguagesForEntity($entity);
 
         return $this->render('AppBundle:screens/report_category:form.html.twig', array(

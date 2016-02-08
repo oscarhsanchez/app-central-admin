@@ -16,12 +16,12 @@ class CountrySelectType extends ESocialType {
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('country', 'entity', array('label' => 'form.country_select.label.country', 'class' => 'VallasModelBundle:Pais', 'empty_value' => 'form.label.choice_empty_value' ));
+        $builder->add('country', 'entity', array('label' => 'form.country_select.label.country', 'class' => 'VallasModelBundle:Pais', 'empty_value' => 'form.label.choice_empty_value', 'choice_label' => 'nombre'));
     }
 
     public function getName()
-    {
-        return 'country_select';
-    }
+{
+    return 'country_select';
+}
 
 }
