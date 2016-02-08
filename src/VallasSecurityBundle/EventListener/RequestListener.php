@@ -12,6 +12,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Vallas\ModelBundle\Entity\User;
 use VallasSecurityBundle\Annotation\RequiresPermission;
 use VallasSecurityBundle\Annotation\AvoidPermission;
+use VallasSecurityBundle\Exception\ControllerNotCountryException;
 use VallasSecurityBundle\Exception\ControllerNotPermissionException;
 use VallasSecurityBundle\Exception\ControllerNotLoggedException;
 use Doctrine\Common\Util\ClassUtils;
@@ -40,7 +41,6 @@ class RequestListener
         $this->router = $router;
         $this->templating = $templating;
     }
-
 
     public function onFilterController(FilterControllerEvent $event)
     {
@@ -71,8 +71,20 @@ class RequestListener
         $user = ($token && $token->isAuthenticated() && $token->getUser() instanceof User)? $token->getUser() : null;
 
         if (!$user) return;
-
         if (!$event->isMasterRequest()) return;
+
+        if ($className == 'AppBundle\Controller\DefaultController' && $method == 'indexAction') return;
+        if ($className == 'AppBundle\Controller\CountryController' && $method == 'selectFormAction') return;
+
+        //Control de country
+        $session = $request->getSession();
+        $vallas_country = $session->get('vallas_country');
+        $vallas_country_id = $vallas_country ? $vallas_country['code'] : null;
+
+        if (!$vallas_country_id){
+            throw new ControllerNotCountryException('No hay país seleccionado');
+            return;
+        }
 
         $avoidAnnotation = $this->annotationReader->getMethodAnnotation($reflectionMethod, 'VallasSecurityBundle\Annotation\AvoidPermission');
         $hasPermissionAnnotations = $this->annotationReader->getMethodAnnotation($reflectionMethod, 'VallasSecurityBundle\Annotation\RequiresPermission');
@@ -126,7 +138,24 @@ class RequestListener
         $kernel = $event->getKernel();
         $request = $event->getRequest();
 
-        if ($exception instanceof ControllerNotPermissionException) {
+        if ($exception instanceof ControllerNotCountryException){
+
+            $session = $request->getSession();
+            Security::clearDataSession($session);
+
+            if ($request->isXmlHttpRequest()) {
+                $r = $this->router->generate('security_not_country_ajax');
+                $response = new RedirectResponse($r);
+            } else {
+
+                $r = $this->router->generate('homepage');
+                $response = new RedirectResponse($r);
+            }
+            //$response->setStatusCode(200);
+            $event->setResponse($response);
+            return;
+
+        } elseif ($exception instanceof ControllerNotPermissionException) {
 
             $attributes = array(
                 '_controller' => $request->isXmlHttpRequest() ? 'VallasSecurityBundle:Default:permissionAjax' : 'VallasSecurityBundle:Default:permission',
