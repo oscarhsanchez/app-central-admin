@@ -2,4 +2,26 @@
 
 {% block body %}
 
+    {% if boolShowCountryForm is defined and boolShowCountryForm %}
+
+        <div class="modal inmodal" id="modalCountrySelect" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ 'menu.title.country.select' }}</h4>
+                    </div>
+                    <div id="modalCountrySelect-body" class="modal-body">
+                        {{ include('AppBundle:screens/country:select.html.twig', { form: formCountry, boolRedirect: false }) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#modalCountrySelect").modal({show: true, keyboard: false, backdrop: 'static'});
+            });
+        </script>
+
+    {% endif %}
+
 {% endblock %}

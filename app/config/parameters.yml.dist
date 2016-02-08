@@ -30,3 +30,9 @@ parameters:
         css:
           primary_color: #1ab394
           primary_color_hover: #18a689
+
+
+    query_filters_entities:
+        country_filter:
+            target_class: VallasModelBundle\Entity\Pais
+            ignore_class: []

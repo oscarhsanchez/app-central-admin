@@ -14,3 +14,14 @@
 {% block esocial_admin_base_menu_options_extra %}
     <li><a href="{{ path('report_execution_list') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'menu.title.report_execution'|trans }}</span></a></li>
 {% endblock %}
+
+{% block esocial_admin_base_header_links %}
+    {% set vallas_country = app.session.get('vallas_country') %}
+    {% set vallas_country_name = vallas_country is not empty ? vallas_country.name : '' %}
+    <li>
+        <span class="m-r-sm">
+            <a href="{{ path('country_select') }}" title="{{ 'menu.title.country.select' }}" onclick="loadAjaxPage(this); return false;"><i class="fa fa-asterisk"></i> {{ 'menu.title.country'|trans }}: {{ vallas_country_name }}</a>
+        </span>
+    </li>
+    {{ parent() }}
+{% endblock %}
