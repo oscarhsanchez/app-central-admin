@@ -29,7 +29,7 @@ class ReportType extends ESocialType {
         if ($post){
             $id_category = $post['category'];
         }else{
-            $id_category = $entity->getSubcategory()->getCategory()->getId();
+            $id_category = $entity && $entity->getSubcategory() && $entity->getSubcategory()->getCategory() ? $entity->getSubcategory()->getCategory()->getId() : null;
         }
 
         $category = $id_category ? $this->getManager()->getRepository('VallasModelBundle:ReportCategory')->find($id_category) : null;
