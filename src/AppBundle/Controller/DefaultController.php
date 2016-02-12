@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends VallasAdminController
 {
     /**
      * @Route("/", name="homepage")
@@ -17,7 +17,7 @@ class DefaultController extends Controller
         $session = $request->getSession();
         $vallas_country = $session->get('vallas_country');
         $vallas_country_id = $vallas_country ? $vallas_country['code'] : null;
-        $formCountry = $this->createForm(new CountrySelectType());
+        $formCountry = $this->createForm(new CountrySelectType(), null, array('user' => $this->getSessionUser()));
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(
@@ -26,4 +26,6 @@ class DefaultController extends Controller
             'boolShowCountryForm' => ($vallas_country_id ? false : true)
         ));
     }
+
+
 }

@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vallas\ModelBundle\Entity\SecuritySubmodulePermission;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Vallas\ModelBundle\Entity\User;
+use Vallas\ModelBundle\Entity\UserPais;
 
 /**
  * Class VallasUserController
@@ -42,6 +43,8 @@ class VallasUserController extends UserController {
         $em = $this->getDoctrine()->getManager();
         $roles = $entity->getRoles();
 
+        if (count($roles) < 1) return;
+
         $role = $em->getRepository('VallasModelBundle:Role')->findOneBy(array('code' => $roles[0]));
 
         $qb = $em->getRepository('VallasModelBundle:SecuritySubmodule')
@@ -69,6 +72,7 @@ class VallasUserController extends UserController {
                 }
                 $smPermission->setSubmodule($sm);
                 $smPermission->setPermissions($strCRUD);
+                $smPermission->setPais($this->getSessionCountry());
 
                 $permissions->add($smPermission);
             }
@@ -85,27 +89,15 @@ class VallasUserController extends UserController {
         $em = $this->getDoctrine()->getManager();
 
         $esocialAdminUserType = $this->getEsocialAdminUserType();
-        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
+        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
         $this->prepareRolePermissions($entity);
 
         $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
-        if ($request->getMethod() == 'POST'){
+        $boolSaved = $this->saveAction($request, $entity, $form);
 
-            $form->handleRequest($request);
-            if ($form->isValid()){
-
-                $this->get('session')->getFlashBag()->add('notice', 'Los datos del usuario han sido guardados correctamente.');
-
-                Database::saveEntity($em, $entity);
-
-
-                return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
-
-            }else{
-                $this->get('session')->getFlashBag()->add('error', 'Revise los campos, por favor.');
-            }
-
+        if ($boolSaved){
+            return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
         }
 
         return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
@@ -124,7 +116,7 @@ class VallasUserController extends UserController {
         $em = $this->getDoctrine()->getManager();
 
         $esocialAdminUserType = $this->getEsocialAdminUserType();
-        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
+        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
         $this->prepareRolePermissions($entity);
 
         $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
@@ -147,7 +139,7 @@ class VallasUserController extends UserController {
         $esocialAdminUserType = $this->getEsocialAdminUserType();
 
         $entity = new $esocialAdminUserClass();
-        $entity->addUserPaise($this->getSessionCountry());
+        $this->initEntity($entity);
         $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
         return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
@@ -168,29 +160,75 @@ class VallasUserController extends UserController {
         $esocialAdminUserType = $this->getEsocialAdminUserType();
 
         $entity = new $esocialAdminUserClass();
-        $entity->addUserPaise($this->getSessionCountry());
+        $this->initEntity($entity);
         $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
-        if ($request->getMethod() == 'POST'){
+        $boolSaved = $this->saveAction($request, $entity, $form);
 
-            $form->handleRequest($request);
-            if ($form->isValid()){
-
-                $this->get('session')->getFlashBag()->add('notice', 'Los datos del usuario han sido guardados correctamente.');
-                Database::saveEntity($em, $entity);
-
-                return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
-
-            }else{
-                $this->get('session')->getFlashBag()->add('error', 'Revise los campos, por favor.');
-            }
-
+        if ($boolSaved){
+            return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
         }
 
         return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView(),
         ));
+
+    }
+
+    private function initEntity($entity){
+        $userPais = new UserPais();
+        $userPais->setUser($entity);
+        $userPais->setPais($this->getSessionCountry());
+        $entity->addUserPaise($userPais);
+    }
+
+    public function saveAction(Request $request, $entity, $form){
+
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->getMethod() == 'POST'){
+
+            $original_countries = array();
+            foreach($entity->getUserPaises() as $up){
+                $original_countries[] = $up;
+            }
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()){
+
+                foreach($original_countries as $original_key=>$original_up){
+                    $boolDelete = true;
+                    foreach($entity->getUserPaises() as $key=>$up){
+                        if ($key == $original_key){
+                            $boolDelete = false;
+                            break;
+                        }
+                    }
+                    if ($boolDelete){
+                        $entity->removeUserPaise($original_up);
+                        $em->remove($original_up);
+                    }
+                }
+
+                foreach($entity->getUserPaises() as $userPais){
+                    $userPais->setUser($entity);
+                }
+
+                Database::saveEntity($em, $entity);
+
+                $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('form.notice.saved_success'));
+
+                return true;
+
+            }else{
+                $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('form.notice.saved_error'));
+                return false;
+            }
+        }
+
+        return false;
 
     }
 

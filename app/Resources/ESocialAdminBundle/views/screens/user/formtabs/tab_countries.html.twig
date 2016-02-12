@@ -1,0 +1,41 @@
+<div class="margin-b">
+    <a class="btn btn-white" href="javascript:void(0)" onclick="addCountryToUser()">
+        <span class="glyphicon glyphicon-plus"></span>
+        <strong>Add</strong>
+    </a>
+</div>
+
+<table class="result-list table table-bordered table-striped">
+    <thead>
+        <tr class="results-list-row">
+            <th>Country</th>
+            <td>E</td>
+        </tr>
+    </thead>
+    <tbody id="user-countries-list" class="collection-form-rows" data-prototype="{% filter escape %}{% include 'ESocialAdminBundle:screens/user/formtabs:tab_countries_prototype.html.twig' with {'formUserCountry': form.user_paises.vars.prototype, 'country': null } %}{% endfilter %}">
+    {% for key, formUserCountry in form.user_paises %}
+        {% 	set country = entity.userPaises[key].pais %}
+        <tr class="results-list-row" id="user-countries-list-{{ key }}">
+            {% include 'ESocialAdminBundle:screens/user/formtabs:tab_countries_prototype.html.twig' with {'formUserCountry': formUserCountry, 'key': key, 'country': country } %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script type="text/javascript">
+    var user_countries_count = {{ form.user_paises|length }};
+
+    function addCountryToUser(){
+        var inxNew = user_countries_count;
+        addItemToCollectionForm(jQuery('#user-countries-list'), user_countries_count, false);
+        user_countries_count++;
+        $('html, body').animate({ scrollTop: $("#user_countries_"+inxNew+"_name").offset().top}, 0);
+    }
+
+    function selectCountry(data, vars){
+        var jsonData = decodeURIComponent(data);
+        var obj = JSON.parse(jsonData);
+        var objVars = JSON.parse(vars);
+        $("#user_countries_"+objVars.line+"_name").html(obj.nombre);
+        $("#user_user_paises_"+objVars.line+"_pais").val(obj.token);
+    }
+</script>

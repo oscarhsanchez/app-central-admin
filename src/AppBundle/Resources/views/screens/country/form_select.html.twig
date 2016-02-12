@@ -1,0 +1,13 @@
+{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+{% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+{{ form_start(form, { method: 'POST', action: path('country_select_form'), attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
+{{ form_row(form.pais) }}
+<div class="clearfix">
+    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.select' }}</strong></button>
+</div>
+{{ form_end(form) }}
+
+{% if boolRedirect is defined and boolRedirect %}
+<script type="text/javascript">window.location.href="{{ path('homepage') }}";</script>
+{% endif %}

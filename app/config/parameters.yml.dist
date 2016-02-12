@@ -35,4 +35,4 @@ parameters:
     query_filters_entities:
         country_filter:
             target_class: Vallas\ModelBundle\Entity\Pais
-            ignore_class: [Vallas\ModelBundle\Entity\Pais]
+            ignore_class: [Vallas\ModelBundle\Entity\Pais, Vallas\ModelBundle\Entity\UserPais]

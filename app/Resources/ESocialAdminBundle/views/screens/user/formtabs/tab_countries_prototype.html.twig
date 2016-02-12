@@ -1,0 +1,21 @@
+{% set keyAux = key is defined ? key : "__name__" %}
+<td class="list-row-td">
+    {% if country is not empty  %}
+    <span id="user_countries_{{ keyAux }}_name" class="form-control">
+        {{  country.nombre  }}
+    </span>
+    {% else %}
+    <div class="input-group">
+      <span class="input-group-btn">
+        <a class="btn btn-sm btn-primary" title="{{ 'Select country'|trans }}" href="{{ path('country_select') }}?line={{ keyAux }}" onclick="loadAjaxPage(this, 'modal-lg'); return false;"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </span>
+        <span id="user_countries_{{ keyAux }}_name" class="form-control"></span>
+    </div>
+    {% endif %}
+</td>
+<td class="list-row-td">
+    <a href="javascript:void(0)" onclick="removeItemFromCollectionForm(this)">
+        <i class="fa fa-times fa-2x"></i>
+    </a>
+    {{ form_rest(formUserCountry) }}
+</td>

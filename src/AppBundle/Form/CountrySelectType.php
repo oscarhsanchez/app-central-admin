@@ -16,12 +16,37 @@ class CountrySelectType extends ESocialType {
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('country', 'entity', array('label' => 'form.country_select.label.country', 'class' => 'VallasModelBundle:Pais', 'empty_value' => 'form.label.choice_empty_value', 'choice_label' => 'nombre'));
+        $user = array_key_exists('user', $options) ? $options['user'] : null;
+        $hiddenForm = array_key_exists('hiddenForm', $options) ? $options['hiddenForm'] : null;
+
+        if ($hiddenForm){
+            $builder->add('pais', 'hidden_entity', array(
+                'class' => 'VallasModelBundle:Pais',
+            ));
+        }else{
+            $builder->add('pais', 'entity', array(
+                'label' => 'form.country_select.label.country',
+                'class' => 'VallasModelBundle:Pais',
+                'empty_value' => 'form.label.choice_empty_value',
+                'choice_label' => 'nombre',
+                'query_builder' => function($repository) use ($user) {
+                    return $user ? $repository->getQueryBuilder()->leftJoin('p.user_paises', 'up')->andWhere('up.user = :user_id')->setParameter('user_id', $user->getId()) : $repository->getQueryBuilder();
+                },
+            ));
+        }
+
     }
 
-    public function getName()
-{
-    return 'country_select';
-}
+    public function getName(){
+        return 'country_select';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'user' => null,
+            'hiddenForm' => false
+        ));
+    }
 
 }

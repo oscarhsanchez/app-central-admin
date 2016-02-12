@@ -1,13 +1,33 @@
-{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
-{% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+<table id="dt-country-list" class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'form.country.label.name'|trans }}</th>
+        <th>{{ 'form.label.actions'|trans }}</th>
+    </tr>
+    </thead>
+</table>
 
-{{ form_start(form, { method: 'POST', action: path('country_select'), attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
-{{ form_row(form.country) }}
-<div class="clearfix">
-    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.select' }}</strong></button>
-</div>
-{{ form_end(form) }}
+<script type="text/javascript">
+    var country_list = null;
+    $(document).ready(function() {
+        var table_columns = [
+            {"mData": "nombre"},
+            {
+                "mData": function (source) {
+                    return '<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="closeThisPopup(this);selectCountry(\''+encodeURIComponent(JSON.stringify(source))+'\', \'{{ getVars|json_encode|escape  }}\')">Select</a>';
+                }
+            }
+        ];
 
-{% if boolRedirect is defined and boolRedirect %}
-<script type="text/javascript">window.location.href="{{ path('homepage') }}";</script>
-{% endif %}
+        jQuery(document).ready(function () {
+            country_list = TableManaged.init(
+                    '#dt-country-list',
+                    '{{ url('country_list_json') }}',
+                    null,
+                    [],
+                    table_columns,
+                    '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+            );
+        });
+    });
+</script>

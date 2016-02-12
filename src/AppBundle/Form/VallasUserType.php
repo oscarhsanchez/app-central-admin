@@ -24,16 +24,6 @@ class VallasUserType extends UserType {
         $em = $this->getManager();
         $post = $this->getPost();
         $data = array_key_exists('data', $options) ? $options['data'] : null;
-        //$this->prepareRolePermissions($data);
-        //$builder->setData($data);
-
-        /*
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($options){
-            $data = $options['data'];
-            $this->prepareRolePermissions($data);
-            $event->setData($data);
-        });
-        */
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) use ($options){
 
@@ -59,10 +49,9 @@ class VallasUserType extends UserType {
                 foreach($form->getData()->getPermissions() as $p){
                     $form->getData()->removePermission($p);
                 }
-                //$form->getData()->setPermissions(new ArrayCollection());
-                //var_dump($form->getData()->getPermissions());
-                //exit;
+
             } else {
+
                 $role = $em->getRepository('VallasModelBundle:Role')->findOneBy(array('code' => 'ROLE_CUSTOM'));
                 foreach($form->getData()->getPermissions() as $p){
                     $p->setRole($role);
@@ -71,7 +60,27 @@ class VallasUserType extends UserType {
 
         });
 
-        $post = $this->getPost();
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event) use ($options, $post){
+
+            $entity = $event->getData();
+            $form = $event->getForm();
+
+            if (!$entity) return;
+
+            $entity->setRoles(array($post['roles']));
+        });
+
+        $builder
+            ->add('user_paises', 'collection', array(
+                'type'           => new CountrySelectType(),
+                'prototype'     => true,
+                'label'          => false,
+                'by_reference'   => false,
+                'allow_delete'   => true,
+                'allow_add'      => true,
+                'options'        => array('hiddenForm' => true, 'data_class' => 'Vallas\ModelBundle\Entity\UserPais')
+            ));
+
         $roles = $post ? array($post['roles']) : $data->getRoles();
         if ($data && in_array('ROLE_CUSTOM', $roles)){
 
