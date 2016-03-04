@@ -99,9 +99,9 @@ e_social_admin:
 
 e_social_util:
     jasper_reports:
-        host: '192.162.12.50:8080'
-        username: jasperadmin
-        password: ahy761q85d
+        host: '%jasper_host%'
+        username: '%jasper_user%'
+        password: '%jasper_pass%'
 
 jms_translation:
     configs:
