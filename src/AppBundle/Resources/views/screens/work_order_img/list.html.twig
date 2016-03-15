@@ -1,0 +1,61 @@
+{% if image is not empty %}
+        <form action="{{ path('work_order_img_update', { id: img.token }) }}" method="post">
+            <div class="row text-center">
+            <div class="col-md-6 text-left" style="float:none; margin:0 auto">
+                <fieldset>
+                    <legend>{{ 'work_order_img.fieldset.image_data'|trans }}</legend>
+                    <label class="control-label">{{ img.nombre }}</label>
+                    <img style="max-width: 100%" src="/media/orden_trabajo_imagen/{{ img.url }}" />
+                </fieldset>
+                <fieldset>
+                    <legend>{{ 'work_order_img.fieldset.work_order_data'|trans }}</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.work_order.label.created_at'|trans }}</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <span class="form-control">{{ img.ordenTrabajo.createdAt|dateToFormat }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.work_order.label.fecha_limite'|trans }}</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <span class="form-control">{{ img.ordenTrabajo.fechaLimite|dateToFormat }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.work_order.label.user'|trans }}</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <span class="form-control">{{ img.ordenTrabajo.codigoUser }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.work_order.label.cliente'|trans }}</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <span class="form-control">{{ img.ordenTrabajo.propuesta is not empty ? img.ordenTrabajo.propuesta.cliente : '' }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.work_order.label.propuesta'|trans }}</label>
+                                <span class="form-control">{{ img.ordenTrabajo.propuesta }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                Con cada imagen hay que mostrar los datos basicos de la orden (Fecha Creacion, Fecha Limite, Usuario, Cliente, Propuesta), un boton para cambiar el estado de la imagen, una campo observaciones y un campos observaciones cliente.
+            </div>
+        </div>
+        </form>
+{% endif %}
+{{ knp_pagination_render(imgPaged) }}
+<script type="text/javascript">
+    $(document).ready(function(){
+        KNPPagination.ajaxify('#work-order-img-list-wrapper');
+    });
+</script>

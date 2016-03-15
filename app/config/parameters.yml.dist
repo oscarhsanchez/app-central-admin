@@ -36,3 +36,11 @@ parameters:
         country_filter:
             target_class: Vallas\ModelBundle\Entity\Pais
             ignore_class: [Vallas\ModelBundle\Entity\Pais, Vallas\ModelBundle\Entity\UserPais]
+
+    esocial_utils.uploadable:
+        temp_dir: /uploads/temp
+        image_mappings:
+            orden_trabajo_imagen:
+                filters:
+                   medium: { size: [800,600] }
+                   thumbnail: { size: [100,100] }

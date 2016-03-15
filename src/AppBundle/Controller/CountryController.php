@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use ESocial\AdminBundle\Annotation\FilterAware;
 
 /**
  * Country controller.
@@ -47,6 +48,7 @@ class CountryController extends VallasAdminController
     }
 
     /**
+     * @FilterAware(disableFilter="country_filter")
      * @Route("/selectForm", name="country_select_form")
      */
     public function selectFormAction(Request $request)
@@ -76,6 +78,7 @@ class CountryController extends VallasAdminController
     }
 
     /**
+     * @FilterAware(disableFilter="country_filter")
      * @Route("/select", name="country_select")
      * @Method("GET")
      */

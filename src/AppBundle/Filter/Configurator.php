@@ -57,6 +57,12 @@ class Configurator
 
                 if (!$vallas_country_id) $boolFiltering = false;
 
+                if ($boolFiltering && count($arrControllerData) == 2) {
+                    $reflectionClass = new \ReflectionClass($arrControllerData[0]);
+                    $reflectionMethod = $reflectionClass->getMethod($arrControllerData[1]);
+                    $boolFiltering = !$this->getBoolDisableFilterAnnotation('country_filter', $reflectionMethod);
+                }
+
                 if ($boolFiltering){
                     $filter->setParameter('id', $vallas_country_id);
                     $filter->setFilterParameters($queryBuilderParameters['country_filter']);
@@ -68,5 +74,21 @@ class Configurator
 
         }
 
+    }
+
+    private function getBoolDisableFilterAnnotation($filter, $reflectionMethod){
+
+        $disableFilterAnnotation = false;
+        $methodAnnotations = $this->reader->getMethodAnnotations($reflectionMethod);
+        foreach($methodAnnotations as $a){
+            if (get_class($a) == 'ESocial\AdminBundle\Annotation\FilterAware'){
+                if ($a->disableFilter == $filter){
+                    $disableFilterAnnotation = true;
+                    break;
+                }
+            }
+        }
+
+        return $disableFilterAnnotation;
     }
 }
