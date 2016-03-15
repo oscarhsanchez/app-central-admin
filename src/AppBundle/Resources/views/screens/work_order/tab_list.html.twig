@@ -9,14 +9,14 @@
         <span class="glyphicon glyphicon-plus"></span>
         <strong>{{ 'work_order.buttons.change_user'|trans }}</strong>
     </a>
-    <button type="button" class="btn btn-white" data-toggle="modal" data-target="#modalWorkOrderChangeDateLimit">
+    <a class="btn btn-white" title="{{ 'work_order.buttons.date_limit'|trans }}" href="{{ path('work_order_edit_field', { type: type, field_type: 'date_limit' }) }}" onclick="loadAjaxFormPage(this, null, null, work_order_list_reload); return false;">
         <span class="glyphicon glyphicon-plus"></span>
         <strong>{{ 'work_order.buttons.change_date_limit'|trans }}</strong>
-    </button>
-    <button type="button" class="btn btn-white" data-toggle="modal" data-target="#modalWorkOrderChangeState">
+    </a>
+    <a class="btn btn-white" title="{{ 'work_order.buttons.state'|trans }}" href="{{ path('work_order_edit_field', { type: type, field_type: 'state' }) }}" onclick="loadAjaxFormPage(this, null, null, work_order_list_reload); return false;">
         <span class="glyphicon glyphicon-plus"></span>
         <strong>{{ 'work_order.buttons.change_state'|trans }}</strong>
-    </button>
+    </a>
 </div>
 
 <table id="dt-work-order-list" class="table table-striped table-bordered table-hover">
@@ -90,7 +90,8 @@
     function setSelectedItems(work_order_list, type){
         var wrapper = $(work_order_list).closest('.dataTables_wrapper');
         var selectedValues = getSelectedChkItemsIntoSelector(wrapper);
-        $('#work_order_'+type+'_tokens').attr("value",selectedValues.join());
+        //$('#work_order_'+type+'_tokens').attr("value",selectedValues.join());
+        $('#work_order_'+type+'_tokens').val(selectedValues.join());
         //alert($('#work_order_user_tokens').val());
     }
 </script>

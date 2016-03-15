@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-01-08T18:58:17Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
+  <file date="2016-03-16T00:21:52Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="0d2f454df9414fb380a9487c61c78d2aafed2dc1" resname="Cerrada">
+        <source>Cerrada</source>
+        <target state="new">Cerrada</target>
+        <jms:reference-file line="94">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="71">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="850b531760f206582d125c23c4413cfd15143a16" resname="En proceso">
+        <source>En proceso</source>
+        <target state="new">En proceso</target>
+        <jms:reference-file line="94">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="71">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7d63af37f69e9e1afbce1591020cd9f760a2b3ab" resname="Pendiente">
+        <source>Pendiente</source>
+        <target state="new">Pendiente</target>
+        <jms:reference-file line="94">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="33">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+        <jms:reference-file line="71">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1d237f6e5d59b2faeba71fd2753016aa236df10c" resname="Rechazada">
+        <source>Rechazada</source>
+        <target state="new">Rechazada</target>
+        <jms:reference-file line="33">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b9de40dd68294e324d03e781c9a97f1f34b352f9" resname="Retocar">
+        <source>Retocar</source>
+        <target state="new">Retocar</target>
+        <jms:reference-file line="33">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f8d131fdb5ec2ade364f98c84d8e5f7725eacae5" resname="Validada">
+        <source>Validada</source>
+        <target state="new">Validada</target>
+        <jms:reference-file line="33">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="ac2362a0e9391a79d65a8247b39c612dcd22d305" resname="form.actions.delete">
         <source>form.actions.delete</source>
         <target>Eliminar</target>
         <jms:reference-file line="66">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="51">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="38">screens/report_subcategory/index.html.twig</jms:reference-file>
+        <jms:reference-file line="64">screens/work_order/tab_list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9ba5fa3125e09d96878c9de8d044ce021c217139" resname="form.actions.edit">
         <source>form.actions.edit</source>
@@ -19,6 +54,7 @@
         <jms:reference-file line="64">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="50">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="37">screens/report_subcategory/index.html.twig</jms:reference-file>
+        <jms:reference-file line="60">screens/work_order/tab_list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d9a6c723c1025d576fedde553e3ebb5c661a331b" resname="form.actions.execute">
         <source>form.actions.execute</source>
@@ -26,17 +62,36 @@
         <jms:reference-file line="65">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="51">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="4cf31bc67b97f07b746cf5be1ed8e9a121ab9e01" resname="form.country.label.name">
+        <source>form.country.label.name</source>
+        <target>Nombre</target>
+        <jms:reference-file line="4">screens/country/select.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a152574dedfe99a56616d1fcb96e8be1e0ee86d2" resname="form.country_select.label.country">
+        <source>form.country_select.label.country</source>
+        <target>País</target>
+        <jms:reference-file line="28">AppBundle/Form/CountrySelectType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="60304cbc3122ba1cd083fbf49d186576f65516bd" resname="form.label.actions">
         <source>form.label.actions</source>
         <target>Acciones</target>
+        <jms:reference-file line="5">screens/country/select.html.twig</jms:reference-file>
         <jms:reference-file line="37">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="36">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="32">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="19">screens/report_subcategory/index.html.twig</jms:reference-file>
+        <jms:reference-file line="11">screens/work_order/select.html.twig</jms:reference-file>
+        <jms:reference-file line="31">screens/work_order/tab_list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1e2fd356b756cce8b318e95947114246ac8484f7" resname="form.label.choice_empty_value">
         <source>form.label.choice_empty_value</source>
         <target>-- Seleccione --</target>
+        <jms:reference-file line="30">AppBundle/Form/CountrySelectType.php</jms:reference-file>
+        <jms:reference-file line="82">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="93">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="66">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="70">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="73">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="25">AppBundle/Form/ReportSearchType.php</jms:reference-file>
         <jms:reference-file line="26">AppBundle/Form/ReportSearchType.php</jms:reference-file>
         <jms:reference-file line="22">AppBundle/Form/ReportSubcategoryType.php</jms:reference-file>
@@ -47,22 +102,31 @@
       <trans-unit id="9c70440830cd5ff0a078484bdee2d22684f37410" resname="form.notice.deleted_error">
         <source>form.notice.deleted_error</source>
         <target>Ha ocurrido un error al eliminar el registro</target>
-        <jms:reference-file line="250">AppBundle/Controller/ReportController.php</jms:reference-file>
+        <jms:reference-file line="252">AppBundle/Controller/ReportController.php</jms:reference-file>
+        <jms:reference-file line="440">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c31d7da66d18758addc889626da1b956130d5ca9" resname="form.notice.deleted_success">
         <source>form.notice.deleted_success</source>
         <target>El registro se ha eliminado correctamente</target>
-        <jms:reference-file line="248">AppBundle/Controller/ReportController.php</jms:reference-file>
+        <jms:reference-file line="250">AppBundle/Controller/ReportController.php</jms:reference-file>
+        <jms:reference-file line="436">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0c4ddae17c4486030bc3bf951be64902b5c61802" resname="form.notice.saved_error">
         <source>form.notice.saved_error</source>
         <target>Ha ocurrido un error al guardar los datos</target>
         <jms:reference-file line="140">AppBundle/Controller/ReportController.php</jms:reference-file>
+        <jms:reference-file line="226">AppBundle/Controller/VallasUserController.php</jms:reference-file>
+        <jms:reference-file line="271">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="111">AppBundle/Controller/WorkOrderImageController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a1b430ca014351ab9bf7844086318ec655238db" resname="form.notice.saved_success">
         <source>form.notice.saved_success</source>
         <target>Los datos han sido modificados correctamente</target>
         <jms:reference-file line="135">AppBundle/Controller/ReportController.php</jms:reference-file>
+        <jms:reference-file line="221">AppBundle/Controller/VallasUserController.php</jms:reference-file>
+        <jms:reference-file line="266">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="364">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="106">AppBundle/Controller/WorkOrderImageController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="038378e2d270ab9a6254f046c526ebc9c5455e5e" resname="form.report.label.active">
         <source>form.report.label.active</source>
@@ -130,6 +194,116 @@
         <target>Submódulo</target>
         <jms:reference-file line="52">AppBundle/Form/RolePermissionType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="204f6696398fb4f6ec2e9cce0b95609812b76077" resname="form.text.need_save">
+        <source>form.text.need_save</source>
+        <target>Es necesario guardar el registro</target>
+        <jms:reference-file line="36">screens/work_order/form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ef98535895ed77e77d836af088639d12911c36f3" resname="form.work_order.label.cliente">
+        <source>form.work_order.label.cliente</source>
+        <target>Cliente</target>
+        <jms:reference-file line="39">screens/work_order_img/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ab25ba40f0697715534d930371c3fb3dbbf0d7fe" resname="form.work_order.label.created_at">
+        <source>form.work_order.label.created_at</source>
+        <target>Fecha creación</target>
+        <jms:reference-file line="12">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="7">screens/work_order/select.html.twig</jms:reference-file>
+        <jms:reference-file line="27">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="16">screens/work_order_img/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fc7bddb83bd4c14463ea0121755dbfe821c73ec5" resname="form.work_order.label.date_limit">
+        <source>form.work_order.label.date_limit</source>
+        <target>Fecha límite</target>
+        <jms:reference-file line="8">screens/work_order/select.html.twig</jms:reference-file>
+        <jms:reference-file line="28">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="812634a10c8bc76513876e027a4b1dbdae2cd1ea" resname="form.work_order.label.estado_orden">
+        <source>form.work_order.label.estado_orden</source>
+        <target>Estado</target>
+        <jms:reference-file line="93">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="70">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ec317d5ec81ef5f1d904e4691a449b85dbd938f1" resname="form.work_order.label.fecha_cierre">
+        <source>form.work_order.label.fecha_cierre</source>
+        <target>Fecha cierre</target>
+        <jms:reference-file line="98">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="68">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="abe529066e82b53de981664c2b9789f027cd411a" resname="form.work_order.label.fecha_limite">
+        <source>form.work_order.label.fecha_limite</source>
+        <target>Fecha límite</target>
+        <jms:reference-file line="88">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="64">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="23">screens/work_order_img/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8644d2a17a62deb7ad1c52912019c39255f77723" resname="form.work_order.label.location">
+        <source>form.work_order.label.location</source>
+        <target>Ubicación</target>
+        <jms:reference-file line="9">screens/work_order/select.html.twig</jms:reference-file>
+        <jms:reference-file line="29">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c1fbb984658fc53f22f24d68a34efbd4da77dab3" resname="form.work_order.label.medio">
+        <source>form.work_order.label.medio</source>
+        <target>Medio</target>
+        <jms:reference-file line="66">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0efc4bb17334a4149f4089404316e2bd70d28e4d" resname="form.work_order.label.observaciones">
+        <source>form.work_order.label.observaciones</source>
+        <target>Observaciones</target>
+        <jms:reference-file line="67">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="20617c88db88ba0769a2baa4386fcfac21a2e3fa" resname="form.work_order.label.observaciones_cierre">
+        <source>form.work_order.label.observaciones_cierre</source>
+        <target>Observaciones de cierre</target>
+        <jms:reference-file line="100">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="72">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="002e7bd93390fcc8f5a4d958585514a6c388b75a" resname="form.work_order.label.priority">
+        <source>form.work_order.label.priority</source>
+        <target>Prioridad</target>
+        <jms:reference-file line="6">screens/work_order/select.html.twig</jms:reference-file>
+        <jms:reference-file line="26">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6fb7157435aed8732643983b81b9ed353ceb8f35" resname="form.work_order.label.propuesta">
+        <source>form.work_order.label.propuesta</source>
+        <target>Propuesta</target>
+        <jms:reference-file line="46">screens/work_order_img/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5765e7db165f7db4c54ef0a7dc31d0b5ec195c95" resname="form.work_order.label.user">
+        <source>form.work_order.label.user</source>
+        <target>User</target>
+        <jms:reference-file line="81">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="73">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="10">screens/work_order/select.html.twig</jms:reference-file>
+        <jms:reference-file line="30">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="32">screens/work_order_img/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fb408461e34e291e2ef04bf7cb99efbc6e37c92f" resname="form.work_order_img.label.estado_imagen">
+        <source>form.work_order_img.label.estado_imagen</source>
+        <target>Estado de la imagen</target>
+        <jms:reference-file line="33">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2fd0058afe896596f8d3af617df4929c16048e7c" resname="form.work_order_img.label.nombre">
+        <source>form.work_order_img.label.nombre</source>
+        <target>Nombre</target>
+        <jms:reference-file line="31">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c38b641d540ad5a3e5a1600daaf4f5f62def0dce" resname="form.work_order_img.label.observaciones">
+        <source>form.work_order_img.label.observaciones</source>
+        <target>Observaciones</target>
+        <jms:reference-file line="35">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4ce6a3890380503358fcc96afcf5fa020383c78a" resname="form.work_order_img.label.observaciones_cliente">
+        <source>form.work_order_img.label.observaciones_cliente</source>
+        <target>Observaciones del cliente</target>
+        <jms:reference-file line="36">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8f8d55d1ce50f82faaee79e2d1c31a61de4be699" resname="form.work_order_img.label.url">
+        <source>form.work_order_img.label.url</source>
+        <target>URL</target>
+        <jms:reference-file line="34">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="71b22b64cd4687894bea1a3d23f0993de9d1343f" resname="menu.title.configuration">
         <source>menu.title.configuration</source>
         <target>Configuración</target>
@@ -137,6 +311,8 @@
         <jms:reference-file line="5">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/report_category/form.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/report_category/index.html.twig</jms:reference-file>
+        <jms:reference-file line="5">screens/work_order/form.html.twig</jms:reference-file>
+        <jms:reference-file line="5">screens/work_order/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="313b0a6c95549d2265983618a5b040e04ca3736e" resname="menu.title.report_categories">
         <source>menu.title.report_categories</source>
@@ -170,6 +346,15 @@
         <jms:reference-file line="7">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="14">screens/report/index.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="90c4bd3168b549d86fca91a66e01c24b9366e000" resname="menu.title.work_orders">
+        <source>menu.title.work_orders</source>
+        <target>Órdenes de trabajo</target>
+        <jms:reference-file line="3">screens/work_order/form.html.twig</jms:reference-file>
+        <jms:reference-file line="7">screens/work_order/form.html.twig</jms:reference-file>
+        <jms:reference-file line="3">screens/work_order/index.html.twig</jms:reference-file>
+        <jms:reference-file line="7">screens/work_order/index.html.twig</jms:reference-file>
+        <jms:reference-file line="14">screens/work_order/index.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="fade5716f6f7edd4411f68dd6027b18ace4a3990" resname="report.buttons.add">
         <source>report.buttons.add</source>
         <target>Añadir informe</target>
@@ -201,6 +386,83 @@
         <target>Añadir informe</target>
         <jms:reference-file line="10">screens/report/form.html.twig</jms:reference-file>
         <jms:reference-file line="18">screens/report/form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="90b60b3141bfa6e294e3a62c77301b052a4ee49f" resname="screens.work_orders.actions.add">
+        <source>screens.work_orders.actions.add</source>
+        <target>Añadir</target>
+        <jms:reference-file line="10">screens/work_order/form.html.twig</jms:reference-file>
+        <jms:reference-file line="18">screens/work_order/form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="42858ec24031882347f8be6490f4928d495f21f5" resname="screens.work_orders.text.basic_data">
+        <source>screens.work_orders.text.basic_data</source>
+        <target>Datos básicos</target>
+        <jms:reference-file line="5">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="dd9a32a9cd0a50f34cbc328d456461cf2f1f55de" resname="screens.work_orders.text.close_data">
+        <source>screens.work_orders.text.close_data</source>
+        <target>Fecha de cierre</target>
+        <jms:reference-file line="40">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="12265f0b8a5971d55ceb96aefd0e6fd273359a5a" resname="work_order.buttons.add">
+        <source>work_order.buttons.add</source>
+        <target>Añadir</target>
+        <jms:reference-file line="4">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="6">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e20b36dde724c2a9e796c7394aeddae715fd000f" resname="work_order.buttons.change_date_limit">
+        <source>work_order.buttons.change_date_limit</source>
+        <target>Modificar fecha límite</target>
+        <jms:reference-file line="14">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="62">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="59de2920512147c0674364d1fcd564638c21361b" resname="work_order.buttons.change_state">
+        <source>work_order.buttons.change_state</source>
+        <target>Modificar estado</target>
+        <jms:reference-file line="18">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="63">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4a63c1b67c114dcc8d6364122b366316cf12e58e" resname="work_order.buttons.change_user">
+        <source>work_order.buttons.change_user</source>
+        <target>Modificar usuario</target>
+        <jms:reference-file line="8">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="10">screens/work_order/tab_list.html.twig</jms:reference-file>
+        <jms:reference-file line="61">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="97581f628207159f2ee2f6f9d495038985b1bf89" resname="work_order.buttons.date_limit">
+        <source>work_order.buttons.date_limit</source>
+        <target>Fecha límite</target>
+        <jms:reference-file line="12">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a7795a0496083666025c1d4092d2c5ab33884623" resname="work_order.buttons.state">
+        <source>work_order.buttons.state</source>
+        <target>Estado</target>
+        <jms:reference-file line="16">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0c723577649a96027d2fd12cefd5cee856e08c2d" resname="work_order.tabs.img_validation">
+        <source>work_order.tabs.img_validation</source>
+        <target>Validación de imágenes</target>
+        <jms:reference-file line="28">screens/work_order/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="46a9ceebcb4d97b611976ff79be53974fe53b44d" resname="work_order.tabs.list">
+        <source>work_order.tabs.list</source>
+        <target>Listado de órdenes de trabajo</target>
+        <jms:reference-file line="25">screens/work_order/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="be0157873e6ff37562074c1f349f5f15767a8e5c" resname="work_order_img.buttons.add">
+        <source>work_order_img.buttons.add</source>
+        <target>Añadir</target>
+        <jms:reference-file line="2">work_order/formtabs/tab_images.html.twig</jms:reference-file>
+        <jms:reference-file line="4">work_order/formtabs/tab_images.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="909a7d38eee698ff61b5b15870c2941b1f13d20e" resname="work_order_img.fieldset.image_data">
+        <source>work_order_img.fieldset.image_data</source>
+        <target>Datos de la imagen</target>
+        <jms:reference-file line="7">screens/work_order_img/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1a0a11477e63a77e9557ac296e2106a4b2fcc829" resname="work_order_img.fieldset.work_order_data">
+        <source>work_order_img.fieldset.work_order_data</source>
+        <target>Datos de la orden de trabajo</target>
+        <jms:reference-file line="12">screens/work_order_img/list.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

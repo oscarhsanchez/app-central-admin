@@ -22,10 +22,10 @@
                     'template_path' : 'AppBundle:screens/work_order',
                     'tabs' : {
                         'list': {
-                            'title': 'work_order.tabs.list'
+                            'title': 'work_order.tabs.list'|trans
                         },
                         'img_validation': {
-                            'title': 'work_order.tabs.img_validation'
+                            'title': 'work_order.tabs.img_validation'|trans
                         }
                     }
                 })
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    {*
+    {#
     {% set modalsWorkOrderFields = {
         'modalWorkOrderChangeUser': { title: 'work_order.title.change_user', form: formChangeUser, type: 'user' },
         'modalWorkOrderChangeDateLimit': { title: 'work_order.title.change_date_limit', form: formChangeDateLimit, type: 'date_limit' },
@@ -61,7 +61,7 @@
             </div>
         </div>
     {% endfor %}
-    *}
+    #}
 
 
 {% endblock %}

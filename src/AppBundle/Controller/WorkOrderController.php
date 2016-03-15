@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\OrdenTrabajoFieldType;
+use AppBundle\Form\OrdenTrabajoImagenType;
 use AppBundle\Form\OrdenTrabajoType;
 use ESocial\UtilBundle\Util\DataTables\EntityJsonList;
 use ESocial\UtilBundle\Util\Dates;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Vallas\ModelBundle\Entity\LogOrdenTrabajo;
 use Vallas\ModelBundle\Entity\OrdenTrabajo;
 
 /**
@@ -92,22 +94,31 @@ class WorkOrderController extends VallasAdminController {
     {
         $em = $this->getDoctrine()->getManager();
 
-        $formChangeUser = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_user')), null, array('type'=>'user'));
-        $formChangeDateLimit = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_date_limit')), null, array('type'=>'date_limit'));
-        $formChangeState = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_state')), null, array('type'=>'state'));
+        //$formChangeUser = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_user')), null, array('type'=>'user'));
+        //$formChangeDateLimit = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_date_limit')), null, array('type'=>'date_limit'));
+        //$formChangeState = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_state')), null, array('type'=>'state'));
 
         $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder();
+        $qbImage->addOrderBy('p.created_at', 'DESC');
+
         $paginator = $this->get('knp_paginator');
         $imgPaged = $paginator->paginate($qbImage, 1, 1);
         $imgPaged->setUsedRoute('work_order_img_list');
-        $firstImg = $imgPaged[0];
+        $imgPaged->setParam('type', $type);
+
+        $firstImg = null;
+        if (count($imgPaged) > 0){
+            $firstImg = $imgPaged[0];
+        }
 
         return $this->render('AppBundle:screens/work_order:index.html.twig', array(
             'type' => $type,
-            'formChangeUser' => $formChangeUser->createView(),
-            'formChangeDateLimit' => $formChangeDateLimit->createView(),
-            'formChangeState' => $formChangeState->createView(),
-            'image' => $firstImg
+            //'formChangeUser' => $formChangeUser->createView(),
+            //'formChangeDateLimit' => $formChangeDateLimit->createView(),
+            //'formChangeState' => $formChangeState->createView(),
+            'image' => $firstImg,
+            'imgPaged' => $imgPaged,
+            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView()
         ));
     }
 
@@ -162,7 +173,7 @@ class WorkOrderController extends VallasAdminController {
         $entity->setPais($this->getSessionCountry());
         $entity->setTipo($this->getCodeTypeByUrlType($type));
         //$this->initLanguagesForEntity($entity);
-        $params_original = array();
+        $params_original = array('entity' => null);
 
         $form = $this->createForm(new OrdenTrabajoType(), $entity);
 
@@ -195,10 +206,27 @@ class WorkOrderController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find OrdenTrabajo entity.');
         }
 
+        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()->andWhere('p.orden_trabajo = :ot')->setParameter('ot', $entity->getPkOrdenTrabajo());
+        $qbImage->addOrderBy('p.created_at', 'DESC');
+
+        $paginator = $this->get('knp_paginator');
+        $imgPaged = $paginator->paginate($qbImage, 1, 1);
+        $imgPaged->setUsedRoute('work_order_img_list');
+        $imgPaged->setParam('type', $this->getTypeUrlByCode($entity->getTipo()));
+        $imgPaged->setParam('id', $entity->getToken());
+
+        $firstImg = null;
+        if (count($imgPaged) > 0){
+            $firstImg = $imgPaged[0];
+        }
+
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
-            'form' => $this->createForm(new OrdenTrabajoType(), $entity)->createView()
+            'form' => $this->createForm(new OrdenTrabajoType(), $entity)->createView(),
+            'image' => $firstImg,
+            'imgPaged' => $imgPaged,
+            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView()
         ));
     }
 
@@ -212,7 +240,27 @@ class WorkOrderController extends VallasAdminController {
 
             if ($form->isValid()){
 
+                //LOG DE ORDEN DE TRABAJO
+                $logAccion = 'Modificación';
+                if (!$entity->getPkOrdenTrabajo()){
+                    $logAccion = 'Creacion';
+                }
+                if (array_key_exists('entity', $params_original) && $params_original['entity']){
+
+                    if ($params_original['entity']->getEstadoOrden() != $entity->getEstadoOrden()){
+                        $logAccion = 'Cambio de estado';
+                        if ($entity->getEstadoOrden() == 2){
+                            $logAccion = 'Cierre';
+                        }
+                    }
+                }
+                $log = new LogOrdenTrabajo();
+                $log->setCodigoUser($this->getSessionUser()->getCodigo());
+                $log->setFecha(new \DateTime(date('Y:m:d H:i:s')));
+                $log->setAccion($logAccion);
+
                 $em->persist($entity);
+                $em->persist($log);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('form.notice.saved_success'));
@@ -262,7 +310,8 @@ class WorkOrderController extends VallasAdminController {
         $em = $this->getDoctrine()->getManager();
         $field_type = $this->getVar('field_type');
 
-        $form = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_'.$field_type)), null, array('type' => $field_type));
+        $entityAux = new OrdenTrabajo();
+        $form = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_'.$field_type)), $entityAux, array('type' => $field_type));
 
         if ($request->getMethod() == 'POST'){
 
@@ -289,13 +338,10 @@ class WorkOrderController extends VallasAdminController {
                         $user = $post['user'] ? $em->getRepository('VallasModelBundle:User')->find($post['user']) : null;
                         break;
                     case 'date_limit':
-                        $dateLimit = $post['fecha_limite'];
-                        if ($dateLimit){
-                            $dateLimit = new \DateTime(date('Y-m-d', Dates::convertAppStringToDate($dateLimit)));
-                        }
+                        $dateLimit = $entityAux->getFechaLimite();
                         break;
                     case 'state':
-                        $state = $post['estado_orden'];
+                        $state = $entityAux->getEstadoOrden();
                         break;
                 }
 
@@ -342,16 +388,33 @@ class WorkOrderController extends VallasAdminController {
 
         $form = $this->createForm(new OrdenTrabajoType(), $entity);
 
-        $boolSaved = $this->saveAction($request, $entity, array(), $form);
+        $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
         if ($boolSaved){
             return $this->redirect($this->generateUrl('work_order_edit', array('id' => $entity->getToken())));
         }
 
+        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()->andWhere('p.orden_trabajo = :ot')->setParameter('ot', $entity->getPkOrdenTrabajo());
+        $qbImage->addOrderBy('p.created_at', 'DESC');
+
+        $paginator = $this->get('knp_paginator');
+        $imgPaged = $paginator->paginate($qbImage, 1, 1);
+        $imgPaged->setUsedRoute('work_order_img_list');
+        $imgPaged->setParam('type', $this->getTypeUrlByCode($entity->getTipo()));
+        $imgPaged->setParam('id', $entity->getToken());
+
+        $firstImg = null;
+        if (count($imgPaged) > 0){
+            $firstImg = $imgPaged[0];
+        }
+
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'image' => $firstImg,
+            'imgPaged' => $imgPaged,
+            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView()
         ));
     }
 

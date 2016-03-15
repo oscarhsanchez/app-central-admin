@@ -1,0 +1,55 @@
+{{ form_start(form, { method: 'POST', action: entity is defined and entity.pk_orden_trabajo is not empty ? path('work_order_update', {id: entity.token, origin: 'list' }) : path('work_order_create', { type: type }) }) }}
+<div class="row">
+    <div class="col-md-6">
+        <fieldset>
+            <legend>{{ 'screens.work_orders.text.basic_data'|trans }}</legend>
+
+            {% if entity is defined and entity.pk_orden_trabajo is not empty %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">
+                                {{ 'form.work_order.label.created_at'|trans }}
+                            </label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <span class="form-control">{{ entity.createdAt|dateToFormat }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.fecha_limite) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.estado_orden) }}
+                </div>
+            </div>
+            {{ form_row(form.user) }}
+            {{ form_row(form.medio) }}
+            {{ form_row(form.observaciones) }}
+
+        </fieldset>
+
+    </div>
+    <div class="col-md-6">
+        <fieldset>
+            <legend>{{ 'screens.work_orders.text.close_data'|trans }}</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.fecha_cierre) }}
+                </div>
+            </div>
+            {{ form_row(form.observaciones_cierre) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="clearfix">
+    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
+</div>
+
+{{ form_end(form) }}

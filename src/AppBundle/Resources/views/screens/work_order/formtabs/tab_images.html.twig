@@ -1,0 +1,16 @@
+<div class="margin-b">
+    <a class="btn btn-white" title="{{ 'work_order_img.buttons.add'|trans }}" href="{{ path('work_order_img_add', { id: entity.token }) }}" onclick="loadAjaxFormPage(this, 'modal-lg', null, workOrderImgListReload); return false;">
+        <span class="glyphicon glyphicon-plus"></span>
+        <strong>{{ 'work_order_img.buttons.add'|trans }}</strong>
+    </a>
+</div>
+
+<div id="work-order-img-list-wrapper" class="text-center">
+    {% include 'AppBundle:screens/work_order_img:list.html.twig' with { 'formImage': formFirstImage } %}
+</div>
+
+<script type="text/javascript">
+    function workOrderImgListReload(){
+        executeAjax('{{ path('work_order_img_list', { type: type, id: entity.token }) }}', '#work-order-img-list-wrapper');
+    }
+</script>

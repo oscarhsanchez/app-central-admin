@@ -3,14 +3,13 @@
 
 {{ form_start(form, {
     method: 'POST',
-    action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token }) : path('work_order_img_create'),
+    action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token, isPopup: isPopup }) : path('work_order_img_create', { id: entity.ordenTrabajo.token }),
     attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
 
 <div class="row">
     <div class="col-md-6">
-        {{ form_row(form.orden_trabajo, { select_href: path('work_order_select', { _type: 'fixing-monitoring' }) }) }}
         {{ form_row(form.nombre) }}
-        {{ form_row(form.path) }}
+        {{ form_row(form.estado_imagen) }}
         {{ form_row(form.url) }}
     </div>
     <div class="col-md-6">
@@ -18,15 +17,4 @@
         {{ form_row(form.observaciones_cliente) }}
     </div>
 </div>
-
 {{ form_end(form) }}
-
-<script type="text/javascript">
-    function selectWorkOrder(data, vars){
-        var jsonData = decodeURIComponent(data);
-        var obj = JSON.parse(jsonData);
-        var objVars = JSON.parse(vars);
-        $("#work_order_img_orden_trabajo").val(obj.token);
-        $("#select-input-group-work_order_img_orden_trabajo").html(obj.toString);
-    }
-</script>
