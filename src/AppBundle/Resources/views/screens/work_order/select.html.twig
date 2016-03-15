@@ -1,0 +1,51 @@
+{% set selectFunction = getVars.selectFunction is defined and getVars.selectFunction is not empty ? getVars.selectFunction : 'selectWorkOrder' %}
+
+<table id="dt-work-order-select-list" class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'form.work_order.label.priority'|trans }}</th>
+        <th>{{ 'form.work_order.label.created_at'|trans }}</th>
+        <th>{{ 'form.work_order.label.date_limit'|trans }}</th>
+        <th>{{ 'form.work_order.label.location'|trans }}</th>
+        <th>{{ 'form.work_order.label.user'|trans }}</th>
+        <th>{{ 'form.label.actions'|trans }}</th>
+    </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+    var work_order_list = null;
+    $(document).ready(function() {
+        var table_columns = [
+            {
+                "mData": function (source) {
+                    switch(source.priority){
+                        case 0: return '<i class="fa fa-circle" style="color: #00bb00"></i>'; break;
+                        case 1: return '<i class="fa fa-circle" style="color: #ffaa00"></i>'; break;
+                        case 2: return '<i class="fa fa-circle" style="color: #ff0000"></i>'; break;
+                    }
+                }
+            },
+            {"mData": "created_at"},
+            {"mData": "fecha_limite"},
+            {"mData": "medio__ubicacion__ubicacion"},
+            {"mData": "codigo_user"},
+            {
+                "mData": function (source){
+                    return '<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="closeThisPopup(this);{{ selectFunction }}(\''+encodeURIComponent(JSON.stringify(source))+'\', \'{{ getVars|json_encode|escape  }}\')">Select</a>';
+                }
+            }
+        ];
+
+        jQuery(document).ready(function(){
+            work_order_list = TableManaged.init(
+                    '#dt-work-order-select-list',
+                    '{{ url('work_order_list_json', { _type: type }) }}',
+                    null,
+                    [],
+                    table_columns,
+                    '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+            );
+        });
+    });
+</script>

@@ -37,6 +37,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'ESocialAdminBundle:Form:esocial.theme.fields.html.twig'
+        - 'ESocialUtilBundle:Form:esocial_util.theme.fields.html.twig'
     globals:
         app_info: %app_info%
         languages: %languages%
@@ -102,6 +103,8 @@ e_social_util:
         host: '%jasper_host%'
         username: '%jasper_user%'
         password: '%jasper_pass%'
+    amazon_aws:
+        enabled: false
 
 jms_translation:
     configs:
@@ -112,3 +115,14 @@ jms_translation:
             excluded_names: []
             excluded_dirs: [cache, data, logs]
             extractors: []
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
