@@ -36,10 +36,14 @@ class WorkOrderController extends VallasAdminController {
         $repository = $em->getRepository('VallasModelBundle:OrdenTrabajo');
         $qb = $repository->getAllQueryBuilder();
 
+        if ($type){
+            $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
+        }
+
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'pk_orden_trabajo', 'created_at', 'fecha_limite', 'medio__ubicacion__ubicacion', 'codigo_user'));
-        $jsonList->setSearchFields(array('fecha_limite', 'medio__ubicacion__ubicacion', 'codigo_user'));
+        $jsonList->setFieldsToGet(array('token', 'pk_orden_trabajo', 'estado_orden', 'created_at', 'fecha_cierre', 'fecha_limite', 'medio__ubicacion__ubicacion', 'codigo_user'));
+        $jsonList->setSearchFields(array('fecha_limite', 'fecha_cierre', 'medio__ubicacion__ubicacion', 'codigo_user'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 
@@ -76,10 +80,19 @@ class WorkOrderController extends VallasAdminController {
                 if ($diff->days < 2 || ($diff->days == 2 && $diff->h == 0 && $diff->i == 0 && $diff->s == 0)) $priority = 2;
             }
 
+            if ($reg['estado_orden'] && $reg['estado_orden'] == 2){
+                $priority = null;
+            }
+
             $response['aaData'][$key]['fecha_limite'] = $reg['fecha_limite']->format('d/m/Y');
             $response['aaData'][$key]['priority'] = $priority;
             $response['aaData'][$key]['created_at'] = $reg['created_at']->format('d/m/Y');
+            $response['aaData'][$key]['fecha_cierre'] = $reg['fecha_cierre'] ? $reg['fecha_cierre']->format('d/m/Y') : null;
             $response['aaData'][$key]['toString'] = $reg['fecha_limite']->format('d/m/Y') .' - '. $reg['medio__ubicacion__ubicacion'] .' - '. $reg['codigo_user'];
+
+            $estados = array('0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada');
+            $estado_orden = strval($reg['estado_orden']);
+            $response['aaData'][$key]['estado_orden'] = $reg['estado_orden'] ? $estados[$estado_orden] : null;
         }
 
         return new JsonResponse($response);

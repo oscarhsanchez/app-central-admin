@@ -23,13 +23,11 @@ class OrdenTrabajoImagenType extends ESocialType {
             $form = $event->getForm();
 
             $form->getData()->setPath($form->getData()->getUrl());
+            $form->getData()->setNombre($form->getData()->getUrl());
 
         });
 
         $builder
-            //->add('orden_trabajo', 'selectable_entity', array('label' => 'form.work_order_img.label.orden_trabajo', 'class' => 'VallasModelBundle:OrdenTrabajo'))
-            ->add('nombre', null, array('label' => 'form.work_order_img.label.nombre'))
-            //->add('path', null, array('label' => 'form.work_order_img.label.path'))
             ->add('estado_imagen', 'choice', array('label'=>'form.work_order_img.label.estado_imagen', 'choices' => array('0' => 'Pendiente', '1' => 'Validada', '2' => 'Rechazada', '3' => 'Retocar')))
             ->add('url', 'uploadable_field', array('label'=>'form.work_order_img.label.url', 'type'=>'image', 'image_mapping' => 'orden_trabajo_imagen', 'required' => false))
             ->add('observaciones', null, array('label' => 'form.work_order_img.label.observaciones', 'attr' => array('rows' => 3)))

@@ -24,8 +24,10 @@
     <tr>
         <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
         <th>{{ 'form.work_order.label.priority'|trans }}</th>
+        <th>{{ 'form.work_order.label.estado_orden'|trans }}</th>
         <th>{{ 'form.work_order.label.created_at'|trans }}</th>
         <th>{{ 'form.work_order.label.date_limit'|trans }}</th>
+        <th>{{ 'form.work_order.label.fecha_cierre'|trans }}</th>
         <th>{{ 'form.work_order.label.location'|trans }}</th>
         <th>{{ 'form.work_order.label.user'|trans }}</th>
         <th>{{ 'form.label.actions'|trans }}</th>
@@ -49,10 +51,13 @@
                         case 1: return '<i class="fa fa-circle" style="color: #ffaa00"></i>'; break;
                         case 2: return '<i class="fa fa-circle" style="color: #ff0000"></i>'; break;
                     }
+                    return '';
                 }
             },
+            {"mData": "estado_orden"},
             {"mData": "created_at"},
             {"mData": "fecha_limite"},
+            {"mData": "fecha_cierre"},
             {"mData": "medio__ubicacion__ubicacion"},
             {"mData": "codigo_user"},
             {

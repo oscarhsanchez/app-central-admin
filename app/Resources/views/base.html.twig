@@ -12,9 +12,9 @@
     <li>
         <a href="#"><i class="fa fa-asterisk"></i> <span class="nav-label">{{ 'menu.title.work_orders'|trans }}</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="{{ path('work_order_list', { type: 'fixing-monitoring' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.fixing_monitoring'|trans }}</span></a></li>
-            <li><a href="{{ path('work_order_list', { type: 'installation' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.installation'|trans }}</span></a></li>
-            <li><a href="{{ path('work_order_list', { type: 'lighting' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.lighting'|trans }}</span></a></li>
+            <li><a href="{{ path('work_order_list', { type: 'fixing-monitoring' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">Fijación y monitoreo{# 'menu.title.fixing_monitoring'|trans #}</span></a></li>
+            <li><a href="{{ path('work_order_list', { type: 'installation' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">Instalación{# 'menu.title.installation'|trans #}</span></a></li>
+            <li><a href="{{ path('work_order_list', { type: 'lighting' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">Iluminación{# 'menu.title.lighting'|trans #}</span></a></li>
         </ul>
     </li>
 {% endblock %}
