@@ -35,7 +35,7 @@ namespace :composer do
 end
 
 ## Permissions
-set :writable_dirs,       ["app/cache", "app/logs", "web/media", "web/uploads/temp", "tmp"]
+set :writable_dirs,       ["app/cache", "app/logs", "web/media", "web/uploads", "tmp"]
 set :permission_method,   :acl
 set :use_set_permissions, true
 set :webserver_user, "www-data"
@@ -65,7 +65,7 @@ namespace :rb do
         run "chmod -R 777 #{latest_release}/app/cache"
         run "chmod -R 777 #{latest_release}/app/logs"
         run "chmod -R 777 #{latest_release}/web/media"
-        run "chmod -R 777 #{latest_release}/web/uploads/temp"
+        run "chmod -R 777 #{latest_release}/web/uploads"
         capifony_puts_ok
     end
     task :reload_apache do
@@ -78,7 +78,7 @@ namespace :rb do
 end
 
 set :shared_files,        ["app/config/parameters.yml"]
-set :shared_children,     [app_path + "/logs", web_path + "/media", web_path + "/uploads/temp", "tmp"]
+set :shared_children,     [app_path + "/logs", web_path + "/media", web_path + "/uploads", "tmp"]
 
 
 
