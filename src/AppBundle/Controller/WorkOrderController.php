@@ -212,7 +212,8 @@ class WorkOrderController extends VallasAdminController {
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByToken($id);
+        $entityQB = $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByTokenQB($id, array('logs' => null))->addOrderBy('logs.fecha', 'DESC');
+        $entity = $entityQB->getQuery()->getOneOrNullResult();
         //$this->initLanguagesForEntity($entity);
 
         if (!$entity){
@@ -268,6 +269,8 @@ class WorkOrderController extends VallasAdminController {
                     }
                 }
                 $log = new LogOrdenTrabajo();
+                $log->setPais($this->getSessionCountry());
+                $log->setOrdenTrabajo($entity);
                 $log->setCodigoUser($this->getSessionUser()->getCodigo());
                 $log->setFecha(new \DateTime(date('Y:m:d H:i:s')));
                 $log->setAccion($logAccion);
@@ -392,7 +395,8 @@ class WorkOrderController extends VallasAdminController {
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByToken($id);
+        $entityQB = $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByTokenQB($id, array('logs' => null))->addOrderBy('logs.fecha', 'DESC');
+        $entity = $entityQB->getQuery()->getOneOrNullResult();
         //$this->initLanguagesForEntity($entity);
 
         if (!$entity){
@@ -452,6 +456,26 @@ class WorkOrderController extends VallasAdminController {
 
             return new JsonResponse(array('result' => '0', 'message' => $this->get('translator')->trans('form.notice.deleted_error')));
         }
+
+    }
+
+    /**
+     * @Route("/{id}/view-log", name="work_order_view_log", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function viewLogAction(Request $request, $id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entityQB = $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByTokenQB($id, array('logs' => null))->addOrderBy('logs.fecha', 'DESC');
+        $entity = $entityQB->getQuery()->getOneOrNullResult();
+
+        if (!$entity){
+            throw $this->createNotFoundException('Unable to find OrdenTrabajo entity.');
+        }
+
+        return $this->render('AppBundle:screens/work_order:logs.html.twig', array('entity' => $entity));
 
     }
 
