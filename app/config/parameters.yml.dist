@@ -48,3 +48,7 @@ parameters:
                 filters:
                    medium: { size: [800,600] }
                    thumbnail: { size: [100,100] }
+            incidencia_imagen:
+                filters:
+                   medium: { size: [800,600] }
+                   thumbnail: { size: [100,100] }

@@ -1,0 +1,43 @@
+{% if image is not empty %}
+        {{ knp_pagination_render(imgPaged) }}
+
+            <div class="row text-center">
+            <div class="col-md-6 text-left" style="float:none; margin:0 auto">
+                <fieldset>
+                    <legend>{{ 'incidencia_img.fieldset.image_data'|trans }}</legend>
+                    {% include 'AppBundle:screens/incidencia_img:form_list.html.twig' with { entity: image, form: formImage } %}
+                </fieldset>
+                {% if entity is not defined  %}
+                <fieldset>
+                    <legend>{{ 'incidencia_img.fieldset.incidencia_data'|trans }}</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.incidencia.label.fecha_limite'|trans }}</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <span class="form-control">{{ image.incidencia.fechaLimite|dateToFormat }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">{{ 'form.incidencia.label.user'|trans }}</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <span class="form-control">{{ image.incidencia.codigoUser }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                {% endif %}
+            </div>
+        </div>
+    {{ knp_pagination_render(imgPaged) }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            KNPPagination.ajaxify('#incidencia-img-list-wrapper');
+        });
+    </script>
+{% endif %}

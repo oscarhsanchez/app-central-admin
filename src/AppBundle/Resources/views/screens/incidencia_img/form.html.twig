@@ -1,0 +1,19 @@
+{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+{# include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' #}
+
+{{ form_start(form, {
+    method: 'POST',
+    action: entity is defined and entity.pkArchivo is not empty ? path('incidencia_img_update', { id: entity.token, isPopup: isPopup }) : path('incidencia_img_create', { id: entity.incidencia.token }),
+    attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
+
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.estado_imagen) }}
+        {{ form_row(form.nombre) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.observaciones) }}
+        {{ form_row(form.observaciones_cliente) }}
+    </div>
+</div>
+{{ form_end(form) }}

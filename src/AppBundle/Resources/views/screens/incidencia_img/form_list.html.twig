@@ -1,0 +1,27 @@
+{{ form_start(form, {
+    method: 'POST',
+    action: entity is defined and entity.pkArchivo is not empty ? path('incidencia_img_update', { id: entity.token, origin: 'list' }) : path('incidencia_img_create'),
+    attr: { onsubmit: 'sendAjaxForm(this); return false;' } }) }}
+
+    <label class="control-label">{{ entity.nombre }}</label>
+    <div class="margin-b-20">
+        <img style="max-width: 100%" src="/media/incidencia_imagen/{{ entity.nombre }}" />
+    </div>
+
+    {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+
+    <div class="row margin-t">
+        <div class="col-md-6">
+            <div class="margin-b">{{ form_row(form.nombre) }}</div>
+            {{ form_row(form.estado_imagen) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.observaciones) }}
+            {{ form_row(form.observaciones_cliente) }}
+        </div>
+    </div>
+    <div class="clearfix">
+        <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
+    </div>
+
+{{ form_end(form) }}

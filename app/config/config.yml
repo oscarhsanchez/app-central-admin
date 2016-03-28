@@ -80,6 +80,9 @@ doctrine:
             country_filter:
                 class:   AppBundle\Filter\CountryFilter
                 enabled: true
+        dql:
+          string_functions:
+            DATE_STR_FORMAT: ESocial\AdminBundle\DQL\DateStringFormatFunction
 
 # Swiftmailer Configuration
 swiftmailer:

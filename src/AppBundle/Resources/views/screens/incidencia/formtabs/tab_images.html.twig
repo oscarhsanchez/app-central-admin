@@ -1,0 +1,16 @@
+<div class="margin-b">
+    <a class="btn btn-white" title="{{ 'incidencia_img.buttons.add'|trans }}" href="{{ path('incidencia_img_add', { id: entity.token }) }}" onclick="loadAjaxFormPage(this, 'modal-lg', null, incidenciaImgListReload); return false;">
+        <span class="glyphicon glyphicon-plus"></span>
+        <strong>{{ 'incidencia_img.buttons.add'|trans }}</strong>
+    </a>
+</div>
+
+<div id="incidencia-img-list-wrapper" class="text-center">
+    {% include 'AppBundle:screens/incidencia_img:list.html.twig' with { 'formImage': formFirstImage } %}
+</div>
+
+<script type="text/javascript">
+    function incidenciaImgListReload(){
+        executeAjax('{{ path('incidencia_img_list', { id: entity.token }) }}', '#incidencia-img-list-wrapper');
+    }
+</script>

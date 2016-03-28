@@ -1,0 +1,42 @@
+{{ form_start(form, { method: 'POST', action: entity is defined and entity.pkIncidencia is not empty ? path('incidencia_update', {id: entity.token, origin: 'list' }) : path('incidencia_create') }) }}
+<div class="row">
+    <div class="col-md-6">
+        <fieldset>
+            <legend>{{ 'screens.incidencias.text.basic_data'|trans }}</legend>
+
+            {{ form_row(form.tipo) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.fecha_limite) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.estado_incidencia) }}
+                </div>
+            </div>
+            {{ form_row(form.user) }}
+            {{ form_row(form.medio, { select_href: path('medio_select') }) }}
+            {{ form_row(form.observaciones) }}
+
+        </fieldset>
+
+    </div>
+    {% if entity.estadoIncidencia == 2 %}
+    <div class="col-md-6">
+        <fieldset>
+            <legend>{{ 'screens.incidencias.text.close_data'|trans }}</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.fecha_cierre) }}
+                </div>
+            </div>
+            {{ form_row(form.observaciones_cierre) }}
+        </fieldset>
+    </div>
+    {% endif %}
+</div>
+
+<div class="clearfix">
+    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
+</div>
+
+{{ form_end(form) }}
