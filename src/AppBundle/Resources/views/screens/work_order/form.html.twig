@@ -41,4 +41,13 @@
 
         </div>
     </div>
+    <script type="text/javascript">
+        function selectMedio(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#work_order_medio").val(obj.token);
+            $("#select-input-group-work_order_medio").html(obj.name);
+        }
+    </script>
 {% endblock %}

@@ -29,6 +29,7 @@
                 </div>
             </div>
             {{ form_row(form.user) }}
+            {{ form_row(form.medio, { select_href: path('medio_select') }) }}
             {{ form_row(form.medio) }}
             {{ form_row(form.observaciones) }}
 

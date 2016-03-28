@@ -63,7 +63,13 @@ class OrdenTrabajoType extends ESocialType {
         $builder
             ->add('fecha_limite', 'date', array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.fecha_limite', 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
-            ->add('medio', 'entity', array('label' => 'form.work_order.label.medio', 'empty_value' => 'form.label.choice_empty_value', 'class' => 'VallasModelBundle:Medio', 'required' => false))
+            ->add('medio', 'selectable_entity', array(
+                'label' => 'form.work_order.label.medio',
+                'class' => 'VallasModelBundle:Medio',
+                'required' => false,
+                'select_text'   => 'Select Medio',
+                'enable_update' => true
+            ))
             ->add('observaciones', null, array('label' => 'form.work_order.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)))
             ->add('fecha_cierre', 'date', array('label' => 'form.work_order.label.fecha_cierre', 'widget' => 'single_text', 'required' => false,
                 'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
@@ -72,17 +78,6 @@ class OrdenTrabajoType extends ESocialType {
             ->add('observaciones_cierre', null, array('label' => 'form.work_order.label.observaciones_cierre', 'required' => false))
             ->add('user', 'entity', array('mapped' => false, 'label' => 'form.work_order.label.user', 'empty_value' => 'form.label.choice_empty_value', 'class' => 'VallasModelBundle:User', 'required' => false,
                     'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); }))
-
-            /*
-            ->add('imagenes', 'collection', array(
-                'type'           => new OrdenTrabajoImagenType(),
-                'prototype'     => true,
-                'label'          => false,
-                'by_reference'   => false,
-                'allow_delete'   => true,
-                'allow_add'      => true
-            ))
-            */
             ;
 
     }
