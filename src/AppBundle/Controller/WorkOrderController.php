@@ -86,7 +86,7 @@ class WorkOrderController extends VallasAdminController {
 
             $response['aaData'][$key]['fecha_limite'] = $reg['fecha_limite']->format('d/m/Y');
             $response['aaData'][$key]['priority'] = $priority;
-            $response['aaData'][$key]['created_at'] = $reg['created_at']->format('d/m/Y');
+            $response['aaData'][$key]['created_at'] = $reg['created_at'] ? $reg['created_at']->format('d/m/Y') : null;
             $response['aaData'][$key]['fecha_cierre'] = $reg['fecha_cierre'] ? $reg['fecha_cierre']->format('d/m/Y') : null;
             $response['aaData'][$key]['toString'] = $reg['fecha_limite']->format('d/m/Y') .' - '. $reg['medio__ubicacion__ubicacion'] .' - '. $reg['codigo_user'];
 

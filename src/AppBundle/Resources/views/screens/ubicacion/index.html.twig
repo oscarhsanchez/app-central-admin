@@ -58,7 +58,7 @@
                 {"mData": "estatus"},
                 {
                     "mData": function (source){
-                        var actions = '<a class="btn btn-primary btn-xs" title="{{ 'location.buttons.edit'|trans }}" onclick="loadAjaxFormPage(this, null, null, location_list_reload); return false;" href="' + Routing.generate('ubicacion_edit', { _locale: '{{ app.request.locale }}', id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; {{ 'form.actions.edit'|trans }}</a>&nbsp; ';
+                        var actions = '<a class="btn btn-primary btn-xs" href="' + Routing.generate('ubicacion_edit', { _locale: '{{ app.request.locale }}', id: encodeURIComponent(source.token) }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; {{ 'form.actions.edit'|trans }}</a>&nbsp; ';
                         actions += '<a class="btn btn-primary btn-xs" href="javascript:void(0)" onclick="bootbox.confirm(\'Seguro que desea eliminar el registro?\', function(confirmed){ if(confirmed) executeAjax(\'' + Routing.generate('ubicacion_delete', { _locale: '{{ app.request.locale }}', id: encodeURIComponent(source.token) }) + '\', null, null, location_list_reload); }); return false;"><span class="glyphicon glyphicon-remove"></span> &nbsp; {{ 'form.actions.delete'|trans }}</a>&nbsp; ';
                         return actions;
                     }
