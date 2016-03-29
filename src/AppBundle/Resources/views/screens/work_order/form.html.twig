@@ -53,7 +53,9 @@
             var objVars = JSON.parse(vars);
             $("#work_order_medio").val(obj.token);
             $("#select-input-group-work_order_medio").html(obj.name);
-            setUbicacionMap(obj.ubicacion__latitud, obj.ubicacion__longitud);
+            if (obj.ubicacion__latitud && obj.ubicacion__longitud){
+                setUbicacionMap(obj.ubicacion__latitud, obj.ubicacion__longitud);
+            }
         }
 
         var ubicacionMap;
@@ -63,7 +65,9 @@
             var marker = new google.maps.Marker({ position: myLatLng, map: ubicacionMap });
         }
         function initMapUbicacion(){
+            {% if entity is defined and entity.medio is not empty and entity.medio.ubicacion is not empty %}
             setUbicacionMap({{ entity.medio.ubicacion.latitud }}, {{ entity.medio.ubicacion.longitud }});
+            {% endif %}
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrnM5OyIjcm8FYALdS1KZdE7yKa-x2Iqk&callback=initMapUbicacion" async defer></script>
