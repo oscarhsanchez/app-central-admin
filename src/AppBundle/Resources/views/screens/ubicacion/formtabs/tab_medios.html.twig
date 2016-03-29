@@ -1,0 +1,30 @@
+<div class="margin-b clearfix">
+    <a class="btn btn-white margin-r" href="javascript:void(0)" onclick="addMedioToUbicacion()">
+        <span class="glyphicon glyphicon-plus"></span>
+        <strong>{{ 'form.actions.add' }}</strong>
+    </a>
+</div>
+
+{{ form_start(formMedios, { method: 'POST', action: path('ubicacion_update', {id: entity.token, origin: 'list', pForm: 'medios' }) }) }}
+
+<table class="result-list table table-bordered table-striped">
+    <thead>
+    <tr class ="results-list-row">
+        <th>{{ 'form.medio.label.medio'|trans }}</th>
+        <th>{{ 'form.actions.delete'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody id="ubicacion-medios-list" data-prototype="{% filter escape %}{% include 'AppBundle:screens/ubicacion:form_medios_prototype.html.twig' with {'formMedio': formMedios.medios.vars.prototype } %}{% endfilter %}">
+    {% for key, formMedio in formMedios.medios %}
+        <tr class="results-list-row" id="ubicacion-medios-list-list-{{ key }}">
+            {% include 'AppBundle:screens/ubicacion:form_medios_prototype.html.twig' with {'formMedio': formMedio, 'key': key } %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="clearfix">
+    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
+</div>
+
+{{ form_end(formMedios) }}

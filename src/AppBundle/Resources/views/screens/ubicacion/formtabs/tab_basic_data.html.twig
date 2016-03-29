@@ -1,0 +1,85 @@
+{{ form_start(form, { method: 'POST', action: entity is defined and not isNew ? path('ubicacion_update', {id: entity.token, origin: 'list' }) : path('ubicacion_create') }) }}
+
+<div class="row">
+    <div class="col-md-6">
+        <fieldset>
+            <legend>{{ 'screens.location.text.basic_data'|trans }}</legend>
+            {{ form_row(form.pk_ubicacion) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.empresa) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.plaza) }}
+                </div>
+            </div>
+            {{ form_row(form.ubicacion) }}
+            {{ form_row(form.referencia) }}
+            {{ form_row(form.direccion_comercial) }}
+
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form_row(form.catorcena) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.anio) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.reserva) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form_row(form.fecha_instalacion) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.estatus) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.categoria) }}
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>{{ 'screens.location.text.other_data'|trans }}</legend>
+            {{ form_row(form.unidad_negocio) }}
+            {{ form_row(form.tipo_medio) }}
+            {{ form_row(form.nivel_socioeconomico) }}
+            {{ form_row(form.lugares_cercanos) }}
+            {{ form_row(form.observaciones) }}
+
+        </fieldset>
+    </div>
+    <div class="col-md-6">
+        <fieldset>
+            <legend>{{ 'screens.location.text.location'|trans }}</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.latitud) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.longitud) }}
+                </div>
+            </div>
+            <div id="ubicacion-map"></div>
+        </fieldset>
+        <fieldset>
+            <legend>{{ 'screens.location.text.zones'|trans }}</legend>
+            {{ form_row(form.zona_fijacion) }}
+            {{ form_row(form.zona_iluminacion) }}
+            {{ form_row(form.zona_instalacion) }}
+        </fieldset>
+        <fieldset>
+            <legend>{{ 'screens.location.text.traffic'|trans }}</legend>
+            {{ form_row(form.trafico_vehicular) }}
+            {{ form_row(form.trafico_transeuntes) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="clearfix">
+    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
+</div>
+
+{{ form_end(form) }}

@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'menu.title.locations'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li>{{ 'menu.title.configuration'|trans }}</li>
+    <li>
+        <strong><a href="{{ path('ubicacion_list') }}">{{ 'menu.title.locations'|trans }}</a></strong>
+    </li>
+    <li class="active">
+        <strong>{% if entity is defined and not isNew %}{{ entity.pkUbicacion }}{% else %}{{ 'screens.locations.actions.add'|trans }}{% endif %}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{% if entity is defined and not isNew %}{{ entity.pkUbicacion }}{% else %}{{ 'screens.locations.actions.add'|trans }}{% endif %}</h5>
+        </div>
+        <div class="ibox-content">
+
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+            {% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+            {{ include('ESocialUtilBundle:Components:tabNavigation.html.twig', {
+                'entity': entity is defined ? entity : null,
+                'tab_selected' : paramForm is defined and paramForm is not empty ? paramForm : 'basic_data',
+                'template_path' : 'AppBundle:screens/ubicacion/formtabs',
+                'tabs' : {
+                    'basic_data': {
+                        'title': 'location.tabs.basic_data',
+                    },
+                    'images': {
+                        'title': 'location.tabs.images',
+                        show: entity is defined and not isNew,
+                        message_show: 'form.text.need_save'|trans
+                    },
+                    'medios': {
+                        'title': 'location.tabs.medios',
+                        show: entity is defined and not isNew,
+                        message_show: 'form.text.need_save'|trans
+                    }
+                }
+            })
+            }}
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        {% if entity is defined and not isNew %}
+        var ubicacion_medios_count = {{ formMedios.medios|length }};
+        function addMedioToUbicacion(){
+            var ubicacionMediosList = jQuery('#ubicacion-medios-list');
+            addItemToCollectionForm(ubicacionMediosList, ubicacion_medios_count, false);
+            ubicacion_medios_count++;
+        }
+        function selectMedio(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#ubicacion_medios_"+objVars.line).val(obj.token);
+            $("#select-input-group-ubicacion_medios_"+objVars.line).html(obj.name);
+        }
+        {% endif %}
+        var ubicacionMap;
+        function setUbicacionMap(latitud, longitud){
+            var myLatLng = {lat: latitud, lng: longitud };
+            var objMap = document.getElementById('ubicacion-map');
+            ubicacionMap = new google.maps.Map(objMap, { center: myLatLng, zoom: 8 });
+            var marker = new google.maps.Marker({ position: myLatLng, map: ubicacionMap });
+            $(objMap).css('height', '200px');
+        }
+        function initMapUbicacion(){
+            {% if entity is defined and entity.latitud is not empty and entity.longitud is not empty %}
+            setUbicacionMap({{ entity.latitud }}, {{ entity.longitud }});
+            {% endif %}
+        }
+        function onUbicacionCoordsChange(){
+            var latitudVal = $('#ubicacion_latitud').val();
+            var longitudVal = $('#ubicacion_longitud').val();
+            if (latitudVal != '' && longitudVal != ''){
+                setUbicacionMap(parseFloat(latitudVal), parseFloat(longitudVal));
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrnM5OyIjcm8FYALdS1KZdE7yKa-x2Iqk&callback=initMapUbicacion" async defer></script>
+{% endblock %}

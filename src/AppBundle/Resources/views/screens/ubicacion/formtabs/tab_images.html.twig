@@ -1,0 +1,20 @@
+{% if not isNew %}
+<div class="margin-b">
+    <a class="btn btn-white" title="{{ 'location_img.buttons.add'|trans }}" href="{{ path('ubicacion_img_add', { id: entity.token }) }}" onclick="loadAjaxFormPage(this, 'modal-lg', null, locationImgListReload); return false;">
+        <span class="glyphicon glyphicon-plus"></span>
+        <strong>{{ 'location_img.buttons.add'|trans }}</strong>
+    </a>
+</div>
+
+<div id="location-img-list-wrapper" class="text-center">
+    {% if formFirstImage is defined %}
+    {% include 'AppBundle:screens/ubicacion_img:list.html.twig' with { 'formImage': formFirstImage } %}
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+    function locationImgListReload(){
+        executeAjax('{{ path('ubicacion_img_list', { id: entity.token }) }}', '#location-img-list-wrapper');
+    }
+</script>
+{% endif %}

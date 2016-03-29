@@ -1,0 +1,10 @@
+{% set keyAux = key is defined ? key : "__name__" %}
+<td class="list-row-td">
+    {{ form_widget(formMedio, { select_href: path('medio_select', { line: keyAux, selectFunction: 'selectMedio' }) }) }}
+</td>
+<td class="list-row-td">
+    <a href="javascript:void(0)" onclick="removeItemFromCollectionForm(this);">
+        <i class="fa fa-times fa-2x"></i>
+    </a>
+    {{ form_rest(formMedio) }}
+</td>
