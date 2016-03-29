@@ -31,7 +31,7 @@ class MedioController extends VallasAdminController {
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio__descripcion'));
+        $jsonList->setFieldsToGet(array('token', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio__descripcion', 'ubicacion__latitud', 'ubicacion__longitud'));
         $jsonList->setSearchFields(array('ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio__descripcion'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
