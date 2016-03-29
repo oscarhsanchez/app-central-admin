@@ -31,8 +31,8 @@ class MedioController extends VallasAdminController {
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio__descripcion', 'ubicacion__latitud', 'ubicacion__longitud'));
-        $jsonList->setSearchFields(array('ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio__descripcion'));
+        $jsonList->setFieldsToGet(array('token', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'ubicacion__latitud', 'ubicacion__longitud'));
+        $jsonList->setSearchFields(array('ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 
@@ -56,7 +56,7 @@ class MedioController extends VallasAdminController {
 
             $toString = '';
             if ($reg['ubicacion__ubicacion']){ $toString .= $reg['ubicacion__ubicacion'].' '; }
-            if ($reg['tipo_medio__descripcion']){ $toString .= $reg['tipo_medio__descripcion'].' '; }
+            if ($reg['tipo_medio']){ $toString .= $reg['tipo_medio'].' '; }
             if ($reg['subtipoMedio__descripcion']){ $toString .= $reg['subtipoMedio__descripcion'].' '; }
 
             $response['aaData'][$key]['name'] = $toString;
