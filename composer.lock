@@ -843,7 +843,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-admin-bundle.git",
-                "reference": "9fa93157fa78aea940a2d428caae7c7697f752a3"
+                "reference": "733cc6e5ef22d1d22fbcdd10c8fcfea75f8d6d41"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-master",
@@ -884,7 +884,7 @@
             ],
             "description": "Common ESocial Admin bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-admin-bundle.git",
-            "time": "2016-03-15 23:26:20"
+            "time": "2016-03-29 18:30:46"
         },
         {
             "name": "esocial/esocial-model-bundle",
@@ -2756,7 +2756,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:vallas/vallas-model-bundle.git",
-                "reference": "7e67e5d5b62642810192705bb8aa953b6c292864"
+                "reference": "3b042548b0fd52fb344b418053320eeed4640a60"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-master",
@@ -2790,7 +2790,7 @@
             ],
             "description": "Common ESocial model bundle",
             "homepage": "https://bitbucket.org/esocialtech/vallas-model-bundle.git",
-            "time": "2016-03-29 15:52:52"
+            "time": "2016-03-30 12:53:10"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
