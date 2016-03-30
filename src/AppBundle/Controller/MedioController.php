@@ -25,9 +25,15 @@ class MedioController extends VallasAdminController {
      */
     private function getDatatableManager()
     {
+        $ubicacion = $this->getVar('ubicacion');
+
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Medio');
         $qb = $repository->getAllQueryBuilder()->leftJoin('p.ubicacion', 'ubi')->addOrderBy('ubi.ubicacion', 'ASC')->addOrderBy('p.posicion', 'ASC');
+
+        if ($ubicacion){
+            $qb->andWhere('p.ubicacion = :ubicacion')->setParameter('ubicacion', $ubicacion);
+        }
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());

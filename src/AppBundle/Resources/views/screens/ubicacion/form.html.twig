@@ -54,6 +54,21 @@
             addItemToCollectionForm(ubicacionMediosList, ubicacion_medios_count, false);
             ubicacion_medios_count++;
         }
+        function selectMedioImgPopup(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#ubicacion_img_popup_medio").val(obj.token);
+            $("#select-input-group-ubicacion_img_popup_medio").html(obj.name);
+
+        }
+        function selectMedioImgList(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#ubicacion_img_medio").val(obj.token);
+            $("#select-input-group-ubicacion_img_medio").html(obj.name);
+        }
         function selectMedio(data, vars){
             var jsonData = decodeURIComponent(data);
             var obj = JSON.parse(jsonData);

@@ -20,6 +20,7 @@
             {{ form_row(form.observaciones_cliente) }}
         </div>
     </div>
+    {{ form_row(form.medio, { select_href: path('medio_select', { ubicacion: entity.ubicacion.pkUbicacion, selectFunction: 'selectMedioImgList' } ) }) }}
     <div class="clearfix">
         <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save' }}</strong></button>
     </div>

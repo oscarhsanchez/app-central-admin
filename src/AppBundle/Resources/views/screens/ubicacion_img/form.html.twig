@@ -3,17 +3,18 @@
 
 {{ form_start(form, {
     method: 'POST',
-    action: entity is defined and entity.pkArchivo is not empty ? path('ubicacion_img_update', { id: entity.token, isPopup: isPopup }) : path('ubicacion_img_create', { id: entity.ubicacion.token }),
-    attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
+action: entity is defined and entity.pkArchivo is not empty ? path('ubicacion_img_update', { id: entity.token, isPopup: isPopup }) : path('ubicacion_img_create', { id: entity.ubicacion.token }),
+attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
 
 <div class="row">
     <div class="col-md-6">
+        <div class="margin-b">{{ form_row(form.nombre) }}</div>
         {{ form_row(form.estado_imagen) }}
-        {{ form_row(form.nombre) }}
     </div>
     <div class="col-md-6">
         {{ form_row(form.observaciones) }}
         {{ form_row(form.observaciones_cliente) }}
     </div>
 </div>
+{{ form_row(form.medio, { select_href: path('medio_select', { ubicacion: entity.ubicacion.pkUbicacion, selectFunction: 'selectMedioImgPopup' } ) }) }}
 {{ form_end(form) }}

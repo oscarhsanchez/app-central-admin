@@ -22,7 +22,14 @@ class UbicacionImagenType extends ESocialType {
             ->add('estado_imagen', 'choice', array('label'=>'form.ubicacion_img.label.estado_imagen', 'choices' => array('0' => 'Pendiente', '1' => 'Validada', '2' => 'Rechazada', '3' => 'Retocar')))
             ->add('nombre', 'uploadable_field', array('label'=>'form.ubicacion_img.label.nombre', 'type'=>'image', 'image_mapping' => 'ubicacion_imagen', 'required' => false))
             ->add('observaciones', null, array('label' => 'form.ubicacion_img.label.observaciones', 'attr' => array('rows' => 3)))
-            ->add('observaciones_cliente', null, array('label' => 'form.ubicacion_img.label.observaciones_cliente', 'attr' => array('rows' => 3)));
+            ->add('observaciones_cliente', null, array('label' => 'form.ubicacion_img.label.observaciones_cliente', 'attr' => array('rows' => 3)))
+            ->add('medio', 'selectable_entity', array(
+                'label' => 'form.work_order.label.medio',
+                'class' => 'VallasModelBundle:Medio',
+                'required' => false,
+                'select_text'   => 'Select Medio',
+                'enable_update' => true
+            ));
 
     }
 
