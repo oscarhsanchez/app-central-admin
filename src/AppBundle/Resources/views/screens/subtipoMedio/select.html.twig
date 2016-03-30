@@ -1,0 +1,34 @@
+{% set selectFunction = getVars.selectFunction is defined and getVars.selectFunction is not empty ? getVars.selectFunction : 'selectSubtipoMedio' %}
+<table id="dt-subtipoMedio-list" class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'form.subtipoMedio.label.tipoMedio'|trans }}</th>
+        <th>{{ 'form.subtipoMedio.label.descripcion'|trans }}</th>
+        <th>{{ 'form.label.actions'|trans }}</th>
+    </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+    var subtipoMedio_list = null;
+    $(document).ready(function() {
+        var table_columns = [
+            {"mData": "tipoMedio__descripcion"},
+            {"mData": "descripcion"},
+            {
+                "mData": function (source) {
+                    return '<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="closeThisPopup(this); {{ selectFunction }}(\''+encodeURIComponent(JSON.stringify(source))+'\', \'{{ getVars|json_encode|escape  }}\')">Select</a>';
+                }
+            }
+        ];
+
+        subtipoMedio_list = TableManaged.init(
+                '#dt-subtipoMedio-list',
+                '{{ url('subtipoMedio_list_json', getVars) }}',
+                null,
+                [],
+                table_columns,
+                '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+        );
+    });
+</script>

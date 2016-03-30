@@ -48,12 +48,6 @@
     </div>
     <script type="text/javascript">
         {% if entity is defined and not isNew %}
-        var ubicacion_medios_count = {{ formMedios.medios|length }};
-        function addMedioToUbicacion(){
-            var ubicacionMediosList = jQuery('#ubicacion-medios-list');
-            addItemToCollectionForm(ubicacionMediosList, ubicacion_medios_count, false);
-            ubicacion_medios_count++;
-        }
         function selectMedioImgPopup(data, vars){
             var jsonData = decodeURIComponent(data);
             var obj = JSON.parse(jsonData);
@@ -68,13 +62,6 @@
             var objVars = JSON.parse(vars);
             $("#ubicacion_img_medio").val(obj.token);
             $("#select-input-group-ubicacion_img_medio").html(obj.name);
-        }
-        function selectMedio(data, vars){
-            var jsonData = decodeURIComponent(data);
-            var obj = JSON.parse(jsonData);
-            var objVars = JSON.parse(vars);
-            $("#ubicacion_medios_"+objVars.line).val(obj.token);
-            $("#select-input-group-ubicacion_medios_"+objVars.line).html(obj.name);
         }
         {% endif %}
         var ubicacionMap;

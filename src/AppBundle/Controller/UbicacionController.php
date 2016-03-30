@@ -130,7 +130,7 @@ class UbicacionController extends VallasAdminController {
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:Ubicacion')->getOneByToken($id, array('medios' => null));
+        $entity = $em->getRepository('VallasModelBundle:Ubicacion')->getOneByToken($id);
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Ubicacion entity.');
@@ -154,7 +154,6 @@ class UbicacionController extends VallasAdminController {
             'isNew' => false,
             'entity' => $entity,
             'form' => $this->createForm(new UbicacionType(), $entity)->createView(),
-            'formMedios' => $this->createForm(new UbicacionType(), $entity, array('formMedios' => true))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
             'formFirstImage' => $this->createForm(new UbicacionImagenType(), $firstImg)->createView()
@@ -167,29 +166,9 @@ class UbicacionController extends VallasAdminController {
 
         if ($request->getMethod() == 'POST'){
 
-            $original_medios = array();
-            $medios_to_delete = array();
-            foreach($entity->getMedios() as $key=>$medio){
-                $original_medios[] = clone $medio;
-                $medios_to_delete[$key] = $medio;
-            }
-
             $form->handleRequest($request);
 
             if ($form->isValid()){
-
-                foreach ($entity->getMedios() as $key=>$medio){
-                    $medio->setUbicacion($entity);
-                    foreach ($medios_to_delete as $keyDel => $toDel) {
-                        if ($key == $keyDel) {
-                            unset($medios_to_delete[$key]);
-                        }
-                    }
-                }
-
-                foreach ($medios_to_delete as $key=>$toDel){
-                    $toDel->setUbicacion(null);
-                }
 
                 $em->persist($entity);
                 $em->flush();
@@ -216,16 +195,15 @@ class UbicacionController extends VallasAdminController {
         $em = $this->getDoctrine()->getManager();
 
         $paramForm = $this->getVar('pForm');
-        $entity = $em->getRepository('VallasModelBundle:Ubicacion')->getOneByToken($id, array('medios' => null));
+        $entity = $em->getRepository('VallasModelBundle:Ubicacion')->getOneByToken($id);
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Ubicacion entity.');
         }
 
         $form = $this->createForm(new UbicacionType(), $entity);
-        $formMedios = $this->createForm(new UbicacionType(), $entity, array('formMedios' => true));
 
-        $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $paramForm == 'medios' ? $formMedios : $form);
+        $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
         if ($boolSaved){
             return $this->redirect($this->generateUrl('ubicacion_edit', array('id' => $entity->getToken(), 'pForm' => $paramForm)));
@@ -249,7 +227,6 @@ class UbicacionController extends VallasAdminController {
             'isNew' => false,
             'entity' => $entity,
             'form' => $form->createView(),
-            'formMedios' => $formMedios->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
             'formFirstImage' => $this->createForm(new UbicacionImagenType(), $firstImg)->createView()

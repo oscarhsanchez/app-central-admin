@@ -26,15 +26,13 @@
             }
         ];
 
-        jQuery(document).ready(function () {
-            medio_list = TableManaged.init(
-                    '#dt-medio-list',
-                    '{{ url('medio_list_json', getVars) }}',
-                    null,
-                    [],
-                    table_columns,
-                    '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
-            );
-        });
+        medio_list = TableManaged.init(
+                '#dt-medio-list',
+                '{{ url('medio_list_json', getVars) }}',
+                null,
+                [],
+                table_columns,
+                '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+        );
     });
 </script>

@@ -1,0 +1,24 @@
+{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+{% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+{{ form_start(form, { method: 'POST', attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } , action: entity is defined and entity.pkMedio is not empty ? path('medio_update', {id: entity.token }) : path('medio_create', { ubicacion: entity.ubicacion.pkUbicacion }) }) }}
+
+{{ form_row(form.pk_medio) }}
+{{ form_row(form.tipo_medio) }}
+{{ form_row(form.subtipoMedio, { select_href: path('subtipoMedio_select') }) }}
+
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.posicion) }}
+        {{ form_row(form.id_cara) }}
+        {{ form_row(form.slots) }}
+        {{ form_row(form.coste) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.estatus_iluminacion) }}
+        {{ form_row(form.estatus_inventario) }}
+        {{ form_row(form.visibilidad) }}
+    </div>
+</div>
+
+{{ form_end(form) }}
