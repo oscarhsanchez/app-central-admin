@@ -4,14 +4,32 @@
 {% block page_breadcrumb %}
     <li>{{ 'menu.title.configuration'|trans }}</li>
     <li class="active">
-        <strong>{{ 'menu.title.zones'|trans }}</strong>
+        <strong>
+            {{ 'menu.title.zones'|trans }}
+            {% if type == 'fixing' %}
+                - {{ 'menu.title.zone_fixing'|trans }}
+            {% elseif type == 'installation' %}
+                - {{ 'menu.title.zone_installation'|trans }}
+            {% elseif type == 'lighting' %}
+                - {{ 'menu.title.zone_lighting'|trans }}
+            {% endif %}
+        </strong>
     </li>
 {% endblock %}
 
 {% block body %}
     <div class="ibox">
         <div class="ibox-title">
-            <h5>{{ 'menu.title.zones'|trans }}</h5>
+            <h5>
+                {{ 'menu.title.zones'|trans }}
+                {% if type == 'fixing' %}
+                    - {{ 'menu.title.zone_fixing'|trans }}
+                {% elseif type == 'installation' %}
+                    - {{ 'menu.title.zone_installation'|trans }}
+                {% elseif type == 'lighting' %}
+                    - {{ 'menu.title.zone_lighting'|trans }}
+                {% endif %}
+            </h5>
         </div>
         <div class="ibox-content">
 

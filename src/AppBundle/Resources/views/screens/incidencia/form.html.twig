@@ -27,10 +27,10 @@
                 'template_path' : 'AppBundle:screens/incidencia/formtabs',
                 'tabs' : {
                     'basic_data': {
-                        'title': 'incidencia.tabs.basic_data',
+                        'title': 'incidencia.tabs.basic_data'|trans,
                     },
                     'images': {
-                        'title': 'incidencia.tabs.images',
+                        'title': 'incidencia.tabs.images'|trans,
                         show: entity is defined and entity.pkIncidencia is not empty,
                         message_show: 'form.text.need_save'|trans
                     }
