@@ -39,15 +39,15 @@
                 'template_path' : 'AppBundle:screens/work_order/formtabs',
                 'tabs' : {
                     'basic_data': {
-                        'title': 'work_order.tabs.basic_data',
+                        'title': 'work_order.tabs.basic_data'|trans,
                     },
                     'images': {
-                        'title': 'work_order.tabs.images',
+                        'title': 'work_order.tabs.images'|trans,
                         show: entity is defined and entity.pk_orden_trabajo is not empty,
                         message_show: 'form.text.need_save'|trans
                     },
                     'logs': {
-                        'title': 'work_order.tabs.logs',
+                        'title': 'work_order.tabs.logs'|trans,
                         show: entity is defined and entity.pk_orden_trabajo is not empty,
                         message_show: 'form.text.need_save'|trans
                     }

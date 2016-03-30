@@ -28,15 +28,15 @@
                 'template_path' : 'AppBundle:screens/ubicacion/formtabs',
                 'tabs' : {
                     'basic_data': {
-                        'title': 'location.tabs.basic_data',
+                        'title': 'location.tabs.basic_data'|trans,
                     },
                     'images': {
-                        'title': 'location.tabs.images',
+                        'title': 'location.tabs.images'|trans,
                         show: entity is defined and not isNew,
                         message_show: 'form.text.need_save'|trans
                     },
                     'medios': {
-                        'title': 'location.tabs.medios',
+                        'title': 'location.tabs.medios'|trans,
                         show: entity is defined and not isNew,
                         message_show: 'form.text.need_save'|trans
                     }

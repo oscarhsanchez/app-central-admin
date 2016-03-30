@@ -4,7 +4,7 @@
 {{ form_start(form, { method: 'POST', action: path('country_select_form'), attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
 {{ form_row(form.pais) }}
 <div class="clearfix">
-    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.select' }}</strong></button>
+    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.select'|trans }}</strong></button>
 </div>
 {{ form_end(form) }}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-03-30T13:25:19Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
+  <file date="2016-03-30T16:42:22Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -91,7 +91,7 @@
         <jms:reference-file line="66">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="51">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="38">screens/report_subcategory/index.html.twig</jms:reference-file>
-        <jms:reference-file line="14">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+        <jms:reference-file line="42">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
         <jms:reference-file line="62">screens/ubicacion/index.html.twig</jms:reference-file>
         <jms:reference-file line="70">screens/work_order/tab_list.html.twig</jms:reference-file>
         <jms:reference-file line="70">screens/zone/index.html.twig</jms:reference-file>
@@ -104,6 +104,7 @@
         <jms:reference-file line="50">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="37">screens/report_subcategory/index.html.twig</jms:reference-file>
         <jms:reference-file line="59">screens/security_submodule/index.html.twig</jms:reference-file>
+        <jms:reference-file line="41">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
         <jms:reference-file line="61">screens/ubicacion/index.html.twig</jms:reference-file>
         <jms:reference-file line="65">screens/work_order/tab_list.html.twig</jms:reference-file>
         <jms:reference-file line="69">screens/zone/index.html.twig</jms:reference-file>
@@ -114,6 +115,28 @@
         <jms:reference-file line="65">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="51">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="9e253221bd1c14d4bbbca934db115515b34d4018" resname="form.actions.save">
+        <source>form.actions.save</source>
+        <target>Guardar</target>
+        <jms:reference-file line="43">incidencia/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="24">screens/incidencia_img/form_list.html.twig</jms:reference-file>
+        <jms:reference-file line="39">screens/report/form.html.twig</jms:reference-file>
+        <jms:reference-file line="22">screens/role/permissions.html.twig</jms:reference-file>
+        <jms:reference-file line="82">ubicacion/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="25">screens/ubicacion_img/form_list.html.twig</jms:reference-file>
+        <jms:reference-file line="56">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="24">screens/work_order_img/form_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7e771a441d6f488ce12274be2d6ec60f0a64d71d" resname="form.actions.select">
+        <source>form.actions.select</source>
+        <target>Selccione</target>
+        <jms:reference-file line="7">screens/country/form_select.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a1130b31770ca45ad72c5991b386d0fce20b1d29" resname="form.actions.update">
+        <source>form.actions.update</source>
+        <target>Modificar</target>
+        <jms:reference-file line="45">Resources/views/layout.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="4cf31bc67b97f07b746cf5be1ed8e9a121ab9e01" resname="form.country.label.name">
         <source>form.country.label.name</source>
         <target>Nombre</target>
@@ -123,6 +146,7 @@
         <source>form.country_select.label.country</source>
         <target>País</target>
         <jms:reference-file line="28">AppBundle/Form/CountrySelectType.php</jms:reference-file>
+        <jms:reference-file line="40">Resources/views/layout.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="268cf4f756155357e37453039ef12c25b72eeca8" resname="form.incidencia.label.codigo_user">
         <source>form.incidencia.label.codigo_user</source>
@@ -241,6 +265,8 @@
         <jms:reference-file line="32">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="19">screens/report_subcategory/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">screens/security_submodule/index.html.twig</jms:reference-file>
+        <jms:reference-file line="7">screens/subtipoMedio/select.html.twig</jms:reference-file>
+        <jms:reference-file line="16">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
         <jms:reference-file line="37">screens/ubicacion/index.html.twig</jms:reference-file>
         <jms:reference-file line="11">screens/work_order/select.html.twig</jms:reference-file>
         <jms:reference-file line="33">screens/work_order/tab_list.html.twig</jms:reference-file>
@@ -271,37 +297,80 @@
         <jms:reference-file line="63">AppBundle/Form/UbicacionType.php</jms:reference-file>
         <jms:reference-file line="78">screens/report/list_for_execution.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="d7e8ae7859731bd1dc14e34467e485da650695d3" resname="form.medio.label.medio">
-        <source>form.medio.label.medio</source>
-        <target>Medio</target>
-        <jms:reference-file line="13">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+      <trans-unit id="52dc62ab0c0404ea1624bab325821802725253cc" resname="form.medio.label.coste">
+        <source>form.medio.label.coste</source>
+        <target>Coste</target>
+        <jms:reference-file line="43">AppBundle/Form/MedioType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3fea075e905bd58dd93d10b4bd8c7ff617990cfc" resname="form.medio.label.estado">
+        <source>form.medio.label.estado</source>
+        <target>Estado</target>
+        <jms:reference-file line="15">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a711cf467e4d8e371ad7197566fd1b8cccb8f71b" resname="form.medio.label.estatus_iluminacion">
+        <source>form.medio.label.estatus_iluminacion</source>
+        <target>Estatus iluminación</target>
+        <jms:reference-file line="40">AppBundle/Form/MedioType.php</jms:reference-file>
+        <jms:reference-file line="41">AppBundle/Form/MedioType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="745d7ade98a30f8dbc239923ec6cb45eefec74cb" resname="form.medio.label.estatus_inventario">
+        <source>form.medio.label.estatus_inventario</source>
+        <target>Estatus inventario</target>
+        <jms:reference-file line="44">AppBundle/Form/MedioType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="91786adf24a920d5ac9ddf76fa39fa0c5fab97f3" resname="form.medio.label.id_cara">
+        <source>form.medio.label.id_cara</source>
+        <target>Id Cara</target>
+        <jms:reference-file line="38">AppBundle/Form/MedioType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c3c25163274708a7c6b07025b9468531879705fc" resname="form.medio.label.pk_medio">
+        <source>form.medio.label.pk_medio</source>
+        <target>Código</target>
+        <jms:reference-file line="27">AppBundle/Form/MedioType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1639a757a7646483f5724eaef337b58d3b4d8041" resname="form.medio.label.posicion">
         <source>form.medio.label.posicion</source>
         <target>Posición</target>
+        <jms:reference-file line="37">AppBundle/Form/MedioType.php</jms:reference-file>
         <jms:reference-file line="6">screens/medio/select.html.twig</jms:reference-file>
+        <jms:reference-file line="12">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="365c758eea765cf432fcaa855f6898149058db40" resname="form.medio.label.slots">
+        <source>form.medio.label.slots</source>
+        <target>Slots</target>
+        <jms:reference-file line="42">AppBundle/Form/MedioType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3b873c04f160657455813e9adc05b536714bbbdd" resname="form.medio.label.subtipoMedio">
+        <source>form.medio.label.subtipoMedio</source>
+        <target>Subtipo Medio</target>
+        <jms:reference-file line="30">AppBundle/Form/MedioType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd9760af04987e1491a8837e19173ff348abbb31" resname="form.medio.label.subtipo_medio">
         <source>form.medio.label.subtipo_medio</source>
         <target>Subtipo Medio</target>
         <jms:reference-file line="8">screens/medio/select.html.twig</jms:reference-file>
+        <jms:reference-file line="14">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4bbbc54c59e74b1c322d4c6aa5c343fa02513334" resname="form.medio.label.tipo_medio">
         <source>form.medio.label.tipo_medio</source>
         <target>Tipo Medio</target>
+        <jms:reference-file line="39">AppBundle/Form/MedioType.php</jms:reference-file>
         <jms:reference-file line="7">screens/medio/select.html.twig</jms:reference-file>
+        <jms:reference-file line="13">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d4b411e9002f2a15584faae2a6ca2aaf2d6c861f" resname="form.medio.label.ubicacion">
         <source>form.medio.label.ubicacion</source>
         <target>Ubicación</target>
         <jms:reference-file line="5">screens/medio/select.html.twig</jms:reference-file>
+        <jms:reference-file line="11">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9c70440830cd5ff0a078484bdee2d22684f37410" resname="form.notice.deleted_error">
         <source>form.notice.deleted_error</source>
         <target>Ha ocurrido un error al eliminar el registro</target>
         <jms:reference-file line="280">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
+        <jms:reference-file line="247">AppBundle/Controller/MedioController.php</jms:reference-file>
         <jms:reference-file line="252">AppBundle/Controller/ReportController.php</jms:reference-file>
-        <jms:reference-file line="278">AppBundle/Controller/UbicacionController.php</jms:reference-file>
+        <jms:reference-file line="255">AppBundle/Controller/UbicacionController.php</jms:reference-file>
         <jms:reference-file line="457">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
         <jms:reference-file line="243">AppBundle/Controller/ZoneController.php</jms:reference-file>
       </trans-unit>
@@ -309,8 +378,9 @@
         <source>form.notice.deleted_success</source>
         <target>El registro se ha eliminado correctamente</target>
         <jms:reference-file line="276">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
+        <jms:reference-file line="243">AppBundle/Controller/MedioController.php</jms:reference-file>
         <jms:reference-file line="250">AppBundle/Controller/ReportController.php</jms:reference-file>
-        <jms:reference-file line="274">AppBundle/Controller/UbicacionController.php</jms:reference-file>
+        <jms:reference-file line="251">AppBundle/Controller/UbicacionController.php</jms:reference-file>
         <jms:reference-file line="453">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
         <jms:reference-file line="239">AppBundle/Controller/ZoneController.php</jms:reference-file>
       </trans-unit>
@@ -319,9 +389,10 @@
         <target>Ha ocurrido un error al guardar los datos</target>
         <jms:reference-file line="208">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
         <jms:reference-file line="113">AppBundle/Controller/IncidenciaImageController.php</jms:reference-file>
+        <jms:reference-file line="192">AppBundle/Controller/MedioController.php</jms:reference-file>
         <jms:reference-file line="140">AppBundle/Controller/ReportController.php</jms:reference-file>
         <jms:reference-file line="160">AppBundle/Controller/SecuritySubmoduleController.php</jms:reference-file>
-        <jms:reference-file line="202">AppBundle/Controller/UbicacionController.php</jms:reference-file>
+        <jms:reference-file line="181">AppBundle/Controller/UbicacionController.php</jms:reference-file>
         <jms:reference-file line="113">AppBundle/Controller/UbicacionImageController.php</jms:reference-file>
         <jms:reference-file line="226">AppBundle/Controller/VallasUserController.php</jms:reference-file>
         <jms:reference-file line="287">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
@@ -334,9 +405,10 @@
         <jms:reference-file line="203">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
         <jms:reference-file line="382">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
         <jms:reference-file line="108">AppBundle/Controller/IncidenciaImageController.php</jms:reference-file>
+        <jms:reference-file line="187">AppBundle/Controller/MedioController.php</jms:reference-file>
         <jms:reference-file line="135">AppBundle/Controller/ReportController.php</jms:reference-file>
         <jms:reference-file line="155">AppBundle/Controller/SecuritySubmoduleController.php</jms:reference-file>
-        <jms:reference-file line="197">AppBundle/Controller/UbicacionController.php</jms:reference-file>
+        <jms:reference-file line="176">AppBundle/Controller/UbicacionController.php</jms:reference-file>
         <jms:reference-file line="108">AppBundle/Controller/UbicacionImageController.php</jms:reference-file>
         <jms:reference-file line="221">AppBundle/Controller/VallasUserController.php</jms:reference-file>
         <jms:reference-file line="282">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
@@ -437,6 +509,16 @@
         <target>Nombre</target>
         <jms:reference-file line="28">AppBundle/Form/SecuritySubmoduleType.php</jms:reference-file>
         <jms:reference-file line="32">screens/security_submodule/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2cd4a3c76eee64a2e73d5aa075f69127715da1e4" resname="form.subtipoMedio.label.descripcion">
+        <source>form.subtipoMedio.label.descripcion</source>
+        <target>Descripción</target>
+        <jms:reference-file line="6">screens/subtipoMedio/select.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="af69ae36e6704afbf7ea5c7abac8d3a613f637ea" resname="form.subtipoMedio.label.tipoMedio">
+        <source>form.subtipoMedio.label.tipoMedio</source>
+        <target>Tipo Medio</target>
+        <jms:reference-file line="5">screens/subtipoMedio/select.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="204f6696398fb4f6ec2e9cce0b95609812b76077" resname="form.text.need_save">
         <source>form.text.need_save</source>
@@ -791,15 +873,42 @@
         <target>Añadir ubicación</target>
         <jms:reference-file line="23">screens/ubicacion/index.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="0415f256ccc99e6b4cf3a5283a03ea7a2f969adc" resname="location.tabs.basic_data">
+        <source>location.tabs.basic_data</source>
+        <target>Datos básicos</target>
+        <jms:reference-file line="31">screens/ubicacion/form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4d4bc71fb84466edf18f095b62758e22a15ea72d" resname="location.tabs.images">
+        <source>location.tabs.images</source>
+        <target>Imágenes</target>
+        <jms:reference-file line="34">screens/ubicacion/form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="903dd154225148005811bfc1828fe76d01d24691" resname="location.tabs.medios">
+        <source>location.tabs.medios</source>
+        <target>Medios</target>
+        <jms:reference-file line="39">screens/ubicacion/form.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="0523d68b137b5b0692db1737834c621b26306189" resname="location_img.buttons.add">
         <source>location_img.buttons.add</source>
         <target>Añadir imagen</target>
         <jms:reference-file line="3">ubicacion/formtabs/tab_images.html.twig</jms:reference-file>
         <jms:reference-file line="5">ubicacion/formtabs/tab_images.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="c4791a467f957745af517c94eed233e09a46a747" resname="medio.buttons.add">
+        <source>medio.buttons.add</source>
+        <target>Añadir medio</target>
+        <jms:reference-file line="2">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+        <jms:reference-file line="4">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0787eb1263b28f70986f9c67714d200630912f7f" resname="medio.buttons.edit">
+        <source>medio.buttons.edit</source>
+        <target>Editar</target>
+        <jms:reference-file line="41">ubicacion/formtabs/tab_medios.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="71b22b64cd4687894bea1a3d23f0993de9d1343f" resname="menu.title.configuration">
         <source>menu.title.configuration</source>
         <target>Configuración</target>
+        <jms:reference-file line="5">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/incidencia/index.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/report/form.html.twig</jms:reference-file>
@@ -824,11 +933,13 @@
       <trans-unit id="2263a8c170df5c27adbba6a0f9f5f5af6125f428" resname="menu.title.issues">
         <source>menu.title.issues</source>
         <target>Incidencias</target>
+        <jms:reference-file line="28">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="7">screens/incidencia/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3dd41e91cf4c10d8d3a85a4f4664512e604a61c9" resname="menu.title.locations">
         <source>menu.title.locations</source>
         <target>Ubicaciones</target>
+        <jms:reference-file line="29">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/ubicacion/form.html.twig</jms:reference-file>
         <jms:reference-file line="7">screens/ubicacion/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/ubicacion/index.html.twig</jms:reference-file>
@@ -838,6 +949,7 @@
       <trans-unit id="313b0a6c95549d2265983618a5b040e04ca3736e" resname="menu.title.report_categories">
         <source>menu.title.report_categories</source>
         <target>Categorías de informe</target>
+        <jms:reference-file line="9">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report_category/form.html.twig</jms:reference-file>
         <jms:reference-file line="7">screens/report_category/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report_category/index.html.twig</jms:reference-file>
@@ -848,6 +960,7 @@
       <trans-unit id="e53118c8ff43ce2d7fb65d3c2bf989307854e289" resname="menu.title.report_execution">
         <source>menu.title.report_execution</source>
         <target>Ejecución de informes</target>
+        <jms:reference-file line="33">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="6">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/report/list_for_execution.html.twig</jms:reference-file>
@@ -861,6 +974,7 @@
       <trans-unit id="d6d39a767d0530d7bbe9def354acb0a7e983620d" resname="menu.title.reports">
         <source>menu.title.reports</source>
         <target>Informes</target>
+        <jms:reference-file line="8">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report/form.html.twig</jms:reference-file>
         <jms:reference-file line="7">screens/report/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report/index.html.twig</jms:reference-file>
@@ -877,6 +991,7 @@
       <trans-unit id="b270f7ff607908c715795a51df2aa9adcde24a70" resname="menu.title.work_order_fixing_monitoring">
         <source>menu.title.work_order_fixing_monitoring</source>
         <target>Fijación y monitoreo</target>
+        <jms:reference-file line="23">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="11">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="26">screens/work_order/index.html.twig</jms:reference-file>
@@ -884,6 +999,7 @@
       <trans-unit id="7c80f3ae0f9e8d1f7a44ce99e1ab19c7ddc4a58d" resname="menu.title.work_order_installation">
         <source>menu.title.work_order_installation</source>
         <target>Instalación</target>
+        <jms:reference-file line="24">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="12">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="28">screens/work_order/index.html.twig</jms:reference-file>
@@ -891,6 +1007,7 @@
       <trans-unit id="0a861840bc673f39b3d181fb6ef462defd43879b" resname="menu.title.work_order_lighting">
         <source>menu.title.work_order_lighting</source>
         <target>Iluminación</target>
+        <jms:reference-file line="25">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="15">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="14">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="30">screens/work_order/index.html.twig</jms:reference-file>
@@ -898,6 +1015,7 @@
       <trans-unit id="90c4bd3168b549d86fca91a66e01c24b9366e000" resname="menu.title.work_orders">
         <source>menu.title.work_orders</source>
         <target>Órdenes de trabajo</target>
+        <jms:reference-file line="21">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="9">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/work_order/index.html.twig</jms:reference-file>
@@ -907,24 +1025,28 @@
       <trans-unit id="ebe4867db7fff336352f2cc1f4c83dfdb239f29d" resname="menu.title.zone_fixing">
         <source>menu.title.zone_fixing</source>
         <target>Fijación</target>
+        <jms:reference-file line="13">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="26">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd3d6e1e4796ef00e5598d54140c917dccee0551" resname="menu.title.zone_installation">
         <source>menu.title.zone_installation</source>
         <target>Instalación</target>
+        <jms:reference-file line="14">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="12">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="28">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5ea9d42d1a003762acee12175a0042df6a1c7ace" resname="menu.title.zone_lighting">
         <source>menu.title.zone_lighting</source>
         <target>Iluminación</target>
+        <jms:reference-file line="15">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="14">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="30">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="24e8a9757e40f8d695341c8c076ae6fa5844a81b" resname="menu.title.zones">
         <source>menu.title.zones</source>
         <target>Zonas</target>
+        <jms:reference-file line="11">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="8">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="24">screens/zone/index.html.twig</jms:reference-file>
@@ -1075,6 +1197,16 @@
         <target>Ver log</target>
         <jms:reference-file line="69">screens/work_order/tab_list.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="0939bdd1df1741803a43d039f14530dcaadb5eb0" resname="work_order.tabs.basic_data">
+        <source>work_order.tabs.basic_data</source>
+        <target>Datos básicos</target>
+        <jms:reference-file line="42">screens/work_order/form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="980a28197839c79ea9863cd95ebbaad615082e35" resname="work_order.tabs.images">
+        <source>work_order.tabs.images</source>
+        <target>Imágenes</target>
+        <jms:reference-file line="45">screens/work_order/form.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="0c723577649a96027d2fd12cefd5cee856e08c2d" resname="work_order.tabs.img_validation">
         <source>work_order.tabs.img_validation</source>
         <target>Validación de imágenes</target>
@@ -1084,6 +1216,11 @@
         <source>work_order.tabs.list</source>
         <target>Listado de órdenes de trabajo</target>
         <jms:reference-file line="43">screens/work_order/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="918e56566e34725801d26a0455b2d0df60c67da6" resname="work_order.tabs.logs">
+        <source>work_order.tabs.logs</source>
+        <target>Logs</target>
+        <jms:reference-file line="50">screens/work_order/form.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="be0157873e6ff37562074c1f349f5f15767a8e5c" resname="work_order_img.buttons.add">
         <source>work_order_img.buttons.add</source>

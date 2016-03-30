@@ -1,0 +1,49 @@
+{% extends 'ESocialAdminBundle::esocial_admin_base.html.twig' %}
+
+{% block esocial_admin_base_menu_options %}
+    <li>
+        <a href="#"><i class="fa fa-asterisk"></i> <span class="nav-label">{{ 'menu.title.configuration'|trans }}</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            {{ parent() }}
+            <li><a href="{{ path('report_list') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'menu.title.reports'|trans }}</span></a></li>
+            <li><a href="{{ path('report_category_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.report_categories'|trans }}</span></a></li>
+            <li>
+                <a href="#"><i class="fa fa-asterisk"></i> <span class="nav-label">{{ 'menu.title.zones'|trans }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                    <li><a href="{{ path('zone_list', { type: 'fixing' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.zone_fixing'|trans }}</span></a></li>
+                    <li><a href="{{ path('zone_list', { type: 'installation' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.zone_installation'|trans }}</span></a></li>
+                    <li><a href="{{ path('zone_list', { type: 'lighting' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.zone_lighting'|trans }}</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-asterisk"></i> <span class="nav-label">{{ 'menu.title.work_orders'|trans }}</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li><a href="{{ path('work_order_list', { type: 'fixing-monitoring' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.work_order_fixing_monitoring'|trans }}</span></a></li>
+            <li><a href="{{ path('work_order_list', { type: 'installation' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.work_order_installation'|trans }}</span></a></li>
+            <li><a href="{{ path('work_order_list', { type: 'lighting' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.work_order_lighting'|trans }}</span></a></li>
+        </ul>
+    </li>
+    <li><a href="{{ path('incidencia_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.issues'|trans }}</span></a></li>
+    <li><a href="{{ path('ubicacion_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.locations'|trans }}</span></a></li>
+{% endblock %}
+
+{% block esocial_admin_base_menu_options_extra %}
+    <li><a href="{{ path('report_execution_list') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{{ 'menu.title.report_execution'|trans }}</span></a></li>
+{% endblock %}
+
+{% block esocial_admin_base_header_links %}
+    {% set vallas_country = app.session.get('vallas_country') %}
+    {% set vallas_country_name = vallas_country is not empty ? vallas_country.name : '' %}
+    <li>
+        {{ 'form.country_select.label.country'|trans }}: {{ vallas_country_name }}
+    </li>
+    <li>
+        <a class="btn btn-sm" href="{{ path('country_select_form') }}" title="{{ 'menu.title.country.select' }}" onclick="loadAjaxPage(this); return false;">
+            <span class="glyphicon glyphicon-map-marker"></span>
+            {{ 'form.actions.update'|trans }}
+        </a>
+    </li>
+    {{ parent() }}
+{% endblock %}
