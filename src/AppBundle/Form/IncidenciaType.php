@@ -93,7 +93,7 @@ class IncidenciaType extends ESocialType {
                 'choices' => array('0' => 'Iluminación', '1' => 'Fijación', '2' => 'Instalación', '3' => 'Otros'),
                 'constraints' => array(new NotBlank())));
 
-        $builder->add('observaciones', 'textarea', array('label' => 'form.incidencia.label.observaciones', 'required' => false));
+        $builder->add('observaciones', 'textarea', array('label' => 'form.incidencia.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)));
 
         $estadoIncidencia = $data->getEstadoIncidencia();
         if ($post) $estadoIncidencia = $post['estado_incidencia'];

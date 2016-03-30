@@ -14,7 +14,11 @@
                 </div>
             </div>
             {{ form_row(form.user) }}
-            {{ form_row(form.medio, { select_href: path('medio_select') }) }}
+            <fieldset class="margin-b-20">
+                <legend>{{ 'form.work_order.label.medio'|trans }}</legend>
+                {{ form_row(form.medio, { select_href: path('medio_select') }) }}
+                <div id="incidencia-medio-ubicacion-map" style="height: 200px"></div>
+            </fieldset>
             {{ form_row(form.observaciones) }}
 
         </fieldset>
