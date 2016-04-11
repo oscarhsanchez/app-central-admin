@@ -92,6 +92,26 @@ class UbicacionDisponibilidadController extends VallasAdminController {
         }
 
         $em = $this->getDoctrine()->getManager();
+
+
+        $filtroFechas = '((propuesta.fecha_inicio <= :intervalo_inicial AND (propuesta.fecha_fin >= :intervalo_final OR propuesta.fecha_fin BETWEEN :intervalo_inicial AND :intervalo_final)) OR (propuesta.fecha_inicio BETWEEN :intervalo_inicial AND :intervalo_final AND (propuesta.fecha_fin >= :intervalo_final OR propuesta.fecha_fin BETWEEN :intervalo_inicial AND :intervalo_final)))';
+        $qb = $em->getRepository('VallasModelBundle:Medio')->createQueryBuilder('medio');
+        $qb
+            ->addSelect('pdo')
+            ->addSelect('pd')
+            ->addSelect('propuesta')
+            ->leftJoin('medio.ubicacion', 'ubi')
+            ->leftJoin('medio.propuesta_detalle_outdoors', 'pdo', 'WITH', 'pdo.estado > 0')
+            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0 AND pd.ubicacion = :ubi')
+            ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0 AND '.$filtroFechas)
+            ->andWhere('medio.estado > 0')
+            ->andWhere('medio.id_cara = 1')
+            ->andWhere('medio.ubicacion = :ubi')
+            ->setParameter('ubi', $ubicacion)
+            ->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
+            ->setParameter('intervalo_final', $dt_end_aux->format('Y-m-d'));
+
+        /*
         $qb = $em->getRepository('VallasModelBundle:PropuestaDetalleOutdoor')->createQueryBuilder('pdo');
         $qb->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
             ->leftJoin('pdo.medio', 'medio', 'WITH', 'medio.estado > 0')
@@ -104,28 +124,39 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             ->setParameter('ubi', $ubicacion)
             ->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
             ->setParameter('intervalo_final', $dt_end_aux->format('Y-m-d'));
+        */
 
         if ($pkMedio){
             $qb->andWhere('medio.pk_medio = :pkMedio')->setParameter('pkMedio', $pkMedio);
         }
 
-        $propuestasDO = $qb->getQuery()->getResult();
+        $medios = $qb->getQuery()->getResult();
         //var_dump($propuestasDO);
         for($i=clone $dt_start; $i<$dt_end; $i->add(new \DateInterval('P1D'))){
             $count = 0;
             $slots = 0;
 
+            if ($i->format('Y-m-d') == '2016-02-26'){
+                $a="";
+            }
+
             $cliente = null;
-            foreach($propuestasDO as $pdo){
-                $p = $pdo->getPropuestaDetalle()->getPropuesta();
-                $fechaInicio = $p->getFechaInicio();
-                $fechaFin = $p->getFechaFin();
+            foreach($medios as $medio){
 
-                $slots += $pdo->getMedio()->getSlots();
+                $slots += $medio->getSlots();
 
-                if ($i >= $fechaInicio && $i <= $fechaFin){
-                    $count++;
-                    if ($pkMedio) $cliente = $p->getCliente();
+                foreach($medio->getPropuestaDetalleOutdoors() as $pdo) {
+                    $p = $pdo->getPropuestaDetalle() ? $pdo->getPropuestaDetalle()->getPropuesta() : null;
+
+                    if (!$p) continue;
+
+                    $fechaInicio = $p->getFechaInicio();
+                    $fechaFin = $p->getFechaFin();
+
+                    if ($i >= $fechaInicio && $i <= $fechaFin) {
+                        $count++;
+                        if ($pkMedio) $cliente = $p->getCliente();
+                    }
                 }
             }
 
@@ -136,7 +167,7 @@ class UbicacionDisponibilidadController extends VallasAdminController {
                 $bgColor = '#ffffff';
                 if ($count > 0){ $bgColor = '#f2dede'; }
             }else{
-                if ($count == $slots){ $type = 3; $bgColor = '#f2dede'; }
+                if ($count >= $slots){ $type = 3; $bgColor = '#f2dede'; }
                 if ($count > 0 && $count < $slots){ $type = 2; $bgColor = '#f8ac59'; }
                 if ($count == 0 || !$type){ $type = 1; $bgColor = '#ffffff'; }
             }
@@ -227,6 +258,7 @@ OR
             ->leftJoin('propuesta.cliente', 'cliente')
             ->andWhere('medio.estado > 0')
             ->andWhere('medio.ubicacion = :ubi')
+            ->andWhere('medio.id_cara = 1')
             ->setParameter('fecha', $day)
             ->setParameter('ubi', $pkUbicacion);
 
