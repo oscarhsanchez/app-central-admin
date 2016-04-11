@@ -248,4 +248,18 @@ class MedioController extends VallasAdminController {
         }
 
     }
+
+    /**
+     * @Route("/{id}/availability", name="medio_availability", options={"expose"=true})
+     *
+     * @Method("GET")
+     */
+    public function availabilityAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('VallasModelBundle:Medio')->getOneByToken($id, array('ubicacion' => null));
+
+        return $this->render('AppBundle:screens/ubicacion/disponibilidad/calendar:medio.html.twig', array('medio' => $entity));
+
+    }
 }

@@ -1,0 +1,43 @@
+<table id="dt-medio-posicion-day-list" class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>&nbsp;</th>
+        <th>{{ 'form.medio.label.code'|trans }}</th>
+        <th>{{ 'form.medio.label.posicion'|trans }}</th>
+        <th>{{ 'form.medio.label.estado'|trans }}</th>
+        <th>{{ 'form.medio.label.cliente'|trans }}</th>
+    </tr>
+    </thead>
+</table>
+<script type="text/javascript">
+    var medio_posicion_day_list = null;
+
+    $(document).ready(function() {
+        var table_columns = [
+            {
+                "mData": function (source) {
+                    switch(source.estado_code){
+                        case '0': return '<i class="fa fa-circle" style="color: #00bb00"></i>'; break;
+                        case '1': return '<i class="fa fa-circle" style="color: #ff0000"></i>'; break;
+                    }
+                    return '';
+                }
+            },
+            {"mData": "pk_medio"},
+            {"mData": "posicion"},
+            {"mData": "estado"},
+            {"mData": "cliente"}
+        ];
+
+        jQuery(document).ready(function(){
+            medio_posicion_day_list = TableManaged.init(
+                    '#dt-medio-posicion-day-list',
+                    '{{ url('ubicacion_disponibilidad_list_day_json', { pkUbicacion: ubicacion.pkUbicacion, day: day }) }}',
+                    null,
+                    [],
+                    table_columns,
+                    '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+            );
+        });
+    });
+</script>

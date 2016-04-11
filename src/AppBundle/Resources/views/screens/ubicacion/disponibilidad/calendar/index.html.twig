@@ -1,0 +1,51 @@
+<div class="btn-toolbar" role="toolbar">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="btn-group margin-r-10">
+                <button type="button" class="btn btn-white btn-sm" aria-label="Previous month" onclick="calendarAction('goToMonth', { month: '{{ prevMonth }}', medio: '{{ medio }}' })">
+                    <span class="fa fa-chevron-left"></span>
+                </button>
+                <button type="button" class="btn btn-white btn-sm" aria-label="Next month" onclick="calendarAction('goToMonth', { month: '{{ nextMonth }}', medio: '{{ medio }}'})">
+                    <span class="fa fa-chevron-right"></span>
+                </button>
+            </div>
+            <button type="button" class="btn btn-white btn-sm" aria-label="Today" onclick="calendarAction('goToMonth', { month: '{{ "now"|date('m-Y') }}', medio: '{{ medio }}' })">
+                <span>Hoy</span>
+            </button>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2>{{ monthString }}</h2>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-1-of-7 text-center"><strong>Lu</strong></th>
+                <th class="col-1-of-7 text-center"><strong>Ma</strong></th>
+                <th class="col-1-of-7 text-center"><strong>Mi</strong></th>
+                <th class="col-1-of-7 text-center"><strong>Ju</strong></th>
+                <th class="col-1-of-7 text-center"><strong>Vi</strong></th>
+                <th class="col-1-of-7 text-center"><strong>Sá</strong></th>
+                <th class="col-1-of-7 text-center"><strong>Do</strong></th>
+            <tr>
+        </thead>
+        <tbody>
+            {% set diaSemana = 1 %}
+            {% for key, day in arrDays %}
+                {% if diaSemana == 1 %}
+                    <tr>
+                {% endif %}
+                        <td class="col-1-of-7 text-center calendar-nb-cell {% if not day.isActualMonth %}calendar-extra-day-cell{% endif %}" {% if day.bgColor is not empty %}style="background: {{ day.bgColor }}" {% endif %}>
+                            <span class="calendar-nb-day">{{ day.day }}</span>
+                            <div data-title="{{ 'menu.title.locations.availability.day'|trans }} {{ key }}" data-href="{{ path('ubicacion_disponibilidad_list_day', { pkUbicacion: ubicacion.pkUbicacion, day: key }) }}" onclick="loadAjaxPage(this);"></div>
+                        </td>
+                {% set diaSemana = diaSemana == 7 ? 1 : diaSemana + 1 %}
+                {% if diaSemana == 1 %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

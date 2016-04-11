@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block plugins_stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/bundles/app/css/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('/bundles/esocialadmin/js/plugins/fullcalendar/moment.min.js') }}"></script>
+{% endblock %}
 {% block page_title %}{{ 'menu.title.locations'|trans }}{% endblock %}
 {% block page_breadcrumb %}
     <li>{{ 'menu.title.configuration'|trans }}</li>
@@ -39,7 +46,12 @@
                         'title': 'location.tabs.medios'|trans,
                         show: entity is defined and not isNew,
                         message_show: 'form.text.need_save'|trans
-                    }
+                    },
+                    'disponibilidad': {
+                        'title': 'location.tabs.disponibilidad'|trans,
+                        show: entity is defined and not isNew,
+                        message_show: 'form.text.need_save'|trans
+                    },
                 }
             })
             }}

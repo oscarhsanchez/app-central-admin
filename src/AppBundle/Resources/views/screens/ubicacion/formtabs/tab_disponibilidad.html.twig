@@ -1,0 +1,22 @@
+<div class="row">
+    <div id="calendar" class="col-md-6" style="max-width: 900px; margin: 0 auto;">
+        {% render controller("AppBundle:UbicacionDisponibilidad:index", { 'month': "now"|date('m-Y') }) %}
+    </div>
+</div>
+
+<script type="text/javascript">
+    var calendar;
+    var dataMonth = null;
+
+    function calendarAction(action, params){
+        switch(action){
+            case 'goToMonth':
+                executeAjax('{{ path('ubicacion_disponibilidad_list', { pkUbicacion: entity.pkUbicacion }) }}', '#calendar', params);
+                break;
+        }
+    }
+
+    $(document).ready(function(){
+        calendarAction('goToMonth', { month: '{{ "now"|date('m-Y') }}' });
+    });
+</script>

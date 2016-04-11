@@ -1,0 +1,9 @@
+.col-1-of-7 { width: 14.28571428%; }
+#calendar .calendar-nb-cell,
+#calendar-medio .calendar-nb-cell { position:relative; padding:0;   }
+#calendar .calendar-nb-day,
+#calendar-medio .calendar-nb-day { position:absolute; top: 0; right: 4px; font-size: small; /*z-index: 1*/ }
+#calendar .calendar-extra-day-cell .calendar-nb-day,
+#calendar-medio .calendar-extra-day-cell .calendar-nb-day { color:#cccccc; }
+#calendar .calendar-nb-cell div,
+#calendar-medio .calendar-nb-cell div { min-height: 30px; /*background: #ffffff; */cursor:pointer;  /*z-index: 2; opacity: 0*/ }
