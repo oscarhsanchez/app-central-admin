@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vallas\ModelBundle\Entity\Ubicacion;
 
 /**
  * Class UbicacionType
@@ -14,6 +15,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  * @author Débora Vázquez Lara <debora.vazquez@gmail.com>
  */
 class UbicacionType extends ESocialType {
+
+    public static $categoria_options = array('A' => 'A', 'AA' => 'AA', 'AAA' => 'AAA');
+    public static $nivel_socioeconomico_options = array('A/B'=>'A/B', 'C+'=>'C+', 'C'=>'C', 'D+'=>'D+', 'D'=>'D', 'E'=>'E');
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -72,11 +76,11 @@ class UbicacionType extends ESocialType {
                 ->add('ubicacion', null, array('label' => 'form.ubicacion.label.ubicacion', 'constraints' => array(new NotBlank())))
                 ->add('direccion_comercial', null, array('label' => 'form.ubicacion.label.direccion_comercial'))
                 ->add('referencia', null, array('label' => 'form.ubicacion.label.referencia'))
-                ->add('trafico_vehicular', null, array('label' => 'form.ubicacion.label.trafico_vehicular'))
-                ->add('trafico_transeuntes', null, array('label' => 'form.ubicacion.label.trafico_transeuntes'))
-                ->add('nivel_socioeconomico', null, array('label' => 'form.ubicacion.label.nivel_socioeconomico'))
+                ->add('trafico_vehicular', 'choice', array('label' => 'form.ubicacion.label.trafico_vehicular', 'choices' => array('ALTO' => 'form.ubicacion.trafico_vehicular.options.high', 'MEDIO' => 'form.ubicacion.trafico_vehicular.options.medium', 'MODERADO' => 'form.ubicacion.trafico_vehicular.options.moderated')))
+                ->add('trafico_transeuntes', 'choice', array('label' => 'form.ubicacion.label.trafico_transeuntes', 'choices' => array('ALTO' => 'form.ubicacion.trafico_transeuntes.options.high', 'MEDIO' => 'form.ubicacion.trafico_transeuntes.options.medium', 'MODERADO' => 'form.ubicacion.trafico_transeuntes.options.moderated')))
+                ->add('nivel_socioeconomico', 'choice', array('label' => 'form.ubicacion.label.nivel_socioeconomico', 'choices' => self::$nivel_socioeconomico_options))
                 ->add('lugares_cercanos', null, array('label' => 'form.ubicacion.label.lugares_cercanos'))
-                ->add('categoria', null, array('label' => 'form.ubicacion.label.categoria'))
+                ->add('categoria', 'choice', array('label' => 'form.ubicacion.label.categoria', 'choices' => self::$categoria_options))
                 ->add('catorcena', null, array('label' => 'form.ubicacion.label.catorcena'))
                 ->add('anio', null, array('label' => 'form.ubicacion.label.anio', 'constraints' => array(new NotBlank())))
                 ->add('fecha_instalacion', 'date', array('required' => false, 'label' => 'form.ubicacion.label.fecha_instalacion', 'widget' => 'single_text',
