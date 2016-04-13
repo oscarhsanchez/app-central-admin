@@ -40,6 +40,19 @@
 
     </div>
     <div class="col-md-6">
+        {% if type == 'fixing' or type == 'monitoring' %}
+        <fieldset>
+            <legend>{{ 'screens.work_orders.text.others'|trans }}</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.version) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.campania) }}
+                </div>
+            </div>
+        </fieldset>
+        {% endif %}
         <fieldset>
             <legend>{{ 'screens.work_orders.text.close_data'|trans }}</legend>
             <div class="row">

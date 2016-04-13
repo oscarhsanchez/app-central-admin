@@ -80,6 +80,12 @@ class OrdenTrabajoType extends ESocialType {
                     'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); }))
             ;
 
+        if ($options['data']->getTipo() == '0' || $options['data']->getTipo() == '1'){
+            $builder
+            ->add('version', null, array('label' => 'form.work_order.label.version', 'required' => false))
+            ->add('campania', null, array('label' => 'form.work_order.label.campania', 'required' => false));
+        }
+
     }
 
     public function getName()
