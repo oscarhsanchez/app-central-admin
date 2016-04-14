@@ -1,4 +1,6 @@
-{% if image is not empty %}
+{% if image is empty %}
+    {{ 'work_order_img.label.no_image_data'|trans }}
+{% else %}
         {{ knp_pagination_render(imgPaged) }}
 
             <div class="row text-center">

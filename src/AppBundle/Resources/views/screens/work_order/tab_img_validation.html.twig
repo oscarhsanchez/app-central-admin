@@ -1,3 +1,37 @@
+<div class="margin-b">
+    <div class="dropdown">
+        <div class="btn-group">
+            <button class="btn btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <strong><span id="workorder-img-select-text">{{ 'form.work_order_img.label.estado_imagen_select'|trans }}</span></strong>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" style="left:0; right:auto">
+                <li><a href="#" onclick="workOrderImgListReload(null)">{{ 'form.work_order_img.label.estado_imagen.todas'|trans }}</a></li>
+                <li><a href="#" onclick="workOrderImgListReload('0')">{{ 'form.work_order_img.label.estado_imagen.pendiente'|trans }}</a></li>
+                <li><a href="#" onclick="workOrderImgListReload('1')">{{ 'form.work_order_img.label.estado_imagen.validada'|trans }}</a></li>
+                <li><a href="#" onclick="workOrderImgListReload('2')">{{ 'form.work_order_img.label.estado_imagen.rechazada'|trans }}</a></li>
+                <li><a href="#" onclick="workOrderImgListReload('3')">{{ 'form.work_order_img.label.estado_imagen.retocar'|trans }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div id="work-order-img-list-wrapper" class="text-center">
     {% include 'AppBundle:screens/work_order_img:list.html.twig' with { 'formImage': formFirstImage } %}
 </div>
+<script type="text/javascript">
+    function workOrderImgListReload(estado){
+
+        var selectText = '{{ 'form.work_order_img.label.estado_imagen_select'|trans }}';
+        switch(estado){
+            case '0': selectText = '{{ 'form.work_order_img.label.estado_imagen.pendiente'|trans }}'; break;
+            case '1': selectText = '{{ 'form.work_order_img.label.estado_imagen.validada'|trans }}'; break;
+            case '2': selectText = '{{ 'form.work_order_img.label.estado_imagen.rechazada'|trans }}'; break;
+            case '3': selectText = '{{ 'form.work_order_img.label.estado_imagen.retocar'|trans }}'; break;
+        }
+        $('#workorder-img-select-text').html(selectText);
+
+        var params = { type: '{{ type }}' };
+        if (estado !== null) params.estado_imagen = estado.toString();
+        executeAjax(Routing.generate('work_order_img_list', params), '#work-order-img-list-wrapper');
+    }
+</script>

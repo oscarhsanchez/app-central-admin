@@ -30,10 +30,13 @@ class WorkOrderImageController extends VallasAdminController {
         $em = $this->getDoctrine()->getManager();
 
         $token = $this->getVar('id');
+        $estado_imagen = $this->getVar('estado_imagen');
 
         $ordenTrabajo = null;
-        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()->leftJoin('p.orden_trabajo', 'orden_trabajo');
-        $qbImage->addOrderBy('p.created_at', 'DESC');
+        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()
+            ->leftJoin('p.orden_trabajo', 'ot')
+            ->andWhere('ot.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type))
+            ->addOrderBy('p.created_at', 'DESC');
 
         if ($token){
             $ordenTrabajo = $token ? $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByToken($token) : null;
@@ -42,11 +45,16 @@ class WorkOrderImageController extends VallasAdminController {
             }
         }
 
+        if ($estado_imagen !== null){
+            $qbImage->andWhere('p.estado_imagen = :estado_imagen')->setParameter('estado_imagen', $estado_imagen);
+        }
+
         $paginator = $this->get('knp_paginator');
         $imgPaged = $paginator->paginate($qbImage, $request->query->getInt('page', 1), 1);
         $imgPaged->setUsedRoute('work_order_img_list');
         $imgPaged->setParam('type', $type);
         if ($token) $imgPaged->setParam('id', $token);
+        if ($estado_imagen) $imgPaged->setParam('estado_imagen', $estado_imagen);
 
         $firstImg = null;
         if (count($imgPaged) > 0){
@@ -58,8 +66,19 @@ class WorkOrderImageController extends VallasAdminController {
             'imgPaged' => $imgPaged,
             'type' => $type,
             'formImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView(),
-            'entity' => $ordenTrabajo
+            'entity' => $ordenTrabajo,
+            'estado_imagen' => $estado_imagen
         ));
+    }
+
+    private function getCodeTypeByUrlType($type){
+        switch($type){
+            case 'fixing': return '0';
+            case 'monitoring': return '1';
+            case 'installation': return '2';
+            case 'lighting': return '3';
+        }
+        return '';
     }
 
     /**

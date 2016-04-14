@@ -107,12 +107,10 @@ class WorkOrderController extends VallasAdminController {
     {
         $em = $this->getDoctrine()->getManager();
 
-        //$formChangeUser = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_user')), null, array('type'=>'user'));
-        //$formChangeDateLimit = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_date_limit')), null, array('type'=>'date_limit'));
-        //$formChangeState = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_state')), null, array('type'=>'state'));
-
-        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder();
-        $qbImage->addOrderBy('p.created_at', 'DESC');
+        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()
+            ->addOrderBy('p.created_at', 'DESC')
+            ->leftJoin('p.orden_trabajo', 'ot')
+            ->andWhere('ot.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
 
         $paginator = $this->get('knp_paginator');
         $imgPaged = $paginator->paginate($qbImage, 1, 1);

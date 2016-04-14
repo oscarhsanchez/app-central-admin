@@ -19,7 +19,11 @@ class OrdenTrabajoImagenType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('estado_imagen', 'choice', array('label'=>'form.work_order_img.label.estado_imagen', 'choices' => array('0' => 'Pendiente', '1' => 'Validada', '2' => 'Rechazada', '3' => 'Retocar')))
+            ->add('estado_imagen', 'choice', array('label'=>'form.work_order_img.label.estado_imagen', 'choices' => array(
+                '0' => 'form.work_order_img.label.estado_imagen.pendiente',
+                '1' => 'form.work_order_img.label.estado_imagen.validada',
+                '2' => 'form.work_order_img.label.estado_imagen.rechazada',
+                '3' => 'form.work_order_img.label.estado_imagen.retocar')))
             ->add('nombre', 'uploadable_field', array('label'=>'form.work_order_img.label.nombre', 'type'=>'image', 'image_mapping' => 'orden_trabajo_imagen', 'required' => false))
             ->add('observaciones', null, array('label' => 'form.work_order_img.label.observaciones', 'attr' => array('rows' => 3)))
             ->add('observaciones_cliente', null, array('label' => 'form.work_order_img.label.observaciones_cliente', 'attr' => array('rows' => 3)));
