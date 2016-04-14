@@ -21,6 +21,7 @@ class OrdenTrabajoType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $em = $this->getManager();
+        $data = array_key_exists('data', $options) ? $options['data'] : null;
         $originalData = array_key_exists('data', $options) ? clone $options['data'] : null;
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) use ($options, $builder, $em){
@@ -60,7 +61,17 @@ class OrdenTrabajoType extends ESocialType {
 
         });
 
+        $arrEstados = array(
+            '0' => 'form.work_order.label.estado_orden.pendiente',
+            '1' => 'form.work_order.label.estado_orden.en_proceso',
+            '2' => 'form.work_order.label.estado_orden.cerrada');
+
+        if ($data && $data->getTipo() == 0){
+            $arrEstados['3'] = 'form.work_order.label.estado_orden.pendiente_impresion';
+        }
+
         $builder
+            ->add('save', 'submit', array('label' => 'form.actions.save'))
             ->add('fecha_limite', 'date', array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.fecha_limite', 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
             ->add('medio', 'selectable_entity', array(
@@ -73,8 +84,8 @@ class OrdenTrabajoType extends ESocialType {
             ->add('observaciones', null, array('label' => 'form.work_order.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)))
             ->add('fecha_cierre', 'date', array('label' => 'form.work_order.label.fecha_cierre', 'widget' => 'single_text', 'required' => false,
                 'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
-            ->add('estado_orden', 'choice', array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.estado_orden', 'empty_value' => 'form.label.choice_empty_value', 'choices' => array(
-                '0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada')))
+            ->add('estado_orden', 'choice', array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.estado_orden',
+                'empty_value' => 'form.label.choice_empty_value', 'choices' => $arrEstados))
             ->add('observaciones_cierre', null, array('label' => 'form.work_order.label.observaciones_cierre', 'required' => false))
             ->add('user', 'entity', array('mapped' => false, 'label' => 'form.work_order.label.user', 'empty_value' => 'form.label.choice_empty_value', 'class' => 'VallasModelBundle:User', 'required' => false,
                     'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); }))

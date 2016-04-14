@@ -147,7 +147,10 @@ class WorkOrderController extends VallasAdminController {
         $entity = new OrdenTrabajo();
         $entity->setPais($this->getSessionCountry());
         $entity->setTipo($this->getCodeTypeByUrlType($type));
-        //$this->initLanguagesForEntity($entity);
+
+        if ($type == 'fixing'){
+            $entity->setEstadoOrden('3');
+        }
 
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
@@ -185,7 +188,11 @@ class WorkOrderController extends VallasAdminController {
         $entity = new OrdenTrabajo();
         $entity->setPais($this->getSessionCountry());
         $entity->setTipo($this->getCodeTypeByUrlType($type));
-        //$this->initLanguagesForEntity($entity);
+
+        if ($type == 'fixing'){
+            $entity->setEstadoOrden('3');
+        }
+
         $params_original = array('entity' => null);
 
         $form = $this->createForm(new OrdenTrabajoType(), $entity);
