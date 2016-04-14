@@ -197,7 +197,29 @@ class IncidenciaController extends VallasAdminController {
 
             if ($form->isValid()){
 
+                //LOG DE INCIDENCIA
+                $logAccion = 'Modificación';
+                if (!$entity->getPkIncidencia()){
+                    $logAccion = 'Creacion';
+                }
+                if (array_key_exists('entity', $params_original) && $params_original['entity']){
+
+                    if ($params_original['entity']->getEstadoIncidencia() != $entity->getEstadoIncidencia()){
+                        $logAccion = 'Cambio de estado';
+                        if ($entity->getEstadoIncidencia() == 2){
+                            $logAccion = 'Cierre';
+                        }
+                    }
+                }
+                $log = new LogIncidencia();
+                $log->setPais($this->getSessionCountry());
+                $log->setIncidencia($entity);
+                $log->setCodigoUser($this->getSessionUser()->getCodigo());
+                $log->setFecha(new \DateTime(date('Y:m:d H:i:s')));
+                $log->setAccion($logAccion);
+
                 $em->persist($entity);
+                $em->persist($log);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('form.notice.saved_success'));
@@ -385,6 +407,24 @@ class IncidenciaController extends VallasAdminController {
         }
 
         return $this->render('AppBundle:screens/incidencia:form_update_field.html.twig', array('form' => $form->createView(), 'field_type' => $field_type));
+    /**
+     * @Route("/{type}/{id}/view-log", name="incidencia_view_log", options={"expose"=true})
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="R")
+     * @Method("GET")
+     */
+    public function viewLogAction(Request $request, $id, $type)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entityQB = $em->getRepository('VallasModelBundle:Incidencia')->getOneByTokenQB($id, array('logs' => null))->addOrderBy('logs.fecha', 'DESC');
+        $entity = $entityQB->getQuery()->getOneOrNullResult();
+
+        if (!$entity){
+            throw $this->createNotFoundException('Unable to find Incidencia entity.');
+        }
+
+        return $this->render('AppBundle:screens/incidencia:logs.html.twig', array('entity' => $entity, 'type' => $type));
 
     }
 }
