@@ -70,6 +70,9 @@ class VallasUserType extends UserType {
             $entity->setRoles(array($post['roles']));
         });
 
+        $builder->add('bool_permitir_geo_ubicaciones', null, array('label' => 'form.user.label.bool_permitir_geo_ubicaciones'));
+        $builder->add('bool_geo', null, array('label' => 'form.user.label.bool_geo'));
+
         $builder
             ->add('user_paises', 'collection', array(
                 'type'           => new CountrySelectType(),

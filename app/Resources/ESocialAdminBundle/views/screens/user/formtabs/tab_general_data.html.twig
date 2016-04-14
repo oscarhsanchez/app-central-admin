@@ -25,5 +25,10 @@
             {{ form_row(form.username) }}
             {{ form_row(form.email) }}
         </fieldset>
+        <fieldset>
+            <legend>{{ 'esocial_admin.screens.users.text.geo_data'|trans }}</legend>
+            {{ form_row(form.bool_permitir_geo_ubicaciones) }}
+            {{ form_row(form.bool_geo) }}
+        </fieldset>
     </div>
 </div>
