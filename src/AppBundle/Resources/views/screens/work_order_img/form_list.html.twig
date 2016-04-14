@@ -1,7 +1,8 @@
+{% set is_validation = imgValidation is defined and imgValidation ? '1' : '' %}
 {{ form_start(form, {
     method: 'POST',
-    action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token, origin: 'list' }) : path('work_order_img_create'),
-    attr: { onsubmit: 'sendAjaxForm(this); return false;' } }) }}
+    action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token, origin: 'list', type: type, validation: is_validation }) : path('work_order_img_create', { id: entity.token, type: type }),
+    attr: { onsubmit: (imgValidation is defined and imgValidation ? 'checkStatusImageNotice(this); return false;' : 'sendAjaxForm(this); return false;') } }) }}
 
     <label class="control-label">{{ entity.nombre }}</label>
     <div class="margin-b-20">
@@ -23,5 +24,13 @@
     <div class="clearfix">
         <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save'|trans }}</strong></button>
     </div>
+
+{% if is_validation %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            imageStatusOld = '{{ entity.estadoImagen }}';
+        });
+    </script>
+{% endif %}
 
 {{ form_end(form) }}

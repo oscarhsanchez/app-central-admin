@@ -11,27 +11,37 @@
                 <li><a href="#" onclick="workOrderImgListReload('1')">{{ 'form.work_order_img.label.estado_imagen.validada'|trans }}</a></li>
                 <li><a href="#" onclick="workOrderImgListReload('2')">{{ 'form.work_order_img.label.estado_imagen.rechazada'|trans }}</a></li>
                 <li><a href="#" onclick="workOrderImgListReload('3')">{{ 'form.work_order_img.label.estado_imagen.retocar'|trans }}</a></li>
+                <li><a href="#" onclick="workOrderImgListReload('4')">{{ 'form.work_order_img.label.estado_imagen.repetir'|trans }}</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="work-order-img-list-wrapper" class="text-center">
-    {% include 'AppBundle:screens/work_order_img:list.html.twig' with { 'formImage': formFirstImage } %}
+    {% include 'AppBundle:screens/work_order_img:list.html.twig' with { 'formImage': formFirstImage, 'imgValidation': true } %}
 </div>
 <script type="text/javascript">
     function workOrderImgListReload(estado){
-
         var selectText = '{{ 'form.work_order_img.label.estado_imagen_select'|trans }}';
         switch(estado){
             case '0': selectText = '{{ 'form.work_order_img.label.estado_imagen.pendiente'|trans }}'; break;
             case '1': selectText = '{{ 'form.work_order_img.label.estado_imagen.validada'|trans }}'; break;
             case '2': selectText = '{{ 'form.work_order_img.label.estado_imagen.rechazada'|trans }}'; break;
             case '3': selectText = '{{ 'form.work_order_img.label.estado_imagen.retocar'|trans }}'; break;
+            case '4': selectText = '{{ 'form.work_order_img.label.estado_imagen.repetir'|trans }}'; break;
         }
         $('#workorder-img-select-text').html(selectText);
 
-        var params = { type: '{{ type }}' };
+        var params = { type: '{{ type }}', validation: 1 };
         if (estado !== null) params.estado_imagen = estado.toString();
         executeAjax(Routing.generate('work_order_img_list', params), '#work-order-img-list-wrapper');
+    }
+
+    var imageStatusOld = null;
+    function checkStatusImageNotice(form){
+        if (imageStatusOld !== '4' && $('#work_order_img_estado_imagen').val() == '4'){
+            bootbox.confirm('{{ 'work_order.confirm.create_work_order_monitoring'|trans }}', function(confirmed){ if(confirmed){ sendAjaxForm(form); } });
+        }else{
+            sendAjaxForm(form);
+        }
     }
 </script>

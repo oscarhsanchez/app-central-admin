@@ -67,7 +67,8 @@ class WorkOrderImageController extends VallasAdminController {
             'type' => $type,
             'formImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView(),
             'entity' => $ordenTrabajo,
-            'estado_imagen' => $estado_imagen
+            'estado_imagen' => $estado_imagen,
+            'imgValidation' => !$token
         ));
     }
 
@@ -121,6 +122,19 @@ class WorkOrderImageController extends VallasAdminController {
 
                 $entity->setPath($imagenUpload);
                 $entity->setUrl('/media/orden_trabajo_imagen');
+
+                if (array_key_exists('entity', $params_original) && $params_original['entity']){
+                    if ($entity->getEstadoImagen() == 4 && $params_original['entity']->getEstadoImagen() !== 4){
+                        $ot = new OrdenTrabajo();
+                        $ot->setPais($this->getSessionCountry());
+                        $ot->setTipo(1);
+                        $ot->setEstadoOrden(0);
+                        $ot->setCodigoUser($this->getSessionUser()->getCodigo());
+                        $ot->setFechaLimite(new \DateTime(date('Y-m-d')));
+                        $em->persist($ot);
+                        $em->flush($ot);
+                    }
+                }
 
                 $em->persist($entity);
                 $em->flush();
@@ -233,7 +247,9 @@ class WorkOrderImageController extends VallasAdminController {
         if ($origin == 'list'){
             return $this->render('AppBundle:screens/work_order_img:form_list.html.twig', array(
                 'form' => $this->createForm(new OrdenTrabajoImagenType(), $entity)->createView(),
-                'entity' => $entity
+                'entity' => $entity,
+                'type' => $type,
+                'imgValidation' => $isValidation
             ));
         }
 

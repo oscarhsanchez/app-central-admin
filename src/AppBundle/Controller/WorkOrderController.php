@@ -107,19 +107,25 @@ class WorkOrderController extends VallasAdminController {
     {
         $em = $this->getDoctrine()->getManager();
 
-        $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()
-            ->addOrderBy('p.created_at', 'DESC')
-            ->leftJoin('p.orden_trabajo', 'ot')
-            ->andWhere('ot.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
-
-        $paginator = $this->get('knp_paginator');
-        $imgPaged = $paginator->paginate($qbImage, 1, 1);
-        $imgPaged->setUsedRoute('work_order_img_list');
-        $imgPaged->setParam('type', $type);
-
         $firstImg = null;
-        if (count($imgPaged) > 0){
-            $firstImg = $imgPaged[0];
+        $imgPaged = null;
+
+        if ($type == 'fixing' || $type == 'monitoring') {
+            $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()
+                ->addOrderBy('p.created_at', 'DESC')
+                ->leftJoin('p.orden_trabajo', 'ot')
+                ->andWhere('ot.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
+
+            $paginator = $this->get('knp_paginator');
+            $imgPaged = $paginator->paginate($qbImage, 1, 1);
+            $imgPaged->setUsedRoute('work_order_img_list');
+            $imgPaged->setParam('type', $type);
+            $imgPaged->setParam('validation', true);
+
+            $firstImg = null;
+            if (count($imgPaged) > 0) {
+                $firstImg = $imgPaged[0];
+            }
         }
 
         return $this->render('AppBundle:screens/work_order:index.html.twig', array(
