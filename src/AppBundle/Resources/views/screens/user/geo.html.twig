@@ -1,0 +1,25 @@
+<div id="range_03"></div>
+<div id="map-canvas" style="width:100%;height:390px;border:1px solid #000;"></div>
+<script type="text/javascript">
+    waypoints = {{ waypoints | raw}};
+    wl = {{ recorrido | length }};
+    markers = [];
+    hoursRange = {{ timerange|json_encode|raw }};
+
+        $("#range_03").ionRangeSlider({
+            type: "double",
+            from:0,
+            to: 48,
+            grid: true,
+            grid_num:25,
+            values: hoursRange,
+            postfix: "h",
+            onChange: function (data) {
+                //console.log("onChange");
+            },
+            onFinish: function (data){
+                updateWayPoints('{{ dateFormatted }}', data);
+                updateMarkers();
+            }
+        });
+</script>

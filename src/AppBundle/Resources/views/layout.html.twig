@@ -1,5 +1,10 @@
 {% extends 'ESocialAdminBundle::esocial_admin_base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/bundles/app/css/style.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block esocial_admin_base_menu_options %}
     <li>
         <a href="#"><i class="fa fa-asterisk"></i> <span class="nav-label">{{ 'menu.title.configuration'|trans }}</span><span class="fa arrow"></span></a>

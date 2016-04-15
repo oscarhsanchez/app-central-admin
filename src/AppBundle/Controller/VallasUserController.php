@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 use ESocial\AdminBundle\Controller\UserController;
 use ESocial\UtilBundle\Util\Database;
+use ESocial\UtilBundle\Util\Util;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -229,6 +230,55 @@ class VallasUserController extends UserController {
         }
 
         return false;
+
+    }
+
+    /**
+     * @Route("/{token}/view-geo", name="user_view_geo", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function viewGeoAction($token){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $fecha = date('Y-m-d');
+        $entity = $em->getRepository($this->getESocialAdminUserClass())
+            ->getOneByTokenQB($token)
+            ->addSelect('geo')
+            ->leftJoin('e.user_geolocations', 'geo', 'WITH', 'geo.fecha BETWEEN :fechaIni AND :fechaFin')
+            ->setParameter('fechaIni', $fecha.' 00:00:00')
+            ->setParameter('fechaFin', $fecha.' 23:59:59')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $recorrido =  Util::getJSONArrayFromCollection($entity->getUserGeolocations(), array('fecha','latitud','longitud'));
+
+        foreach($recorrido as $k=>$r){
+            $recorrido[$k]['visible'] = true;
+        }
+
+        $timeRange = array();
+        foreach (range(0,24) as $fullhour){
+
+            if (strlen(strval($fullhour)) < 2){
+                $fullhour = "0".$fullhour;
+            }
+            if (intval($fullhour) < 24){
+                $timeRange[] = "$fullhour";
+                $timeRange[] = "$fullhour:30";
+            }else{
+                $timeRange[] = "23:59";
+            }
+
+        }
+
+        return $this->render('AppBundle:screens/user:geo.html.twig', array(
+            'entity' => $entity,
+            'waypoints'=>json_encode( array_values($recorrido) ),
+            'recorrido'=> $recorrido,
+            'timerange' => $timeRange,
+            'dateFormatted' => $fecha,
+        ));
 
     }
 
