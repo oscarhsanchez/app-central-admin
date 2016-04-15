@@ -85,7 +85,7 @@
                         else
                             actions += '<a class="btn btn-primary btn-xs" href="' + Routing.generate('esocial_admin_user_action', { action: 'activate', token: encodeURIComponent(source.token), _locale: '{{ app.request.get('_locale') }}' }) + '"><span class="glyphicon glyphicon-plus-sign"></span> &nbsp; {{ 'esocial_admin.screens.users.actions.activate'|trans }}</a>&nbsp; ';
 
-                        actions += '<a title="{{ 'menu.title.user.geo'|trans }}" class="btn btn-primary btn-xs" href="' + Routing.generate('user_view_geo', { token: encodeURIComponent(source.token), _locale: '{{ app.request.get('_locale') }}' }) + '" onclick="loadAjaxPage(this, \'modal-lg\', show_map_makers); return false;"><span class="glyphicon glyphicon-plus-sign"></span> &nbsp; {{ 'screens.user.action.view_geo'|trans }}</a>&nbsp; ';
+                        actions += '<a title="{{ 'menu.title.user.geo'|trans }}" class="btn btn-primary btn-xs" href="' + Routing.generate('user_view_geo', { token: encodeURIComponent(source.token), _locale: '{{ app.request.get('_locale') }}' }) + '" onclick="loadAjaxPage(this, \'modal-lg\', show_map_makers); return false;"><span class="glyphicon glyphicon-map-marker"></span> &nbsp; {{ 'screens.user.action.view_geo'|trans }}</a>&nbsp; ';
 
                         return actions;
                     }
