@@ -107,6 +107,8 @@ class OrdenTrabajoType extends ESocialType {
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\OrdenTrabajo',
             ));

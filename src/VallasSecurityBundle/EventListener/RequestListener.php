@@ -142,27 +142,11 @@ class RequestListener
 
                 $r = $this->router->generate('seguridad_need_login');
                 $response = new RedirectResponse($r);
-                //$response->setStatusCode(200);
-
-                //echo 'a';exit;
-
-                //echo $this->templating->render('SeguridadBundle:Default:no_logeado.html.twig');
-                //exit;
-
-                //$response = $this->templating->renderResponse('SeguridadBundle:Default:no_logeado.html.twig');
-
-
-                /*$attributes = array(
-                    //'_controller' => 'SeguridadBundle:Default:notlogged',
-                    'exception' => null,
-                    '_controller' => 'SeguridadBundle:Default:notlogged',
-                );*/
 
             }else{
                 $r = $this->router->generate('user_login');
                 $response = new RedirectResponse($r);
-                //header("Location: ".$r);
-                //exit;
+
             }
 
 

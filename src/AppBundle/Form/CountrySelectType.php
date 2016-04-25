@@ -43,6 +43,8 @@ class CountrySelectType extends ESocialType {
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
             'user' => null,
             'hiddenForm' => false

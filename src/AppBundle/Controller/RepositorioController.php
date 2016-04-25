@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Vallas\ModelBundle\Entity\Archivo;
 use Vallas\ModelBundle\Entity\Medio;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Class ArchivoController
@@ -61,6 +62,7 @@ class RepositorioController extends VallasAdminController {
 
     /**
      * @Route("/", name="repositorio_list")
+     * @RequiresPermission(submodule="repositorio", permissions="R")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -74,6 +76,7 @@ class RepositorioController extends VallasAdminController {
 
     /**
      * @Route("/add", name="archivo_add")
+     * @RequiresPermission(submodule="repositorio", permissions="C")
      * @Method("GET")
      */
     public function addAction()
@@ -90,6 +93,7 @@ class RepositorioController extends VallasAdminController {
 
     /**
      * @Route("/create", name="archivo_create")
+     * @RequiresPermission(submodule="repositorio", permissions="C")
      * @Method("POST")
      */
     public function createAction(Request $request)
@@ -117,6 +121,7 @@ class RepositorioController extends VallasAdminController {
 
     /**
      * @Route("/{id}/edit", name="archivo_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="repositorio", permissions="R")
      * @Method("GET")
      */
     public function editAction($id)
@@ -132,7 +137,7 @@ class RepositorioController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/repositorio:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ArchivoType(), $entity)->createView(),
+            'form' => $this->createForm(new ArchivoType(), $entity, array('editable' => $this->checkActionPermissions('repositorio', 'U')))->createView(),
         ));
     }
 
@@ -171,6 +176,7 @@ class RepositorioController extends VallasAdminController {
 
     /**
      * @Route("/{id}/update", name="archivo_update")
+     * @RequiresPermission(submodule="repositorio", permissions="U")
      * @Method("POST")
      */
     public function updateAction(Request $request, $id)
@@ -200,6 +206,7 @@ class RepositorioController extends VallasAdminController {
 
     /**
      * @Route("/{id}/delete", name="archivo_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="repositorio", permissions="D")
      * @Method("GET")
      */
     public function deleteAction(Request $request, $id)

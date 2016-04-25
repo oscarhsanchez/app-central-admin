@@ -169,7 +169,7 @@ class ZoneController extends VallasAdminController {
         return $this->render('AppBundle:screens/zone:form.html.twig', array(
             'entity' => $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
-            'form' => $this->createForm(new ZonaType(), $entity)->createView(),
+            'form' => $this->createForm(new ZonaType(), $entity, array('editable' => $this->checkActionPermissions('zone_{type}', 'U')))->createView(),
         ));
     }
 

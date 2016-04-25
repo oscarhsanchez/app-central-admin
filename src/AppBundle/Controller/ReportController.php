@@ -111,7 +111,7 @@ class ReportController extends VallasAdminController
 
         return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ReportType(), $entity)->createView()
+            'form' => $this->createForm(new ReportType(), $entity, array('editable' => $this->checkActionPermissions('report', 'U')))->createView()
         ));
     }
 

@@ -107,6 +107,8 @@ class VallasUserType extends UserType {
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\User',
             'role_class' => 'Vallas\ModelBundle\Entity\Role',

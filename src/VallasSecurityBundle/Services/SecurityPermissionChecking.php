@@ -93,6 +93,9 @@ class SecurityPermissionChecking {
         if (!$user) return false;
 
         $user_roles = $user->getRoles();
+
+        if (in_array('ROLE_SUPER_ADMIN', $user_roles)) return true;
+
         $role = $this->entityManager->getRepository('VallasModelBundle:Role')->findOneBy(array('code' => $user_roles[0]));
         $arrUserPermissions = $this->entityManager->getRepository('VallasModelBundle:SecuritySubmodulePermission')->getAllByRoleAndUser($role->getId(), $user->getId());
 

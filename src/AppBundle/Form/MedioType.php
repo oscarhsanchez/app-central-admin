@@ -53,6 +53,8 @@ class MedioType extends ESocialType {
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Medio',
         ));
