@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Vallas\ModelBundle\Entity\Medio;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Class MedioController
@@ -87,6 +88,7 @@ class MedioController extends VallasAdminController {
 
     /**
      * @Route("/add", name="medio_add")
+     * @RequiresPermission(submodule="medio", permissions="C")
      * @Method("GET")
      */
     public function addAction()
@@ -115,6 +117,7 @@ class MedioController extends VallasAdminController {
 
     /**
      * @Route("/create", name="medio_create")
+     * @RequiresPermission(submodule="medio", permissions="C")
      * @Method("POST")
      */
     public function createAction(Request $request)
@@ -152,6 +155,7 @@ class MedioController extends VallasAdminController {
 
     /**
      * @Route("/{id}/edit", name="medio_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="medio", permissions="R")
      * @Method("GET")
      */
     public function editAction($id)
@@ -167,7 +171,7 @@ class MedioController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/medio:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new MedioType(), $entity)->createView(),
+            'form' => $this->createForm(new MedioType(), $entity, array('editable' => $this->checkActionPermissions('medio', 'U')))->createView(),
         ));
     }
 
@@ -198,6 +202,7 @@ class MedioController extends VallasAdminController {
 
     /**
      * @Route("/{id}/update", name="medio_update")
+     * @RequiresPermission(submodule="medio", permissions="U")
      * @Method("POST")
      */
     public function updateAction(Request $request, $id)
@@ -227,6 +232,7 @@ class MedioController extends VallasAdminController {
 
     /**
      * @Route("/{id}/delete", name="medio_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="medio", permissions="D")
      * @Method("GET")
      */
     public function deleteAction(Request $request, $id)
