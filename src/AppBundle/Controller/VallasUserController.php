@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 use ESocial\AdminBundle\Controller\UserController;
 use ESocial\UtilBundle\Util\Database;
+use ESocial\UtilBundle\Util\Dates;
 use ESocial\UtilBundle\Util\Util;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -242,6 +243,11 @@ class VallasUserController extends UserController {
         $em = $this->getDoctrine()->getManager();
 
         $fecha = date('Y-m-d');
+
+        if ($fechaParam = $this->getVar('fecha')){
+            $fecha = date('Y-m-d', Dates::convertAppStringToDate($fechaParam));
+        }
+
         $entity = $em->getRepository($this->getESocialAdminUserClass())
             ->getOneByTokenQB($token)
             ->addSelect('geo')
@@ -278,6 +284,7 @@ class VallasUserController extends UserController {
             'recorrido'=> $recorrido,
             'timerange' => $timeRange,
             'dateFormatted' => $fecha,
+            'reloading' => $this->getVar('reloading')
         ));
 
     }

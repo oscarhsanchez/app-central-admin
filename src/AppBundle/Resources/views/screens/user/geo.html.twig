@@ -1,25 +1,52 @@
+{% if not reloading %}
+<div class="margin-b-10 row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="control-label required" for="user_geo_date">{{ 'form.user.label.geo_date'|trans }}</label>
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input type="text" id="user_geo_date" name="user_geo_date" class="calendar text-date form-control" />
+            </div>
+        </div>
+    </div>
+</div>
 <div id="range_03"></div>
 <div id="map-canvas" style="width:100%;height:390px;border:1px solid #000;"></div>
+{% endif %}
 <script type="text/javascript">
+    fechaRecorrido = '{{ dateFormatted }}';
     waypoints = {{ waypoints | raw}};
     wl = {{ recorrido | length }};
     markers = [];
     hoursRange = {{ timerange|json_encode|raw }};
-
-        $("#range_03").ionRangeSlider({
-            type: "double",
-            from:0,
-            to: 48,
-            grid: true,
-            grid_num:25,
-            values: hoursRange,
-            postfix: "h",
-            onChange: function (data) {
-                //console.log("onChange");
-            },
-            onFinish: function (data){
-                updateWayPoints('{{ dateFormatted }}', data);
-                updateMarkers();
-            }
-        });
+    $("#range_03").ionRangeSlider({
+        type: "double",
+        from:0,
+        to: 48,
+        grid: true,
+        grid_num:25,
+        values: hoursRange,
+        postfix: "h",
+        onChange: function (data) {
+            //console.log("onChange");
+        },
+        onFinish: function (data){
+            updateWayPoints(fechaRecorrido, data);
+            updateMarkers();
+        }
+    });
 </script>
+{% if not reloading %}
+<script type="text/javascript">
+    var slider = $("#range_03").data("ionRangeSlider");
+    $('#user_geo_date').change(function(){
+        if ($(this).val()){
+            executeAjax('{{ path('user_view_geo', { token: entity.token }) }}', $('#user_geo_info'), { fecha: $(this).val(), reloading: true }, function(data){
+                slider.update({ from: 0, to: 48 });
+                show_map_makers();
+            });
+        }
+    });
+</script>
+<div id="user_geo_info"></div>
+{% endif %}

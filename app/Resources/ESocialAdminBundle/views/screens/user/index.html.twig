@@ -123,7 +123,7 @@
                             position: new google.maps.LatLng(waypoints[i].latitud,waypoints[i].longitud),
                             map: gmapApp,
                             draggable: false,
-                            html: ''
+                            title: waypoints[i].fecha.date
                         });
                         markers.push(marker);
                     }
