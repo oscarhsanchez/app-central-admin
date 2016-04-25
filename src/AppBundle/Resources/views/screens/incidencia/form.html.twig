@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title %}{{ 'menu.title.incidencias'|trans }}{% endblock %}
+{% block page_title %}{{ 'menu.title.issues'|trans }}{% endblock %}
 {% block page_breadcrumb %}
     <li>{{ 'menu.title.configuration'|trans }}</li>
     <li>
-        <strong><a href="{{ path('incidencia_list') }}">{{ 'menu.title.incidencias'|trans }}</a></strong>
+        <strong>
+            <a href="{{ path('incidencia_list', { type: type }) }}">
+                {{ 'menu.title.issues'|trans }}
+                {% if type == 'fixing' %}
+                    - {{ 'menu.title.issue_fixing'|trans }}
+                {% elseif type == 'monitoring' %}
+                    - {{ 'menu.title.issue_monitoring'|trans }}
+                {% elseif type == 'installation' %}
+                    - {{ 'menu.title.issue_installation'|trans }}
+                {% elseif type == 'lighting' %}
+                    - {{ 'menu.title.issue_lighting'|trans }}
+                {% elseif type == 'plane' %}
+                    - {{ 'menu.title.issue_plane'|trans }}
+                {% elseif type == 'others' %}
+                    - {{ 'menu.title.issue_others'|trans }}
+                {% endif %}
+            </a>
+        </strong>
     </li>
+
     <li class="active">
         <strong>{% if entity is defined and entity.pkIncidencia is not empty %}{{ entity.pkIncidencia }}{% else %}{{ 'screens.incidencias.actions.add'|trans }}{% endif %}</strong>
     </li>
@@ -33,11 +51,15 @@
                         'title': 'incidencia.tabs.images'|trans,
                         show: entity is defined and entity.pkIncidencia is not empty,
                         message_show: 'form.text.need_save'|trans
+                    },
+                    'logs': {
+                        'title': 'incidencia.tabs.logs'|trans,
+                        show: entity is defined and entity.pkIncidencia is not empty,
+                        message_show: 'form.text.need_save'|trans
                     }
                 }
             })
             }}
-
         </div>
     </div>
     <script type="text/javascript">
@@ -54,6 +76,7 @@
 
         var ubicacionMap;
         function setUbicacionMap(latitud, longitud){
+            $('#incidencia-medio-ubicacion-map').show();
             var myLatLng = {lat: latitud, lng: longitud };
             ubicacionMap = new google.maps.Map(document.getElementById('incidencia-medio-ubicacion-map'), { center: myLatLng, zoom: 8 });
             var marker = new google.maps.Marker({ position: myLatLng, map: ubicacionMap });

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vallas\ModelBundle\Entity\Zona;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Class ZoneController
@@ -67,6 +68,7 @@ class ZoneController extends VallasAdminController {
 
     /**
      * @Route("/{type}", name="zone_list")
+     * @RequiresPermission(submodule="zone_{type}", permissions="R")
      * @Method("GET")
      */
     public function indexAction(Request $request, $type)
@@ -80,6 +82,7 @@ class ZoneController extends VallasAdminController {
 
     /**
      * @Route("/{type}/add", name="zone_add")
+     * @RequiresPermission(submodule="zone_{type}", permissions="C")
      * @Method("GET")
      */
     public function addAction($type)
@@ -101,8 +104,9 @@ class ZoneController extends VallasAdminController {
     private function getTypeUrlByCode($code){
         switch($code){
             case '0': return 'fixing';
+            case '1': return 'monitoring';
             case '2': return 'installation';
-            case '1': return 'lighting';
+            case '3': return 'lighting';
         }
         return '';
     }
@@ -110,14 +114,16 @@ class ZoneController extends VallasAdminController {
     private function getCodeTypeByUrlType($type){
         switch($type){
             case 'fixing': return '0';
+            case 'monitoring': return '1';
             case 'installation': return '2';
-            case 'lighting': return '1';
+            case 'lighting': return '3';
         }
         return '';
     }
 
     /**
      * @Route("/{type}/create", name="zone_create")
+     * @RequiresPermission(submodule="zone_{type}", permissions="C")
      * @Method("POST")
      */
     public function createAction(Request $request, $type)
@@ -134,7 +140,7 @@ class ZoneController extends VallasAdminController {
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
         if ($boolSaved){
-            return $this->redirect($this->generateUrl('zone_edit', array('id' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('zone_edit', array('id' => $entity->getToken(), 'type' => $type)));
         }
 
         return $this->render('AppBundle:screens/zone:form.html.twig', array(
@@ -145,10 +151,11 @@ class ZoneController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/edit", name="zone_edit", options={"expose"=true})
+     * @Route("/{type}/{id}/edit", name="zone_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="zone_{type}", permissions="R")
      * @Method("GET")
      */
-    public function editAction($id)
+    public function editAction($id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -192,10 +199,11 @@ class ZoneController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/update", name="zone_update")
+     * @Route("/{type}/{id}/update", name="zone_update")
+     * @RequiresPermission(submodule="zone_{type}", permissions="U")
      * @Method("POST")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -211,7 +219,7 @@ class ZoneController extends VallasAdminController {
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
         if ($boolSaved){
-            return $this->redirect($this->generateUrl('zone_edit', array('id' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('zone_edit', array('id' => $entity->getToken(), 'type' => $type)));
         }
 
         return $this->render('AppBundle:screens/zone:form.html.twig', array(
@@ -222,10 +230,11 @@ class ZoneController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/delete", name="zone_delete", options={"expose"=true})
+     * @Route("/{type}/{id}/delete", name="zone_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="zone_{type}", permissions="D")
      * @Method("GET")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();

@@ -1,6 +1,6 @@
 {{ form_start(form, {
     method: 'POST',
-    action: entity is defined and entity.pkArchivo is not empty ? path('incidencia_img_update', { id: entity.token, origin: 'list' }) : path('incidencia_img_create'),
+    action: entity is defined and entity.pkArchivo is not empty ? path('incidencia_img_update', { id: entity.token, origin: 'list', type: type }) : path('incidencia_img_create', { id: entity.token, type: type }),
     attr: { onsubmit: 'sendAjaxForm(this); return false;' } }) }}
 
     <label class="control-label">{{ entity.nombre }}</label>
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="clearfix">
-        <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save'|trans }}</strong></button>
+        {{ form_row(form.save) }}
     </div>
 
 {{ form_end(form) }}

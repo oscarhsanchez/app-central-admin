@@ -5,6 +5,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use ESocial\UtilBundle\Form\ESocialType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -17,6 +18,10 @@ class OrdenTrabajoImagenType extends ESocialType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+        if (!$options['is_popup']){
+            $builder->add('save', 'submit', array('label' => 'form.actions.save'));
+        }
 
         $builder
             ->add('estado_imagen', 'choice', array('label'=>'form.work_order_img.label.estado_imagen', 'choices' => array(
@@ -37,11 +42,15 @@ class OrdenTrabajoImagenType extends ESocialType {
         return 'work_order_img';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
+    public function setDefaultOptions(OptionsResolverInterface $resolver){
+
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Imagen',
+            'is_popup' => false
         ));
     }
+
 
 }

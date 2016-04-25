@@ -39,6 +39,7 @@ class ReportType extends ESocialType {
             $form->get('category')->setData($category);
         });
 
+        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
         $builder
             ->add('category', 'entity', array('mapped'=>false, 'label' => 'form.report_category.label.category', 'class' => 'VallasModelBundle:ReportCategory', 'query_builder' => function($repository) { return $repository->getQueryBuilder(); },
                 'choice_label' => 'name', 'empty_value' => 'form.label.choice_empty_value', 'required' => true))

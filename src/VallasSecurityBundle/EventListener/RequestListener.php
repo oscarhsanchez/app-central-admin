@@ -1,14 +1,15 @@
 <?php
 namespace VallasSecurityBundle\EventListener;
 
+use Doctrine\Common\Annotations\Reader;
 use ESocial\UtilBundle\Util\Security;
 use ESocial\UtilBundle\Util\Util;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Vallas\ModelBundle\Entity\User;
 use VallasSecurityBundle\Annotation\RequiresPermission;
 use VallasSecurityBundle\Annotation\AvoidPermission;
@@ -20,22 +21,27 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\Container;
 
 class RequestListener
 {
 
     protected $security_context;
 
+    /**
+     * Annotation Reader.
+     *
+     * @var Reader
+     */
     private $annotationReader;
     private $entityManager;
     private $service_container;
     private $router;
     private $templating;
 
-    public function __construct($service_container, $security_context, EntityManager $manager = null, AnnotationReader $annotationReader = null, $router = null, TwigEngine $templating = null)
+    public function __construct(Container $service_container, $security_context, EntityManager $manager = null, Router $router = null, TwigEngine $templating = null)
     {
         $this->service_container = $service_container;
-        $this->annotationReader = $annotationReader;
         $this->security_context = $security_context;
         $this->entityManager = $manager;
         $this->router = $router;
@@ -47,34 +53,23 @@ class RequestListener
 
         $this->entityManager->clear();
 
-        $controller = $event->getController();
-
         /** @var Request $request */
         $request = $event->getRequest();
-        $session = $request->getSession();
+
+        $request_controller = $request->attributes->get('_controller');
+
+        if ($request_controller == 'VallasSecurityBundle:Default:notlogged') return;
         $token = $this->security_context->getToken();
-        $cont = $controller[0];
-
-        //AppBundle\Controller\DefaultController::indexAction
-
-        if ($request->attributes->get('_controller') == 'VallasSecurityBundle:Default:notlogged'){
-            return;
-        }
-
-        list($object, $method) = $controller;
-
-        // the controller could be a proxy, e.g. when using the JMSSecuriyExtraBundle or JMSDiExtraBundle
-        $className = ClassUtils::getClass($object);
-
-        $reflectionClass = new \ReflectionClass($className);
-        $reflectionMethod = $reflectionClass->getMethod($method);
         $user = ($token && $token->isAuthenticated() && $token->getUser() instanceof User)? $token->getUser() : null;
+
+        list($controller, $controller_action) = $event->getController();
+        $controller_classname = get_class($controller);
+        $arr_data_controller = array('controller_classname' => $controller_classname, 'controller_action' => $controller_action);
 
         if (!$user) return;
         if (!$event->isMasterRequest()) return;
-
-        if ($className == 'AppBundle\Controller\DefaultController' && $method == 'indexAction') return;
-        if ($className == 'AppBundle\Controller\CountryController' && $method == 'selectFormAction') return;
+        if ($controller_classname == 'AppBundle\Controller\DefaultController' && $controller_action == 'indexAction') return;
+        if ($controller_classname == 'AppBundle\Controller\CountryController' && $controller_action == 'selectFormAction') return;
 
         //Control de country
         $session = $request->getSession();
@@ -86,46 +81,12 @@ class RequestListener
             return;
         }
 
-        $avoidAnnotation = $this->annotationReader->getMethodAnnotation($reflectionMethod, 'VallasSecurityBundle\Annotation\AvoidPermission');
-        $hasPermissionAnnotations = $this->annotationReader->getMethodAnnotation($reflectionMethod, 'VallasSecurityBundle\Annotation\RequiresPermission');
+        $permissionCheckingService = $this->service_container->get('vallas.security.permissions.checking');
+        $hasPermission = $permissionCheckingService->checkControllerPermission($arr_data_controller);
 
-        if ($hasPermissionAnnotations){
-
-            $allMethodAnnotations = $this->annotationReader->getMethodAnnotations($reflectionMethod);
-
-            $user_roles = $user->getRoles();
-            $role = $this->entityManager->getRepository('VallasModelBundle:Role')->findOneBy(array('code' => $user_roles[0]));
-            $arrUserPermissions = $this->entityManager->getRepository('VallasModelBundle:SecuritySubmodulePermission')->getAllByRoleAndUser($role->getId(), $user->getId());
-
-            //$hasPermission = $this->entityManager->getRepository('ModelBundle:SeguridadUsuarioAccion')->checkRequestUser($request, $this->security_context);
-            $requiredPermissions = array();
-            $hasPermission = false;
-            foreach($allMethodAnnotations as $methodAnnotation){
-                if (get_class($methodAnnotation) !== 'VallasSecurityBundle\Annotation\RequiresPermission') continue;
-
-                $required_submodule = $methodAnnotation->getSubmodule();
-                $arr_required_permissions = explode(',', $methodAnnotation->getPermissions());
-
-                if (array_key_exists($required_submodule, $arrUserPermissions)){
-
-                    foreach($arrUserPermissions[$required_submodule] as $userPermission){
-                        if (trim($userPermission) != '' && in_array($userPermission, $arr_required_permissions)){
-                            $hasPermission = true;
-                            break;
-                        }
-                    }
-
-                    if ($hasPermission) break;
-
-                }
-
-            }
-
-            if (!$hasPermission){
-                throw new ControllerNotPermissionException('No estás autorizado a realizar ésta acción');
-                return;
-
-            }
+        if (!$hasPermission){
+            throw new ControllerNotPermissionException('No estás autorizado a realizar ésta acción');
+            return;
 
         }
 

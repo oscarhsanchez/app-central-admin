@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Controller;
 
 use AppBundle\Form\IncidenciaImagenType;
@@ -13,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vallas\ModelBundle\Entity\Incidencia;
+use Vallas\ModelBundle\Entity\LogIncidencia;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Class IncidenciaController
@@ -29,15 +30,14 @@ class IncidenciaController extends VallasAdminController {
     /**
      * @return EntityJsonList
      */
-    private function getDatatableManager()
+    private function getDatatableManager($type=null)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Incidencia');
         $qb = $repository->getAllQueryBuilder()->andWhere('p.estado = 1');
 
-        $tipo = $this->getVar('tipo');
-        if ($tipo !== NULL){
-            $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $tipo);
+        if ($type !== NULL){
+            $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $type);
         }
 
         /** @var EntityJsonList $jsonList */
@@ -54,14 +54,14 @@ class IncidenciaController extends VallasAdminController {
      * Returns a list of Incidencia entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="incidencia_list_json")
+     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="incidencia_list_json")
      *
      * @Method("GET")
      */
-    public function listJsonAction()
+    public function listJsonAction($_type)
     {
 
-        $response = $this->getDatatableManager()->getResults();
+        $response = $this->getDatatableManager($_type)->getResults();
 
         foreach($response['aaData'] as $key=>$row){
             $reg = $response['aaData'][$key];
@@ -91,46 +91,52 @@ class IncidenciaController extends VallasAdminController {
     }
 
     /**
-     * @Route("/", name="incidencia_list")
+     * @Route("/{type}", name="incidencia_list")
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="R")
      * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $type)
     {
         $em = $this->getDoctrine()->getManager();
 
         return $this->render('AppBundle:screens/incidencia:index.html.twig', array(
-
+            'type' => $type
         ));
     }
 
     /**
-     * @Route("/add", name="incidencia_add")
+     * @Route("/{type}/add", name="incidencia_add")
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="C")
      * @Method("GET")
      */
-    public function addAction()
+    public function addAction($type)
     {
 
         $em = $this->getDoctrine()->getManager();
 
         $entity = new Incidencia();
+        $entity->setTipo($this->getCodeTypeByUrlType($type));
         $entity->setPais($this->getSessionCountry());
         $entity->setCodigoUser($this->getSessionUser()->getCodigo());
 
         return $this->render('AppBundle:screens/incidencia:form.html.twig', array(
             'entity' => $entity,
+            'type' => $type,
             'form' => $this->createForm(new IncidenciaType(), $entity)->createView()
         ));
     }
 
     /**
-     * @Route("/create", name="incidencia_create")
+     * @Route("/{type}/create", name="incidencia_create")
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="C")
      * @Method("POST")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $type)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entity = new Incidencia();
+        $entity->setTipo($this->getCodeTypeByUrlType($type));
         $entity->setPais($this->getSessionCountry());
         $entity->setCodigoUser($this->getSessionUser()->getCodigo());
 
@@ -141,25 +147,28 @@ class IncidenciaController extends VallasAdminController {
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
         if ($boolSaved){
-            return $this->redirect($this->generateUrl('incidencia_edit', array('id' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('incidencia_edit', array('id' => $entity->getToken(), 'type' => $type)));
         }
 
         return $this->render('AppBundle:screens/incidencia:form.html.twig', array(
             'entity' => $entity,
+            'type' => $type,
             'form' => $form->createView()
         ));
     }
 
     /**
-     * @Route("/{id}/edit", name="incidencia_edit", options={"expose"=true})
+     * @Route("/{type}/{id}/edit", name="incidencia_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="R")
      * @Method("GET")
      */
-    public function editAction($id)
+    public function editAction($id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:Incidencia')->getOneByToken($id);
+        $entityQB = $em->getRepository('VallasModelBundle:Incidencia')->getOneByTokenQB($id, array('logs' => null))->addOrderBy('logs.fecha', 'DESC');
+        $entity = $entityQB->getQuery()->getOneOrNullResult();
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Incidencia entity.');
@@ -179,12 +188,37 @@ class IncidenciaController extends VallasAdminController {
         }
 
         return $this->render('AppBundle:screens/incidencia:form.html.twig', array(
+            'type' => $this->getTypeUrlByCode($entity->getTipo()),
             'entity' => $entity,
-            'form' => $this->createForm(new IncidenciaType(), $entity)->createView(),
+            'form' => $this->createForm(new IncidenciaType(), $entity, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new IncidenciaImagenType(), $firstImg)->createView()
+            'formFirstImage' => $this->createForm(new IncidenciaImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView()
         ));
+    }
+
+    private function getTypeUrlByCode($code){
+        switch($code){
+            case '0': return 'fixing';
+            case '1': return 'monitoring';
+            case '2': return 'installation';
+            case '3': return 'lighting';
+            case '4': return 'plane';
+            case '5': return 'others';
+        }
+        return '';
+    }
+
+    private function getCodeTypeByUrlType($type){
+        switch($type){
+            case 'fixing': return '0';
+            case 'monitoring': return '1';
+            case 'installation': return '2';
+            case 'lighting': return '3';
+            case 'plane': return '4';
+            case 'others': return '5';
+        }
+        return '';
     }
 
     public function saveAction(Request $request, $entity, $params_original, $form){
@@ -235,15 +269,17 @@ class IncidenciaController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/update", name="incidencia_update")
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="U")
+     * @Route("/{type}/{id}/update", name="incidencia_update")
      * @Method("POST")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VallasModelBundle:Incidencia')->getOneByToken($id);
+        $entityQB = $em->getRepository('VallasModelBundle:Incidencia')->getOneByTokenQB($id, array('logs' => null))->addOrderBy('logs.fecha', 'DESC');
+        $entity = $entityQB->getQuery()->getOneOrNullResult();
 
         if (!$entity){
             throw $this->createNotFoundException('Unable to find Incidencia entity.');
@@ -254,7 +290,7 @@ class IncidenciaController extends VallasAdminController {
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
         if ($boolSaved){
-            return $this->redirect($this->generateUrl('incidencia_edit', array('id' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('incidencia_edit', array('id' => $entity->getToken(), 'type' => $type)));
         }
 
 
@@ -273,6 +309,7 @@ class IncidenciaController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/incidencia:form.html.twig', array(
             'entity' => $entity,
+            'type' => $this->getTypeUrlByCode($entity->getTipo()),
             'form' => $form->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
@@ -281,10 +318,11 @@ class IncidenciaController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/delete", name="incidencia_delete", options={"expose"=true})
+     * @Route("/{type}/{id}/delete", name="incidencia_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="D")
      * @Method("GET")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -305,21 +343,23 @@ class IncidenciaController extends VallasAdminController {
     }
 
     /**
-     * @Route("/select", name="incidencia_select")
+     * @Route("/{type}/select", name="incidencia_select")
      * @Method("GET")
      */
-    public function selectAction()
+    public function selectAction($type)
     {
         return $this->render('AppBundle:screens/incidencia:select.html.twig', array(
-            'getVars' => $this->getVar()
+            'getVars' => $this->getVar(),
+            'type' => $type
         ));
     }
 
     /**
-     * @Route("/edit-field", name="incidencia_edit_field", options={"expose"=true})
+     * @Route("/{type}/edit-field", name="incidencia_edit_field", options={"expose"=true})
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="U")
      * @Method("GET")
      */
-    public function editFieldAction(Request $request)
+    public function editFieldAction(Request $request, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -337,15 +377,16 @@ class IncidenciaController extends VallasAdminController {
 
         $form = $this->createForm(new IncidenciaFieldType(array('_form_name' => 'incidencia_' . $field_type)), $entity, array('type' => $field_type));
 
-        return $this->render('AppBundle:screens/incidencia:form_update_field.html.twig', array('form' => $form->createView(), 'field_type' => $field_type));
+        return $this->render('AppBundle:screens/incidencia:form_update_field.html.twig', array('form' => $form->createView(), 'type'=>$type, 'field_type' => $field_type));
 
     }
 
     /**
-     * @Route("/update-field", name="incidencia_update_field")
+     * @Route("/{type}/update-field", name="incidencia_update_field")
+     * @RequiresPermission(submodule="incidencia_{type}", permissions="U")
      * @Method("POST")
      */
-    public function updateFieldAction(Request $request)
+    public function updateFieldAction(Request $request, $type)
     {
         $em = $this->getDoctrine()->getManager();
         $field_type = $this->getVar('field_type');
@@ -406,7 +447,10 @@ class IncidenciaController extends VallasAdminController {
 
         }
 
-        return $this->render('AppBundle:screens/incidencia:form_update_field.html.twig', array('form' => $form->createView(), 'field_type' => $field_type));
+        return $this->render('AppBundle:screens/incidencia:form_update_field.html.twig', array('form' => $form->createView(), 'type' => $type, 'field_type' => $field_type));
+
+    }
+
     /**
      * @Route("/{type}/{id}/view-log", name="incidencia_view_log", options={"expose"=true})
      * @RequiresPermission(submodule="incidencia_{type}", permissions="R")

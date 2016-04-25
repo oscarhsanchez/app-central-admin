@@ -6,8 +6,10 @@
     <li class="active">
         <strong>
             {{ 'menu.title.work_orders'|trans }}
-            {% if type == 'fixing-monitoring' %}
-                - {{ 'menu.title.work_order_fixing_monitoring'|trans }}
+            {% if type == 'fixing' %}
+                - {{ 'menu.title.work_order_fixing'|trans }}
+            {% elseif type == 'monitoring' %}
+                - {{ 'menu.title.work_order_monitoring'|trans }}
             {% elseif type == 'installation' %}
                 - {{ 'menu.title.work_order_installation'|trans }}
             {% elseif type == 'lighting' %}
@@ -22,8 +24,10 @@
         <div class="ibox-title">
             <h5>
                 {{ 'menu.title.work_orders'|trans }}
-                {% if type == 'fixing-monitoring' %}
-                    - {{ 'menu.title.work_order_fixing_monitoring'|trans }}
+                {% if type == 'fixing' %}
+                    - {{ 'menu.title.work_order_fixing'|trans }}
+                {% elseif type == 'monitoring' %}
+                    - {{ 'menu.title.work_order_monitoring'|trans }}
                 {% elseif type == 'installation' %}
                     - {{ 'menu.title.work_order_installation'|trans }}
                 {% elseif type == 'lighting' %}
@@ -32,8 +36,7 @@
             </h5>
         </div>
         <div class="ibox-content">
-
-            {% if type == 'fixing-monitoring' %}
+            {% if type == 'fixing' or type == 'monitoring' %}
                 {{ include('ESocialUtilBundle:Components:tabNavigation.html.twig', {
                     'entity': entity is defined ? entity : null,
                     'tab_selected' : 'list',
@@ -43,7 +46,7 @@
                             'title': 'work_order.tabs.list'|trans
                         },
                         'img_validation': {
-                            'title': 'work_order.tabs.img_validation'|trans
+                            'title': 'work_order.tabs.img_validation'|trans,
                         }
                     }
                 })

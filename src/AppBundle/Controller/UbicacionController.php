@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vallas\ModelBundle\Entity\Ubicacion;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Class UbicacionController
@@ -63,6 +64,7 @@ class UbicacionController extends VallasAdminController {
 
     /**
      * @Route("/", name="ubicacion_list")
+     * @RequiresPermission(submodule="ubicacion", permissions="R")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -76,6 +78,7 @@ class UbicacionController extends VallasAdminController {
 
     /**
      * @Route("/add", name="ubicacion_add")
+     * @RequiresPermission(submodule="ubicacion", permissions="C")
      * @Method("GET")
      */
     public function addAction()
@@ -95,6 +98,7 @@ class UbicacionController extends VallasAdminController {
 
     /**
      * @Route("/create", name="ubicacion_create")
+     * @RequiresPermission(submodule="ubicacion", permissions="C")
      * @Method("POST")
      */
     public function createAction(Request $request)
@@ -123,6 +127,7 @@ class UbicacionController extends VallasAdminController {
 
     /**
      * @Route("/{id}/edit", name="ubicacion_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="ubicacion", permissions="R")
      * @Method("GET")
      */
     public function editAction($id)
@@ -153,10 +158,10 @@ class UbicacionController extends VallasAdminController {
             'paramForm' => $this->getVar('pForm'),
             'isNew' => false,
             'entity' => $entity,
-            'form' => $this->createForm(new UbicacionType(), $entity)->createView(),
+            'form' => $this->createForm(new UbicacionType(), $entity, array('editable' => $this->checkActionPermissions('ubicacion', 'U')))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new UbicacionImagenType(), $firstImg)->createView()
+            'formFirstImage' => $this->createForm(new UbicacionImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('ubicacion', 'U')))->createView()
         ));
     }
 
@@ -187,6 +192,7 @@ class UbicacionController extends VallasAdminController {
 
     /**
      * @Route("/{id}/update", name="ubicacion_update")
+     * @RequiresPermission(submodule="ubicacion", permissions="U")
      * @Method("POST")
      */
     public function updateAction(Request $request, $id)
@@ -235,6 +241,7 @@ class UbicacionController extends VallasAdminController {
 
     /**
      * @Route("/{id}/delete", name="ubicacion_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="ubicacion", permissions="D")
      * @Method("GET")
      */
     public function deleteAction(Request $request, $id)

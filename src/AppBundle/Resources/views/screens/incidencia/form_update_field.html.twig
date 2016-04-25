@@ -2,6 +2,6 @@
 {% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
 {{ form_start(form, {
     method: 'POST',
-    action: path('incidencia_update_field', { field_type: field_type }),
+    action: path('incidencia_update_field', { field_type: field_type, type: type }),
     attr: { onsubmit: 'setSelectedItems(incidencia_list, \''~field_type~'\'); sendAjaxPopupForm(this); return false;' } }) }}
 {{ form_end(form) }}

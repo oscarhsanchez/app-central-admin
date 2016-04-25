@@ -19,7 +19,6 @@ use AppBundle\Form\ReportType;
 use ESocial\UtilBundle\Util\DataTables\EntityJsonList;
 use VallasSecurityBundle\Annotation\RequiresPermission;
 
-
 /**
  * Report controller.
  *
@@ -83,11 +82,11 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/", name="report_list")
+     * @RequiresPermission(submodule="report", permissions="R")
      * @Method("GET")
      */
     public function indexAction(Request $request)
     {
-
         return $this->render('AppBundle:screens/report:index.html.twig', array(
 
         ));
@@ -95,6 +94,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/{id}/edit", name="report_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="report", permissions="R")
      * @Method("GET")
      */
     public function editAction($id)
@@ -146,6 +146,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/{id}/update", name="report_update")
+     * @RequiresPermission(submodule="report", permissions="U")
      * @Method("POST")
      */
     public function updateAction(Request $request, $id)
@@ -176,6 +177,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/create", name="report_create")
+     * @RequiresPermission(submodule="report", permissions="C")
      * @Method("POST")
      */
     public function createAction(Request $request)
@@ -204,6 +206,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/add", name="report_add")
+     * @RequiresPermission(submodule="report", permissions="C")
      * @Method("GET")
      */
     public function addAction()
@@ -235,6 +238,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/{id}/delete", name="report_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="report", permissions="D")
      * @Method("GET")
      */
     public function deleteAction(Request $request, $id)
@@ -257,6 +261,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/{id}/execute", name="report_execute", options={"expose"=true})
+     * @RequiresPermission(submodule="report", permissions="R")
      * @Method("GET")
      */
     public function executeAction($id)
@@ -288,6 +293,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/{id}/execute-parameters", name="report_execute_parameters")
+     * @RequiresPermission(submodule="report", permissions="R")
      * @Method("POST")
      */
     public function executeParametersAction($id)
@@ -335,6 +341,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/{id}/execute-parameters", name="report_execute_by_request_id")
+     * @RequiresPermission(submodule="report", permissions="R")
      * @Method("GET")
      */
     public function executeByRequestIdAction($id)
@@ -363,6 +370,7 @@ class ReportController extends VallasAdminController
 
     /**
      * @Route("/list-execution", name="report_execution_list")
+     * @RequiresPermission(submodule="report", permissions="R")
      * @Method("GET")
      */
     public function executionListAction(Request $request)

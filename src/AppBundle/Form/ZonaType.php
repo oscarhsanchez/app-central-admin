@@ -23,6 +23,7 @@ class ZonaType extends ESocialType {
         $entity = array_key_exists('data', $options) ? $options['data'] : null;
         $post = $this->getPost();
 
+        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
         $builder
             ->add('nombre', null, array('label' => 'form.zona.label.nombre'));
 

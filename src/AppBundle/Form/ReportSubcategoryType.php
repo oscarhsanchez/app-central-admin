@@ -17,6 +17,7 @@ class ReportSubcategoryType extends ESocialType
     {
         parent::buildForm($builder, $options);
 
+        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
         $builder
             ->add('category', null, array('label' => 'form.report_category.label.category', 'class' => 'VallasModelBundle:ReportCategory', 'query_builder' => function($repository) { return $repository->getQueryBuilder(); },
                 'property' => 'name', 'empty_value' => 'form.label.choice_empty_value', 'required' => true))

@@ -1,5 +1,5 @@
 <div class="margin-b">
-    <a class="btn btn-white" title="{{ 'work_order_img.buttons.add'|trans }}" href="{{ path('work_order_img_add', { id: entity.token }) }}" onclick="loadAjaxFormPage(this, 'modal-lg', null, workOrderImgListReload); return false;">
+    <a class="btn btn-white" title="{{ 'work_order_img.buttons.add'|trans }}" href="{{ path('work_order_img_add', { id: entity.token, type: type }) }}" onclick="loadAjaxFormPage(this, 'modal-lg', null, workOrderImgListReload); return false;">
         <span class="glyphicon glyphicon-plus"></span>
         <strong>{{ 'work_order_img.buttons.add'|trans }}</strong>
     </a>
@@ -10,6 +10,7 @@
 </div>
 
 <script type="text/javascript">
+    var imageStatusOld = null;
     function workOrderImgListReload(){
         executeAjax('{{ path('work_order_img_list', { type: type, id: entity.token }) }}', '#work-order-img-list-wrapper');
     }

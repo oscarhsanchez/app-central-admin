@@ -3,7 +3,7 @@
 
 {{ form_start(form, {
     method: 'POST',
-    action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token, isPopup: isPopup }) : path('work_order_img_create', { id: entity.ordenTrabajo.token }),
+    action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token, isPopup: isPopup, type: type }) : path('work_order_img_create', { id: entity.ordenTrabajo.token, type: type }),
     attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } }) }}
 
 <div class="row">

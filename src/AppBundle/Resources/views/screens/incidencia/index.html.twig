@@ -1,10 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title %}{{ 'menu.title.incidencias'|trans }}{% endblock %}
+{% block page_title %}{{ 'menu.title.issues'|trans }}{% endblock %}
 {% block page_breadcrumb %}
     <li>{{ 'menu.title.configuration'|trans }}</li>
     <li class="active">
-        <strong>{{ 'menu.title.issues'|trans }}</strong>
+        <strong>
+            {{ 'menu.title.issues'|trans }}
+            {% if type == 'fixing' %}
+                - {{ 'menu.title.issue_fixing'|trans }}
+            {% elseif type == 'monitoring' %}
+                - {{ 'menu.title.issue_monitoring'|trans }}
+            {% elseif type == 'installation' %}
+                - {{ 'menu.title.issue_installation'|trans }}
+            {% elseif type == 'lighting' %}
+                - {{ 'menu.title.issue_lighting'|trans }}
+            {% elseif type == 'plane' %}
+                - {{ 'menu.title.issue_plane'|trans }}
+            {% elseif type == 'others' %}
+                - {{ 'menu.title.issue_others'|trans }}
+            {% endif %}
+        </strong>
     </li>
 {% endblock %}
 
@@ -12,26 +27,26 @@
     <div class="ibox">
 
         <div class="ibox-title">
-            <h5>{{ 'menu.title.incidencias'|trans }}</h5>
+            <h5>{{ 'menu.title.issues'|trans }}</h5>
         </div>
         <div class="ibox-content">
 
             {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
 
             <div class="margin-b">
-                <a class="btn btn-white" title="{{ 'incidencia.buttons.add'|trans }}" href="{{ path('incidencia_add') }}">
+                <a class="btn btn-white" title="{{ 'incidencia.buttons.add'|trans }}" href="{{ path('incidencia_add', { type: type }) }}">
                     <span class="glyphicon glyphicon-plus"></span>
                     <strong>{{ 'incidencia.buttons.add'|trans }}</strong>
                 </a>
-                <a class="btn btn-white" title="{{ 'incidencia.buttons.change_user'|trans }}" href="{{ path('incidencia_edit_field', { field_type: 'user' }) }}" onclick="loadAjaxFormPage(this, null, null, incidencia_list_reload); return false;">
+                <a class="btn btn-white" title="{{ 'incidencia.buttons.change_user'|trans }}" href="{{ path('incidencia_edit_field', { type: type, field_type: 'user' }) }}" onclick="loadAjaxFormPage(this, null, null, incidencia_list_reload); return false;">
                     <span class="glyphicon glyphicon-plus"></span>
                     <strong>{{ 'incidencia.buttons.change_user'|trans }}</strong>
                 </a>
-                <a class="btn btn-white" title="{{ 'incidencia.buttons.date_limit'|trans }}" href="{{ path('incidencia_edit_field', { field_type: 'date_limit' }) }}" onclick="loadAjaxFormPage(this, null, null, incidencia_list_reload); return false;">
+                <a class="btn btn-white" title="{{ 'incidencia.buttons.date_limit'|trans }}" href="{{ path('incidencia_edit_field', { type: type, field_type: 'date_limit' }) }}" onclick="loadAjaxFormPage(this, null, null, incidencia_list_reload); return false;">
                     <span class="glyphicon glyphicon-plus"></span>
                     <strong>{{ 'incidencia.buttons.change_date_limit'|trans }}</strong>
                 </a>
-                <a class="btn btn-white" title="{{ 'incidencia.buttons.state'|trans }}" href="{{ path('incidencia_edit_field', { field_type: 'state' }) }}" onclick="loadAjaxFormPage(this, null, null, incidencia_list_reload); return false;">
+                <a class="btn btn-white" title="{{ 'incidencia.buttons.state'|trans }}" href="{{ path('incidencia_edit_field', { type: type, field_type: 'state' }) }}" onclick="loadAjaxFormPage(this, null, null, incidencia_list_reload); return false;">
                     <span class="glyphicon glyphicon-plus"></span>
                     <strong>{{ 'incidencia.buttons.change_state'|trans }}</strong>
                 </a>
@@ -107,7 +122,7 @@
             jQuery(document).ready(function(){
                 incidencia_list = TableManaged.init(
                         '#dt-incidencia-list',
-                        '{{ url('incidencia_list_json') }}',
+                        '{{ url('incidencia_list_json', { _type: type }) }}',
                         params,
                         [],
                         table_columns,
@@ -123,7 +138,7 @@
             }
 
             var incidencia_filter_tipo = $("#dt-incidencia-list_filter-tipo").val();
-            var url = '{{ url('incidencia_list_json') }}';
+            var url = '{{ url('incidencia_list_json', { _type: type }) }}';
             var params = '';
             if ($.trim(incidencia_filter_tipo) != '') params += '?tipo='+encodeURIComponent(incidencia_filter_tipo);
 

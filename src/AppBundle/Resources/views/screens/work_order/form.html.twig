@@ -7,8 +7,10 @@
         <strong>
             <a href="{{ path('work_order_list', { type: type }) }}">
                 {{ 'menu.title.work_orders'|trans }}
-                {% if type == 'fixing-monitoring' %}
-                    - {{ 'menu.title.work_order_fixing_monitoring'|trans }}
+                {% if type == 'fixing' %}
+                    - {{ 'menu.title.work_order_fixing'|trans }}
+                {% elseif type == 'monitoring' %}
+                    - {{ 'menu.title.work_order_monitoring'|trans }}
                 {% elseif type == 'installation' %}
                     - {{ 'menu.title.work_order_installation'|trans }}
                 {% elseif type == 'lighting' %}
@@ -71,6 +73,7 @@
 
         var ubicacionMap;
         function setUbicacionMap(latitud, longitud){
+            $('#work-order-medio-ubicacion-map').show();
             var myLatLng = {lat: latitud, lng: longitud };
             ubicacionMap = new google.maps.Map(document.getElementById('work-order-medio-ubicacion-map'), { center: myLatLng, zoom: 8 });
             var marker = new google.maps.Marker({ position: myLatLng, map: ubicacionMap });

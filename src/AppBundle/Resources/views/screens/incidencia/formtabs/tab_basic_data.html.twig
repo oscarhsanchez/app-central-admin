@@ -1,10 +1,9 @@
-{{ form_start(form, { method: 'POST', action: entity is defined and entity.pkIncidencia is not empty ? path('incidencia_update', {id: entity.token, origin: 'list' }) : path('incidencia_create') }) }}
+{{ form_start(form, { method: 'POST', action: entity is defined and entity.pkIncidencia is not empty ? path('incidencia_update', {id: entity.token, origin: 'list', type: type }) : path('incidencia_create', { type: type }) }) }}
 <div class="row">
     <div class="col-md-6">
         <fieldset>
             <legend>{{ 'screens.incidencias.text.basic_data'|trans }}</legend>
 
-            {{ form_row(form.tipo) }}
             <div class="row">
                 <div class="col-md-6">
                     {{ form_row(form.fecha_limite) }}
@@ -17,7 +16,7 @@
             <fieldset class="margin-b-20">
                 <legend>{{ 'form.work_order.label.medio'|trans }}</legend>
                 {{ form_row(form.medio, { select_href: path('medio_select') }) }}
-                <div id="incidencia-medio-ubicacion-map" style="height: 200px"></div>
+                <div id="incidencia-medio-ubicacion-map" style="{% if entity.medio is empty %}display:none{% endif %}; height: 200px"></div>
             </fieldset>
             {{ form_row(form.observaciones) }}
 
@@ -40,7 +39,7 @@
 </div>
 
 <div class="clearfix">
-    <button class="btn btn-primary pull-right" type="submit"><strong>{{ 'form.actions.save'|trans }}</strong></button>
+    {{ form_row(form.save) }}
 </div>
 
 {{ form_end(form) }}

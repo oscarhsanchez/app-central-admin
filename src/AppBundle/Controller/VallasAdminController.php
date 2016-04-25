@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use ESocial\UtilBundle\Controller\ESocialController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * VallasAdmin controller.
@@ -47,4 +48,10 @@ class VallasAdminController extends ESocialController
         return ($token->isAuthenticated()) ? $token->getUser() : false;
     }
 
+    public function checkActionPermissions($submodule, $permissionCode){
+
+        $hasPermission = $this->get('vallas.security.permissions.checking')->checkPermissionCode($submodule, $permissionCode);
+
+        return $hasPermission;
+    }
 }

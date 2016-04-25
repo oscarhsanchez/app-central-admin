@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Vallas\ModelBundle\Entity\LogOrdenTrabajo;
 use Vallas\ModelBundle\Entity\OrdenTrabajo;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Class WorkOrderController
@@ -101,6 +102,7 @@ class WorkOrderController extends VallasAdminController {
 
     /**
      * @Route("/{type}", name="work_order_list")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="R")
      * @Method("GET")
      */
     public function indexAction(Request $request, $type)
@@ -130,17 +132,15 @@ class WorkOrderController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/work_order:index.html.twig', array(
             'type' => $type,
-            //'formChangeUser' => $formChangeUser->createView(),
-            //'formChangeDateLimit' => $formChangeDateLimit->createView(),
-            //'formChangeState' => $formChangeState->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView()
+            'formFirstImage' => $firstImg ? $this->createForm(new OrdenTrabajoImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView() : null
         ));
     }
 
     /**
      * @Route("/{type}/add", name="work_order_add")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="C")
      * @Method("GET")
      */
     public function addAction($type)
@@ -165,24 +165,27 @@ class WorkOrderController extends VallasAdminController {
 
     private function getTypeUrlByCode($code){
         switch($code){
-            case '0': return 'fixing-monitoring';
-            case '1': return 'installation';
-            case '2': return 'lighting';
+            case '0': return 'fixing';
+            case '1': return 'monitoring';
+            case '2': return 'installation';
+            case '3': return 'lighting';
         }
         return '';
     }
 
     private function getCodeTypeByUrlType($type){
         switch($type){
-            case 'fixing-monitoring': return '0';
-            case 'installation': return '1';
-            case 'lighting': return '2';
+            case 'fixing': return '0';
+            case 'monitoring': return '1';
+            case 'installation': return '2';
+            case 'lighting': return '3';
         }
         return '';
     }
 
     /**
      * @Route("/{type}/create", name="work_order_create")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="C")
      * @Method("POST")
      */
     public function createAction(Request $request, $type)
@@ -204,7 +207,7 @@ class WorkOrderController extends VallasAdminController {
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
         if ($boolSaved){
-            return $this->redirect($this->generateUrl('work_order_edit', array('id' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('work_order_edit', array('id' => $entity->getToken(), 'type' => $type)));
         }
 
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
@@ -215,10 +218,11 @@ class WorkOrderController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/edit", name="work_order_edit", options={"expose"=true})
+     * @Route("/{type}/{id}/edit", name="work_order_edit", options={"expose"=true})
+     * @RequiresPermission(submodule="work_order_{type}", permissions="R")
      * @Method("GET")
      */
-    public function editAction($id)
+    public function editAction($id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -248,10 +252,10 @@ class WorkOrderController extends VallasAdminController {
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
-            'form' => $this->createForm(new OrdenTrabajoType(), $entity)->createView(),
+            'form' => $this->createForm(new OrdenTrabajoType(), $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView()
+            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView()
         ));
     }
 
@@ -304,6 +308,7 @@ class WorkOrderController extends VallasAdminController {
 
     /**
      * @Route("/{type}/edit-field", name="work_order_edit_field", options={"expose"=true})
+     * @RequiresPermission(submodule="work_order_{type}", permissions="U")
      * @Method("GET")
      */
     public function editFieldAction(Request $request, $type)
@@ -330,6 +335,7 @@ class WorkOrderController extends VallasAdminController {
 
     /**
      * @Route("/{type}/update-field", name="work_order_update_field")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="U")
      * @Method("POST")
      */
     public function updateFieldAction(Request $request, $type)
@@ -398,10 +404,11 @@ class WorkOrderController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/update", name="work_order_update")
+     * @Route("/{type}/{id}/update", name="work_order_update")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="U")
      * @Method("POST")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -419,7 +426,7 @@ class WorkOrderController extends VallasAdminController {
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
         if ($boolSaved){
-            return $this->redirect($this->generateUrl('work_order_edit', array('id' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('work_order_edit', array('id' => $entity->getToken(), 'type' => $type)));
         }
 
         $qbImage = $em->getRepository('VallasModelBundle:Imagen')->getAllQueryBuilder()->andWhere('p.orden_trabajo = :ot')->setParameter('ot', $entity->getPkOrdenTrabajo());
@@ -447,10 +454,11 @@ class WorkOrderController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/delete", name="work_order_delete", options={"expose"=true})
+     * @Route("/{type}/{id}/delete", name="work_order_delete", options={"expose"=true})
+     * @RequiresPermission(submodule="work_order_{type}", permissions="D")
      * @Method("GET")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -471,10 +479,11 @@ class WorkOrderController extends VallasAdminController {
     }
 
     /**
-     * @Route("/{id}/view-log", name="work_order_view_log", options={"expose"=true})
+     * @Route("/{type}/{id}/view-log", name="work_order_view_log", options={"expose"=true})
+     * @RequiresPermission(submodule="work_order_{type}", permissions="R")
      * @Method("GET")
      */
-    public function viewLogAction(Request $request, $id)
+    public function viewLogAction(Request $request, $id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -486,7 +495,7 @@ class WorkOrderController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find OrdenTrabajo entity.');
         }
 
-        return $this->render('AppBundle:screens/work_order:logs.html.twig', array('entity' => $entity));
+        return $this->render('AppBundle:screens/work_order:logs.html.twig', array('entity' => $entity, 'type' => $type));
 
     }
 

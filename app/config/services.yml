@@ -16,7 +16,7 @@ services:
             tags:
                 - { name: kernel.event_listener, event: kernel.controller, method: onFilterController }
                 - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
-            arguments: [@service_container, @security.context, @doctrine.orm.entity_manager, @annotations.reader, @router, @templating]
+            arguments: [@service_container, @security.context, @doctrine.orm.entity_manager, @router, @templating]
 
     vallas.doctrine.filter.configurator:
         class: AppBundle\Filter\Configurator
@@ -27,3 +27,11 @@ services:
             - "@session"
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+    vallas.security.permissions.checking:
+        class: VallasSecurityBundle\Services\SecurityPermissionChecking
+        arguments:
+            - "@security.context"
+            - "@doctrine.orm.entity_manager"
+            - "@annotations.reader"
+            - "@request_stack"

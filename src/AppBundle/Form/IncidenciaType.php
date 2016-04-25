@@ -64,6 +64,7 @@ class IncidenciaType extends ESocialType {
 
         });
 
+        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
         $builder->add('medio', 'selectable_entity', array(
                 'label' => 'form.incidencia.label.medio',
                 'class' => 'VallasModelBundle:Medio',
@@ -86,12 +87,7 @@ class IncidenciaType extends ESocialType {
 
         $builder
             ->add('estado_incidencia', 'choice', array('label' => 'form.incidencia.label.estado_incidencia', 'empty_value' => 'form.label.choice_empty_value', 'choices' => array(
-            '0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada'), 'constraints' => array(new NotBlank())));
-
-        $builder
-            ->add('tipo', 'choice', array('label' => 'form.incidencia.label.tipo', 'empty_value' => 'form.label.choice_empty_value',
-                'choices' => array('0' => 'Iluminación', '1' => 'Fijación', '2' => 'Instalación', '3' => 'Otros'),
-                'constraints' => array(new NotBlank())));
+            '0' => 'form.incidencia.label.estado_incidencia.pendiente', '1' => 'form.incidencia.label.estado_incidencia.en_proceso', '2' => 'form.incidencia.label.estado_incidencia.cerrada'), 'constraints' => array(new NotBlank())));
 
         $builder->add('observaciones', 'textarea', array('label' => 'form.incidencia.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)));
 
@@ -114,6 +110,7 @@ class IncidenciaType extends ESocialType {
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Incidencia'));
     }

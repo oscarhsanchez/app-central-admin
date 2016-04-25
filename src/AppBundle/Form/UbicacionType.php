@@ -29,6 +29,7 @@ class UbicacionType extends ESocialType {
 
         if (!$options['formMedios']) {
 
+            $builder->add('save', 'submit', array('label' => 'form.actions.save'));
             $builder
                 ->add('pk_ubicacion', null, array('label' => 'form.ubicacion.label.pk_ubicacion', 'constraints' => array(new NotBlank())))
                 ->add('empresa', 'entity', array(
@@ -91,6 +92,7 @@ class UbicacionType extends ESocialType {
                 ->add('reserva', null, array('label' => 'form.ubicacion.label.reserva'));
         } else {
 
+            $builder->add('save', 'submit', array('label' => 'form.actions.save'));
             $builder->add('medios', 'collection', array(
                 'type' => 'selectable_entity',
                 'prototype' => true,

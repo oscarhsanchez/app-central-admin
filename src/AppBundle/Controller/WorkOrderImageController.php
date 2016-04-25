@@ -13,16 +13,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Vallas\ModelBundle\Entity\Imagen;
+use Vallas\ModelBundle\Entity\OrdenTrabajo;
+use VallasSecurityBundle\Annotation\RequiresPermission;
 
 /**
  * Imagen controller.
  *
- * @Route("/{_locale}/work-order-images", defaults={"_locale"="en"})
+ * @Route("/{_locale}/work-order-images/{type}", defaults={"_locale"="en"})
  */
 class WorkOrderImageController extends VallasAdminController {
 
     /**
-     * @Route("/{type}", name="work_order_img_list")
+     * @Route("/", name="work_order_img_list", options={"expose"=true})
+     * @RequiresPermission(submodule="work_order_{type}", permissions="R")
      * @Method("GET")
      */
     public function indexAction(Request $request, $type)
@@ -84,9 +87,10 @@ class WorkOrderImageController extends VallasAdminController {
 
     /**
      * @Route("/{id}/add", name="work_order_img_add")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="U")
      * @Method("GET")
      */
-    public function addAction($id)
+    public function addAction($id, $type)
     {
         $em = $this->getDoctrine()->getManager();
         $ot = $em->getRepository('VallasModelBundle:OrdenTrabajo')->getOneByToken($id);
@@ -98,10 +102,11 @@ class WorkOrderImageController extends VallasAdminController {
         $entity = new Imagen();
         $entity->setOrdenTrabajo($ot);
         $entity->setPais($this->getSessionCountry());
-        $form = $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity);
+        $form = $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true));
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
             'form' => $form->createView(),
+            'type' => $type,
             'entity' => $entity
         ));
     }
@@ -153,9 +158,10 @@ class WorkOrderImageController extends VallasAdminController {
 
     /**
      * @Route("/{id}/create", name="work_order_img_create")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="U")
      * @Method("POST")
      */
-    public function createAction(Request $request, $id)
+    public function createAction(Request $request, $id, $type)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -170,7 +176,7 @@ class WorkOrderImageController extends VallasAdminController {
         $entity->setPais($this->getSessionCountry());
         $entity->setOrdenTrabajo($ot);
 
-        $form = $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity);
+        $form = $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true));
         $params_original = array('entity' => null);
 
         if ($request->getMethod() == 'POST'){
@@ -178,22 +184,24 @@ class WorkOrderImageController extends VallasAdminController {
             $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
             if ($boolSaved){
-                return $this->redirect($this->generateUrl('work_order_img_edit', array('id' => $entity->getToken(), 'isPopup' => 1)));
+                return $this->redirect($this->generateUrl('work_order_img_edit', array('id' => $entity->getToken(), 'isPopup' => 1, 'type' => $type)));
             }
 
         }
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
             'form' => $form->createView(),
+            'type' => $type,
             'entity' => $entity
         ));
     }
 
     /**
      * @Route("/{id}/edit", name="work_order_img_edit")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="R")
      * @Method("GET")
      */
-    public function editAction($id)
+    public function editAction($id, $type)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -205,11 +213,12 @@ class WorkOrderImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity) :
-                                    $this->createForm(new OrdenTrabajoImagenType(), $entity);
+        $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('work_order_{type}', 'U'))) :
+                                    $this->createForm(new OrdenTrabajoImagenType(), $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')));
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
             'entity' => $entity,
+            'type' => $type,
             'form' => $form->createView(),
             'isPopup' => $isPopup
         ));
@@ -217,11 +226,13 @@ class WorkOrderImageController extends VallasAdminController {
 
     /**
      * @Route("/{id}/update", name="work_order_img_update")
+     * @RequiresPermission(submodule="work_order_{type}", permissions="U")
      * @Method("POST")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $type)
     {
         $origin = $this->getVar('origin');
+        $isValidation = $this->getVar('validation') == '1';
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('VallasModelBundle:Imagen')->getOneByToken($id);
         $isPopup = $this->getVar('isPopup');
@@ -230,7 +241,7 @@ class WorkOrderImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity) :
+        $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true)) :
                                     $this->createForm(new OrdenTrabajoImagenType(), $entity);
 
         $params_original = array('entity' => clone $entity);
@@ -240,7 +251,7 @@ class WorkOrderImageController extends VallasAdminController {
 
             if ($boolSaved && $origin != 'list'){
 
-                return $this->redirect($this->generateUrl('work_order_img_edit', array('id' => $entity->getToken(), 'isPopup' => $isPopup)));
+                return $this->redirect($this->generateUrl('work_order_img_edit', array('id' => $entity->getToken(), 'isPopup' => $isPopup, 'type' => $type,)));
             }
         }
 
@@ -255,6 +266,7 @@ class WorkOrderImageController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
             'form' => $form->createView(),
+            'type' => $type,
             'entity' => $entity
         ));
     }

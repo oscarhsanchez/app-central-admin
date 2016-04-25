@@ -16,6 +16,7 @@ class ReportCategoryType extends ESocialType
     {
         parent::buildForm($builder, $options);
 
+        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
         $builder
             ->add('name', null, array('label' => 'form.report_category.label.name'));
     }
