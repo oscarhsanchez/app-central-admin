@@ -43,6 +43,9 @@ parameters:
 
     esocial_utils.uploadable:
         temp_dir: /uploads/temp
+        file_mappings:
+            archivo:
+                path: /media/archivo
         image_mappings:
             orden_trabajo_imagen:
                 filters:
