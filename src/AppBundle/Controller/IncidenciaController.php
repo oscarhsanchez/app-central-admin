@@ -54,7 +54,7 @@ class IncidenciaController extends VallasAdminController {
      * Returns a list of Incidencia entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="incidencia_list_json")
+     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="incidencia_list_json")
      *
      * @Method("GET")
      */

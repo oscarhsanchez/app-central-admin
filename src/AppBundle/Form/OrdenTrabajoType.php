@@ -24,6 +24,7 @@ class OrdenTrabajoType extends ESocialType {
         $em = $this->getManager();
         $data = array_key_exists('data', $options) ? $options['data'] : null;
         $originalData = array_key_exists('data', $options) ? clone $options['data'] : null;
+        $post = $this->getPost();
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) use ($options, $builder, $em){
             $data = $event->getData();
@@ -45,6 +46,10 @@ class OrdenTrabajoType extends ESocialType {
                 $form->getData()->setObservacionesCierre(null);
             }
 
+            if ($data->getEstadoOrden() != 4){
+                $form->getData()->setMotivoOrdenesPendientes(null);
+            }
+
         });
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) use ($options, $builder, $em){
@@ -60,6 +65,10 @@ class OrdenTrabajoType extends ESocialType {
                 ESocialType::addOptionsToEmbedFormField($builder, $form, 'fecha_cierre', array('constraints' => array(new NotBlank())));
             }
 
+            if (intval($data['estado_orden']) == 4){
+                ESocialType::addOptionsToEmbedFormField($builder, $form, 'motivo_ordenes_pendientes', array('constraints' => array(new NotBlank())));
+            }
+
         });
 
         $arrEstados = array(
@@ -70,6 +79,8 @@ class OrdenTrabajoType extends ESocialType {
         if ($data && $data->getTipo() == 0){
             $arrEstados['3'] = 'form.work_order.label.estado_orden.pendiente_impresion';
         }
+
+        $arrEstados['4'] = 'form.work_order.label.estado_orden.pendiente_incidencia';
 
         $builder
             ->add('save', 'submit', array('label' => 'form.actions.save'))
@@ -98,6 +109,17 @@ class OrdenTrabajoType extends ESocialType {
             ->add('campania', null, array('label' => 'form.work_order.label.campania', 'required' => false));
         }
 
+        $estadoIncidencia = $data && $data->getEstadoOrden() ? $data->getEstadoOrden() : null;
+        if ($post) $estadoIncidencia = $post['estado_orden'];
+
+        $builder->add('motivo_ordenes_pendientes', 'selectable_entity', array(
+            'label' => 'form.work_order.label.motivo_ordenes_pendientes',
+            'class' => 'VallasModelBundle:MotivoOrdenesPendientes',
+            'required' => $estadoIncidencia == 4,
+            'select_text'   => 'Select Reason',
+            'enable_update' => true
+        ));
+        $builder->add('motivo_ordenes_pendientes_incidencia', 'hidden', array('mapped' => false));
     }
 
     public function getName()

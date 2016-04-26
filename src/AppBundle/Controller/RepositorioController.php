@@ -48,7 +48,7 @@ class RepositorioController extends VallasAdminController {
      * Returns a list of Archivo entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="archivo_list_json")
+     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="archivo_list_json")
      *
      * @Method("GET")
      */

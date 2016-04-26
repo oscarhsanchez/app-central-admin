@@ -60,16 +60,52 @@
         </div>
     </div>
     <script type="text/javascript">
-        function selectMedio(data, vars){
+        var boolEvalCheckWorkOrderStatus = true;
+        function checkWorkOrderStatus(){
+            if (parseInt($('#work_order_estado_orden').val()) != 4) return true;
+            if ($("#work_order_motivo_ordenes_pendientes").val() == '') return true;
+            {% if entityOld is defined and entityOld.estadoOrden == 4 %}
+            return true;
+            {% endif %}
+            if (!boolEvalCheckWorkOrderStatus) return true;
+            bootbox.confirm('Desea generar una incidencia?', function(confirmed){
+                if(confirmed){
+                    $('#work_order_motivo_ordenes_pendientes_incidencia').val('1');
+                }else{
+                    $('#work_order_motivo_ordenes_pendientes_incidencia').val('0');
+                }
+                boolEvalCheckWorkOrderStatus = false;
+                $('#work-order-form').trigger('submit');
+            });
+            return false;
+        }
+        function selectMedio(data, vars) {
             var jsonData = decodeURIComponent(data);
             var obj = JSON.parse(jsonData);
             var objVars = JSON.parse(vars);
             $("#work_order_medio").val(obj.token);
             $("#select-input-group-work_order_medio").html(obj.name);
-            if (obj.ubicacion__latitud && obj.ubicacion__longitud){
+            if (obj.ubicacion__latitud && obj.ubicacion__longitud) {
                 setUbicacionMap(obj.ubicacion__latitud, obj.ubicacion__longitud);
             }
         }
+        function selectMotivoOrdenesPendientes(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#work_order_motivo_ordenes_pendientes").val(obj.token);
+            $("#select-input-group-work_order_motivo_ordenes_pendientes").html(obj.descripcion);
+        }
+
+        $(document).ready(function(){
+            $('#work_order_estado_orden').change(function(){
+                if (parseInt($(this).val()) == 4){
+                    $('#work_order_motivo_ordenes_pendientes-wrapper').show();
+                }else{
+                    $('#work_order_motivo_ordenes_pendientes-wrapper').hide();
+                }
+            });
+        });
 
         var ubicacionMap;
         function setUbicacionMap(latitud, longitud){

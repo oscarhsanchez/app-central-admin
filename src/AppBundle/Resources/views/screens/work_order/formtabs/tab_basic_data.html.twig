@@ -1,4 +1,4 @@
-{{ form_start(form, { method: 'POST', action: entity is defined and entity.pk_orden_trabajo is not empty ? path('work_order_update', {id: entity.token, origin: 'list', type: type }) : path('work_order_create', { type: type }) }) }}
+{{ form_start(form, { attr: { id: 'work-order-form', onsubmit: 'return checkWorkOrderStatus();' }, method: 'POST', action: entity is defined and entity.pk_orden_trabajo is not empty ? path('work_order_update', {id: entity.token, origin: 'list', type: type }) : path('work_order_create', { type: type }) }) }}
 <div class="row">
     <div class="col-md-6">
         <fieldset>
@@ -27,6 +27,10 @@
                 <div class="col-md-6">
                     {{ form_row(form.estado_orden) }}
                 </div>
+            </div>
+            <div id="work_order_motivo_ordenes_pendientes-wrapper" {% if entity.estadoOrden != 4 %}style="display: none"{% endif %}>
+                {{ form_row(form.motivo_ordenes_pendientes, { select_href: path('motivo_ordenes_pendientes_select') }) }}
+                {{ form_widget(form.motivo_ordenes_pendientes_incidencia) }}
             </div>
             {{ form_row(form.user) }}
             <fieldset class="margin-b-20">

@@ -1,0 +1,8 @@
+{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+{% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+{{ form_start(form, { method: 'POST', attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } , action: entity is defined and entity.pkMotivo is not empty ? path('motivo_ordenes_pendientes_update', {id: entity.token }) : path('motivo_ordenes_pendientes_create') }) }}
+{{ form_row(form.descripcion) }}
+{{ form_row(form.tipo_incidencia) }}
+
+{{ form_end(form) }}

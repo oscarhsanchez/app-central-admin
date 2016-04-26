@@ -1,0 +1,30 @@
+{% set selectFunction = getVars.selectFunction is defined and getVars.selectFunction is not empty ? getVars.selectFunction : 'selectMotivoOrdenesPendientes' %}
+<table id="dt-motivo-ordenes-pendientes-list-select" class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'form.motivo_ordenes_pendientes.label.descripcion'|trans }}</th>
+        <th>{{ 'form.motivo_ordenes_pendientes.label.tipo_incidencia'|trans }}</th>
+        <th>{{ 'form.label.actions'|trans }}</th>
+    </tr>
+    </thead>
+</table>
+<script type="text/javascript">
+    var motivo_ordenes_pendientes_list_select = null;
+    var motivo_ordenes_pendientes_list_select_table_columns = [
+        {"mData": "descripcion"},
+        {"mData": "tipo_incidencia"},
+        {
+            "mData": function (source) {
+                return '<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="closeThisPopup(this); {{ selectFunction }}(\''+encodeURIComponent(JSON.stringify(source))+'\', \'{{ getVars|json_encode|escape  }}\')">Select</a>';
+            }
+        }
+    ];
+    motivo_ordenes_pendientes_list_select = TableManaged.init(
+            '#dt-motivo-ordenes-pendientes-list-select',
+            '{{ url('motivo_ordenes_pendientes_list_json', getVars) }}',
+            null,
+            [],
+            motivo_ordenes_pendientes_list_select_table_columns,
+            '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+    );
+</script>

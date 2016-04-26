@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Vallas\ModelBundle\Entity\Incidencia;
 use Vallas\ModelBundle\Entity\LogOrdenTrabajo;
 use Vallas\ModelBundle\Entity\OrdenTrabajo;
 use VallasSecurityBundle\Annotation\RequiresPermission;
@@ -55,7 +56,7 @@ class WorkOrderController extends VallasAdminController {
      * Returns a list of OrdenTrabajo entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="work_order_list_json")
+     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="work_order_list_json")
      *
      * @Method("GET")
      */
@@ -91,7 +92,14 @@ class WorkOrderController extends VallasAdminController {
             $response['aaData'][$key]['fecha_cierre'] = $reg['fecha_cierre'] ? $reg['fecha_cierre']->format('d/m/Y') : null;
             $response['aaData'][$key]['toString'] = $reg['fecha_limite']->format('d/m/Y') .' - '. $reg['medio__ubicacion__ubicacion'] .' - '. $reg['codigo_user'];
 
-            $estados = array('0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada');
+            $estados = array(
+                '0' => $this->get('translator')->trans('form.work_order.label.estado_orden.pendiente'),
+                '1' => $this->get('translator')->trans('form.work_order.label.estado_orden.en_proceso'),
+                '2' => $this->get('translator')->trans('form.work_order.label.estado_orden.cerrada'),
+                '3' => $this->get('translator')->trans('form.work_order.label.estado_orden.pendiente_impresion'),
+                '4' => $this->get('translator')->trans('form.work_order.label.estado_orden.pendiente_incidencia')
+            );
+
             $estado_orden = strval($reg['estado_orden']);
             $response['aaData'][$key]['estado_orden'] = $reg['estado_orden'] ? $estados[$estado_orden] : null;
         }
@@ -251,6 +259,7 @@ class WorkOrderController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
+            'entityOld' => clone $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
             'form' => $this->createForm(new OrdenTrabajoType(), $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView(),
             'image' => $firstImg,
@@ -268,6 +277,8 @@ class WorkOrderController extends VallasAdminController {
             $form->handleRequest($request);
 
             if ($form->isValid()){
+
+                $post = $this->postVar('work_order');
 
                 //LOG DE ORDEN DE TRABAJO
                 $logAccion = 'Modificación';
@@ -289,6 +300,24 @@ class WorkOrderController extends VallasAdminController {
                 $log->setCodigoUser($this->getSessionUser()->getCodigo());
                 $log->setFecha(new \DateTime(date('Y:m:d H:i:s')));
                 $log->setAccion($logAccion);
+
+                //CREAMOS INCIDENCIA
+                if ($entity->getEstadoOrden() == 4){
+                    if ($post['motivo_ordenes_pendientes_incidencia']=='1'){
+                        $incidencia = new Incidencia();
+                        $incidencia->setPais($this->getSessionCountry());
+                        $incidencia->setMedio($entity->getMedio());
+                        $incidencia->setCodigoUser($entity->getCodigoUser());
+                        $incidencia->setTipo($entity->getMotivoOrdenesPendientes()->getTipoIncidencia());
+                        $incidencia->setEstadoIncidencia(0);
+
+                        $fecha = new \DateTime();
+                        $fecha->add(new \DateInterval('PT48H'));
+
+                        $incidencia->setFechaLimite(new \DateTime($fecha->format('Y-m-d')));
+                        $em->persist($incidencia);
+                    }
+                }
 
                 $em->persist($entity);
                 $em->persist($log);
@@ -421,9 +450,10 @@ class WorkOrderController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find OrdenTrabajo entity.');
         }
 
+        $entityOld = clone $entity;
         $form = $this->createForm(new OrdenTrabajoType(), $entity);
 
-        $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
+        $boolSaved = $this->saveAction($request, $entity, array('entity' => $entityOld), $form);
 
         if ($boolSaved){
             return $this->redirect($this->generateUrl('work_order_edit', array('id' => $entity->getToken(), 'type' => $type)));
@@ -445,6 +475,7 @@ class WorkOrderController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
+            'entityOld' => $entityOld,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
             'form' => $form->createView(),
             'image' => $firstImg,

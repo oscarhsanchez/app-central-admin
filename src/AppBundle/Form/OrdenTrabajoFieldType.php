@@ -89,9 +89,18 @@ class OrdenTrabajoFieldType extends ESocialType {
                     'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')));
                 break;
             case 'state':
+                $arrEstados = array(
+                    '0' => 'form.work_order.label.estado_orden.pendiente',
+                    '1' => 'form.work_order.label.estado_orden.en_proceso',
+                    '2' => 'form.work_order.label.estado_orden.cerrada');
+
+                if ($data && $data->getTipo() == 0){
+                    $arrEstados['3'] = 'form.work_order.label.estado_orden.pendiente_impresion';
+                }
+
+                $arrEstados['4'] = 'form.work_order.label.estado_orden.pendiente_incidencia';
                 $builder
-                    ->add('estado_orden', 'choice', array('label' => 'form.work_order.label.estado_orden', 'empty_value' => 'form.label.choice_empty_value', 'choices' => array(
-                    '0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada')));
+                    ->add('estado_orden', 'choice', array('label' => 'form.work_order.label.estado_orden', 'empty_value' => 'form.label.choice_empty_value', 'choices' => $arrEstados));
 
                 if ($post['estado_orden'] == '2'){
                     $builder

@@ -46,7 +46,7 @@ class SubtipoMedioController extends VallasAdminController {
      * Returns a list of SubtipoMedio entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="subtipoMedio_list_json")
+     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="subtipoMedio_list_json")
      *
      * @Method("GET")
      */

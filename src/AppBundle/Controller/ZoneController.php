@@ -52,7 +52,7 @@ class ZoneController extends VallasAdminController {
      * Returns a list of Zona entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="zone_list_json")
+     * @Route("/async/{_type}/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="zone_list_json")
      *
      * @Method("GET")
      */

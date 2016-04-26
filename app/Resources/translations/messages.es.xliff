@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-04-25T13:04:57Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
+  <file date="2016-04-26T11:51:54Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,19 +10,16 @@
         <source>Cerrada</source>
         <target state="new">Cerrada</target>
         <jms:reference-file line="94">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
-        <jms:reference-file line="94">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="850b531760f206582d125c23c4413cfd15143a16" resname="En proceso">
         <source>En proceso</source>
         <target state="new">En proceso</target>
         <jms:reference-file line="94">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
-        <jms:reference-file line="94">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d63af37f69e9e1afbce1591020cd9f760a2b3ab" resname="Pendiente">
         <source>Pendiente</source>
         <target state="new">Pendiente</target>
         <jms:reference-file line="94">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
-        <jms:reference-file line="94">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
         <jms:reference-file line="22">AppBundle/Form/UbicacionImagenType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d237f6e5d59b2faeba71fd2753016aa236df10c" resname="Rechazada">
@@ -54,6 +51,7 @@
         <source>form.actions.delete</source>
         <target>Eliminar</target>
         <jms:reference-file line="116">screens/incidencia/index.html.twig</jms:reference-file>
+        <jms:reference-file line="53">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
         <jms:reference-file line="66">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="51">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="38">screens/report_subcategory/index.html.twig</jms:reference-file>
@@ -67,6 +65,7 @@
         <source>form.actions.edit</source>
         <target>Editar</target>
         <jms:reference-file line="114">screens/incidencia/index.html.twig</jms:reference-file>
+        <jms:reference-file line="52">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
         <jms:reference-file line="64">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="50">screens/report_category/index.html.twig</jms:reference-file>
         <jms:reference-file line="37">screens/report_subcategory/index.html.twig</jms:reference-file>
@@ -89,13 +88,12 @@
         <jms:reference-file line="22">AppBundle/Form/IncidenciaImagenType.php</jms:reference-file>
         <jms:reference-file line="67">AppBundle/Form/IncidenciaType.php</jms:reference-file>
         <jms:reference-file line="23">AppBundle/Form/OrdenTrabajoImagenType.php</jms:reference-file>
-        <jms:reference-file line="75">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="86">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="19">AppBundle/Form/ReportCategoryType.php</jms:reference-file>
         <jms:reference-file line="20">AppBundle/Form/ReportSubcategoryType.php</jms:reference-file>
         <jms:reference-file line="42">AppBundle/Form/ReportType.php</jms:reference-file>
         <jms:reference-file line="32">AppBundle/Form/UbicacionType.php</jms:reference-file>
         <jms:reference-file line="95">AppBundle/Form/UbicacionType.php</jms:reference-file>
-        <jms:reference-file line="26">AppBundle/Form/ZonaType.php</jms:reference-file>
         <jms:reference-file line="22">screens/role/permissions.html.twig</jms:reference-file>
         <jms:reference-file line="25">screens/ubicacion_img/form_list.html.twig</jms:reference-file>
       </trans-unit>
@@ -107,7 +105,7 @@
       <trans-unit id="a1130b31770ca45ad72c5991b386d0fce20b1d29" resname="form.actions.update">
         <source>form.actions.update</source>
         <target>Modificar</target>
-        <jms:reference-file line="62">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="65">Resources/views/layout.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="958d1eb773283ac7cde6b8453cf43fe5a3fc8a79" resname="form.actions.view_availability">
         <source>form.actions.view_availability</source>
@@ -134,7 +132,7 @@
         <source>form.country_select.label.country</source>
         <target>País</target>
         <jms:reference-file line="28">AppBundle/Form/CountrySelectType.php</jms:reference-file>
-        <jms:reference-file line="57">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="60">Resources/views/layout.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="51d551c978b0f66658e6a77e3e4e465fa047af9d" resname="form.incidencia.label.accion">
         <source>form.incidencia.label.accion</source>
@@ -293,6 +291,8 @@
         <jms:reference-file line="5">screens/country/select.html.twig</jms:reference-file>
         <jms:reference-file line="66">screens/incidencia/index.html.twig</jms:reference-file>
         <jms:reference-file line="9">screens/medio/select.html.twig</jms:reference-file>
+        <jms:reference-file line="33">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+        <jms:reference-file line="7">screens/motivo_ordenes_pendientes/select.html.twig</jms:reference-file>
         <jms:reference-file line="37">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="36">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="32">screens/report_category/index.html.twig</jms:reference-file>
@@ -314,10 +314,11 @@
         <jms:reference-file line="93">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
         <jms:reference-file line="80">AppBundle/Form/IncidenciaType.php</jms:reference-file>
         <jms:reference-file line="89">AppBundle/Form/IncidenciaType.php</jms:reference-file>
+        <jms:reference-file line="27">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
         <jms:reference-file line="82">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="93">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="89">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
-        <jms:reference-file line="91">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="103">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="100">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="102">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="25">AppBundle/Form/ReportSearchType.php</jms:reference-file>
         <jms:reference-file line="26">AppBundle/Form/ReportSearchType.php</jms:reference-file>
         <jms:reference-file line="23">AppBundle/Form/ReportSubcategoryType.php</jms:reference-file>
@@ -438,26 +439,72 @@
         <target>Total</target>
         <jms:reference-file line="42">AppBundle/Form/MedioType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="33305e9cb00efe71635fe65feacd2721f7ec4c12" resname="form.motivo_ordenes_pendientes.label.descripcion">
+        <source>form.motivo_ordenes_pendientes.label.descripcion</source>
+        <target>Descripción</target>
+        <jms:reference-file line="25">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+        <jms:reference-file line="31">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+        <jms:reference-file line="5">screens/motivo_ordenes_pendientes/select.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b40689906b243a1fbc055dd48af0f19866d1ef78" resname="form.motivo_ordenes_pendientes.label.tipo_incidencia">
+        <source>form.motivo_ordenes_pendientes.label.tipo_incidencia</source>
+        <target>Tipo de incidencia</target>
+        <jms:reference-file line="26">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+        <jms:reference-file line="32">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+        <jms:reference-file line="6">screens/motivo_ordenes_pendientes/select.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a9f0a51b46d524b52444def82d381d9252f8ee96" resname="form.motivo_ordenes_pendientes.tipo_incidencia.options.fixing">
+        <source>form.motivo_ordenes_pendientes.tipo_incidencia.options.fixing</source>
+        <target>Fijación</target>
+        <jms:reference-file line="29">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d7a7a6edc8db3a523426affcff1a4c6307e3025e" resname="form.motivo_ordenes_pendientes.tipo_incidencia.options.installation">
+        <source>form.motivo_ordenes_pendientes.tipo_incidencia.options.installation</source>
+        <target>Instalación</target>
+        <jms:reference-file line="31">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="96906838fcffc4308b8621f26563494ca131af1d" resname="form.motivo_ordenes_pendientes.tipo_incidencia.options.lighting">
+        <source>form.motivo_ordenes_pendientes.tipo_incidencia.options.lighting</source>
+        <target>Iluminación</target>
+        <jms:reference-file line="32">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ad169bfd7fbe5b513adb19d8399b8d25e1f41fa4" resname="form.motivo_ordenes_pendientes.tipo_incidencia.options.monitoring">
+        <source>form.motivo_ordenes_pendientes.tipo_incidencia.options.monitoring</source>
+        <target>Monitoreo</target>
+        <jms:reference-file line="30">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ebdd05eb7c6ee09ec58d5c099d6466af0f672062" resname="form.motivo_ordenes_pendientes.tipo_incidencia.options.others">
+        <source>form.motivo_ordenes_pendientes.tipo_incidencia.options.others</source>
+        <target>Otras</target>
+        <jms:reference-file line="34">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d8b6a26503abd950d007ddf4b84365d221346728" resname="form.motivo_ordenes_pendientes.tipo_incidencia.options.plane">
+        <source>form.motivo_ordenes_pendientes.tipo_incidencia.options.plane</source>
+        <target>De plano</target>
+        <jms:reference-file line="33">AppBundle/Form/MotivoOrdenesPendientesType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="9c70440830cd5ff0a078484bdee2d22684f37410" resname="form.notice.deleted_error">
         <source>form.notice.deleted_error</source>
         <target>Ha ocurrido un error al eliminar el registro</target>
         <jms:reference-file line="340">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
-        <jms:reference-file line="247">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="253">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="245">AppBundle/Controller/MotivoOrdenesPendientesController.php</jms:reference-file>
         <jms:reference-file line="256">AppBundle/Controller/ReportController.php</jms:reference-file>
-        <jms:reference-file line="220">AppBundle/Controller/RepositorioController.php</jms:reference-file>
+        <jms:reference-file line="227">AppBundle/Controller/RepositorioController.php</jms:reference-file>
         <jms:reference-file line="262">AppBundle/Controller/UbicacionController.php</jms:reference-file>
-        <jms:reference-file line="476">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="507">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
         <jms:reference-file line="252">AppBundle/Controller/ZoneController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c31d7da66d18758addc889626da1b956130d5ca9" resname="form.notice.deleted_success">
         <source>form.notice.deleted_success</source>
         <target>El registro se ha eliminado correctamente</target>
         <jms:reference-file line="336">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
-        <jms:reference-file line="243">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="249">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="241">AppBundle/Controller/MotivoOrdenesPendientesController.php</jms:reference-file>
         <jms:reference-file line="254">AppBundle/Controller/ReportController.php</jms:reference-file>
-        <jms:reference-file line="216">AppBundle/Controller/RepositorioController.php</jms:reference-file>
+        <jms:reference-file line="223">AppBundle/Controller/RepositorioController.php</jms:reference-file>
         <jms:reference-file line="258">AppBundle/Controller/UbicacionController.php</jms:reference-file>
-        <jms:reference-file line="472">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="503">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
         <jms:reference-file line="248">AppBundle/Controller/ZoneController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0c4ddae17c4486030bc3bf951be64902b5c61802" resname="form.notice.saved_error">
@@ -465,14 +512,15 @@
         <target>Ha ocurrido un error al guardar los datos</target>
         <jms:reference-file line="264">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
         <jms:reference-file line="118">AppBundle/Controller/IncidenciaImageController.php</jms:reference-file>
-        <jms:reference-file line="192">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="196">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="188">AppBundle/Controller/MotivoOrdenesPendientesController.php</jms:reference-file>
         <jms:reference-file line="140">AppBundle/Controller/ReportController.php</jms:reference-file>
-        <jms:reference-file line="165">AppBundle/Controller/RepositorioController.php</jms:reference-file>
+        <jms:reference-file line="170">AppBundle/Controller/RepositorioController.php</jms:reference-file>
         <jms:reference-file line="160">AppBundle/Controller/SecuritySubmoduleController.php</jms:reference-file>
         <jms:reference-file line="186">AppBundle/Controller/UbicacionController.php</jms:reference-file>
         <jms:reference-file line="113">AppBundle/Controller/UbicacionImageController.php</jms:reference-file>
         <jms:reference-file line="228">AppBundle/Controller/VallasUserController.php</jms:reference-file>
-        <jms:reference-file line="302">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="331">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
         <jms:reference-file line="152">AppBundle/Controller/WorkOrderImageController.php</jms:reference-file>
         <jms:reference-file line="194">AppBundle/Controller/ZoneController.php</jms:reference-file>
       </trans-unit>
@@ -482,15 +530,16 @@
         <jms:reference-file line="259">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
         <jms:reference-file line="445">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
         <jms:reference-file line="113">AppBundle/Controller/IncidenciaImageController.php</jms:reference-file>
-        <jms:reference-file line="187">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="191">AppBundle/Controller/MedioController.php</jms:reference-file>
+        <jms:reference-file line="183">AppBundle/Controller/MotivoOrdenesPendientesController.php</jms:reference-file>
         <jms:reference-file line="135">AppBundle/Controller/ReportController.php</jms:reference-file>
-        <jms:reference-file line="160">AppBundle/Controller/RepositorioController.php</jms:reference-file>
+        <jms:reference-file line="165">AppBundle/Controller/RepositorioController.php</jms:reference-file>
         <jms:reference-file line="155">AppBundle/Controller/SecuritySubmoduleController.php</jms:reference-file>
         <jms:reference-file line="181">AppBundle/Controller/UbicacionController.php</jms:reference-file>
         <jms:reference-file line="108">AppBundle/Controller/UbicacionImageController.php</jms:reference-file>
         <jms:reference-file line="223">AppBundle/Controller/VallasUserController.php</jms:reference-file>
-        <jms:reference-file line="297">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
-        <jms:reference-file line="397">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="326">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+        <jms:reference-file line="426">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
         <jms:reference-file line="147">AppBundle/Controller/WorkOrderImageController.php</jms:reference-file>
         <jms:reference-file line="189">AppBundle/Controller/ZoneController.php</jms:reference-file>
       </trans-unit>
@@ -808,7 +857,7 @@
       <trans-unit id="5548c1c2149eec5a7603b03973ae60fd2555986b" resname="form.work_order.label.campania">
         <source>form.work_order.label.campania</source>
         <target>Campaña</target>
-        <jms:reference-file line="98">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="109">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ef98535895ed77e77d836af088639d12911c36f3" resname="form.work_order.label.cliente">
         <source>form.work_order.label.cliente</source>
@@ -837,9 +886,34 @@
       <trans-unit id="812634a10c8bc76513876e027a4b1dbdae2cd1ea" resname="form.work_order.label.estado_orden">
         <source>form.work_order.label.estado_orden</source>
         <target>Estado</target>
-        <jms:reference-file line="93">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="88">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="103">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="99">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="27">screens/work_order/tab_list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a974b8829693c61fa84517524293bf60cbdbd830" resname="form.work_order.label.estado_orden.cerrada">
+        <source>form.work_order.label.estado_orden.cerrada</source>
+        <target>Cerrada</target>
+        <jms:reference-file line="98">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="72ad4186b78a96c24c8bc6626d18fe5b9a2d22af" resname="form.work_order.label.estado_orden.en_proceso">
+        <source>form.work_order.label.estado_orden.en_proceso</source>
+        <target>En proceso</target>
+        <jms:reference-file line="97">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c450332f85784528d97e01ed821a47ffd6c028fd" resname="form.work_order.label.estado_orden.pendiente">
+        <source>form.work_order.label.estado_orden.pendiente</source>
+        <target>Pendiente</target>
+        <jms:reference-file line="96">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ce35f9a4630716559102d5ac6657b33e2c066a33" resname="form.work_order.label.estado_orden.pendiente_impresion">
+        <source>form.work_order.label.estado_orden.pendiente_impresion</source>
+        <target>Pendiente de impresión</target>
+        <jms:reference-file line="99">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="12df4001f9729402033e21e327f4cb38eee80695" resname="form.work_order.label.estado_orden.pendiente_incidencia">
+        <source>form.work_order.label.estado_orden.pendiente_incidencia</source>
+        <target>No finalizada por incidencia</target>
+        <jms:reference-file line="100">AppBundle/Controller/WorkOrderController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4d0ae906b39efe8fc67b55c36384b817d7bbb244" resname="form.work_order.label.fecha">
         <source>form.work_order.label.fecha</source>
@@ -850,8 +924,8 @@
         <source>form.work_order.label.fecha_cierre</source>
         <target>Fecha cierre</target>
         <jms:reference-file line="98">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
-        <jms:reference-file line="98">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="86">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="107">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="97">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="30">screens/work_order/tab_list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="abe529066e82b53de981664c2b9789f027cd411a" resname="form.work_order.label.fecha_limite">
@@ -859,7 +933,7 @@
         <target>Fecha límite</target>
         <jms:reference-file line="88">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
         <jms:reference-file line="88">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="76">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="87">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="25">screens/work_order_img/list.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8644d2a17a62deb7ad1c52912019c39255f77723" resname="form.work_order.label.location">
@@ -871,22 +945,27 @@
       <trans-unit id="c1fbb984658fc53f22f24d68a34efbd4da77dab3" resname="form.work_order.label.medio">
         <source>form.work_order.label.medio</source>
         <target>Medio</target>
-        <jms:reference-file line="79">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="90">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="27">AppBundle/Form/UbicacionImagenType.php</jms:reference-file>
         <jms:reference-file line="17">incidencia/formtabs/tab_basic_data.html.twig</jms:reference-file>
-        <jms:reference-file line="33">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="37">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ab7ccd09062d2fca50b8a4c83c52b00b421fe8cb" resname="form.work_order.label.motivo_ordenes_pendientes">
+        <source>form.work_order.label.motivo_ordenes_pendientes</source>
+        <target>Motivo de órdenes pendientes</target>
+        <jms:reference-file line="116">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0efc4bb17334a4149f4089404316e2bd70d28e4d" resname="form.work_order.label.observaciones">
         <source>form.work_order.label.observaciones</source>
         <target>Observaciones</target>
-        <jms:reference-file line="85">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="96">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="20617c88db88ba0769a2baa4386fcfac21a2e3fa" resname="form.work_order.label.observaciones_cierre">
         <source>form.work_order.label.observaciones_cierre</source>
         <target>Observaciones de cierre</target>
         <jms:reference-file line="100">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
-        <jms:reference-file line="100">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="90">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="109">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
+        <jms:reference-file line="101">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="002e7bd93390fcc8f5a4d958585514a6c388b75a" resname="form.work_order.label.priority">
         <source>form.work_order.label.priority</source>
@@ -904,7 +983,7 @@
         <target>User</target>
         <jms:reference-file line="81">AppBundle/Form/IncidenciaFieldType.php</jms:reference-file>
         <jms:reference-file line="81">AppBundle/Form/OrdenTrabajoFieldType.php</jms:reference-file>
-        <jms:reference-file line="91">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="102">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
         <jms:reference-file line="4">screens/work_order/logs.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/work_order/select.html.twig</jms:reference-file>
         <jms:reference-file line="32">screens/work_order/tab_list.html.twig</jms:reference-file>
@@ -913,7 +992,7 @@
       <trans-unit id="c0c67b4e0b0e0d990bc2480cd82ca849042a615a" resname="form.work_order.label.version">
         <source>form.work_order.label.version</source>
         <target>Versión</target>
-        <jms:reference-file line="97">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
+        <jms:reference-file line="108">AppBundle/Form/OrdenTrabajoType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb408461e34e291e2ef04bf7cb99efbc6e37c92f" resname="form.work_order_img.label.estado_imagen">
         <source>form.work_order_img.label.estado_imagen</source>
@@ -984,7 +1063,7 @@
       <trans-unit id="44fc38b3816a9961cb6bc62ab1620afcf797275c" resname="form.zona.label.nombre">
         <source>form.zona.label.nombre</source>
         <target>Nombre</target>
-        <jms:reference-file line="28">AppBundle/Form/ZonaType.php</jms:reference-file>
+        <jms:reference-file line="27">AppBundle/Form/ZonaType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="30e593283418e8617aabf12229d59ba62eb5c83b" resname="form.zone.label.nombre">
         <source>form.zone.label.nombre</source>
@@ -1109,9 +1188,10 @@
       <trans-unit id="71b22b64cd4687894bea1a3d23f0993de9d1343f" resname="menu.title.configuration">
         <source>menu.title.configuration</source>
         <target>Configuración</target>
-        <jms:reference-file line="10">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="11">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/incidencia/index.html.twig</jms:reference-file>
+        <jms:reference-file line="5">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/report/form.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/report/index.html.twig</jms:reference-file>
         <jms:reference-file line="5">screens/report_category/form.html.twig</jms:reference-file>
@@ -1126,28 +1206,28 @@
       <trans-unit id="ac4f32433996e8dbfb48c433fa2f75fd707640bf" resname="menu.title.issue_fixing">
         <source>menu.title.issue_fixing</source>
         <target>Incidencias de Fijación</target>
-        <jms:reference-file line="38">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="41">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="11">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/incidencia/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b1b4c6b449534930ac2340d20fc5e59dc2fca7d3" resname="menu.title.issue_installation">
         <source>menu.title.issue_installation</source>
         <target>Incidencias de Instalación</target>
-        <jms:reference-file line="40">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="43">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="15">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="14">screens/incidencia/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4bdfa279a0b8f126f17be08d086f015bb53a3937" resname="menu.title.issue_lighting">
         <source>menu.title.issue_lighting</source>
         <target>Incidencias de Iluminación</target>
-        <jms:reference-file line="41">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="44">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="17">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="16">screens/incidencia/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7cff81ee056cc87d9c391cfe313976392e72541b" resname="menu.title.issue_monitoring">
         <source>menu.title.issue_monitoring</source>
         <target>Incidencias de Monitoreo</target>
-        <jms:reference-file line="39">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="42">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="12">screens/incidencia/index.html.twig</jms:reference-file>
       </trans-unit>
@@ -1166,7 +1246,7 @@
       <trans-unit id="2263a8c170df5c27adbba6a0f9f5f5af6125f428" resname="menu.title.issues">
         <source>menu.title.issues</source>
         <target>Incidencias</target>
-        <jms:reference-file line="36">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="39">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="9">screens/incidencia/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/incidencia/index.html.twig</jms:reference-file>
@@ -1176,7 +1256,7 @@
       <trans-unit id="3dd41e91cf4c10d8d3a85a4f4664512e604a61c9" resname="menu.title.locations">
         <source>menu.title.locations</source>
         <target>Ubicaciones</target>
-        <jms:reference-file line="45">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="48">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="6">screens/ubicacion/form.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/ubicacion/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/ubicacion/index.html.twig</jms:reference-file>
@@ -1188,10 +1268,18 @@
         <target>Día</target>
         <jms:reference-file line="42">disponibilidad/calendar/index.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="175d2c01ea1d10bfb4c1a0d9d7505ceb39b8165d" resname="menu.title.motivo_ordenes_pendientes">
+        <source>menu.title.motivo_ordenes_pendientes</source>
+        <target>Motivos de órdenes pendientes</target>
+        <jms:reference-file line="25">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="3">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+        <jms:reference-file line="7">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+        <jms:reference-file line="14">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="313b0a6c95549d2265983618a5b040e04ca3736e" resname="menu.title.report_categories">
         <source>menu.title.report_categories</source>
         <target>Categorías de informe</target>
-        <jms:reference-file line="14">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="15">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report_category/form.html.twig</jms:reference-file>
         <jms:reference-file line="7">screens/report_category/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report_category/index.html.twig</jms:reference-file>
@@ -1202,7 +1290,7 @@
       <trans-unit id="e53118c8ff43ce2d7fb65d3c2bf989307854e289" resname="menu.title.report_execution">
         <source>menu.title.report_execution</source>
         <target>Ejecución de informes</target>
-        <jms:reference-file line="50">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="53">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="6">screens/report/list_for_execution.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/report/list_for_execution.html.twig</jms:reference-file>
@@ -1216,7 +1304,7 @@
       <trans-unit id="d6d39a767d0530d7bbe9def354acb0a7e983620d" resname="menu.title.reports">
         <source>menu.title.reports</source>
         <target>Informes</target>
-        <jms:reference-file line="13">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="14">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report/form.html.twig</jms:reference-file>
         <jms:reference-file line="7">screens/report/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/report/index.html.twig</jms:reference-file>
@@ -1226,7 +1314,7 @@
       <trans-unit id="1b84a8abac0c96196384ef137c4372b113c9f1fe" resname="menu.title.repository">
         <source>menu.title.repository</source>
         <target>Repositorio de archivos</target>
-        <jms:reference-file line="46">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="49">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/repositorio/index.html.twig</jms:reference-file>
         <jms:reference-file line="6">screens/repositorio/index.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/repositorio/index.html.twig</jms:reference-file>
@@ -1241,7 +1329,7 @@
       <trans-unit id="f1d6839cc057e7c3eee01adff1d59da6e0e1efc3" resname="menu.title.work_order_fixing">
         <source>menu.title.work_order_fixing</source>
         <target>Órdenes de trabajo de fijación</target>
-        <jms:reference-file line="29">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="32">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="11">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="28">screens/work_order/index.html.twig</jms:reference-file>
@@ -1249,7 +1337,7 @@
       <trans-unit id="7c80f3ae0f9e8d1f7a44ce99e1ab19c7ddc4a58d" resname="menu.title.work_order_installation">
         <source>menu.title.work_order_installation</source>
         <target>Instalación</target>
-        <jms:reference-file line="31">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="34">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="15">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="14">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="32">screens/work_order/index.html.twig</jms:reference-file>
@@ -1257,7 +1345,7 @@
       <trans-unit id="0a861840bc673f39b3d181fb6ef462defd43879b" resname="menu.title.work_order_lighting">
         <source>menu.title.work_order_lighting</source>
         <target>Iluminación</target>
-        <jms:reference-file line="32">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="35">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="17">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="16">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">screens/work_order/index.html.twig</jms:reference-file>
@@ -1265,7 +1353,7 @@
       <trans-unit id="7b0d7ae75508d2648670cb0e4744ddc3de62d6f6" resname="menu.title.work_order_monitoring">
         <source>menu.title.work_order_monitoring</source>
         <target>Órdenes de trabajo de monitoreo</target>
-        <jms:reference-file line="30">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="33">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="13">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="12">screens/work_order/index.html.twig</jms:reference-file>
         <jms:reference-file line="30">screens/work_order/index.html.twig</jms:reference-file>
@@ -1273,7 +1361,7 @@
       <trans-unit id="90c4bd3168b549d86fca91a66e01c24b9366e000" resname="menu.title.work_orders">
         <source>menu.title.work_orders</source>
         <target>Órdenes de trabajo</target>
-        <jms:reference-file line="27">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="30">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="9">screens/work_order/form.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/work_order/index.html.twig</jms:reference-file>
@@ -1283,35 +1371,35 @@
       <trans-unit id="ebe4867db7fff336352f2cc1f4c83dfdb239f29d" resname="menu.title.zone_fixing">
         <source>menu.title.zone_fixing</source>
         <target>Fijación</target>
-        <jms:reference-file line="18">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="19">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="10">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="28">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd3d6e1e4796ef00e5598d54140c917dccee0551" resname="menu.title.zone_installation">
         <source>menu.title.zone_installation</source>
         <target>Instalación</target>
-        <jms:reference-file line="20">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="21">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="14">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="32">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5ea9d42d1a003762acee12175a0042df6a1c7ace" resname="menu.title.zone_lighting">
         <source>menu.title.zone_lighting</source>
         <target>Iluminación</target>
-        <jms:reference-file line="21">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="22">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="16">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d47edf0215691c28915ac242ce822f06a7c3acc5" resname="menu.title.zone_monitoring">
         <source>menu.title.zone_monitoring</source>
         <target>Zonas de monitoreo</target>
-        <jms:reference-file line="19">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="20">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="12">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="30">screens/zone/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="24e8a9757e40f8d695341c8c076ae6fa5844a81b" resname="menu.title.zones">
         <source>menu.title.zones</source>
         <target>Zonas</target>
-        <jms:reference-file line="16">Resources/views/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="17">Resources/views/layout.html.twig</jms:reference-file>
         <jms:reference-file line="3">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="8">screens/zone/index.html.twig</jms:reference-file>
         <jms:reference-file line="26">screens/zone/index.html.twig</jms:reference-file>
@@ -1389,6 +1477,17 @@
         <jms:reference-file line="13">screens/ubicacion/form.html.twig</jms:reference-file>
         <jms:reference-file line="21">screens/ubicacion/form.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="75154930613b5ca194f7abebc1e44eeeca24a1f3" resname="screens.motivo_ordenes_pendientes.buttons.add">
+        <source>screens.motivo_ordenes_pendientes.buttons.add</source>
+        <target>Añadir motivo</target>
+        <jms:reference-file line="21">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+        <jms:reference-file line="23">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="172da5ded063eb424c6e56a5d9b952ef91946d00" resname="screens.motivo_ordenes_pendientes.buttons.edit">
+        <source>screens.motivo_ordenes_pendientes.buttons.edit</source>
+        <target>Editar motivo</target>
+        <jms:reference-file line="52">screens/motivo_ordenes_pendientes/index.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="7f9f3d584da5b413b5d05b00aa92f706c77a21cb" resname="screens.reports.actions.add">
         <source>screens.reports.actions.add</source>
         <target>Añadir informe</target>
@@ -1420,12 +1519,12 @@
       <trans-unit id="dd9a32a9cd0a50f34cbc328d456461cf2f1f55de" resname="screens.work_orders.text.close_data">
         <source>screens.work_orders.text.close_data</source>
         <target>Fecha de cierre</target>
-        <jms:reference-file line="57">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="61">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8bb36fe689af4e1cd8c41367669358e33a92b017" resname="screens.work_orders.text.others">
         <source>screens.work_orders.text.others</source>
         <target>Otras órdenes de trabajo</target>
-        <jms:reference-file line="45">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
+        <jms:reference-file line="49">work_order/formtabs/tab_basic_data.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6d03ad0582c0cf4dec7b69137f7be20a830e6564" resname="security_submodule.buttons.add">
         <source>security_submodule.buttons.add</source>

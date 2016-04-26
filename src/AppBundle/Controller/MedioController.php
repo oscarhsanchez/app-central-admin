@@ -52,7 +52,7 @@ class MedioController extends VallasAdminController {
      * Returns a list of Medio entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_all" = "all" }, name="medio_list_json")
+     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="medio_list_json")
      *
      * @Method("GET")
      */
