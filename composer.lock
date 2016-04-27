@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.27",
+            "version": "2.8.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c1605360b6624958a5397601ad5543cd45fcf8f7"
+                "reference": "83b86d1bbbca452b00a1f0bbea6fcbb506c76650"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c1605360b6624958a5397601ad5543cd45fcf8f7",
-                "reference": "c1605360b6624958a5397601ad5543cd45fcf8f7",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/83b86d1bbbca452b00a1f0bbea6fcbb506c76650",
+                "reference": "83b86d1bbbca452b00a1f0bbea6fcbb506c76650",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-01-30 00:53:32"
+            "time": "2016-04-11 17:00:10"
         },
         {
             "name": "doctrine/annotations",
@@ -843,7 +843,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-admin-bundle.git",
-                "reference": "733cc6e5ef22d1d22fbcdd10c8fcfea75f8d6d41"
+                "reference": "aa0183bbc624ec32fb93f55dfa1a861b78eec46c"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-master",
@@ -854,7 +854,7 @@
                 "jms/translation-bundle": "dev-master",
                 "knplabs/knp-paginator-bundle": "dev-master",
                 "php": ">=5.3.3",
-                "symfony/translation": "^2.7",
+                "symfony/translation": "*",
                 "twig/extensions": "~1.0"
             },
             "require-dev": {
@@ -864,7 +864,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "dev-master"
+                    "dev-master": ""
                 }
             },
             "autoload": {
@@ -884,7 +884,7 @@
             ],
             "description": "Common ESocial Admin bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-admin-bundle.git",
-            "time": "2016-03-29 18:30:46"
+            "time": "2016-04-26 12:33:01"
         },
         {
             "name": "esocial/esocial-model-bundle",
@@ -893,14 +893,10 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-model-bundle.git",
-                "reference": "a53def8f00bcc490ffa00f99bef08a44cdbd7096"
+                "reference": "08ab6e547be2010e50ac1c7ef165d47ede2fe859"
             },
             "require": {
                 "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "doctrine/data-fixtures": "dev-master",
-                "doctrine/doctrine-fixtures-bundle": "dev-master"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -925,7 +921,7 @@
             ],
             "description": "Common ESocial model bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-model-bundle.git",
-            "time": "2016-02-16 21:02:33"
+            "time": "2016-04-22 12:15:39"
         },
         {
             "name": "esocial/esocial-utils-bundle",
@@ -934,7 +930,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-utils-bundle.git",
-                "reference": "f217122704f15d437e66fae08b87fd53c0364550"
+                "reference": "190aa0d0ac75b6ec08ff18ee97644aea5cb2ad39"
             },
             "require": {
                 "aws/aws-sdk-php": "2.*",
@@ -966,7 +962,7 @@
             "keywords": [
                 "util bundle"
             ],
-            "time": "2016-03-28 12:16:49"
+            "time": "2016-04-26 09:54:54"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1391,12 +1387,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSDiExtraBundle.git",
-                "reference": "fb2da6655761718bb61c1367ceafd9ff4f4bccc1"
+                "reference": "27c3fc7150550ccc0731290b2c1ceb57449f909d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/fb2da6655761718bb61c1367ceafd9ff4f4bccc1",
-                "reference": "fb2da6655761718bb61c1367ceafd9ff4f4bccc1",
+                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/27c3fc7150550ccc0731290b2c1ceb57449f909d",
+                "reference": "27c3fc7150550ccc0731290b2c1ceb57449f909d",
                 "shasum": ""
             },
             "require": {
@@ -1452,7 +1448,7 @@
                 "annotations",
                 "dependency injection"
             ],
-            "time": "2016-02-21 22:25:12"
+            "time": "2016-04-18 22:27:09"
         },
         {
             "name": "jms/metadata",
@@ -1513,12 +1509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "2f170506c60962fe7a33e2a3b90cea470676f229"
+                "reference": "8c027be8e9760e1dd1d424d773f04cd14e1ef43c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/2f170506c60962fe7a33e2a3b90cea470676f229",
-                "reference": "2f170506c60962fe7a33e2a3b90cea470676f229",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/8c027be8e9760e1dd1d424d773f04cd14e1ef43c",
+                "reference": "8c027be8e9760e1dd1d424d773f04cd14e1ef43c",
                 "shasum": ""
             },
             "require": {
@@ -1572,7 +1568,7 @@
                 "ui",
                 "webinterface"
             ],
-            "time": "2016-03-29 15:15:54"
+            "time": "2016-04-23 15:17:49"
         },
         {
             "name": "knplabs/knp-components",
@@ -1648,12 +1644,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "5147740faff4d32e6f42acf64475314c35320fa4"
+                "reference": "881b186ebef519b6d9a03bab2cab190fd58be15d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/5147740faff4d32e6f42acf64475314c35320fa4",
-                "reference": "5147740faff4d32e6f42acf64475314c35320fa4",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/881b186ebef519b6d9a03bab2cab190fd58be15d",
+                "reference": "881b186ebef519b6d9a03bab2cab190fd58be15d",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1664,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -1701,7 +1697,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2015-11-23 17:51:40"
+            "time": "2016-04-21 06:28:52"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1782,16 +1778,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.18.1",
+            "version": "1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45"
+                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
-                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5f56ed5212dc509c8dc8caeba2715732abb32dbf",
+                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf",
                 "shasum": ""
             },
             "require": {
@@ -1806,13 +1802,13 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
                 "jakub-onderka/php-parallel-lint": "0.9",
+                "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
                 "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
-                "swiftmailer/swiftmailer": "~5.3",
-                "videlalvaro/php-amqplib": "~2.4"
+                "swiftmailer/swiftmailer": "~5.3"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -1821,11 +1817,11 @@
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
@@ -1856,20 +1852,20 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-13 16:08:35"
+            "time": "2016-04-12 18:29:35"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ce5be709d59b32dd8a88c80259028759991a4206"
+                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ce5be709d59b32dd8a88c80259028759991a4206",
-                "reference": "ce5be709d59b32dd8a88c80259028759991a4206",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
+                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
                 "shasum": ""
             },
             "require": {
@@ -1885,7 +1881,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -1907,7 +1903,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-02-28 19:48:28"
+            "time": "2016-04-19 13:41:41"
         },
         {
             "name": "paragonie/random_compat",
@@ -1997,17 +1993,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v4.0.5",
+            "version": "v4.0.6",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "c89375c9d95fc5afaeb99e7a49b428b6e3beb9d3"
+                "reference": "181a47c527a04d2d03986a0b3e9c1b86eaacab40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/c89375c9d95fc5afaeb99e7a49b428b6e3beb9d3",
-                "reference": "c89375c9d95fc5afaeb99e7a49b428b6e3beb9d3",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/181a47c527a04d2d03986a0b3e9c1b86eaacab40",
+                "reference": "181a47c527a04d2d03986a0b3e9c1b86eaacab40",
                 "shasum": ""
             },
             "require": {
@@ -2053,7 +2049,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2016-02-12 16:21:25"
+            "time": "2016-04-25 20:49:44"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2286,20 +2282,20 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.10.0",
+            "version": "2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "82fd8f36e2cccbe94faf237403c48052d4d4b77e"
+                "reference": "e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/82fd8f36e2cccbe94faf237403c48052d4d4b77e",
-                "reference": "82fd8f36e2cccbe94faf237403c48052d4d4b77e",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00",
+                "reference": "e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00",
                 "shasum": ""
             },
             "require": {
-                "monolog/monolog": "~1.12",
+                "monolog/monolog": "~1.18",
                 "php": ">=5.3.2",
                 "symfony/config": "~2.3|~3.0",
                 "symfony/dependency-injection": "~2.3|~3.0",
@@ -2314,7 +2310,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2342,7 +2338,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2016-03-13 15:55:56"
+            "time": "2016-04-13 16:21:01"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -2756,7 +2752,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:vallas/vallas-model-bundle.git",
-                "reference": "3b042548b0fd52fb344b418053320eeed4640a60"
+                "reference": "64736d3585d83e86bd105c57582f1409dea85b41"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-master",
@@ -2790,7 +2786,7 @@
             ],
             "description": "Common ESocial model bundle",
             "homepage": "https://bitbucket.org/esocialtech/vallas-model-bundle.git",
-            "time": "2016-03-30 12:53:10"
+            "time": "2016-04-26 09:55:26"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
