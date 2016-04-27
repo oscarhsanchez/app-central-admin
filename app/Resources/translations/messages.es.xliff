@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-04-27T15:26:46Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
+  <file date="2016-04-27T15:27:50Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -1465,7 +1465,7 @@
       </trans-unit>
       <trans-unit id="0c2c162f5aac521a10633b57a24a2df1753916ce" resname="screens.issues.type.monitoring">
         <source>screens.issues.type.monitoring</source>
-        <target>Monitorización</target>
+        <target>Monitoreo</target>
         <jms:reference-file line="202">AppBundle/Controller/IncidenciaController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0580c3aada22c74d1320bf25c6cb35d1b84872b5" resname="screens.issues.type.others">
