@@ -21,7 +21,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Zona controller.
  *
- * @Route("/{_locale}/zones", defaults={"_locale"="en"})
+ * @Route("/{_locale}/zones", defaults={"_locale"="es"})
  */
 class ZoneController extends VallasAdminController {
 

@@ -22,7 +22,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Ubicacion controller.
  *
- * @Route("/{_locale}/ubicaciones", defaults={"_locale"="en"})
+ * @Route("/{_locale}/ubicaciones", defaults={"_locale"="es"})
  */
 class UbicacionController extends VallasAdminController {
 

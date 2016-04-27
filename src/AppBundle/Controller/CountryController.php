@@ -14,7 +14,7 @@ use ESocial\AdminBundle\Annotation\FilterAware;
 /**
  * Country controller.
  *
- * @Route("/{_locale}/country", defaults={"_locale"="en"})
+ * @Route("/{_locale}/country", defaults={"_locale"="es"})
  */
 class CountryController extends VallasAdminController
 {

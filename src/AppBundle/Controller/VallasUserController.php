@@ -23,7 +23,7 @@ use Vallas\ModelBundle\Entity\UserPais;
 
 /**
  * VallasUserController.
- * @Route("/{_locale}/user", defaults={"_locale"="en"})
+ * @Route("/{_locale}/user", defaults={"_locale"="es"})
  */
 class VallasUserController extends UserController {
 

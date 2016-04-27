@@ -22,7 +22,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Report controller.
  *
- * @Route("/{_locale}/reports", defaults={"_locale"="en"})
+ * @Route("/{_locale}/reports", defaults={"_locale"="es"})
  */
 class ReportController extends VallasAdminController
 {

@@ -19,7 +19,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * MotivoOrdenesPendientes controller.
  *
- * @Route("/{_locale}/motivos-ordenes-pendientes", defaults={"_locale"="en"})
+ * @Route("/{_locale}/motivos-ordenes-pendientes", defaults={"_locale"="es"})
  */
 class MotivoOrdenesPendientesController extends VallasAdminController {
 

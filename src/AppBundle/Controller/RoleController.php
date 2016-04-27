@@ -23,7 +23,7 @@ use Vallas\ModelBundle\Entity\User;
 
 /**
  * RoleController.
- * @Route("/{_locale}/role/{id}", defaults={"_locale"="en"})
+ * @Route("/{_locale}/role/{id}", defaults={"_locale"="es"})
  */
 class RoleController extends VallasAdminController {
 
@@ -99,6 +99,9 @@ class RoleController extends VallasAdminController {
         $form->handleRequest($request);
 
         if ($form->isValid()){
+            foreach($entity->getPermissions() as $permission){
+                $permission->setPais($this->getSessionCountry());
+            }
             Database::saveEntity($em, $entity);
             return $this->redirect($this->generateUrl('role_permissions_list', array('id' => $entity->getToken())));
         }

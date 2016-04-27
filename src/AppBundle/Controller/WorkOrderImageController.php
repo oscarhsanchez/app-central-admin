@@ -19,7 +19,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Imagen controller.
  *
- * @Route("/{_locale}/work-order-images/{type}", defaults={"_locale"="en"})
+ * @Route("/{_locale}/work-order-images/{type}", defaults={"_locale"="es"})
  */
 class WorkOrderImageController extends VallasAdminController {
 

@@ -84,7 +84,7 @@
             var obj = JSON.parse(jsonData);
             var objVars = JSON.parse(vars);
             $("#work_order_medio").val(obj.token);
-            $("#select-input-group-work_order_medio").html(obj.name);
+            $("#select-input-group-work_order_medio").html(text3Dots(obj.name, 30));
             if (obj.ubicacion__latitud && obj.ubicacion__longitud) {
                 setUbicacionMap(obj.ubicacion__latitud, obj.ubicacion__longitud);
             }

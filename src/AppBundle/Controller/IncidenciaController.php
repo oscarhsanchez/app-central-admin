@@ -23,7 +23,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Incidencia controller.
  *
- * @Route("/{_locale}/incidencias", defaults={"_locale"="en"})
+ * @Route("/{_locale}/incidencias", defaults={"_locale"="es"})
  */
 class IncidenciaController extends VallasAdminController {
 
@@ -37,12 +37,12 @@ class IncidenciaController extends VallasAdminController {
         $qb = $repository->getAllQueryBuilder()->andWhere('p.estado = 1');
 
         if ($type !== NULL){
-            $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $type);
+            $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
         }
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'tipo_string', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
+        $jsonList->setFieldsToGet(array('token', 'tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
         $jsonList->setSearchFields(array('tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
@@ -81,8 +81,7 @@ class IncidenciaController extends VallasAdminController {
             $estados = array('0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada');
             $estado_incidencia = strval($reg['estado_incidencia']);
             $response['aaData'][$key]['estado_incidencia'] = $reg['estado_incidencia'] ? $estados[$estado_incidencia] : null;
-
-            $response['aaData'][$key]['tipo'] = $reg['tipo_string'];
+            $response['aaData'][$key]['tipo'] = $this->getDescriptionByCode($reg['tipo']);
 
         }
 
@@ -195,6 +194,18 @@ class IncidenciaController extends VallasAdminController {
             'imgPaged' => $imgPaged,
             'formFirstImage' => $this->createForm(new IncidenciaImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView()
         ));
+    }
+
+    private function getDescriptionByCode($code){
+        switch($code){
+            case '0': return $this->get('translator')->trans('screens.issues.type.fixing');
+            case '1': return $this->get('translator')->trans('screens.issues.type.monitoring');
+            case '2': return $this->get('translator')->trans('screens.issues.type.installation');
+            case '3': return $this->get('translator')->trans('screens.issues.type.lighting');
+            case '4': return $this->get('translator')->trans('screens.issues.type.plane');
+            case '5': return $this->get('translator')->trans('screens.issues.type.others');
+        }
+        return '';
     }
 
     private function getTypeUrlByCode($code){

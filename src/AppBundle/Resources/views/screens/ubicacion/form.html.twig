@@ -61,7 +61,7 @@
             var obj = JSON.parse(jsonData);
             var objVars = JSON.parse(vars);
             $("#ubicacion_img_popup_medio").val(obj.token);
-            $("#select-input-group-ubicacion_img_popup_medio").html(obj.name);
+            $("#select-input-group-ubicacion_img_popup_medio").html(text3Dots(obj.name,30));
 
         }
         function selectMedioImgList(data, vars){
@@ -69,7 +69,7 @@
             var obj = JSON.parse(jsonData);
             var objVars = JSON.parse(vars);
             $("#ubicacion_img_medio").val(obj.token);
-            $("#select-input-group-ubicacion_img_medio").html(obj.name);
+            $("#select-input-group-ubicacion_img_medio").html(text3Dots(obj.name,30));
         }
         {% endif %}
         var ubicacionMap;

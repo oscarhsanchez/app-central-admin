@@ -4,9 +4,13 @@
     action: entity is defined and entity.pkArchivo is not empty ? path('work_order_img_update', { id: entity.token, origin: 'list', type: type, validation: is_validation }) : path('work_order_img_create', { id: entity.token, type: type }),
     attr: { onsubmit: (imgValidation is defined and imgValidation ? 'checkStatusImageNotice(this); return false;' : 'sendAjaxForm(this); return false;') } }) }}
 
-    <label class="control-label">{{ entity.nombre }}</label>
+    <label class="control-label">
+        <a target="_blank" href="{{ app.request.schemeAndHttpHost }}{{ entity.url }}/{{ entity.nombre }}">
+            {{ app.request.schemeAndHttpHost }}{{ entity.url }}/{{ entity.nombre }}
+        </a>
+    </label>
     <div class="margin-b-20">
-        <img style="width:100%; max-width: 100%" src="/media/orden_trabajo_imagen/{{ entity.nombre }}" />
+        <img style="width:100%; max-width: 100%" src="{{ entity.url }}/{{ entity.nombre }}" />
     </div>
 
     {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}

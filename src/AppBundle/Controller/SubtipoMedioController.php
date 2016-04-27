@@ -17,7 +17,7 @@ use Vallas\ModelBundle\Entity\SubtipoMedio;
 /**
  * SubtipoMedio controller.
  *
- * @Route("/{_locale}/subtipoMedios", defaults={"_locale"="en"})
+ * @Route("/{_locale}/subtipoMedios", defaults={"_locale"="es"})
  */
 class SubtipoMedioController extends VallasAdminController {
 

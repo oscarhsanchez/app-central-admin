@@ -18,7 +18,7 @@ use Vallas\ModelBundle\Entity\ImagenUbicacion;
 /**
  * Imagen controller.
  *
- * @Route("/{_locale}/ubicacion-images", defaults={"_locale"="en"})
+ * @Route("/{_locale}/ubicacion-images", defaults={"_locale"="es"})
  */
 class UbicacionImageController extends VallasAdminController {
 

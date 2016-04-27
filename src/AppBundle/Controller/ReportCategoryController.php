@@ -19,7 +19,7 @@ use ESocial\UtilBundle\Util\DataTables\EntityJsonList;
  * ReportCategory controller.
 
  * @Route("/{_locale}/report-categories")
- * @Route("/report-categories", defaults={"_locale"="en"})
+ * @Route("/report-categories", defaults={"_locale"="es"})
  */
 class ReportCategoryController extends VallasAdminController
 {

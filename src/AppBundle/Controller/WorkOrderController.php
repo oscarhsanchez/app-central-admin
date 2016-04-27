@@ -25,7 +25,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * OrdenTrabajo controller.
  *
- * @Route("/{_locale}/work-orders", defaults={"_locale"="en"})
+ * @Route("/{_locale}/work-orders", defaults={"_locale"="es"})
  */
 class WorkOrderController extends VallasAdminController {
 

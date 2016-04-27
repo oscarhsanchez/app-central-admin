@@ -3,7 +3,11 @@
     action: entity is defined and entity.pkArchivo is not empty ? path('incidencia_img_update', { id: entity.token, origin: 'list', type: type }) : path('incidencia_img_create', { id: entity.token, type: type }),
     attr: { onsubmit: 'sendAjaxForm(this); return false;' } }) }}
 
-    <label class="control-label">{{ entity.nombre }}</label>
+    <label class="control-label">
+        <a target="_blank" href="{{ app.request.schemeAndHttpHost }}{{ entity.url }}/{{ entity.nombre }}">
+            {{ app.request.schemeAndHttpHost }}{{ entity.url }}/{{ entity.nombre }}
+        </a>
+    </label>
     <div class="margin-b-20">
         <img style="width:100%; max-width: 100%" src="/media/incidencia_imagen/{{ entity.nombre }}" />
     </div>

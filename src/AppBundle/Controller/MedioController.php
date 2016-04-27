@@ -19,7 +19,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Medio controller.
  *
- * @Route("/{_locale}/medios", defaults={"_locale"="en"})
+ * @Route("/{_locale}/medios", defaults={"_locale"="es"})
  */
 class MedioController extends VallasAdminController {
 

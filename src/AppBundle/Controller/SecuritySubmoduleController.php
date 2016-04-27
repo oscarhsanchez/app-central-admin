@@ -22,7 +22,7 @@ use Vallas\ModelBundle\Entity\Zona;
 /**
  * SecuritySubmodule controller.
  *
- * @Route("/{_locale}/security-submodules", defaults={"_locale"="en"})
+ * @Route("/{_locale}/security-submodules", defaults={"_locale"="es"})
  */
 class SecuritySubmoduleController extends VallasAdminController {
 

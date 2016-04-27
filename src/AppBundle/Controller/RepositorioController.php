@@ -21,7 +21,7 @@ use VallasSecurityBundle\Annotation\RequiresPermission;
 /**
  * Repositorio controller.
  *
- * @Route("/{_locale}/repositorio", defaults={"_locale"="en"})
+ * @Route("/{_locale}/repositorio", defaults={"_locale"="es"})
  */
 class RepositorioController extends VallasAdminController {
 

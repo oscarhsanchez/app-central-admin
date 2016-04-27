@@ -21,7 +21,7 @@ use Vallas\ModelBundle\Entity\Ubicacion;
 /**
  * Ubicacion controller.
  *
- * @Route("/{_locale}/location/availability", defaults={"_locale"="en"})
+ * @Route("/{_locale}/location/availability", defaults={"_locale"="es"})
  */
 class UbicacionDisponibilidadController extends VallasAdminController {
 

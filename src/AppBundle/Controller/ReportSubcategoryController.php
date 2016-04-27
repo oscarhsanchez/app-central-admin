@@ -21,7 +21,7 @@ use Vallas\ModelBundle\Entity\ReportSubcategory;
  * ReportSubcategory controller.
 
  * @Route("/{_locale}/report-subcategories")
- * @Route("/report-subcategories", defaults={"_locale"="en"})
+ * @Route("/report-subcategories", defaults={"_locale"="es"})
  */
 class ReportSubcategoryController extends VallasAdminController
 {
