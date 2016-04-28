@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\VallasUserPasswordType;
 use Doctrine\Common\Collections\ArrayCollection;
 use ESocial\AdminBundle\Controller\UserController;
 use ESocial\UtilBundle\Util\Database;
@@ -285,6 +286,61 @@ class VallasUserController extends UserController {
             'timerange' => $timeRange,
             'dateFormatted' => $fecha,
             'reloading' => $this->getVar('reloading')
+        ));
+
+    }
+
+    /**
+     * @Route("/{token}/edit/password", name="admin_user_password_edit", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function editPasswordAction($token){
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
+
+        $form = $this->createForm(new VallasUserPasswordType(), $entity);
+
+        return $this->render('AppBundle:screens/user:form_password.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @Route("/{token}/update/password", name="admin_user_password_update")
+     * @Method("POST")
+     */
+    public function updatePasswordAction(Request $request, $token){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
+        $form = $this->createForm(new VallasUserPasswordType(), $entity);
+
+        $boolSaved = false;
+
+        if ($request->getMethod() == 'POST'){
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()){
+                Database::saveEntity($em, $entity);
+                $boolSaved = true;
+            }
+        }
+
+        if ($boolSaved){
+            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('form.notice.saved_success'));
+            return $this->redirect($this->generateUrl('admin_user_password_edit', array('token' => $entity->getToken())));
+        }else{
+            $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('form.notice.saved_error'));
+        }
+
+        return $this->render('AppBundle:screens/user:form_password.html.twig', array(
+            'entity' => $entity,
+            'form' => $form->createView(),
         ));
 
     }
