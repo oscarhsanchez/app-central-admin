@@ -115,7 +115,7 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             ;
 
         if ($pkMedio){
-            $qb->andWhere("medio.pk_medio = $pkMedio");
+            $qb->andWhere("medio.pk_medio = '$pkMedio'");
         }
 
         //echo $qb->getQuery()->getSQL();exit;
