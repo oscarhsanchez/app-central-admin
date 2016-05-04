@@ -94,7 +94,9 @@ class UbicacionDisponibilidadController extends VallasAdminController {
         $em = $this->getDoctrine()->getManager();
 
 
-        $filtroFechas = '((propuesta.fecha_inicio <= :intervalo_inicial AND (propuesta.fecha_fin >= :intervalo_final OR propuesta.fecha_fin BETWEEN :intervalo_inicial AND :intervalo_final)) OR (propuesta.fecha_inicio BETWEEN :intervalo_inicial AND :intervalo_final AND (propuesta.fecha_fin >= :intervalo_final OR propuesta.fecha_fin BETWEEN :intervalo_inicial AND :intervalo_final)))';
+        $intervalo_inicial = "'".$dt_start->format('Y-m-d')."'";
+        $intervalo_final = "'".$dt_end_aux->format('Y-m-d')."'";
+        $filtroFechas = "((propuesta.fecha_inicio <= $intervalo_inicial AND (propuesta.fecha_fin >= $intervalo_final OR propuesta.fecha_fin BETWEEN $intervalo_inicial AND $intervalo_final)) OR (propuesta.fecha_inicio BETWEEN $intervalo_inicial AND $intervalo_final AND (propuesta.fecha_fin >= $intervalo_final OR propuesta.fecha_fin BETWEEN $intervalo_inicial AND $intervalo_final)))";
         $qb = $em->getRepository('VallasModelBundle:Medio')->createQueryBuilder('medio');
         $qb
             ->addSelect('pdo')
@@ -102,34 +104,21 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             ->addSelect('propuesta')
             ->leftJoin('medio.ubicacion', 'ubi')
             ->leftJoin('medio.propuesta_detalle_outdoors', 'pdo', 'WITH', 'pdo.estado > 0')
-            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0 AND pd.ubicacion = :ubi')
+            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
             ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0 AND '.$filtroFechas)
             ->andWhere('medio.estado > 0')
             ->andWhere('medio.id_cara = 1')
-            ->andWhere('medio.ubicacion = :ubi')
-            ->setParameter('ubi', $ubicacion)
-            ->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
-            ->setParameter('intervalo_final', $dt_end_aux->format('Y-m-d'));
-
-        /*
-        $qb = $em->getRepository('VallasModelBundle:PropuestaDetalleOutdoor')->createQueryBuilder('pdo');
-        $qb->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
-            ->leftJoin('pdo.medio', 'medio', 'WITH', 'medio.estado > 0')
-            ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0')
-            ->andWhere('pdo.estado > 0')
-            ->andWhere('pd.ubicacion = :ubi')
-            ->andWhere('medio.ubicacion = :ubi')
-            ->andWhere('medio.id_cara = 1')
-            ->andWhere('((propuesta.fecha_inicio <= :intervalo_inicial AND (propuesta.fecha_fin >= :intervalo_final OR propuesta.fecha_fin BETWEEN :intervalo_inicial AND :intervalo_final)) OR (propuesta.fecha_inicio BETWEEN :intervalo_inicial AND :intervalo_final AND (propuesta.fecha_fin >= :intervalo_final OR propuesta.fecha_fin BETWEEN :intervalo_inicial AND :intervalo_final)))')
-            ->setParameter('ubi', $ubicacion)
-            ->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
-            ->setParameter('intervalo_final', $dt_end_aux->format('Y-m-d'));
-        */
+            ->andWhere("medio.ubicacion = '$pkUbicacion'")
+            //->setParameter('ubi', $pkUbicacion)
+            //->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
+            //->setParameter('intervalo_final', $dt_end_aux->format('Y-m-d'))
+            ;
 
         if ($pkMedio){
-            $qb->andWhere('medio.pk_medio = :pkMedio')->setParameter('pkMedio', $pkMedio);
+            $qb->andWhere("medio.pk_medio = $pkMedio");
         }
 
+        //echo $qb->getQuery()->getSQL();exit;
         $medios = $qb->getQuery()->getResult();
         //var_dump($propuestasDO);
         for($i=clone $dt_start; $i<$dt_end; $i->add(new \DateInterval('P1D'))){
@@ -253,7 +242,7 @@ OR
             ->addSelect('cliente')
             ->leftJoin('medio.ubicacion', 'ubi')
             ->leftJoin('medio.propuesta_detalle_outdoors', 'pdo', 'WITH', 'pdo.estado > 0')
-            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0 AND pd.ubicacion = :ubi')
+            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
             ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0 AND :fecha BETWEEN propuesta.fecha_inicio AND propuesta.fecha_fin')
             ->leftJoin('propuesta.cliente', 'cliente')
             ->andWhere('medio.estado > 0')
