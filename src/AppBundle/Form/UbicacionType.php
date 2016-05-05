@@ -53,8 +53,8 @@ class UbicacionType extends ESocialType {
                         return $repository->getQueryBuilder()->andWhere('p.tipo = 0');
                     },
                 ))
-                ->add('zona_iluminacion', 'entity', array(
-                    'required' => false, 'label' => 'form.ubicacion.label.zona_iluminacion',
+                ->add('zona_monitoreo', 'entity', array(
+                    'required' => false, 'label' => 'form.ubicacion.label.zona_monitoreo',
                     'class' => 'VallasModelBundle:Zona',
                     'empty_value' => 'form.label.choice_empty_value',
                     'choice_label' => 'nombre',
@@ -69,6 +69,15 @@ class UbicacionType extends ESocialType {
                     'choice_label' => 'nombre',
                     'query_builder' => function ($repository) {
                         return $repository->getQueryBuilder()->andWhere('p.tipo = 2');
+                    },
+                ))
+                ->add('zona_iluminacion', 'entity', array(
+                    'required' => false, 'label' => 'form.ubicacion.label.zona_iluminacion',
+                    'class' => 'VallasModelBundle:Zona',
+                    'empty_value' => 'form.label.choice_empty_value',
+                    'choice_label' => 'nombre',
+                    'query_builder' => function ($repository) {
+                        return $repository->getQueryBuilder()->andWhere('p.tipo = 3');
                     },
                 ))
                 ->add('unidad_negocio', null, array('label' => 'form.ubicacion.label.unidad_negocio'))
