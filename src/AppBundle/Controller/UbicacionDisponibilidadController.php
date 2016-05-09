@@ -107,7 +107,7 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
             ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0 AND '.$filtroFechas)
             ->andWhere('medio.estado > 0')
-            ->andWhere('medio.id_cara = 1')
+            ->andWhere('medio.id_cara > 0')
             ->andWhere("medio.ubicacion = '$pkUbicacion'")
             //->setParameter('ubi', $pkUbicacion)
             //->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
@@ -118,16 +118,11 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             $qb->andWhere("medio.pk_medio = '$pkMedio'");
         }
 
-        //echo $qb->getQuery()->getSQL();exit;
         $medios = $qb->getQuery()->getResult();
-        //var_dump($propuestasDO);
+
         for($i=clone $dt_start; $i<$dt_end; $i->add(new \DateInterval('P1D'))){
             $count = 0;
             $slots = 0;
-
-            if ($i->format('Y-m-d') == '2016-02-26'){
-                $a="";
-            }
 
             $cliente = null;
             foreach($medios as $medio){
@@ -167,8 +162,6 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             }
             $arrDays[$i->format('Y-m-d')] = $arrParamsDay;
         }
-
-        //var_dump($arrDays);exit;
 
         //Añadimos dias para completar la semana
         for($diaSemana=$diaSemanaUltimoDia; $diaSemana<7;$diaSemana++){
@@ -247,7 +240,7 @@ OR
             ->leftJoin('propuesta.cliente', 'cliente')
             ->andWhere('medio.estado > 0')
             ->andWhere('medio.ubicacion = :ubi')
-            ->andWhere('medio.id_cara = 1')
+            ->andWhere('medio.id_cara > 0')
             ->setParameter('fecha', $day)
             ->setParameter('ubi', $pkUbicacion);
 
