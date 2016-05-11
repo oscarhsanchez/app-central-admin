@@ -36,7 +36,7 @@ class WorkOrderController extends VallasAdminController {
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:OrdenTrabajo');
-        $qb = $repository->getAllQueryBuilder();
+        $qb = $repository->getAllQueryBuilder()->andWhere('p.estado > 0');
 
         if ($type){
             $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
