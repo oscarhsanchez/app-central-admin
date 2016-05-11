@@ -22,11 +22,11 @@ class AppKernel extends Kernel
             new ESocial\AdminBundle\ESocialAdminBundle(),
             new ESocial\ModelBundle\ESocialModelBundle(),
             new ESocial\UtilBundle\ESocialUtilBundle(),
+            new ESocial\SecurityBundle\ESocialSecurityBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
-            new VallasSecurityBundle\VallasSecurityBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 

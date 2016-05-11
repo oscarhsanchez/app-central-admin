@@ -1,7 +1,3 @@
-vallas_security:
-    resource: "@VallasSecurityBundle/Resources/config/routing.yml"
-    prefix:   /
-
 e_social_admin:
     resource: "@ESocialAdminBundle/Resources/config/routing.yml"
 

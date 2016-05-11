@@ -11,12 +11,12 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
-    kernel.listener.RequestListener:
-            class: VallasSecurityBundle\EventListener\RequestListener
-            tags:
-                - { name: kernel.event_listener, event: kernel.controller, method: onFilterController }
-                - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
-            arguments: [@service_container, @security.context, @doctrine.orm.entity_manager, @router, @templating]
+#    kernel.listener.RequestListener:
+#            class: VallasSecurityBundle\EventListener\RequestListener
+#            tags:
+#                - { name: kernel.event_listener, event: kernel.controller, method: onFilterController }
+#                - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+#            arguments: [@service_container, @security.context, @doctrine.orm.entity_manager, @router, @templating]
 
     vallas.doctrine.filter.configurator:
         class: AppBundle\Filter\Configurator
@@ -27,11 +27,3 @@ services:
             - "@session"
         tags:
             - { name: kernel.event_listener, event: kernel.request }
-
-    vallas.security.permissions.checking:
-        class: VallasSecurityBundle\Services\SecurityPermissionChecking
-        arguments:
-            - "@security.context"
-            - "@doctrine.orm.entity_manager"
-            - "@annotations.reader"
-            - "@request_stack"

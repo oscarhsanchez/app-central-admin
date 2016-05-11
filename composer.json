@@ -19,9 +19,10 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "esocial/esocial-admin-bundle": "dev-master",
-        "esocial/esocial-model-bundle": "dev-master",
-        "esocial/esocial-utils-bundle": "dev-master",
+        "esocial/esocial-admin-bundle": "dev-devel",
+        "esocial/esocial-model-bundle": "dev-devel",
+        "esocial/esocial-utils-bundle": "dev-devel",
+        "esocial/esocial-security-bundle": "dev-master",
         "vallas/model-bundle": "dev-master",
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
@@ -75,7 +76,11 @@
           "url" : "git@bitbucket.org:esocialtech/esocial-utils-bundle.git"
       },{
           "type" : "vcs",
+          "url" : "git@bitbucket.org:esocialtech/esocial-security-bundle.git"
+      },{
+          "type" : "vcs",
           "url" : "git@bitbucket.org:vallas/vallas-model-bundle.git"
       }
-  ]
+  ],
+  "minimum-stability": "dev"
 }
