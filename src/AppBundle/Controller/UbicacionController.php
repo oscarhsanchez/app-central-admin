@@ -37,8 +37,8 @@ class UbicacionController extends VallasAdminController {
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'ubicacion', 'categoria', 'trafico_vehicular', 'trafico_transeuntes', 'nivel_socioeconomico', 'estatus'));
-        $jsonList->setSearchFields(array('ubicacion', 'categoria', 'trafico_vehicular', 'trafico_transeuntes', 'nivel_socioeconomico', 'estatus'));
+        $jsonList->setFieldsToGet(array('pk_ubicacion', 'token', 'ubicacion', 'categoria', 'trafico_vehicular', 'trafico_transeuntes', 'nivel_socioeconomico', 'estatus'));
+        $jsonList->setSearchFields(array('pk_ubicacion', 'ubicacion', 'categoria', 'trafico_vehicular', 'trafico_transeuntes', 'nivel_socioeconomico', 'estatus'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

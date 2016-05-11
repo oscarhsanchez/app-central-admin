@@ -28,6 +28,7 @@
                 <thead>
                 <tr>
                     <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
+                    <th>{{ 'form.ubicacion.label.pk_ubicacion'|trans }}</th>
                     <th>{{ 'form.ubicacion.label.ubicacion'|trans }}</th>
                     <th>{{ 'form.ubicacion.label.categoria'|trans }}</th>
                     <th>{{ 'form.ubicacion.label.trafico_vehicular'|trans }}</th>
@@ -50,6 +51,7 @@
                         return '<input type="checkbox" class="i-checks" value="'+source.token+'" />';
                     }
                 },
+                {"mData": "pk_ubicacion"},
                 {"mData": "ubicacion"},
                 {"mData": "categoria"},
                 {"mData": "trafico_vehicular"},
