@@ -2,11 +2,13 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class IncidenciaFieldType
@@ -76,10 +78,10 @@ class IncidenciaFieldType extends ESocialType {
 
         switch($type){
             case 'user':
-                $builder->add('user', 'entity', array(
+                $builder->add('user', EntityType::class, array(
                     'mapped' => false,
                     'label' => 'form.work_order.label.user',
-                    'empty_value' => 'form.label.choice_empty_value',
+                    'placeholder' => 'form.label.choice_empty_value',
                     'class' => 'VallasModelBundle:User', 'required' => true,
                     'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); })
                 );
@@ -90,8 +92,8 @@ class IncidenciaFieldType extends ESocialType {
                 break;
             case 'state':
                 $builder
-                    ->add('estado_incidencia', 'choice', array('label' => 'form.work_order.label.estado_incidencia', 'empty_value' => 'form.label.choice_empty_value', 'choices' => array(
-                    '0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada')));
+                    ->add('estado_incidencia', ChoiceType::class, array('label' => 'form.work_order.label.estado_incidencia', 'placeholder' => 'form.label.choice_empty_value',
+                        'choices' => self::sf3TransformChoiceOptions(array('0' => 'Pendiente', '1' => 'En proceso', '2' => 'Cerrada'))));
 
                 if ($post['estado_incidencia'] == '2'){
                     $builder
@@ -110,9 +112,9 @@ class IncidenciaFieldType extends ESocialType {
         return 'incidencia';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Incidencia',

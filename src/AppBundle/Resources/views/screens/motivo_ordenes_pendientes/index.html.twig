@@ -57,7 +57,6 @@
                 }
             ];
 
-            jQuery(document).ready(function(){
                 motivo_ordenes_pendientes_list = TableManaged.init(
                         '#dt-motivo-ordenes-pendientes-list',
                         '{{ url('motivo_ordenes_pendientes_list_json') }}',
@@ -66,7 +65,6 @@
                         table_columns,
                         '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
                 );
-            });
         });
 
         function motivo_ordenes_pendientes_list_reload(result){
@@ -74,7 +72,7 @@
                 var alertType = result.result == 1 ? 'success' : 'danger';
                 $(motivo_ordenes_pendientes_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
             }
-            motivo_ordenes_pendientes_list.api().ajax.reload();
+            motivo_ordenes_pendientes_list.ajax.reload();
         }
     </script>
 {% endblock %}

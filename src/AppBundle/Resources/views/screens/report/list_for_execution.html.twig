@@ -67,12 +67,12 @@
         });
 
         function report_list_reload(){
-            report_list.api().ajax.reload();
+            report_list.ajax.reload();
         }
         $('#report_search_category').bind("change", function() {
             //refresh list
             var refreshURL = Routing.generate('report_list_json', { _locale: '{{ app.request.locale }}', _all: 'active', category_id: $(this).val()});
-            report_list.api().ajax.url(refreshURL).load();
+            report_list.ajax.url(refreshURL).load();
 
             if (!$(this).val()){
                 $('#report_search_subcategory').empty().append('<option value="">{{ 'form.label.choice_empty_value'|trans }}</option>');
@@ -84,7 +84,7 @@
         $('#report_search_subcategory').bind("change", function() {
             //refresh list
             var refreshURL = Routing.generate('report_list_json', { _locale: '{{ app.request.locale }}', _all: 'active', subcategory_id: $(this).val()});
-            report_list.api().ajax.url(refreshURL).load();
+            report_list.ajax.url(refreshURL).load();
         });
     </script>
 {% endblock %}

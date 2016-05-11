@@ -8,8 +8,10 @@
     <thead>
     <tr>
         <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
+        <th>{{ 'form.medio.label.pk_medio'|trans }}</th>
         <th>{{ 'form.medio.label.ubicacion'|trans }}</th>
         <th>{{ 'form.medio.label.posicion'|trans }}</th>
+        <th>{{ 'form.medio.label.id_cara'|trans }}</th>
         <th>{{ 'form.medio.label.tipo_medio'|trans }}</th>
         <th>{{ 'form.medio.label.subtipo_medio'|trans }}</th>
         <th>{{ 'form.medio.label.estado'|trans }}</th>
@@ -27,8 +29,10 @@
                     return '<input type="checkbox" class="i-checks" value="'+source.token+'" />';
                 }
             },
+            {"mData": "pk_medio"},
             {"mData": "ubicacion__ubicacion"},
             {"mData": "posicion"},
+            {"mData": "id_cara"},
             {"mData": "tipo_medio"},
             {"mData": "subtipoMedio__descripcion"},
             {
@@ -61,7 +65,7 @@
             var alertType = result.result == 1 ? 'success' : 'danger';
             $(medio_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
         }
-        medio_list.api().ajax.reload();
+        medio_list.ajax.reload();
     }
 
     function selectSubtipoMedio(data, vars){

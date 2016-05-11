@@ -142,7 +142,7 @@
             var params = '';
             if ($.trim(incidencia_filter_tipo) != '') params += '?tipo='+encodeURIComponent(incidencia_filter_tipo);
 
-            incidencia_list.api().ajax.url(url+params).load();
+            incidencia_list.ajax.url(url+params).load();
 
         }
 

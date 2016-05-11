@@ -26,7 +26,7 @@ use Vallas\ModelBundle\Entity\UserPais;
  * VallasUserController.
  * @Route("/{_locale}/user", defaults={"_locale"="es"})
  */
-class VallasUserController extends UserController {
+class VallasUserController  {
 
     public function getSessionCountry(){
 
@@ -95,7 +95,7 @@ class VallasUserController extends UserController {
         $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
         $this->prepareRolePermissions($entity);
 
-        $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+        $form = $this->createForm($esocialAdminUserType, $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
         $boolSaved = $this->saveAction($request, $entity, $form);
 
@@ -122,7 +122,7 @@ class VallasUserController extends UserController {
         $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
         $this->prepareRolePermissions($entity);
 
-        $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+        $form = $this->createForm($esocialAdminUserType, $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
         return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
             'entity' => $entity,
@@ -143,7 +143,7 @@ class VallasUserController extends UserController {
 
         $entity = new $esocialAdminUserClass();
         $this->initEntity($entity);
-        $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+        $form = $this->createForm($esocialAdminUserType, $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
         return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
             'entity' => $entity,
@@ -164,7 +164,7 @@ class VallasUserController extends UserController {
 
         $entity = new $esocialAdminUserClass();
         $this->initEntity($entity);
-        $form = $this->createForm(new $esocialAdminUserType(), $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
+        $form = $this->createForm($esocialAdminUserType, $entity, array('data_class' => $this->getESocialAdminUserClass(), 'role_class' => $this->getEsocialAdminRoleClass()));
 
         $boolSaved = $this->saveAction($request, $entity, $form);
 
@@ -299,7 +299,7 @@ class VallasUserController extends UserController {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
 
-        $form = $this->createForm(new VallasUserPasswordType(), $entity);
+        $form = $this->createForm('AppBundle\Form\VallasUserPasswordType', $entity);
 
         return $this->render('AppBundle:screens/user:form_password.html.twig', array(
             'entity' => $entity,
@@ -317,7 +317,7 @@ class VallasUserController extends UserController {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
-        $form = $this->createForm(new VallasUserPasswordType(), $entity);
+        $form = $this->createForm('AppBundle\Form\VallasUserPasswordType', $entity);
 
         $boolSaved = false;
 

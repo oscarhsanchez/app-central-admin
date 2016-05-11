@@ -4,7 +4,8 @@ namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -38,8 +39,8 @@ class MedioType extends ESocialType {
         $builder->add('posicion', null, array('label' => 'form.medio.label.posicion', 'constraints' => array(new NotBlank())));
         $builder->add('id_cara', null, array('label' => 'form.medio.label.id_cara', 'constraints' => array(new NotBlank())));
         $builder->add('tipo_medio', null, array('label' => 'form.medio.label.tipo_medio', 'attr' => array('maxlength' => 20)));
-        $builder->add('estatus_iluminacion', 'choice', array('label' => 'form.medio.label.estatus_iluminacion', 'choices' => array('SI' => 'form.medio.estatus_iluminacion.options.yes', 'NO' => 'form.medio.estatus_iluminacion.options.no')));
-        $builder->add('visibilidad', 'choice', array('label' => 'form.medio.label.visibilidad', 'choices' => array('TOTAL' => 'form.medio.visibilidad.options.total', 'PARCIAL' => 'form.medio.visibilidad.options.partial', 'NULA' => 'form.medio.visibilidad.options.null')));
+        $builder->add('estatus_iluminacion', ChoiceType::class, array('label' => 'form.medio.label.estatus_iluminacion', 'choices' => self::sf3TransformChoiceOptions(array('SI' => 'form.medio.estatus_iluminacion.options.yes', 'NO' => 'form.medio.estatus_iluminacion.options.no'))));
+        $builder->add('visibilidad', ChoiceType::class, array('label' => 'form.medio.label.visibilidad', 'choices' => self::sf3TransformChoiceOptions(array('TOTAL' => 'form.medio.visibilidad.options.total', 'PARCIAL' => 'form.medio.visibilidad.options.partial', 'NULA' => 'form.medio.visibilidad.options.null'))));
         $builder->add('slots', null, array('label' => 'form.medio.label.slots', 'constraints' => array(new NotBlank())));
         $builder->add('coste', null, array('label' => 'form.medio.label.coste', 'constraints' => array(new NotBlank())));
         $builder->add('estatus_inventario', null, array('label' => 'form.medio.label.estatus_inventario', 'attr' => array('maxlength' => 45)));
@@ -51,9 +52,9 @@ class MedioType extends ESocialType {
         return 'medio';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Medio',

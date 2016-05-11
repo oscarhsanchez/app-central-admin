@@ -2,11 +2,14 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class IncidenciaType
@@ -64,7 +67,7 @@ class IncidenciaType extends ESocialType {
 
         });
 
-        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
+        $builder->add('save', SubmitType::class, array('label' => 'form.actions.save'));
         $builder->add('medio', 'selectable_entity', array(
                 'label' => 'form.incidencia.label.medio',
                 'class' => 'VallasModelBundle:Medio',
@@ -73,11 +76,11 @@ class IncidenciaType extends ESocialType {
                 'enable_update' => true
         ));
 
-        $builder->add('user', 'entity', array(
+        $builder->add('user', EntityType::class, array(
             'mapped' => false,
             'constraints' => array(new NotBlank()),
             'label' => 'form.incidencia.label.user_assigned',
-            'empty_value' => 'form.label.choice_empty_value',
+            'placeholder' => 'form.label.choice_empty_value',
             'class' => 'VallasModelBundle:User', 'required' => true,
             'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); })
         );
@@ -86,8 +89,8 @@ class IncidenciaType extends ESocialType {
             'format' => 'dd/MM/yyyy', 'constraints' => array(new NotBlank()), 'attr' => array('class' => 'calendar text-date')));
 
         $builder
-            ->add('estado_incidencia', 'choice', array('label' => 'form.incidencia.label.estado_incidencia', 'empty_value' => 'form.label.choice_empty_value', 'choices' => array(
-            '0' => 'form.incidencia.label.estado_incidencia.pendiente', '1' => 'form.incidencia.label.estado_incidencia.en_proceso', '2' => 'form.incidencia.label.estado_incidencia.cerrada'), 'constraints' => array(new NotBlank())));
+            ->add('estado_incidencia', ChoiceType::class, array('label' => 'form.incidencia.label.estado_incidencia', 'placeholder' => 'form.label.choice_empty_value', 'choices' => self::sf3TransformChoiceOptions(array(
+            '0' => 'form.incidencia.label.estado_incidencia.pendiente', '1' => 'form.incidencia.label.estado_incidencia.en_proceso', '2' => 'form.incidencia.label.estado_incidencia.cerrada')), 'constraints' => array(new NotBlank())));
 
         $builder->add('observaciones', 'textarea', array('label' => 'form.incidencia.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)));
 
@@ -108,9 +111,9 @@ class IncidenciaType extends ESocialType {
         return 'incidencia';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Incidencia'));
     }

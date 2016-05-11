@@ -89,7 +89,7 @@ class SecuritySubmoduleController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/security_submodule:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new SecuritySubmoduleType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\SecuritySubmoduleType', $entity)->createView()
         ));
     }
 
@@ -104,7 +104,7 @@ class SecuritySubmoduleController extends VallasAdminController {
         $entity = new SecuritySubmodule();
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new SecuritySubmoduleType(), $entity);
+        $form = $this->createForm('AppBundle\Form\SecuritySubmoduleType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -135,7 +135,7 @@ class SecuritySubmoduleController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/security_submodule:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new SecuritySubmoduleType(), $entity)->createView(),
+            'form' => $this->createForm('AppBundle\Form\SecuritySubmoduleType', $entity)->createView(),
         ));
     }
 
@@ -179,7 +179,7 @@ class SecuritySubmoduleController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find SecuritySubmodule entity.');
         }
 
-        $form = $this->createForm(new SecuritySubmoduleType(), $entity);
+        $form = $this->createForm('AppBundle\Form\SecuritySubmoduleType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 

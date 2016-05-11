@@ -121,7 +121,7 @@ class IncidenciaController extends VallasAdminController {
         return $this->render('AppBundle:screens/incidencia:form.html.twig', array(
             'entity' => $entity,
             'type' => $type,
-            'form' => $this->createForm(new IncidenciaType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\IncidenciaType', $entity)->createView()
         ));
     }
 
@@ -141,7 +141,7 @@ class IncidenciaController extends VallasAdminController {
 
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new IncidenciaType(), $entity);
+        $form = $this->createForm('AppBundle\Form\IncidenciaType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -189,10 +189,10 @@ class IncidenciaController extends VallasAdminController {
         return $this->render('AppBundle:screens/incidencia:form.html.twig', array(
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
             'entity' => $entity,
-            'form' => $this->createForm(new IncidenciaType(), $entity, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\IncidenciaType', $entity, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new IncidenciaImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView()
+            'formFirstImage' => $this->createForm('AppBundle\Form\IncidenciaImagenType', $firstImg, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')))->createView()
         ));
     }
 
@@ -296,7 +296,7 @@ class IncidenciaController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Incidencia entity.');
         }
 
-        $form = $this->createForm(new IncidenciaType(), $entity);
+        $form = $this->createForm('AppBundle\Form\IncidenciaType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
@@ -324,7 +324,7 @@ class IncidenciaController extends VallasAdminController {
             'form' => $form->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new IncidenciaImagenType(), $firstImg)->createView()
+            'formFirstImage' => $this->createForm('AppBundle\Form\IncidenciaImagenType', $firstImg)->createView()
         ));
     }
 

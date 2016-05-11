@@ -1,11 +1,13 @@
 <?php
 
 namespace AppBundle\Form;
+use ESocial\UtilBundle\Form\Widget\UploadableFieldType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use ESocial\UtilBundle\Form\ESocialType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UbicacionImagenType
@@ -19,8 +21,8 @@ class UbicacionImagenType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('estado_imagen', 'choice', array('label'=>'form.ubicacion_img.label.estado_imagen', 'choices' => array('0' => 'Pendiente', '1' => 'Validada', '2' => 'Rechazada', '3' => 'Retocar')))
-            ->add('nombre', 'uploadable_field', array('label'=>'form.ubicacion_img.label.nombre', 'type'=>'image', 'image_mapping' => 'ubicacion_imagen', 'required' => false))
+            ->add('estado_imagen', ChoiceType::class, array('label'=>'form.ubicacion_img.label.estado_imagen', 'choices' => self::sf3TransformChoiceOptions(array('0' => 'Pendiente', '1' => 'Validada', '2' => 'Rechazada', '3' => 'Retocar'))))
+            ->add('nombre', UploadableFieldType::class, array('label'=>'form.ubicacion_img.label.nombre', 'type'=>'image', 'image_mapping' => 'ubicacion_imagen', 'required' => false))
             ->add('observaciones', null, array('label' => 'form.ubicacion_img.label.observaciones', 'attr' => array('rows' => 3)))
             ->add('observaciones_cliente', null, array('label' => 'form.ubicacion_img.label.observaciones_cliente', 'attr' => array('rows' => 3)))
             ->add('medio', 'selectable_entity', array(
@@ -39,9 +41,9 @@ class UbicacionImagenType extends ESocialType {
         return 'ubicacion_img';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\ImagenUbicacion',

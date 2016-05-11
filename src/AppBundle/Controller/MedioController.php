@@ -40,8 +40,8 @@ class MedioController extends VallasAdminController {
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'posicion', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'ubicacion__latitud', 'ubicacion__longitud', 'estado'));
-        $jsonList->setSearchFields(array('posicion', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'estado'));
+        $jsonList->setFieldsToGet(array('pk_medio', 'id_cara', 'token', 'posicion', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'ubicacion__latitud', 'ubicacion__longitud', 'estado'));
+        $jsonList->setSearchFields(array('pk_medio', 'posicion', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'estado'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 
@@ -111,7 +111,7 @@ class MedioController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/medio:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new MedioType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\MedioType', $entity)->createView()
         ));
     }
 
@@ -139,7 +139,7 @@ class MedioController extends VallasAdminController {
 
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new MedioType(), $entity);
+        $form = $this->createForm('AppBundle\Form\MedioType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -171,7 +171,7 @@ class MedioController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/medio:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new MedioType(), $entity, array('editable' => $this->checkActionPermissions('medio', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\MedioType', $entity, array('editable' => $this->checkActionPermissions('medio', 'U')))->createView(),
         ));
     }
 
@@ -216,7 +216,7 @@ class MedioController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Medio entity.');
         }
 
-        $form = $this->createForm(new MedioType(), $entity);
+        $form = $this->createForm('AppBundle\Form\MedioType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 

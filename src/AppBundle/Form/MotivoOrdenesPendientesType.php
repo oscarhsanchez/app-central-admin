@@ -4,7 +4,8 @@ namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -23,15 +24,15 @@ class MotivoOrdenesPendientesType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $builder->add('descripcion', null, array('label' => 'form.motivo_ordenes_pendientes.label.descripcion', 'constraints' => array(new NotBlank())));
-        $builder->add('tipo_incidencia', 'choice', array('label' => 'form.motivo_ordenes_pendientes.label.tipo_incidencia', 'constraints' => array(new NotBlank()),
-            'empty_value' => 'form.label.choice_empty_value',
+        $builder->add('tipo_incidencia', ChoiceType::class, array('label' => 'form.motivo_ordenes_pendientes.label.tipo_incidencia', 'constraints' => array(new NotBlank()),
+            'placeholder' => 'form.label.choice_empty_value',
             'choices' => array(
-                '0' => 'form.motivo_ordenes_pendientes.tipo_incidencia.options.fixing',
-                '1' => 'form.motivo_ordenes_pendientes.tipo_incidencia.options.monitoring',
-                '2' => 'form.motivo_ordenes_pendientes.tipo_incidencia.options.installation',
-                '3' => 'form.motivo_ordenes_pendientes.tipo_incidencia.options.lighting',
-                '4' => 'form.motivo_ordenes_pendientes.tipo_incidencia.options.plane',
-                '5' => 'form.motivo_ordenes_pendientes.tipo_incidencia.options.others'
+                'form.motivo_ordenes_pendientes.tipo_incidencia.options.fixing' => '0',
+                'form.motivo_ordenes_pendientes.tipo_incidencia.options.monitoring' => '1',
+                'form.motivo_ordenes_pendientes.tipo_incidencia.options.installation' => '2',
+                'form.motivo_ordenes_pendientes.tipo_incidencia.options.lighting' => '3',
+                'form.motivo_ordenes_pendientes.tipo_incidencia.options.plane' => '4',
+                'form.motivo_ordenes_pendientes.tipo_incidencia.options.others' => '5'
             )));
 
     }
@@ -41,9 +42,9 @@ class MotivoOrdenesPendientesType extends ESocialType {
         return 'motivo_ordenes_pendientes';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\MotivoOrdenesPendientes',

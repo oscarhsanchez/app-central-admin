@@ -142,7 +142,7 @@ class WorkOrderController extends VallasAdminController {
             'type' => $type,
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $firstImg ? $this->createForm(new OrdenTrabajoImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView() : null
+            'formFirstImage' => $firstImg ? $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $firstImg, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView() : null
         ));
     }
 
@@ -167,7 +167,7 @@ class WorkOrderController extends VallasAdminController {
         return $this->render('AppBundle:screens/work_order:form.html.twig', array(
             'entity' => $entity,
             'type' => $type,
-            'form' => $this->createForm(new OrdenTrabajoType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\OrdenTrabajoType', $entity)->createView()
         ));
     }
 
@@ -210,7 +210,7 @@ class WorkOrderController extends VallasAdminController {
 
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new OrdenTrabajoType(), $entity);
+        $form = $this->createForm('AppBundle\Form\OrdenTrabajoType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -261,10 +261,10 @@ class WorkOrderController extends VallasAdminController {
             'entity' => $entity,
             'entityOld' => clone $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
-            'form' => $this->createForm(new OrdenTrabajoType(), $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\OrdenTrabajoType', $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView()
+            'formFirstImage' => $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $firstImg, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')))->createView()
         ));
     }
 
@@ -451,7 +451,7 @@ class WorkOrderController extends VallasAdminController {
         }
 
         $entityOld = clone $entity;
-        $form = $this->createForm(new OrdenTrabajoType(), $entity);
+        $form = $this->createForm('AppBundle\Form\OrdenTrabajoType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => $entityOld), $form);
 
@@ -480,7 +480,7 @@ class WorkOrderController extends VallasAdminController {
             'form' => $form->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView()
+            'formFirstImage' => $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $firstImg)->createView()
         ));
     }
 

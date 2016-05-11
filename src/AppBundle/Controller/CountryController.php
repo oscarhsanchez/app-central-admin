@@ -55,7 +55,7 @@ class CountryController extends VallasAdminController
     {
 
         $boolRedirect = false;
-        $form = $this->createForm(new CountrySelectType(), null, array('user' => $this->getSessionUser()));
+        $form = $this->createForm('AppBundle\Form\CountrySelectType', null, array('user' => $this->getSessionUser()));
 
         if ($request->getMethod() == 'POST'){
             $form->handleRequest($request);

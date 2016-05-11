@@ -2,8 +2,10 @@
 <table id="dt-medio-list-select" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
+        <th>{{ 'form.medio.label.pk_medio'|trans }}</th>
         <th>{{ 'form.medio.label.ubicacion'|trans }}</th>
         <th>{{ 'form.medio.label.posicion'|trans }}</th>
+        <th>{{ 'form.medio.label.id_cara'|trans }}</th>
         <th>{{ 'form.medio.label.tipo_medio'|trans }}</th>
         <th>{{ 'form.medio.label.subtipo_medio'|trans }}</th>
         <th>{{ 'form.label.actions'|trans }}</th>
@@ -13,8 +15,10 @@
 <script type="text/javascript">
     var medio_list_select = null;
     var medio_list_select_table_columns = [
+        {"mData": "pk_medio"},
         {"mData": "ubicacion__ubicacion"},
         {"mData": "posicion"},
+        {"mData": "id_cara"},
         {"mData": "tipo_medio"},
         {"mData": "subtipoMedio__descripcion"},
         {

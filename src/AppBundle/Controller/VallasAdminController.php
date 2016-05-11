@@ -44,13 +44,13 @@ class VallasAdminController extends ESocialController
 
     public function getSessionUser()
     { //retorna falso si token no esta autentificado o getUser returns false
-        $token = $this->get('security.context')->getToken();
+        $token = $this->get('security.token_storage')->getToken();
         return ($token->isAuthenticated()) ? $token->getUser() : false;
     }
 
     public function checkActionPermissions($submodule, $permissionCode){
 
-        $hasPermission = $this->get('vallas.security.permissions.checking')->checkPermissionCode($submodule, $permissionCode);
+        $hasPermission = $this->get('e_social_security.permissions.checking')->checkPermissionCode($submodule, $permissionCode);
 
         return $hasPermission;
     }

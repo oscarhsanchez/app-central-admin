@@ -111,7 +111,7 @@ class ReportController extends VallasAdminController
 
         return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ReportType(), $entity, array('editable' => $this->checkActionPermissions('report', 'U')))->createView()
+            'form' => $this->createForm('AppBundle\Form\ReportType', $entity, array('editable' => $this->checkActionPermissions('report', 'U')))->createView()
         ));
     }
 
@@ -161,7 +161,7 @@ class ReportController extends VallasAdminController
             throw $this->createNotFoundException('Unable to find Report entity.');
         }
 
-        $form = $this->createForm(new ReportType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ReportType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array(), $form);
 
@@ -190,7 +190,7 @@ class ReportController extends VallasAdminController
         //$this->initLanguagesForEntity($entity);
         $params_original = array();
 
-        $form = $this->createForm(new ReportType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ReportType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -220,7 +220,7 @@ class ReportController extends VallasAdminController
 
         return $this->render('AppBundle:screens/report:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ReportType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\ReportType', $entity)->createView()
         ));
     }
 
@@ -377,7 +377,7 @@ class ReportController extends VallasAdminController
     {
 
         return $this->render('AppBundle:screens/report:list_for_execution.html.twig', array(
-            'searchForm' => $this->createForm(new ReportSearchType())->createView()
+            'searchForm' => $this->createForm('AppBundle\Form\ReportSearchType')->createView()
         ));
 
     }

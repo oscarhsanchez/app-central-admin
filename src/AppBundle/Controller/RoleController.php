@@ -45,7 +45,7 @@ class RoleController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/role:permissions.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new RolePermissionsType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\RolePermissionsType', $entity)->createView()
         ));
     }
 
@@ -95,7 +95,7 @@ class RoleController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Role entity.');
         }
 
-        $form = $this->createForm(new RolePermissionsType(), $entity);
+        $form = $this->createForm('AppBundle\Form\RolePermissionsType', $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()){
@@ -169,7 +169,7 @@ class RoleController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/role:permissions_list.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new VallasUserType(), $entity, array(
+            'form' => $this->createForm('AppBundle\Form\VallasUserType', $entity, array(
                 'data_class' => $this->container->getParameter('fos_user.model.user.class'),
                 'role_class' => $this->container->getParameter('e_social_admin.role_class')
             ))->createView()

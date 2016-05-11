@@ -92,7 +92,7 @@ class ReportCategoryController extends VallasAdminController
 
         return $this->render('AppBundle:screens/report_category:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ReportCategoryType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\ReportCategoryType', $entity)->createView()
         ));
     }
 
@@ -142,7 +142,7 @@ class ReportCategoryController extends VallasAdminController
             throw $this->createNotFoundException('Unable to find ReportCategory entity.');
         }
 
-        $form = $this->createForm(new ReportCategoryType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ReportCategoryType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array(), $form);
 
@@ -194,7 +194,7 @@ class ReportCategoryController extends VallasAdminController
         //$this->initLanguagesForEntity($entity);
         $params_original = array();
 
-        $form = $this->createForm(new ReportCategoryType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ReportCategoryType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -223,7 +223,7 @@ class ReportCategoryController extends VallasAdminController
 
         return $this->render('AppBundle:screens/report_category:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ReportCategoryType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\ReportCategoryType', $entity)->createView()
         ));
     }
 
