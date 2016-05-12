@@ -32,7 +32,7 @@ class MedioController extends VallasAdminController {
 
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Medio');
-        $qb = $repository->getAllQueryBuilder()->leftJoin('p.ubicacion', 'ubi')->addOrderBy('ubi.ubicacion', 'ASC')->addOrderBy('p.posicion', 'ASC');
+        $qb = $repository->getAllQueryBuilder()->leftJoin('p.ubicacion', 'ubi')->leftJoin('p.subtipoMedio', 'subtipoMedio')->addOrderBy('ubi.ubicacion', 'ASC');
 
         if ($ubicacion){
             $qb->andWhere('p.ubicacion = :ubicacion')->setParameter('ubicacion', $ubicacion);
@@ -42,6 +42,7 @@ class MedioController extends VallasAdminController {
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('pk_medio', 'id_cara', 'token', 'posicion', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'ubicacion__latitud', 'ubicacion__longitud', 'estado'));
         $jsonList->setSearchFields(array('pk_medio', 'posicion', 'ubicacion__ubicacion', 'subtipoMedio__descripcion', 'tipo_medio', 'estado'));
+        $jsonList->setOrderFields(array('', 'pk_medio', 'ubi__ubicacion', 'posicion', 'id_cara', 'tipo_medio', 'subtipoMedio__descripcion', 'estado'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

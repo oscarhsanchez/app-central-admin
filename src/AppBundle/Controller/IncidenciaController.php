@@ -34,7 +34,8 @@ class IncidenciaController extends VallasAdminController {
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Incidencia');
-        $qb = $repository->getAllQueryBuilder()->andWhere('p.estado = 1');
+        $qb = $repository->getAllQueryBuilder()
+            ->leftJoin('p.medio', 'medio')->leftJoin('medio.ubicacion', 'ubicacion')->andWhere('p.estado = 1');
 
         if ($type !== NULL){
             $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
@@ -44,6 +45,7 @@ class IncidenciaController extends VallasAdminController {
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
         $jsonList->setSearchFields(array('tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
+        $jsonList->setOrderFields(array('', 'ubicacion__ubicacion', 'codigo_user', 'codigo_user_asignado', 'tipo', 'estado_incidencia', 'fecha_limite', 'fecha_cierre'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

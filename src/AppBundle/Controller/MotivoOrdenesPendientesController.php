@@ -36,6 +36,7 @@ class MotivoOrdenesPendientesController extends VallasAdminController {
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'descripcion', 'tipo_incidencia'));
         $jsonList->setSearchFields(array('descripcion'));
+        $jsonList->setOrderFields(array('','descripcion', 'tipo_incidencia'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

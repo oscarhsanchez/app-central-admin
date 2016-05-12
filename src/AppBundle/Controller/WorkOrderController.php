@@ -36,7 +36,7 @@ class WorkOrderController extends VallasAdminController {
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:OrdenTrabajo');
-        $qb = $repository->getAllQueryBuilder()->andWhere('p.estado > 0');
+        $qb = $repository->getAllQueryBuilder()->leftJoin('p.medio','medio')->leftJoin('medio.ubicacion','ubicacion')->andWhere('p.estado > 0');
 
         if ($type){
             $qb->andWhere('p.tipo = :tipo')->setParameter('tipo', $this->getCodeTypeByUrlType($type));
@@ -46,6 +46,7 @@ class WorkOrderController extends VallasAdminController {
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'pk_orden_trabajo', 'estado_orden', 'created_at', 'fecha_cierre', 'fecha_limite', 'medio__ubicacion__ubicacion', 'codigo_user'));
         $jsonList->setSearchFields(array('fecha_limite', 'fecha_cierre', 'medio__ubicacion__ubicacion', 'codigo_user'));
+        $jsonList->setOrderFields(array('','','estado_orden','created_at','fecha_limite', 'fecha_cierre', 'ubicacion__ubicacion', 'codigo_user'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

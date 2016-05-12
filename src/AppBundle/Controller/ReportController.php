@@ -34,12 +34,13 @@ class ReportController extends VallasAdminController
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('VallasModelBundle:Report');
         $qb = $repository->getAllQueryBuilder();
+        $qb->leftJoin('p.subcategory', 'subcategory')->leftJoin('subcategory.category', 'category');
+
         if ($boolActive){
             $qb->andWhere('p.active = 1');
         }
         if ($category_id){
-            $qb->leftJoin('p.subcategory', 'subcategory')->leftJoin('subcategory.category', 'category')
-                ->andWhere('category = :cat')->setParameter('cat', $category_id);
+            $qb->andWhere('category = :cat')->setParameter('cat', $category_id);
         }
         if ($subcategory_id){
             $qb->andWhere('p.subcategory = :subcat')->setParameter('subcat', $subcategory_id);
@@ -49,6 +50,7 @@ class ReportController extends VallasAdminController
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'id', 'subcategory__category__name', 'subcategory__name', 'name', 'jasper_report_id', 'route', 'active'));
         $jsonList->setSearchFields(array('subcategory__category__name', 'subcategory__name', 'name'));
+        $jsonList->setOrderFields(array('category__name', 'subcategory__name', 'name', 'jasper_report_id', 'route', 'active'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

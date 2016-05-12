@@ -90,8 +90,8 @@
                                 '</div>' +
                             '</div>'
                     );
-                    initPage($(filterWrapper));
                 }
+                initPage($('#dt-incidencia-list'));
             }
         };
 
@@ -124,7 +124,7 @@
                         '#dt-incidencia-list',
                         '{{ url('incidencia_list_json', { _type: type }) }}',
                         params,
-                        [],
+                        [0,8],
                         table_columns,
                         '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
                 );

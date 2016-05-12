@@ -53,8 +53,8 @@
         medio_list = TableManaged.init(
                 '#dt-medio-list',
                 '{{ url('medio_list_json', { ubicacion: entity.pkUbicacion }) }}',
-                null,
-                [],
+                { aaSorting: [[ 3, "asc" ]]},
+                [0,8],
                 table_columns,
                 '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
         );

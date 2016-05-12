@@ -38,6 +38,7 @@ class RepositorioController extends VallasAdminController {
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'nombre', 'path', 'url'));
         $jsonList->setSearchFields(array('nombre', 'path', 'url'));
+        $jsonList->setOrderFields(array('','nombre', 'url'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

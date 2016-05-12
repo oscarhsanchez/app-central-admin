@@ -37,6 +37,7 @@ class ReportSubcategoryController extends VallasAdminController
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'id', 'category__name', 'name'));
         $jsonList->setSearchFields(array('category__name','name'));
+        $jsonList->setOrderFields(array('','name'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($repository->getQueryBuilder()->andWhere('p.category = :cat')->setParameter('cat', $id_category));
 

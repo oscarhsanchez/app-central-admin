@@ -42,6 +42,7 @@ class ZoneController extends VallasAdminController {
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
         $jsonList->setFieldsToGet(array('token', 'nombre'));
         $jsonList->setSearchFields(array('nombre'));
+        $jsonList->setOrderFields(array('','nombre'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 
