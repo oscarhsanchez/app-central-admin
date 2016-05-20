@@ -1,7 +1,9 @@
-e_social_security:
-    resource: "@ESocialSecurityBundle/Resources/config/routing.yml"
+e_social_util:
+    resource: "@ESocialUtilBundle/Resources/config/routing.yml"
+
+e_social_admin:
+    resource: "@ESocialAdminBundle/Resources/config/routing.yml"
 
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-

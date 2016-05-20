@@ -591,12 +591,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
+                "reference": "803a2ed9fea02f9ca47cd45395089fe78769a392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/803a2ed9fea02f9ca47cd45395089fe78769a392",
+                "reference": "803a2ed9fea02f9ca47cd45395089fe78769a392",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +650,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2016-05-12 17:23:41"
         },
         {
             "name": "doctrine/instantiator",
@@ -766,12 +766,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "59a041095183f188faac6bc784074f4f88475a4a"
+                "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/59a041095183f188faac6bc784074f4f88475a4a",
-                "reference": "59a041095183f188faac6bc784074f4f88475a4a",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b3aa8254e480926adeb2a2df30a0b0ac8328d639",
+                "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +837,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2016-04-21 15:26:15"
+            "time": "2016-05-13 02:47:26"
         },
         {
             "name": "esocial/esocial-admin-bundle",
@@ -846,7 +846,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-admin-bundle.git",
-                "reference": "0ab955805a5b405ad4f727ddf27e5702930dfffa"
+                "reference": "15760bf5598397a4743673c3c05f786bf9a21e12"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -887,7 +887,7 @@
             ],
             "description": "Common ESocial Admin bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-admin-bundle.git",
-            "time": "2016-05-11 08:30:17"
+            "time": "2016-05-17 09:39:27"
         },
         {
             "name": "esocial/esocial-model-bundle",
@@ -974,7 +974,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-utils-bundle.git",
-                "reference": "d516da2100e61b2472b84eba2e7cf338651c5c7b"
+                "reference": "bf9c0e1170f9fd36621c9306e61b6839fc352e29"
             },
             "require": {
                 "aws/aws-sdk-php": "2.*",
@@ -1006,7 +1006,7 @@
             "keywords": [
                 "util bundle"
             ],
-            "time": "2016-05-03 19:09:06"
+            "time": "2016-05-19 10:51:02"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1014,12 +1014,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "90dcbf52dae73c3cb36965ee05e7cd04e53b5b6f"
+                "reference": "4a3f3ea8298775f06a01e2c85c9c0e5d5d22d797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/90dcbf52dae73c3cb36965ee05e7cd04e53b5b6f",
-                "reference": "90dcbf52dae73c3cb36965ee05e7cd04e53b5b6f",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/4a3f3ea8298775f06a01e2c85c9c0e5d5d22d797",
+                "reference": "4a3f3ea8298775f06a01e2c85c9c0e5d5d22d797",
                 "shasum": ""
             },
             "require": {
@@ -1065,7 +1065,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2016-04-21 13:20:58"
+            "time": "2016-05-11 15:04:31"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2214,12 +2214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "68f50da0fdd6cb0146d17d6bde20b76e0e57e7fb"
+                "reference": "1460e98b53d2f916f1b4123069c96c90844a1a4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/68f50da0fdd6cb0146d17d6bde20b76e0e57e7fb",
-                "reference": "68f50da0fdd6cb0146d17d6bde20b76e0e57e7fb",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/1460e98b53d2f916f1b4123069c96c90844a1a4d",
+                "reference": "1460e98b53d2f916f1b4123069c96c90844a1a4d",
                 "shasum": ""
             },
             "require": {
@@ -2259,7 +2259,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:46:16"
+            "time": "2016-05-11 12:36:48"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2738,12 +2738,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "42279b5d0031a6c39e28900505cf8a3a195a43c7"
+                "reference": "7bdd50cae69bac554891add644d0a3c1817c6326"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/42279b5d0031a6c39e28900505cf8a3a195a43c7",
-                "reference": "42279b5d0031a6c39e28900505cf8a3a195a43c7",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/7bdd50cae69bac554891add644d0a3c1817c6326",
+                "reference": "7bdd50cae69bac554891add644d0a3c1817c6326",
                 "shasum": ""
             },
             "require": {
@@ -2860,7 +2860,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-03 06:45:46"
+            "time": "2016-05-19 08:07:44"
         },
         {
             "name": "twig/extensions",
@@ -3180,12 +3180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "191fc2b648e1b00ad4725fcae0ab0729537725c8"
+                "reference": "df56110269ffaaea78295290c74d0bd1b3ac176f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/191fc2b648e1b00ad4725fcae0ab0729537725c8",
-                "reference": "191fc2b648e1b00ad4725fcae0ab0729537725c8",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/df56110269ffaaea78295290c74d0bd1b3ac176f",
+                "reference": "df56110269ffaaea78295290c74d0bd1b3ac176f",
                 "shasum": ""
             },
             "require": {
@@ -3222,7 +3222,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-05-10 09:22:13"
+            "time": "2016-05-19 20:16:37"
         },
         {
             "name": "hautelook/alice-bundle",
@@ -3312,23 +3312,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/alice.git",
-                "reference": "f0a642fcb5fd2f2d6fd4d992027517f14dfc5a1e"
+                "reference": "ad2b3ed41aff00bfa3a518d9224fe72bc6c1082e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/f0a642fcb5fd2f2d6fd4d992027517f14dfc5a1e",
-                "reference": "f0a642fcb5fd2f2d6fd4d992027517f14dfc5a1e",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/ad2b3ed41aff00bfa3a518d9224fe72bc6c1082e",
+                "reference": "ad2b3ed41aff00bfa3a518d9224fe72bc6c1082e",
                 "shasum": ""
             },
             "require": {
-                "fzaninotto/faker": "~1.0",
+                "fzaninotto/faker": "^1.0",
                 "php": ">=5.4",
-                "symfony/yaml": "~2.0|~3.0"
+                "symfony/yaml": "^2.0||^3.0"
             },
             "require-dev": {
-                "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.0",
-                "symfony/property-access": "~2.2|~3.0"
+                "doctrine/common": "^2.3",
+                "phpunit/phpunit": "^5.0||^4.0",
+                "symfony/phpunit-bridge": "^3.0",
+                "symfony/property-access": "^2.2||^3.0"
             },
             "type": "library",
             "extra": {
@@ -3353,6 +3354,10 @@
                 {
                     "name": "Tim Shelburne",
                     "email": "shelburt02@gmail.com"
+                },
+                {
+                    "name": "Théo FIDRY",
+                    "email": "theo.fidry@gmail.com"
                 }
             ],
             "description": "Expressive fixtures generator",
@@ -3362,7 +3367,7 @@
                 "orm",
                 "test"
             ],
-            "time": "2016-05-06 08:00:23"
+            "time": "2016-05-17 18:01:38"
         },
         {
             "name": "sensio/generator-bundle",
@@ -3418,7 +3423,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "dev-master",
+            "version": "3.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
