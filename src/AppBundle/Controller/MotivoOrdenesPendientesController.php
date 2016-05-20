@@ -114,7 +114,7 @@ class MotivoOrdenesPendientesController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/motivo_ordenes_pendientes:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new MotivoOrdenesPendientesType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\MotivoOrdenesPendientesType', $entity)->createView()
         ));
     }
 
@@ -132,7 +132,7 @@ class MotivoOrdenesPendientesController extends VallasAdminController {
 
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new MotivoOrdenesPendientesType(), $entity);
+        $form = $this->createForm('AppBundle\Form\MotivoOrdenesPendientesType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -164,7 +164,7 @@ class MotivoOrdenesPendientesController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/motivo_ordenes_pendientes:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new MotivoOrdenesPendientesType(), $entity, array('editable' => $this->checkActionPermissions('motivo_ordenes_pendientes', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\MotivoOrdenesPendientesType', $entity, array('editable' => $this->checkActionPermissions('motivo_ordenes_pendientes', 'U')))->createView(),
         ));
     }
 
@@ -209,7 +209,7 @@ class MotivoOrdenesPendientesController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find MotivoOrdenesPendientes entity.');
         }
 
-        $form = $this->createForm(new MotivoOrdenesPendientesType(), $entity);
+        $form = $this->createForm('AppBundle\Form\MotivoOrdenesPendientesType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 

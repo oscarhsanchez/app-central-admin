@@ -3,8 +3,10 @@
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use ESocial\UtilBundle\Util\Dates;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -39,12 +41,12 @@ class ReportType extends ESocialType {
             $form->get('category')->setData($category);
         });
 
-        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
+        $builder->add('save', SubmitType::class, array('label' => 'form.actions.save'));
         $builder
-            ->add('category', 'entity', array('mapped'=>false, 'label' => 'form.report_category.label.category', 'class' => 'VallasModelBundle:ReportCategory', 'query_builder' => function($repository) { return $repository->getQueryBuilder(); },
-                'choice_label' => 'name', 'empty_value' => 'form.label.choice_empty_value', 'required' => true))
+            ->add('category', EntityType::class, array('mapped'=>false, 'label' => 'form.report_category.label.category', 'class' => 'VallasModelBundle:ReportCategory', 'query_builder' => function($repository) { return $repository->getQueryBuilder(); },
+                'choice_label' => 'name', 'placeholder' => 'form.label.choice_empty_value', 'required' => true))
             ->add('subcategory', null, array('label' => 'form.report_category.label.subcategory', 'class' => 'VallasModelBundle:ReportSubcategory', 'query_builder' => function($repository) { return $repository->getQueryBuilder(); },
-                'choice_label' => 'name', 'empty_value' => 'form.label.choice_empty_value', 'required' => true))
+                'choice_label' => 'name', 'placeholder' => 'form.label.choice_empty_value', 'required' => true))
             ->add('name', null, array('label' => 'form.report.label.name'))
             ->add('jasper_report_id', null, array('label' => 'form.report.label.jasper_report_id'))
             ->add('route', null, array('label' => 'form.report.label.route'));
@@ -56,9 +58,9 @@ class ReportType extends ESocialType {
         return 'report';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Report',

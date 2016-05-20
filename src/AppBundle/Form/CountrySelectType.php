@@ -3,7 +3,8 @@
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class CountrySelectType
@@ -24,10 +25,10 @@ class CountrySelectType extends ESocialType {
                 'class' => 'VallasModelBundle:Pais',
             ));
         }else{
-            $builder->add('pais', 'entity', array(
+            $builder->add('pais', EntityType::class, array(
                 'label' => 'form.country_select.label.country',
                 'class' => 'VallasModelBundle:Pais',
-                'empty_value' => 'form.label.choice_empty_value',
+                'placeholder' => 'form.label.choice_empty_value',
                 'choice_label' => 'nombre',
                 'query_builder' => function($repository) use ($user) {
                     return $user ? $repository->getQueryBuilder()->leftJoin('p.user_paises', 'up')->andWhere('up.user = :user_id')->setParameter('user_id', $user->getId()) : $repository->getQueryBuilder();
@@ -41,9 +42,9 @@ class CountrySelectType extends ESocialType {
         return 'country_select';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'user' => null,

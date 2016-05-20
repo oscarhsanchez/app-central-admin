@@ -88,7 +88,7 @@ class RepositorioController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/repositorio:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ArchivoType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\ArchivoType', $entity)->createView()
         ));
     }
 
@@ -106,7 +106,7 @@ class RepositorioController extends VallasAdminController {
 
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new ArchivoType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ArchivoType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -138,7 +138,7 @@ class RepositorioController extends VallasAdminController {
 
         return $this->render('AppBundle:screens/repositorio:form.html.twig', array(
             'entity' => $entity,
-            'form' => $this->createForm(new ArchivoType(), $entity, array('editable' => $this->checkActionPermissions('repositorio', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\ArchivoType', $entity, array('editable' => $this->checkActionPermissions('repositorio', 'U')))->createView(),
         ));
     }
 
@@ -191,7 +191,7 @@ class RepositorioController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Archivo entity.');
         }
 
-        $form = $this->createForm(new ArchivoType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ArchivoType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 

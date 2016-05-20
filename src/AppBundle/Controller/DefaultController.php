@@ -17,7 +17,7 @@ class DefaultController extends VallasAdminController
         $session = $request->getSession();
         $vallas_country = $session->get('vallas_country');
         $vallas_country_id = $vallas_country ? $vallas_country['code'] : null;
-        $formCountry = $this->createForm(new CountrySelectType(), null, array('user' => $this->getSessionUser()));
+        $formCountry = $this->createForm('AppBundle\Form\CountrySelectType', null, array('user' => $this->getSessionUser()));
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(

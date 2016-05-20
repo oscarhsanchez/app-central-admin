@@ -22,11 +22,11 @@ class AppKernel extends Kernel
             new ESocial\AdminBundle\ESocialAdminBundle(),
             new ESocial\ModelBundle\ESocialModelBundle(),
             new ESocial\UtilBundle\ESocialUtilBundle(),
+            new ESocial\SecurityBundle\ESocialSecurityBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
-            new VallasSecurityBundle\VallasSecurityBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
@@ -40,6 +40,21 @@ class AppKernel extends Kernel
         }
 
         return $bundles;
+    }
+
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+
+    public function getCacheDir()
+    {
+        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+    }
+
+    public function getLogDir()
+    {
+        return dirname(__DIR__).'/var/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

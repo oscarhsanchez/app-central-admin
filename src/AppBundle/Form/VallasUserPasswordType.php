@@ -7,7 +7,7 @@ use ESocial\UtilBundle\Form\ESocialType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vallas\ModelBundle\Entity\SecuritySubmodulePermission;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -41,9 +41,9 @@ class VallasUserPasswordType extends ESocialType {
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\User',

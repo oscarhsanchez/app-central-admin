@@ -68,7 +68,7 @@ class WorkOrderImageController extends VallasAdminController {
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
             'type' => $type,
-            'formImage' => $this->createForm(new OrdenTrabajoImagenType(), $firstImg)->createView(),
+            'formImage' => $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $firstImg)->createView(),
             'entity' => $ordenTrabajo,
             'estado_imagen' => $estado_imagen,
             'imgValidation' => !$token
@@ -214,7 +214,7 @@ class WorkOrderImageController extends VallasAdminController {
         }
 
         $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('work_order_{type}', 'U'))) :
-                                    $this->createForm(new OrdenTrabajoImagenType(), $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')));
+                                    $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')));
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
             'entity' => $entity,
@@ -242,7 +242,7 @@ class WorkOrderImageController extends VallasAdminController {
         }
 
         $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true)) :
-                                    $this->createForm(new OrdenTrabajoImagenType(), $entity);
+                                    $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $entity);
 
         $params_original = array('entity' => clone $entity);
 
@@ -257,7 +257,7 @@ class WorkOrderImageController extends VallasAdminController {
 
         if ($origin == 'list'){
             return $this->render('AppBundle:screens/work_order_img:form_list.html.twig', array(
-                'form' => $this->createForm(new OrdenTrabajoImagenType(), $entity)->createView(),
+                'form' => $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $entity)->createView(),
                 'entity' => $entity,
                 'type' => $type,
                 'imgValidation' => $isValidation

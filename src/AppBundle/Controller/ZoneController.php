@@ -98,7 +98,7 @@ class ZoneController extends VallasAdminController {
         return $this->render('AppBundle:screens/zone:form.html.twig', array(
             'entity' => $entity,
             'type' => $type,
-            'form' => $this->createForm(new ZonaType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\ZonaType', $entity)->createView()
         ));
     }
 
@@ -136,7 +136,7 @@ class ZoneController extends VallasAdminController {
         $entity->setTipo($this->getCodeTypeByUrlType($type));
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new ZonaType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ZonaType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -170,7 +170,7 @@ class ZoneController extends VallasAdminController {
         return $this->render('AppBundle:screens/zone:form.html.twig', array(
             'entity' => $entity,
             'type' => $this->getTypeUrlByCode($entity->getTipo()),
-            'form' => $this->createForm(new ZonaType(), $entity, array('editable' => $this->checkActionPermissions('zone_{type}', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\ZonaType', $entity, array('editable' => $this->checkActionPermissions('zone_{type}', 'U')))->createView(),
         ));
     }
 
@@ -215,7 +215,7 @@ class ZoneController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Zona entity.');
         }
 
-        $form = $this->createForm(new ZonaType(), $entity);
+        $form = $this->createForm('AppBundle\Form\ZonaType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 

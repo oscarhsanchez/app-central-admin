@@ -2,11 +2,13 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Class OrdenTrabajoFieldType
@@ -76,10 +78,10 @@ class OrdenTrabajoFieldType extends ESocialType {
 
         switch($type){
             case 'user':
-                $builder->add('user', 'entity', array(
+                $builder->add('user', EntityType::class, array(
                     'mapped' => false,
                     'label' => 'form.work_order.label.user',
-                    'empty_value' => 'form.label.choice_empty_value',
+                    'placeholder' => 'form.label.choice_empty_value',
                     'class' => 'VallasModelBundle:User', 'required' => true,
                     'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); })
                 );
@@ -100,7 +102,7 @@ class OrdenTrabajoFieldType extends ESocialType {
 
                 $arrEstados['4'] = 'form.work_order.label.estado_orden.pendiente_incidencia';
                 $builder
-                    ->add('estado_orden', 'choice', array('label' => 'form.work_order.label.estado_orden', 'empty_value' => 'form.label.choice_empty_value', 'choices' => $arrEstados));
+                    ->add('estado_orden', ChoiceType::class, array('label' => 'form.work_order.label.estado_orden', 'placeholder' => 'form.label.choice_empty_value', 'choices' => self::sf3TransformChoiceOptions($arrEstados)));
 
                 if ($post['estado_orden'] == '2'){
                     $builder
@@ -119,9 +121,9 @@ class OrdenTrabajoFieldType extends ESocialType {
         return 'work_order';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\OrdenTrabajo',

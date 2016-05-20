@@ -4,7 +4,7 @@ namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -33,9 +33,9 @@ class ZonaType extends ESocialType {
         return 'zona';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Zona',

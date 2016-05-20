@@ -1,6 +1,5 @@
-vallas_security:
-    resource: "@VallasSecurityBundle/Resources/config/routing.yml"
-    prefix:   /
+e_social_util:
+    resource: "@ESocialUtilBundle/Resources/config/routing.yml"
 
 e_social_admin:
     resource: "@ESocialAdminBundle/Resources/config/routing.yml"
@@ -8,4 +7,3 @@ e_social_admin:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-

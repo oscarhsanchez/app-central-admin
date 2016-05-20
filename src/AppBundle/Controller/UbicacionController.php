@@ -93,7 +93,7 @@ class UbicacionController extends VallasAdminController {
         return $this->render('AppBundle:screens/ubicacion:form.html.twig', array(
             'isNew' => true,
             'entity' => $entity,
-            'form' => $this->createForm(new UbicacionType(), $entity)->createView()
+            'form' => $this->createForm('AppBundle\Form\UbicacionType', $entity)->createView()
         ));
     }
 
@@ -111,7 +111,7 @@ class UbicacionController extends VallasAdminController {
 
         $params_original = array('entity' => null);
 
-        $form = $this->createForm(new UbicacionType(), $entity);
+        $form = $this->createForm('AppBundle\Form\UbicacionType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, $params_original, $form);
 
@@ -159,10 +159,10 @@ class UbicacionController extends VallasAdminController {
             'paramForm' => $this->getVar('pForm'),
             'isNew' => false,
             'entity' => $entity,
-            'form' => $this->createForm(new UbicacionType(), $entity, array('editable' => $this->checkActionPermissions('ubicacion', 'U')))->createView(),
+            'form' => $this->createForm('AppBundle\Form\UbicacionType', $entity, array('editable' => $this->checkActionPermissions('ubicacion', 'U')))->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new UbicacionImagenType(), $firstImg, array('editable' => $this->checkActionPermissions('ubicacion', 'U')))->createView()
+            'formFirstImage' => $this->createForm('AppBundle\Form\UbicacionImagenType', $firstImg, array('editable' => $this->checkActionPermissions('ubicacion', 'U')))->createView()
         ));
     }
 
@@ -208,7 +208,7 @@ class UbicacionController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Ubicacion entity.');
         }
 
-        $form = $this->createForm(new UbicacionType(), $entity);
+        $form = $this->createForm('AppBundle\Form\UbicacionType', $entity);
 
         $boolSaved = $this->saveAction($request, $entity, array('entity' => clone $entity), $form);
 
@@ -236,7 +236,7 @@ class UbicacionController extends VallasAdminController {
             'form' => $form->createView(),
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formFirstImage' => $this->createForm(new UbicacionImagenType(), $firstImg)->createView()
+            'formFirstImage' => $this->createForm('AppBundle\Form\UbicacionImagenType', $firstImg)->createView()
         ));
     }
 

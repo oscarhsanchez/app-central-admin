@@ -29,11 +29,14 @@ parameters:
       version: '0.1'
       name: 'Vallas Admin Panel'
       logo: '/bundles/app/img/logogpovallas.png'
+      login_logo: /bundles/app/img/logogpovallas.png
 
       customization:
         css:
              primary_color: '#eb6b08'
              primary_color_hover: '#eb5208'
+             icheck_custom_img: '/bundles/app/img/icheck/icheck_vallas.png'
+             icheck_2x_custom_img: '/bundles/app/img/icheck/icheck_vallas@2x.png'
 
 
     query_filters_entities:

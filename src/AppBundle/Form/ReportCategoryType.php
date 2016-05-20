@@ -4,7 +4,8 @@ namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -16,7 +17,7 @@ class ReportCategoryType extends ESocialType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('save', 'submit', array('label' => 'form.actions.save'));
+        $builder->add('save', SubmitType::class, array('label' => 'form.actions.save'));
         $builder
             ->add('name', null, array('label' => 'form.report_category.label.name'));
     }
@@ -26,9 +27,9 @@ class ReportCategoryType extends ESocialType
         return 'report_category';
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\ReportCategory',

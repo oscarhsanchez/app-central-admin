@@ -1,12 +1,12 @@
 <?php
 
 namespace AppBundle\Form;
+use ESocial\UtilBundle\Form\Widget\UploadableFieldType;
 use Symfony\Component\Form\FormBuilderInterface;
 use ESocial\UtilBundle\Form\ESocialType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class ArchivoType
@@ -20,7 +20,7 @@ class ArchivoType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('nombre', 'uploadable_field', array('label'=>'form.archivo.label.nombre', 'type'=>'file', 'file_mapping' => 'archivo', 'required' => false))
+            ->add('nombre', UploadableFieldType::class, array('label'=>'form.archivo.label.nombre', 'type'=>'file', 'file_mapping' => 'archivo', 'required' => false))
             ;
 
     }
@@ -31,9 +31,9 @@ class ArchivoType extends ESocialType {
         return 'archivo';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver){
+    public function configureOptions(OptionsResolver $resolver){
 
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'data_class' => 'Vallas\ModelBundle\Entity\Archivo'

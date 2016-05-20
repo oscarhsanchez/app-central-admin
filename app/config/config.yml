@@ -30,6 +30,7 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    assets: ~
 
 # Twig Configuration
 twig:
@@ -100,6 +101,10 @@ fos_user:
 e_social_admin:
     role_class: Vallas\ModelBundle\Entity\Role
     user_type: AppBundle\Form\VallasUserType
+
+e_social_security:
+    submodule_class: Vallas\ModelBundle\Entity\SecuritySubmodule
+    submodule_permission_class: Vallas\ModelBundle\Entity\SecuritySubmodulePermission
 
 e_social_util:
     jasper_reports:

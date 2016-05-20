@@ -56,7 +56,7 @@ class UbicacionImageController extends VallasAdminController {
         return $this->render('AppBundle:screens/ubicacion_img:list.html.twig', array(
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formImage' => $this->createForm(new UbicacionImagenType(), $firstImg)->createView(),
+            'formImage' => $this->createForm('AppBundle\Form\UbicacionImagenType', $firstImg)->createView(),
             'entity' => $ubicacion
         ));
     }
@@ -172,7 +172,7 @@ class UbicacionImageController extends VallasAdminController {
         }
 
         $form = $isPopup == '1' ? $this->createForm(new UbicacionImagenType(array('_form_name' => 'ubicacion_img_popup')), $entity) :
-                                    $this->createForm(new UbicacionImagenType(), $entity);
+                                    $this->createForm('AppBundle\Form\UbicacionImagenType', $entity);
 
         return $this->render('AppBundle:screens/ubicacion_img:form.html.twig', array(
             'entity' => $entity,
@@ -197,7 +197,7 @@ class UbicacionImageController extends VallasAdminController {
         }
 
         $form = $isPopup == '1' ? $this->createForm(new UbicacionImagenType(array('_form_name' => 'ubicacion_img_popup')), $entity) :
-                                    $this->createForm(new UbicacionImagenType(), $entity);
+                                    $this->createForm('AppBundle\Form\UbicacionImagenType', $entity);
 
         $params_original = array('entity' => clone $entity);
 
@@ -212,7 +212,7 @@ class UbicacionImageController extends VallasAdminController {
 
         if ($origin == 'list'){
             return $this->render('AppBundle:screens/ubicacion_img:form_list.html.twig', array(
-                'form' => $this->createForm(new UbicacionImagenType(), $entity)->createView(),
+                'form' => $this->createForm('AppBundle\Form\UbicacionImagenType', $entity)->createView(),
                 'entity' => $entity
             ));
         }

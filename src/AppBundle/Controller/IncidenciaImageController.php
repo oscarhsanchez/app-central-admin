@@ -58,7 +58,7 @@ class IncidenciaImageController extends VallasAdminController {
         return $this->render('AppBundle:screens/incidencia_img:list.html.twig', array(
             'image' => $firstImg,
             'imgPaged' => $imgPaged,
-            'formImage' => $this->createForm(new IncidenciaImagenType(), $firstImg)->createView(),
+            'formImage' => $this->createForm('AppBundle\Form\IncidenciaImagenType', $firstImg)->createView(),
             'entity' => $incidencia,
             'type' => $type,
         ));
@@ -180,7 +180,7 @@ class IncidenciaImageController extends VallasAdminController {
         }
 
         $form = $isPopup == '1' ? $this->createForm(new IncidenciaImagenType(array('_form_name' => 'incidencia_img_popup')), $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('incidencia_{type}', 'U'))) :
-                                    $this->createForm(new IncidenciaImagenType(), $entity, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')));
+                                    $this->createForm('AppBundle\Form\IncidenciaImagenType', $entity, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')));
 
         return $this->render('AppBundle:screens/incidencia_img:form.html.twig', array(
             'entity' => $entity,
@@ -207,7 +207,7 @@ class IncidenciaImageController extends VallasAdminController {
         }
 
         $form = $isPopup == '1' ? $this->createForm(new IncidenciaImagenType(array('_form_name' => 'incidencia_img_popup')), $entity, array('is_popup' => true)) :
-                                    $this->createForm(new IncidenciaImagenType(), $entity);
+                                    $this->createForm('AppBundle\Form\IncidenciaImagenType', $entity);
 
         $params_original = array('entity' => clone $entity);
 
@@ -222,7 +222,7 @@ class IncidenciaImageController extends VallasAdminController {
 
         if ($origin == 'list'){
             return $this->render('AppBundle:screens/incidencia_img:form_list.html.twig', array(
-                'form' => $this->createForm(new IncidenciaImagenType(), $entity)->createView(),
+                'form' => $this->createForm('AppBundle\Form\IncidenciaImagenType', $entity)->createView(),
                 'type' => $type,
                 'entity' => $entity
             ));
