@@ -96,41 +96,42 @@ class UbicacionDisponibilidadController extends VallasAdminController {
 
         $intervalo_inicial = "'".$dt_start->format('Y-m-d')."'";
         $intervalo_final = "'".$dt_end_aux->format('Y-m-d')."'";
-        $filtroFechas = "((propuesta.fecha_inicio <= $intervalo_inicial AND (propuesta.fecha_fin >= $intervalo_final OR propuesta.fecha_fin BETWEEN $intervalo_inicial AND $intervalo_final)) OR (propuesta.fecha_inicio BETWEEN $intervalo_inicial AND $intervalo_final AND (propuesta.fecha_fin >= $intervalo_final OR propuesta.fecha_fin BETWEEN $intervalo_inicial AND $intervalo_final)))";
-        $qb = $em->getRepository('VallasModelBundle:Medio')->createQueryBuilder('medio');
+
+        $filtroFechas = "((reserva.fecha_inicio <= $intervalo_inicial AND (reserva.fecha_fin >= $intervalo_final OR reserva.fecha_fin BETWEEN $intervalo_inicial AND $intervalo_final)) OR (reserva.fecha_inicio BETWEEN $intervalo_inicial AND $intervalo_final AND (reserva.fecha_fin >= $intervalo_final OR reserva.fecha_fin BETWEEN $intervalo_inicial AND $intervalo_final)))";
+
+        $qb = $em->getRepository('VallasModelBundle:ReservaMedio')->createQueryBuilder('reserva');
         $qb
-            ->addSelect('pdo')
             ->addSelect('pd')
+            ->addSelect('pdo')
             ->addSelect('propuesta')
-            ->leftJoin('medio.ubicacion', 'ubi')
-            ->leftJoin('medio.propuesta_detalle_outdoors', 'pdo', 'WITH', 'pdo.estado > 0')
-            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
-            ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0 AND '.$filtroFechas)
+            ->leftJoin('reserva.medio', 'medio')
+            ->leftJoin('reserva.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
+            ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0')
+            ->leftJoin('reserva.propuestaDetalleOutdoor', 'pdo', 'WITH', 'pdo.estado > 0')
+            ->andWhere('reserva.estado > 0')
             ->andWhere('medio.estado > 0')
             ->andWhere('medio.id_cara > 0')
             ->andWhere("medio.ubicacion = '$pkUbicacion'")
-            //->setParameter('ubi', $pkUbicacion)
-            //->setParameter('intervalo_inicial', $dt_start->format('Y-m-d'))
-            //->setParameter('intervalo_final', $dt_end_aux->format('Y-m-d'))
-            ;
+            ->andWhere($filtroFechas);
 
         if ($pkMedio){
-            $qb->andWhere("medio.pk_medio = '$pkMedio'");
+            $qb->andWhere("reserva.medio = '$pkMedio'");
         }
 
-        $medios = $qb->getQuery()->getResult();
+        $reservas = $qb->getQuery()->getResult();
 
         for($i=clone $dt_start; $i<$dt_end; $i->add(new \DateInterval('P1D'))){
             $count = 0;
             $slots = 0;
 
             $cliente = null;
-            foreach($medios as $medio){
+            foreach($reservas as $reserva){
 
+                $medio = $reserva->getMedio();
                 $slots += $medio->getSlots();
 
-                foreach($medio->getPropuestaDetalleOutdoors() as $pdo) {
-                    $p = $pdo->getPropuestaDetalle() ? $pdo->getPropuestaDetalle()->getPropuesta() : null;
+                foreach($reserva->getPropuestaDetalleOutdoors() as $pdo) {
+                    $p = $reserva->getPropuestaDetalle() ? $reserva->getPropuestaDetalle()->getPropuesta() : null;
 
                     if (!$p) continue;
 
@@ -184,25 +185,6 @@ class UbicacionDisponibilidadController extends VallasAdminController {
             'ubicacion' => $ubicacion,
             'medio' => $pkMedio
         ));
-        //return new JsonResponse($arrDays);
-
-        /*
-SELECT *
-FROM propuestas_detalle_outdoor
-JOIN propuestas_detalle ON fk_propuesta_detalle = pk_propuesta_detalle AND propuestas_detalle.estado > 0
-JOIN propuestas ON fk_propuesta = pk_propuesta AND propuestas.estado > 0
-JOIN medios ON fk_medio = pk_medio AND medios.estado > 0
-WHERE propuestas_detalle_outdoor.estado > 0 AND propuestas_detalle.fk_ubicacion = 'ubicacion28' AND id_cara = 1
-AND (
-(fecha_inicio <= '2015-07-01' AND (fecha_fin >= '2015-07-31' OR fecha_fin BETWEEN '2015-07-01' AND '2015-07-31'))
-OR
-(fecha_inicio BETWEEN '2015-07-01' AND '2015-07-31' AND (fecha_fin >= '2015-07-31' OR fecha_fin BETWEEN '2015-07-01' AND '2015-07-31'))
-)
-         */
-
-        //$response = $this->getDatatableManager()->getResults();
-
-        //return new JsonResponse($response);
 
     }
 
@@ -227,47 +209,55 @@ OR
     {
 
         $em = $this->getDoctrine()->getManager();
-        $qb = $em->getRepository('VallasModelBundle:Medio')->createQueryBuilder('medio');
+
+        $repository = $em->getRepository('VallasModelBundle:ReservaMedio');
+        $qb = $repository->createQueryBuilder('reserva');
         $qb
-            ->addSelect('pdo')
             ->addSelect('pd')
+            ->addSelect('pdo')
             ->addSelect('propuesta')
             ->addSelect('cliente')
-            ->leftJoin('medio.ubicacion', 'ubi')
-            ->leftJoin('medio.propuesta_detalle_outdoors', 'pdo', 'WITH', 'pdo.estado > 0')
-            ->leftJoin('pdo.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
-            ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0 AND :fecha BETWEEN propuesta.fecha_inicio AND propuesta.fecha_fin')
-            ->leftJoin('propuesta.cliente', 'cliente')
+            ->leftJoin('reserva.medio', 'medio')
+            ->leftJoin('reserva.propuestaDetalle', 'pd', 'WITH', 'pd.estado > 0')
+            ->leftJoin('pd.propuesta', 'propuesta', 'WITH', 'propuesta.estado > 0')
+            ->leftJoin('reserva.propuestaDetalleOutdoor', 'pdo', 'WITH', 'pdo.estado > 0')
+            ->andWhere('reserva.estado > 0')
             ->andWhere('medio.estado > 0')
-            ->andWhere('medio.ubicacion = :ubi')
             ->andWhere('medio.id_cara > 0')
-            ->setParameter('fecha', $day)
-            ->setParameter('ubi', $pkUbicacion);
+            ->andWhere("medio.ubicacion = '$pkUbicacion'")
+            ->andWhere(":fecha BETWEEN reserva.fecha_inicio AND reserva.fecha_fin")->setParameter('fecha', $day);
+
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'pk_medio', 'posicion', 'tipo_medio', 'slots', 'propuesta_detalle_outdoors'));
-        $jsonList->setSearchFields(array('tipo_medio', 'slots'));
-        $jsonList->setRepository($em->getRepository('VallasModelBundle:Medio'));
+        $jsonList->setFieldsToGet(array('token', 'medio__pk_medio', 'medio__posicion', 'medio__tipo_medio', 'medio__slots', 'propuestaDetalle__propuesta__cliente'));
+        $jsonList->setSearchFields(array('medio__tipo_medio', 'medio__slots'));
+        $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 
-        //echo $qb->getQuery()->getSQL();exit;
-
         $response = $jsonList->getResults();
+
+        $arrReservas = array();
+        foreach($response['aaData'] as $key=>$row){
+            $reg = $response['aaData'][$key];
+
+            if (!array_key_exists($reg['medio__pk_medio'], $arrReservas)){
+                $arrReservas[$reg['medio__pk_medio']] = 0;
+            }
+            $arrReservas[$reg['medio__pk_medio']]++;
+        }
 
         foreach($response['aaData'] as $key=>$row){
             $reg = $response['aaData'][$key];
 
-            $propuestaDetalleOutdoor = count($reg['propuesta_detalle_outdoors'])>0 ? $reg['propuesta_detalle_outdoors'][0] : null;
-            $cliente = $propuestaDetalleOutdoor && $propuestaDetalleOutdoor->getPropuestaDetalle() && $propuestaDetalleOutdoor->getPropuestaDetalle()->getPropuesta() ? $propuestaDetalleOutdoor->getPropuestaDetalle()->getPropuesta()->getCliente() : null;
+            $cliente = $reg['propuestaDetalle__propuesta__cliente'];
 
-            $response['aaData'][$key]['estado_code'] = count($reg['propuesta_detalle_outdoors']) < $reg['slots'] ? '0' : '1';
-            $response['aaData'][$key]['estado'] = count($reg['propuesta_detalle_outdoors']) < $reg['slots'] ? 'Libre' : 'Ocupada';
+            $response['aaData'][$key]['estado_code'] = $arrReservas[$reg['medio__pk_medio']] < $reg['medio__slots'] ? '0' : '1';
+            $response['aaData'][$key]['estado'] = $arrReservas[$reg['medio__pk_medio']] < $reg['medio__slots'] ? 'Libre' : 'Ocupada';
             $response['aaData'][$key]['cliente'] = $cliente ? $cliente->getRazonSocial() : null;
 
-            unset($response['aaData'][$key]['propuesta_detalle_outdoors']);
+            unset($response['aaData'][$key]['propuestaDetalle__propuesta__cliente']);
         }
-
 
         return new JsonResponse($response);
     }
