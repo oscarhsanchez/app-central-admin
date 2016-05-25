@@ -2,8 +2,11 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -58,7 +61,7 @@ class IncidenciaType extends ESocialType {
 
             if ($form->getData() && $data && $data['user']) {
                 $user = $em->getRepository('VallasModelBundle:User')->find($data['user']);
-                $form->getData()->setCodigoUserAsignado($user->getCodigo());
+                if ($user) $form->getData()->setCodigoUserAsignado($user->getCodigo());
             }
 
             if (intval($data['estado_incidencia']) == 2 && $form->getData()->getEstadoIncidencia() != intval($data['estado_incidencia'])) {
@@ -68,7 +71,7 @@ class IncidenciaType extends ESocialType {
         });
 
         $builder->add('save', SubmitType::class, array('label' => 'form.actions.save'));
-        $builder->add('medio', 'selectable_entity', array(
+        $builder->add('medio', SelectableEntityType::class, array(
                 'label' => 'form.incidencia.label.medio',
                 'class' => 'VallasModelBundle:Medio',
                 'required' => false,
@@ -85,22 +88,22 @@ class IncidenciaType extends ESocialType {
             'query_builder' => function ($repository){ return $repository->getQueryBuilder()->leftJoin('u.user_paises', 'up'); })
         );
 
-        $builder->add('fecha_limite', 'date', array('label' => 'form.incidencia.label.fecha_limite', 'widget' => 'single_text',
+        $builder->add('fecha_limite', DateType::class, array('label' => 'form.incidencia.label.fecha_limite', 'widget' => 'single_text',
             'format' => 'dd/MM/yyyy', 'constraints' => array(new NotBlank()), 'attr' => array('class' => 'calendar text-date')));
 
         $builder
             ->add('estado_incidencia', ChoiceType::class, array('label' => 'form.incidencia.label.estado_incidencia', 'placeholder' => 'form.label.choice_empty_value', 'choices' => self::sf3TransformChoiceOptions(array(
             '0' => 'form.incidencia.label.estado_incidencia.pendiente', '1' => 'form.incidencia.label.estado_incidencia.en_proceso', '2' => 'form.incidencia.label.estado_incidencia.cerrada')), 'constraints' => array(new NotBlank())));
 
-        $builder->add('observaciones', 'textarea', array('label' => 'form.incidencia.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)));
+        $builder->add('observaciones', TextareaType::class, array('label' => 'form.incidencia.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)));
 
         $estadoIncidencia = $data->getEstadoIncidencia();
         if ($post) $estadoIncidencia = $post['estado_incidencia'];
         if ($estadoIncidencia == 2){
             $builder
-                ->add('fecha_cierre', 'date', array('label' => 'form.incidencia.label.fecha_cierre', 'widget' => 'single_text', 'required' => true,
+                ->add('fecha_cierre', DateType::class, array('label' => 'form.incidencia.label.fecha_cierre', 'widget' => 'single_text', 'required' => true,
                     'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
-                ->add('observaciones_cierre', 'textarea', array('label' => 'form.incidencia.label.observaciones_cierre', 'required' => false));
+                ->add('observaciones_cierre', TextareaType::class, array('label' => 'form.incidencia.label.observaciones_cierre', 'required' => false));
         }
 
     }

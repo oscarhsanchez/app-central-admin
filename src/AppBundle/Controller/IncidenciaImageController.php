@@ -81,7 +81,7 @@ class IncidenciaImageController extends VallasAdminController {
         $entity = new ImagenIncidencia();
         $entity->setIncidencia($ot);
         $entity->setPais($this->getSessionCountry());
-        $form = $this->createForm(new IncidenciaImagenType(array('_form_name' => 'incidencia_img_popup')), $entity, array('is_popup' => true));
+        $form = $this->createNamedForm('incidencia_img_popup', 'AppBundle\Form\IncidenciaImagenType', $entity, array('is_popup' => true));
 
         return $this->render('AppBundle:screens/incidencia_img:form.html.twig', array(
             'form' => $form->createView(),
@@ -145,7 +145,7 @@ class IncidenciaImageController extends VallasAdminController {
         $entity->setPais($this->getSessionCountry());
         $entity->setIncidencia($ot);
 
-        $form = $this->createForm(new IncidenciaImagenType(array('_form_name' => 'incidencia_img_popup')), $entity, array('is_popup' => true));
+        $form = $this->createNamedForm('incidencia_img_popup', 'AppBundle\Form\IncidenciaImagenType', $entity, array('is_popup' => true));
         $params_original = array('entity' => null);
 
         if ($request->getMethod() == 'POST'){
@@ -182,7 +182,7 @@ class IncidenciaImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new IncidenciaImagenType(array('_form_name' => 'incidencia_img_popup')), $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('incidencia_{type}', 'U'))) :
+        $form = $isPopup == '1' ? $this->createNamedForm('incidencia_img_popup', 'AppBundle\Form\IncidenciaImagenType', $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('incidencia_{type}', 'U'))) :
                                     $this->createForm('AppBundle\Form\IncidenciaImagenType', $entity, array('editable' => $this->checkActionPermissions('incidencia_{type}', 'U')));
 
         return $this->render('AppBundle:screens/incidencia_img:form.html.twig', array(
@@ -209,7 +209,7 @@ class IncidenciaImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new IncidenciaImagenType(array('_form_name' => 'incidencia_img_popup')), $entity, array('is_popup' => true)) :
+        $form = $isPopup == '1' ? $this->createNamedForm('incidencia_img_popup','AppBundle\Form\IncidenciaImagenType', $entity, array('is_popup' => true)) :
                                     $this->createForm('AppBundle\Form\IncidenciaImagenType', $entity);
 
         $params_original = array('entity' => clone $entity);

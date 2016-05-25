@@ -102,7 +102,7 @@ class WorkOrderImageController extends VallasAdminController {
         $entity = new Imagen();
         $entity->setOrdenTrabajo($ot);
         $entity->setPais($this->getSessionCountry());
-        $form = $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true));
+        $form = $this->createNamedForm('work_order_img_popup', 'AppBundle\Form\OrdenTrabajoImagenType', $entity, array('is_popup' => true));
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
             'form' => $form->createView(),
@@ -179,7 +179,7 @@ class WorkOrderImageController extends VallasAdminController {
         $entity->setPais($this->getSessionCountry());
         $entity->setOrdenTrabajo($ot);
 
-        $form = $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true));
+        $form = $this->createNamedForm('work_order_img_popup', 'AppBundle\Form\OrdenTrabajoImagenType', $entity, array('is_popup' => true));
         $params_original = array('entity' => null);
 
         if ($request->getMethod() == 'POST'){
@@ -216,7 +216,7 @@ class WorkOrderImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('work_order_{type}', 'U'))) :
+        $form = $isPopup == '1' ? $this->createNamedForm('work_order_img_popup', 'AppBundle\Form\OrdenTrabajoImagenType', $entity, array('is_popup' => true, 'editable' => $this->checkActionPermissions('work_order_{type}', 'U'))) :
                                     $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $entity, array('editable' => $this->checkActionPermissions('work_order_{type}', 'U')));
 
         return $this->render('AppBundle:screens/work_order_img:form.html.twig', array(
@@ -244,7 +244,7 @@ class WorkOrderImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new OrdenTrabajoImagenType(array('_form_name' => 'work_order_img_popup')), $entity, array('is_popup' => true)) :
+        $form = $isPopup == '1' ? $this->createNamedForm('work_order_img_popup', 'AppBundle\Form\OrdenTrabajoImagenType', $entity, array('is_popup' => true)) :
                                     $this->createForm('AppBundle\Form\OrdenTrabajoImagenType', $entity);
 
         $params_original = array('entity' => clone $entity);

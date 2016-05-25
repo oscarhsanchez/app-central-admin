@@ -72,7 +72,7 @@
                 var alertType = result.result == 1 ? 'success' : 'danger';
                 $(motivo_ordenes_pendientes_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
             }
-            motivo_ordenes_pendientes_list.ajax.reload();
+            motivo_ordenes_pendientes_list.api().ajax.reload();
         }
     </script>
 {% endblock %}

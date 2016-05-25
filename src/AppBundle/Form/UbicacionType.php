@@ -2,9 +2,12 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -96,9 +99,9 @@ class UbicacionType extends ESocialType {
                 ->add('categoria', ChoiceType::class, array('label' => 'form.ubicacion.label.categoria', 'choices' => self::sf3TransformChoiceOptions(self::$categoria_options)))
                 ->add('catorcena', null, array('label' => 'form.ubicacion.label.catorcena'))
                 ->add('anio', null, array('label' => 'form.ubicacion.label.anio', 'constraints' => array(new NotBlank())))
-                ->add('fecha_instalacion', 'date', array('required' => false, 'label' => 'form.ubicacion.label.fecha_instalacion', 'widget' => 'single_text',
+                ->add('fecha_instalacion', DateType::class, array('required' => false, 'label' => 'form.ubicacion.label.fecha_instalacion', 'widget' => 'single_text',
                     'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
-                ->add('observaciones', 'textarea', array('required' => false, 'label' => 'form.ubicacion.label.observaciones', 'attr' => array('rows' => 5)))
+                ->add('observaciones', TextareaType::class, array('required' => false, 'label' => 'form.ubicacion.label.observaciones', 'attr' => array('rows' => 5)))
                 ->add('latitud', null, array('label' => 'form.ubicacion.label.latitud', 'attr' => array('onchange' => 'onUbicacionCoordsChange()')))
                 ->add('longitud', null, array('label' => 'form.ubicacion.label.longitud', 'attr' => array('onchange' => 'onUbicacionCoordsChange()')))
                 ->add('reserva', null, array('label' => 'form.ubicacion.label.reserva'));
@@ -106,7 +109,7 @@ class UbicacionType extends ESocialType {
 
             $builder->add('save', SubmitType::class, array('label' => 'form.actions.save'));
             $builder->add('medios', 'collection', array(
-                'type' => 'selectable_entity',
+                'type' => SelectableEntityType::class,
                 'prototype' => true,
                 'label' => false,
                 'by_reference' => false,

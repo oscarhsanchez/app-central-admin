@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,7 +29,7 @@ class MedioType extends ESocialType {
 
         $builder->add('pk_medio', null, array('label' => 'form.medio.label.pk_medio', 'constraints' => array(new NotBlank())));
 
-        $builder->add('subtipoMedio', 'selectable_entity', array(
+        $builder->add('subtipoMedio', SelectableEntityType::class, array(
             'label' => 'form.medio.label.subtipoMedio',
             'class' => 'VallasModelBundle:SubtipoMedio',
             'required' => false,

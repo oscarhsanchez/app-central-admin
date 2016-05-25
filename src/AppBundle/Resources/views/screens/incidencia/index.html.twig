@@ -79,7 +79,6 @@
         var params = {
             dom: '<"clearfix" lf>r<"tablePrint" t>ip',
             fnDrawCallback: function ( settings ) {
-                var api = this.api();
                 var filterWrapper = $('#dt-incidencia-list_filter');
                 if ($('#dt-incidencia-list_filter-tipo-wrapper').length < 1) {
                     $(filterWrapper).append(

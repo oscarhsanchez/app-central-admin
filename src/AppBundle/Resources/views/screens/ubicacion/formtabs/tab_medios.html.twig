@@ -65,7 +65,7 @@
             var alertType = result.result == 1 ? 'success' : 'danger';
             $(medio_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
         }
-        medio_list.ajax.reload();
+        medio_list.api().ajax.reload();
     }
 
     function selectSubtipoMedio(data, vars){

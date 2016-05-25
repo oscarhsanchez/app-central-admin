@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\HiddenEntityType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -49,7 +50,7 @@ class RolePermissionType extends ESocialType {
         });
 
         $builder
-            ->add('submodule', 'hidden_entity', array('label' => 'form.role_permissions.label.submodule', 'class' => 'VallasModelBundle:SecuritySubmodule'))
+            ->add('submodule', HiddenEntityType::class, array('label' => 'form.role_permissions.label.submodule', 'class' => 'VallasModelBundle:SecuritySubmodule'))
             ->add('permission_C', 'checkbox', array('attr' => array('class' => 'i-checks'), 'label' => false, 'mapped' => false, 'required' => false))
             ->add('permission_R', 'checkbox', array('attr' => array('class' => 'i-checks'), 'label' => false, 'mapped' => false, 'required' => false))
             ->add('permission_U', 'checkbox', array('attr' => array('class' => 'i-checks'), 'label' => false, 'mapped' => false, 'required' => false))

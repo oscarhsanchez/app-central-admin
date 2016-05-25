@@ -77,7 +77,7 @@ class UbicacionImageController extends VallasAdminController {
         $entity = new ImagenUbicacion();
         $entity->setUbicacion($ot);
         $entity->setPais($this->getSessionCountry());
-        $form = $this->createForm(new UbicacionImagenType(array('_form_name' => 'ubicacion_img_popup')), $entity);
+        $form = $this->createNamedForm('ubicacion_img_popup', 'AppBundle\Form\UbicacionImagenType', $entity);
 
         return $this->render('AppBundle:screens/ubicacion_img:form.html.twig', array(
             'form' => $form->createView(),
@@ -139,7 +139,7 @@ class UbicacionImageController extends VallasAdminController {
         $entity->setPais($this->getSessionCountry());
         $entity->setUbicacion($ot);
 
-        $form = $this->createForm(new UbicacionImagenType(array('_form_name' => 'ubicacion_img_popup')), $entity);
+        $form = $this->createNamedForm('ubicacion_img_popup', 'AppBundle\Form\UbicacionImagenType', $entity);
         $params_original = array('entity' => null);
 
         if ($request->getMethod() == 'POST'){
@@ -174,7 +174,7 @@ class UbicacionImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new UbicacionImagenType(array('_form_name' => 'ubicacion_img_popup')), $entity) :
+        $form = $isPopup == '1' ? $this->createNamedForm('ubicacion_img_popup', 'AppBundle\Form\UbicacionImagenType', $entity) :
                                     $this->createForm('AppBundle\Form\UbicacionImagenType', $entity);
 
         return $this->render('AppBundle:screens/ubicacion_img:form.html.twig', array(
@@ -199,7 +199,7 @@ class UbicacionImageController extends VallasAdminController {
             throw $this->createNotFoundException('Unable to find Imagen entity.');
         }
 
-        $form = $isPopup == '1' ? $this->createForm(new UbicacionImagenType(array('_form_name' => 'ubicacion_img_popup')), $entity) :
+        $form = $isPopup == '1' ? $this->createNamedForm('ubicacion_img_popup', 'AppBundle\Form\UbicacionImagenType', $entity) :
                                     $this->createForm('AppBundle\Form\UbicacionImagenType', $entity);
 
         $params_original = array('entity' => clone $entity);

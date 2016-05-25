@@ -77,7 +77,7 @@
                 var alertType = result.result == 1 ? 'success' : 'danger';
                 $(repository_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
             }
-            repository_list.ajax.reload();
+            repository_list.api().ajax.reload();
         }
 
     </script>

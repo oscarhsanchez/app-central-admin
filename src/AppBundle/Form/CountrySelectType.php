@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\HiddenEntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -21,7 +22,7 @@ class CountrySelectType extends ESocialType {
         $hiddenForm = array_key_exists('hiddenForm', $options) ? $options['hiddenForm'] : null;
 
         if ($hiddenForm){
-            $builder->add('pais', 'hidden_entity', array(
+            $builder->add('pais', HiddenEntityType::class, array(
                 'class' => 'VallasModelBundle:Pais',
             ));
         }else{

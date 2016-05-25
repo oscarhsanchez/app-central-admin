@@ -1,6 +1,6 @@
 <div class="row">
     <div id="calendar" class="col-md-6" style="max-width: 900px; margin: 0 auto;">
-        {% render controller("AppBundle:UbicacionDisponibilidad:index", { 'month': "now"|date('m-Y') }) %}
+        {{ render(controller("AppBundle:UbicacionDisponibilidad:index", { 'month': "now"|date('m-Y') })) }}
     </div>
 </div>
 

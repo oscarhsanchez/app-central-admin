@@ -83,7 +83,7 @@
                 var alertType = result.result == 1 ? 'success' : 'danger';
                 $(security_submodule_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
             }
-            security_submodule_list.ajax.reload();
+            security_submodule_list.api().ajax.reload();
         }
 
     </script>

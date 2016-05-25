@@ -84,7 +84,7 @@
                 var alertType = result.result == 1 ? 'success' : 'danger';
                 $(location_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
             }
-            location_list.ajax.reload();
+            location_list.api().ajax.reload();
         }
 
     </script>

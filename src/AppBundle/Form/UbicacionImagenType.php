@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Form;
+use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use ESocial\UtilBundle\Form\Widget\UploadableFieldType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,7 @@ class UbicacionImagenType extends ESocialType {
             ->add('nombre', UploadableFieldType::class, array('label'=>'form.ubicacion_img.label.nombre', 'type'=>'image', 'image_mapping' => 'ubicacion_imagen', 'required' => false))
             ->add('observaciones', null, array('label' => 'form.ubicacion_img.label.observaciones', 'attr' => array('rows' => 3)))
             ->add('observaciones_cliente', null, array('label' => 'form.ubicacion_img.label.observaciones_cliente', 'attr' => array('rows' => 3)))
-            ->add('medio', 'selectable_entity', array(
+            ->add('medio', SelectableEntityType::class, array(
                 'label' => 'form.work_order.label.medio',
                 'class' => 'VallasModelBundle:Medio',
                 'required' => false,

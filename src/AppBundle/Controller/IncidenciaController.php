@@ -388,7 +388,7 @@ class IncidenciaController extends VallasAdminController {
             $entity = null;
         }
 
-        $form = $this->createForm(new IncidenciaFieldType(array('_form_name' => 'incidencia_' . $field_type)), $entity, array('type' => $field_type));
+        $form = $this->createNamedForm('incidencia_' . $field_type, 'AppBundle\Form\IncidenciaFieldType', $entity, array('type' => $field_type));
 
         return $this->render('AppBundle:screens/incidencia:form_update_field.html.twig', array('form' => $form->createView(), 'type'=>$type, 'field_type' => $field_type));
 
@@ -405,7 +405,7 @@ class IncidenciaController extends VallasAdminController {
         $field_type = $this->getVar('field_type');
 
         $entityAux = new Incidencia();
-        $form = $this->createForm(new IncidenciaFieldType(array('_form_name' => 'incidencia_'.$field_type)), $entityAux, array('type' => $field_type));
+        $form = $this->createNamedForm('incidencia_'.$field_type, 'AppBundle\Form\IncidenciaFieldType', $entityAux, array('type' => $field_type));
 
         if ($request->getMethod() == 'POST'){
 

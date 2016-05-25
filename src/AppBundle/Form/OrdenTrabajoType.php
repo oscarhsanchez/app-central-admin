@@ -2,7 +2,10 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
@@ -86,9 +89,9 @@ class OrdenTrabajoType extends ESocialType {
 
         $builder
             ->add('save', SubmitType::class, array('label' => 'form.actions.save'))
-            ->add('fecha_limite', 'date', array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.fecha_limite', 'widget' => 'single_text',
+            ->add('fecha_limite', DateType::class, array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.fecha_limite', 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
-            ->add('medio', 'selectable_entity', array(
+            ->add('medio', SelectableEntityType::class, array(
                 'label' => 'form.work_order.label.medio',
                 'class' => 'VallasModelBundle:Medio',
                 'required' => false,
@@ -96,7 +99,7 @@ class OrdenTrabajoType extends ESocialType {
                 'enable_update' => true
             ))
             ->add('observaciones', null, array('label' => 'form.work_order.label.observaciones', 'required' => false, 'attr' => array('rows' => 5)))
-            ->add('fecha_cierre', 'date', array('label' => 'form.work_order.label.fecha_cierre', 'widget' => 'single_text', 'required' => false,
+            ->add('fecha_cierre', DateType::class, array('label' => 'form.work_order.label.fecha_cierre', 'widget' => 'single_text', 'required' => false,
                 'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
             ->add('estado_orden', ChoiceType::class, array('constraints' => array(new NotBlank()), 'label' => 'form.work_order.label.estado_orden',
                 'placeholder' => 'form.label.choice_empty_value', 'choices' => self::sf3TransformChoiceOptions($arrEstados)))
@@ -114,14 +117,14 @@ class OrdenTrabajoType extends ESocialType {
         $estadoIncidencia = $data && $data->getEstadoOrden() ? $data->getEstadoOrden() : null;
         if ($post) $estadoIncidencia = $post['estado_orden'];
 
-        $builder->add('motivo_ordenes_pendientes', 'selectable_entity', array(
+        $builder->add('motivo_ordenes_pendientes', SelectableEntityType::class, array(
             'label' => 'form.work_order.label.motivo_ordenes_pendientes',
             'class' => 'VallasModelBundle:MotivoOrdenesPendientes',
             'required' => $estadoIncidencia == 4,
             'select_text'   => 'Select Reason',
             'enable_update' => true
         ));
-        $builder->add('motivo_ordenes_pendientes_incidencia', 'hidden', array('mapped' => false));
+        $builder->add('motivo_ordenes_pendientes_incidencia', HiddenType::class, array('mapped' => false));
     }
 
     public function getName()

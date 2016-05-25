@@ -357,7 +357,7 @@ class WorkOrderController extends VallasAdminController {
             $entity = null;
         }
 
-        $form = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_' . $field_type)), $entity, array('type' => $field_type));
+        $form = $this->createNamedForm('work_order_' . $field_type, 'AppBundle\Form\OrdenTrabajoFieldType', $entity, array('type' => $field_type));
 
         return $this->render('AppBundle:screens/work_order:form_update_field.html.twig', array('form' => $form->createView(), 'type' => $type, 'field_type' => $field_type));
 
@@ -374,7 +374,7 @@ class WorkOrderController extends VallasAdminController {
         $field_type = $this->getVar('field_type');
 
         $entityAux = new OrdenTrabajo();
-        $form = $this->createForm(new OrdenTrabajoFieldType(array('_form_name' => 'work_order_'.$field_type)), $entityAux, array('type' => $field_type));
+        $form = $this->createNamedForm('work_order_'.$field_type, 'AppBundle\Form\OrdenTrabajoFieldType', $entityAux, array('type' => $field_type));
 
         if ($request->getMethod() == 'POST'){
 

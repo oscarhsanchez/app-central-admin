@@ -3,6 +3,9 @@
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -74,7 +77,7 @@ class IncidenciaFieldType extends ESocialType {
             }
         });
 
-        $builder->add('tokens', 'hidden', array('mapped' => false));
+        $builder->add('tokens', HiddenType::class, array('mapped' => false));
 
         switch($type){
             case 'user':
@@ -87,7 +90,7 @@ class IncidenciaFieldType extends ESocialType {
                 );
                 break;
             case 'date_limit':
-                $builder->add('fecha_limite', 'date', array('label' => 'form.work_order.label.fecha_limite', 'widget' => 'single_text',
+                $builder->add('fecha_limite', DateType::class, array('label' => 'form.work_order.label.fecha_limite', 'widget' => 'single_text',
                     'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')));
                 break;
             case 'state':
@@ -97,9 +100,9 @@ class IncidenciaFieldType extends ESocialType {
 
                 if ($post['estado_incidencia'] == '2'){
                     $builder
-                        ->add('fecha_cierre', 'date', array('label' => 'form.work_order.label.fecha_cierre', 'widget' => 'single_text', 'required' => true,
+                        ->add('fecha_cierre', DateType::class, array('label' => 'form.work_order.label.fecha_cierre', 'widget' => 'single_text', 'required' => true,
                             'format' => 'dd/MM/yyyy', 'attr' => array('class' => 'calendar text-date')))
-                        ->add('observaciones_cierre', 'textarea', array('label' => 'form.work_order.label.observaciones_cierre', 'required' => false));
+                        ->add('observaciones_cierre', TextareaType::class, array('label' => 'form.work_order.label.observaciones_cierre', 'required' => false));
                 }
                 break;
         }

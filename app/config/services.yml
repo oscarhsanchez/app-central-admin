@@ -27,3 +27,135 @@ services:
             - "@session"
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+    vallas_admin.form.type.agrupacion_medio_detalle_type:
+        class: AppBundle\Form\AgrupacionMedioDetalleType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.agrupacion_medio_type:
+        class: AppBundle\Form\AgrupacionMedioType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.archivo_type:
+        class: AppBundle\Form\ArchivoType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.categoria_propuesta_type:
+        class: AppBundle\Form\CategoriaPropuestaType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.country_select_type:
+        class: AppBundle\Form\CountrySelectType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.incidencia_field_type:
+        class: AppBundle\Form\IncidenciaFieldType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.incidencia_imagen_type:
+        class: AppBundle\Form\IncidenciaImagenType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.incidencia_type:
+        class: AppBundle\Form\IncidenciaType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.medio_type:
+        class: AppBundle\Form\MedioType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.motivo_ordenes_pendientes_type:
+        class: AppBundle\Form\MotivoOrdenesPendientesType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.orden_trabajo_field_type:
+        class: AppBundle\Form\OrdenTrabajoFieldType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.orden_trabajo_imagen_type:
+        class: AppBundle\Form\OrdenTrabajoImagenType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.orden_trabajo_type:
+        class: AppBundle\Form\OrdenTrabajoType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.report_category_type:
+        class: AppBundle\Form\ReportCategoryType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.report_search_type:
+        class: AppBundle\Form\ReportSearchType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.report_subcategory_type:
+        class: AppBundle\Form\ReportSubcategoryType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.report_type:
+        class: AppBundle\Form\ReportType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.ubicacion_imagen_type:
+        class: AppBundle\Form\UbicacionImagenType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.ubicacion_type:
+        class: AppBundle\Form\UbicacionType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.vallas_user_password_type:
+        class: AppBundle\Form\VallasUserPasswordType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.vallas_user_type_type:
+        class: AppBundle\Form\VallasUserType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }
+
+    vallas_admin.form.type.zona_type:
+        class: AppBundle\Form\ZonaType
+        parent: esocial_util.form.type.esocial_type
+        tags:
+            - { name: form.type }

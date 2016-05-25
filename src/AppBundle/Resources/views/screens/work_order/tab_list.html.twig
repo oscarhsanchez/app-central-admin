@@ -92,7 +92,7 @@
             var alertType = result.result == 1 ? 'success' : 'danger';
             $(work_order_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
         }
-        work_order_list.ajax.reload();
+        work_order_list.api().ajax.reload();
     }
 
     function setSelectedItems(work_order_list, type){
