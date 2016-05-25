@@ -31,7 +31,7 @@
         "esocial/esocial-admin-bundle": "dev-devel",
         "esocial/esocial-model-bundle": "dev-devel",
         "esocial/esocial-utils-bundle": "dev-devel",
-        "esocial/esocial-security-bundle": "dev-master",
+        "esocial/esocial-security-bundle": "dev-devel",
         "vallas/model-bundle": "dev-master",
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
