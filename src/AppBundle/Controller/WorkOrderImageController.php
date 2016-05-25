@@ -125,8 +125,11 @@ class WorkOrderImageController extends VallasAdminController {
                 $uploadable_manager = $this->get('esocial_util.form.manager.uploadable_file');
                 $imagenUpload = $uploadable_manager->processUploadedFile($form->get('nombre'), $post['nombre'], array_key_exists('entity', $params_original) && $params_original['entity'] ? $params_original['entity']->getNombre() : null);
 
-                $entity->setPath($imagenUpload);
-                $entity->setUrl('/media/orden_trabajo_imagen');
+                if ($imagenUpload) {
+                    $pathinfo = pathinfo($imagenUpload);
+                    $entity->setPath($pathinfo['dirname'] . '/');
+                    $entity->setUrl($request->getSchemeAndHttpHost() . '/media/orden_trabajo_imagen/');
+                }
 
                 if (array_key_exists('entity', $params_original) && $params_original['entity']){
                     if ($entity->getEstadoImagen() == 4 && $params_original['entity']->getEstadoImagen() !== 4){
