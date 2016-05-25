@@ -1,0 +1,20 @@
+{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+{% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+{{ include('ESocialUtilBundle:Components:tabNavigation.html.twig', {
+    'entity': entity is defined ? entity : null,
+    'tab_selected' : 'basic_data',
+    'tab_navigation_id' : 'agrupacion-medio',
+    'template_path' : 'AppBundle:screens/agrupacion_medio/formtabs',
+    'tabs' : {
+        'basic_data': {
+            'title': 'agrupacion_medio.tabs.basic_data'|trans,
+        },
+        'detalle_list': {
+            'title': 'agrupacion_medio.tabs.detalle_list'|trans,
+            show: entity is defined and entity.pkAgrupacion is not empty,
+            message_show: 'form.text.need_save'|trans
+        }
+    }
+})
+}}

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'menu.title.agrupacion_medio'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li class="active">
+        <strong><a href="{{ path('agrupacion_medio_list') }}">{{ 'menu.title.agrupacion_medio'|trans }}</a></strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{{ 'menu.title.agrupacion_medio'|trans }}</h5>
+        </div>
+        <div class="ibox-content">
+
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+
+            <div class="margin-b">
+                <a class="btn btn-white" title="{{ 'agrupacion_medio.buttons.add'|trans }}" href="{{ path('agrupacion_medio_add') }}" onclick="loadAjaxFormPage(this, 'modal-lg', null, agrupacion_medio_list_reload); return false;">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <strong>{{ 'agrupacion_medio.buttons.add'|trans }}</strong>
+                </a>
+            </div>
+
+            <table id="dt-agrupacion-medio-list" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
+                    <th>{{ 'form.agrupacion_medio.label.descripcion'|trans }}</th>
+                    <th>{{ 'form.label.actions'|trans }}</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var agrupacion_medio_list = null;
+
+            var table_columns = [
+                {
+                    "mData": function (source) {
+                        return '<input type="checkbox" class="i-checks" value="'+source.token+'" />';
+                    }
+                },
+                {"mData": "descripcion"},
+                {
+                    "mData": function (source) {
+                        var actions = '<a class="btn btn-primary btn-xs" title="{{ 'agrupacion_medio.buttons.edit'|trans }}" onclick="loadAjaxFormPage(this, \'modal-lg\', null, agrupacion_medio_list_reload); return false;" href="' + Routing.generate('agrupacion_medio_edit', { id: encodeURIComponent(source.token), _locale: '{{ app.request.locale }}' }) + '"><span class="glyphicon glyphicon-edit"></span> &nbsp; {{ 'form.actions.edit'|trans }}</a>&nbsp; ';
+                            actions += '<a class="btn btn-primary btn-xs" href="javascript:void(0)" onclick="bootbox.confirm(\'Seguro que desea eliminar el registro?\', function(confirmed){ if(confirmed) executeAjax(\'' + Routing.generate('agrupacion_medio_delete', { _locale: '{{ app.request.locale }}', id: encodeURIComponent(source.token) }) + '\', null, null, agrupacion_medio_list_reload); }); return false;"><span class="glyphicon glyphicon-remove"></span> &nbsp; {{ 'form.actions.delete'|trans }}</a>&nbsp; ';
+                        return actions;
+                    }
+                }
+            ];
+
+            jQuery(document).ready(function(){
+                agrupacion_medio_list = TableManaged.init(
+                        '#dt-agrupacion-medio-list',
+                        '{{ url('agrupacion_medio_list_json') }}',
+                        null,
+                        [0,2],
+                        table_columns,
+                        '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+                );
+            });
+
+        function agrupacion_medio_list_reload(result){
+            if (result && result.message){
+                var alertType = result.result == 1 ? 'success' : 'danger';
+                $(agrupacion_medio_list).closest('.dataTables_wrapper').prepend(Notification.alert(alertType, result.message));
+            }
+            agrupacion_medio_list.api().ajax.reload();
+        }
+    </script>
+{% endblock %}

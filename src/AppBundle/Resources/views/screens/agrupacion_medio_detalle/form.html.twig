@@ -1,0 +1,19 @@
+{% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+{% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+{{ form_start(form, { method: 'POST', attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } , action: entity is defined and entity.pkAgrupacionDetalle is not empty ? path('agrupacion_medio_detalle_update', {id: entity.token }) : path('agrupacion_medio_detalle_create', { agrupacion_medio_id: entity.agrupacionMedio.token }) }) }}
+
+{{ form_row(form.medio, { select_href: path('medio_select') }) }}
+{{ form_row(form.factor_agrupacion) }}
+
+{{ form_end(form) }}
+
+<script type="text/javascript">
+    function selectMedio(data, vars){
+        var jsonData = decodeURIComponent(data);
+        var obj = JSON.parse(jsonData);
+        var objVars = JSON.parse(vars);
+        $("#agrupacion_medio_detalle_medio").val(obj.token);
+        $("#select-input-group-agrupacion_medio_detalle_medio").html(text3Dots(obj.name, 30));
+    }
+</script>

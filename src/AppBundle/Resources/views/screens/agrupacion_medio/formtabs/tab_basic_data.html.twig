@@ -1,0 +1,35 @@
+{% set action_path = null %}
+{% if entity is defined and entity.pkAgrupacion is not empty %}
+    {% set action_path = path('agrupacion_medio_update', {id: entity.token }) %}
+{% else %}
+    {% if ubicacion is not empty  %}
+        {% set action_path = path('agrupacion_medio_create', { ubicacion: ubicacion.pkUbicacion }) %}
+    {% else %}
+        {% set action_path = path('agrupacion_medio_create') %}
+    {% endif %}
+{% endif %}
+{{ form_start(form, { method: 'POST', attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' }, action: action_path}) }}
+
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.descripcion) }}
+        {% if form.ubicacion is defined %}
+        {{ form_row(form.ubicacion, { select_href: path('ubicacion_select') }) }}
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.tipo) }}
+        {{ form_row(form.coste) }}
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+<script type="text/javascript">
+    function selectUbicacion(data, vars){
+        var jsonData = decodeURIComponent(data);
+        var obj = JSON.parse(jsonData);
+        $("#agrupacion_medio_ubicacion").val(obj.token);
+        $("#select-input-group-agrupacion_medio_ubicacion").html(text3Dots(obj.ubicacion, 30));
+    }
+</script>

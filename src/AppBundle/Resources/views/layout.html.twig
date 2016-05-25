@@ -47,7 +47,13 @@
             <li><a href="{{ path('incidencia_list', { type: 'others' }) }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'screens.issues.type.others'|trans }}</span></a></li>
         </ul>
     </li>
-    <li><a href="{{ path('ubicacion_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.locations'|trans }}</span></a></li>
+    <li>
+        <a href="#"><i class="fa fa-asterisk"></i> <span class="nav-label">{{ 'menu.title.locations'|trans }}</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li><a href="{{ path('ubicacion_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.locations'|trans }}</span></a></li>
+            <li><a href="{{ path('agrupacion_medio_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.agrupacion_medio'|trans }}</span></a></li>
+        </ul>
+    </li>
     <li><a href="{{ path('repositorio_list') }}"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'menu.title.repository'|trans }}</span></a></li>
 {% endblock %}
 
