@@ -49,7 +49,7 @@ namespace :db do
     puts "Loading locally..."
     `mysql -u #{remote_config['parameters']['database_user']} --password=#{local_config['parameters']['database_password']} #{local_config['parameters']['database_name']} < tmp/#{filename}`
     puts "Cleaning up temp files"
-    `rm -f tmp/#{filename}`
+    #`rm -f tmp/#{filename}`
     `rm -f tmp/remote_parameters.yml`
   end
 end
