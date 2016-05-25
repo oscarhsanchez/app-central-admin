@@ -46,11 +46,11 @@ class ReportCategoryController extends VallasAdminController
      * Returns a list of ReportCategory entities in JSON format.
      *
      * @return JsonResponse
-     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json", "_featured" = false }, name="report_category_list_json")
+     * @Route("/async/list.{_format}", requirements={ "_format" = "json" }, defaults={ "_format" = "json" }, name="report_category_list_json")
      *
      * @Method("GET")
      */
-    public function listJsonAction(Request $request, $_featured=false)
+    public function listJsonAction(Request $request)
     {
         $response = $this->getDatatableManager()->getResults();
 
