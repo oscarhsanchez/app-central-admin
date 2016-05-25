@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 use Doctrine\Common\Collections\ArrayCollection;
 use ESocial\AdminBundle\Form\UserType;
 use ESocial\UtilBundle\Form\ESocialType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -24,8 +26,8 @@ class VallasUserPasswordType extends ESocialType {
 
         //The password fields must match.
 
-        $builder->add('plainPassword', 'repeated', array(
-            'type' => 'password',
+        $builder->add('plainPassword', RepeatedType::class, array(
+            'type' => PasswordType::class,
             'invalid_message' => 'form.user.errors.password_mustmatch',
             'options' => array('attr' => array('class' => 'password-field')),
             'required' => true,

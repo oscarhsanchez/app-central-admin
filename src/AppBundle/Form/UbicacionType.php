@@ -5,6 +5,7 @@ use ESocial\UtilBundle\Form\ESocialType;
 use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -108,7 +109,7 @@ class UbicacionType extends ESocialType {
         } else {
 
             $builder->add('save', SubmitType::class, array('label' => 'form.actions.save'));
-            $builder->add('medios', 'collection', array(
+            $builder->add('medios', CollectionType::class, array(
                 'type' => SelectableEntityType::class,
                 'prototype' => true,
                 'label' => false,
