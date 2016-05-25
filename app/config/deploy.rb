@@ -6,6 +6,7 @@ require 'capistrano/ext/multistage'
 
 set   :application,   "Vallas Admin"
 set   :app_path,      "app"
+set   :symfony_console, "bin/console"
 
 ## GIT
 set   :scm,           :git
@@ -35,7 +36,7 @@ namespace :composer do
 end
 
 ## Permissions
-set :writable_dirs,       ["app/cache", "app/logs", "web/media", "web/uploads", "tmp"]
+set :writable_dirs,       ["var/cache", "var/logs", "web/media", "web/uploads", "tmp"]
 set :permission_method,   :acl
 set :use_set_permissions, true
 set :webserver_user, "www-data"
@@ -62,8 +63,8 @@ namespace :rb do
     end
     task :permissions do
         capifony_pretty_print '--> Force cache and log permissions'
-        run "chmod -R 777 #{latest_release}/app/cache"
-        run "chmod -R 777 #{latest_release}/app/logs"
+        run "chmod -R 777 #{latest_release}/var/cache"
+        run "chmod -R 777 #{latest_release}/var/logs"
         run "chmod -R 777 #{latest_release}/web/media"
         run "chmod -R 777 #{latest_release}/web/uploads"
         capifony_puts_ok
@@ -78,7 +79,7 @@ namespace :rb do
 end
 
 set :shared_files,        ["app/config/parameters.yml"]
-set :shared_children,     [app_path + "/logs", web_path + "/media", web_path + "/uploads", "tmp"]
+set :shared_children,     ["var/logs", web_path + "/media", web_path + "/uploads", "tmp"]
 
 
 
