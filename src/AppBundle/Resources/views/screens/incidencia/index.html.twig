@@ -56,6 +56,7 @@
                 <thead>
                 <tr>
                     <th class="datatable-chk-cell"><input type="checkbox" class="i-checks datatable-chk-select-all" value="all" /></th>
+                    <th>{{ 'form.incidencia.label.location_id'|trans }}</th>
                     <th>{{ 'form.incidencia.label.medio'|trans }}</th>
                     <th>{{ 'form.incidencia.label.codigo_user'|trans }}</th>
                     <th>{{ 'form.incidencia.label.codigo_user_asignado'|trans }}</th>
@@ -102,6 +103,7 @@
                         return '<input type="checkbox" class="i-checks" value="'+source.token+'" />';
                     }
                 },
+                {"mData": "medio__ubicacion__pk_ubicacion"},
                 {"mData": "medio__ubicacion__ubicacion"},
                 {"mData": "codigo_user"},
                 {"mData": "codigo_user_asignado"},

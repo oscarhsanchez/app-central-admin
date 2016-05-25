@@ -44,9 +44,9 @@ class WorkOrderController extends VallasAdminController {
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'pk_orden_trabajo', 'estado_orden', 'created_at', 'fecha_cierre', 'fecha_limite', 'medio__ubicacion__ubicacion', 'codigo_user'));
-        $jsonList->setSearchFields(array('fecha_limite', 'fecha_cierre', 'medio__ubicacion__ubicacion', 'codigo_user'));
-        $jsonList->setOrderFields(array('','','estado_orden','created_at','fecha_limite', 'fecha_cierre', 'ubicacion__ubicacion', 'codigo_user'));
+        $jsonList->setFieldsToGet(array('token', 'pk_orden_trabajo', 'estado_orden', 'created_at', 'fecha_cierre', 'fecha_limite', 'medio__ubicacion__ubicacion', 'medio__ubicacion__pk_ubicacion', 'codigo_user'));
+        $jsonList->setSearchFields(array('fecha_limite', 'fecha_cierre', 'medio__ubicacion__ubicacion', 'medio__ubicacion__pk_ubicacion', 'codigo_user'));
+        $jsonList->setOrderFields(array('','','estado_orden','created_at','fecha_limite', 'fecha_cierre', 'ubicacion__pk_ubicacion', 'ubicacion__ubicacion', 'codigo_user'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 

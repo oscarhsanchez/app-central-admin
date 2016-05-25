@@ -43,9 +43,9 @@ class IncidenciaController extends VallasAdminController {
 
         /** @var EntityJsonList $jsonList */
         $jsonList = new EntityJsonList($this->getRequest(), $this->getDoctrine()->getManager());
-        $jsonList->setFieldsToGet(array('token', 'tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
-        $jsonList->setSearchFields(array('tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'fecha_limite', 'fecha_cierre'));
-        $jsonList->setOrderFields(array('', 'ubicacion__ubicacion', 'codigo_user', 'codigo_user_asignado', 'tipo', 'estado_incidencia', 'fecha_limite', 'fecha_cierre'));
+        $jsonList->setFieldsToGet(array('token', 'tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'medio__ubicacion__pk_ubicacion', 'fecha_limite', 'fecha_cierre'));
+        $jsonList->setSearchFields(array('tipo', 'estado_incidencia', 'codigo_user', 'codigo_user_asignado', 'medio__ubicacion__ubicacion', 'medio__ubicacion__pk_ubicacion', 'fecha_limite', 'fecha_cierre'));
+        $jsonList->setOrderFields(array('', 'ubicacion__pk_ubicacion', 'ubicacion__ubicacion', 'codigo_user', 'codigo_user_asignado', 'tipo', 'estado_incidencia', 'fecha_limite', 'fecha_cierre'));
         $jsonList->setRepository($repository);
         $jsonList->setQueryBuilder($qb);
 
