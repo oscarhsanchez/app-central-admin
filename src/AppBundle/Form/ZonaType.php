@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 use ESocial\UtilBundle\Form\ESocialType;
+use ESocial\UtilBundle\Form\Widget\SelectableEntityType;
 use ESocial\UtilBundle\Util\Dates;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,8 +24,25 @@ class ZonaType extends ESocialType {
         $entity = array_key_exists('data', $options) ? $options['data'] : null;
         $post = $this->getPost();
 
+        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) use ($builder){
+            $data = $event->getData();
+            $form = $event->getForm();
+
+            if ($data->getUser()){
+                $form->getData()->setCodigoUser($data->getUser()->getCodigo());
+            }
+
+        });
+
         $builder
-            ->add('nombre', null, array('label' => 'form.zona.label.nombre'));
+            ->add('nombre', null, array('label' => 'form.zona.label.nombre'))
+            ->add('user', SelectableEntityType::class, array(
+            'label' => 'form.zona.label.user',
+            'class' => 'VallasModelBundle:User',
+            'required' => false,
+            'select_text'   => 'Select User',
+            'enable_update' => true
+        ));
 
     }
 

@@ -3,4 +3,16 @@
 
 {{ form_start(form, { method: 'POST', attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } , action: entity is defined and entity.pkZona is not empty ? path('zone_update', {id: entity.token, type: type }) : path('zone_create', { type: type }) }) }}
 {{ form_row(form.nombre) }}
+{{ form_row(form.user, { select_href: path('esocial_admin_user_select') }) }}
 {{ form_end(form) }}
+
+<script type="text/javascript">
+    function selectUser(data, vars){
+        var jsonData = decodeURIComponent(data);
+        var obj = JSON.parse(jsonData);
+        var objVars = JSON.parse(vars);
+        $("#zona_user").val(obj.token);
+        console.log(obj);
+        $("#select-input-group-zona_user").html(text3Dots(obj.name + ' ' + obj.surnames, 30));
+    }
+</script>
