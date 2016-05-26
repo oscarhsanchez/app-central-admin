@@ -1,37 +1,41 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    capifony (2.8.6)
-      capistrano (>= 2.13.5, <= 2.16.0)
-      capistrano-maintenance (= 0.0.3)
-      colored (>= 1.2.0)
-      inifile (>= 2.0.2, < 3.0.0)
-      ruby-progressbar (= 1.4.1)
-    capistrano (2.15.7)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capistrano-maintenance (0.0.3)
-      capistrano (>= 2.0.0)
-    colored (1.2)
-    highline (1.7.8)
-    inifile (2.0.2)
+    airbrussh (1.0.2)
+      sshkit (>= 1.6.1, != 1.7.0)
+    capistrano (3.5.0)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-composer (0.0.6)
+      capistrano (>= 3.0.0.pre)
+    capistrano-file-permissions (1.0.0)
+      capistrano (~> 3.0)
+    capistrano-harrow (0.5.1)
+    capistrano-ssh-doctor (1.0.0)
+      capistrano (>= 3.1)
+    capistrano-symfony (1.0.0.rc2)
+      capistrano (~> 3.1)
+      capistrano-composer (~> 0.0.3)
+      capistrano-file-permissions (~> 1.0)
+    i18n (0.7.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (3.0.2)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
-    ruby-progressbar (1.4.1)
+    net-ssh (3.1.1)
+    rake (11.1.2)
+    sshkit (1.10.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  capifony (~> 2.8.1)
+  capistrano (~> 3.5)
+  capistrano-ssh-doctor (~> 1.0)
+  capistrano-symfony (~> 1.0.0.rc1)
 
 BUNDLED WITH
    1.11.2

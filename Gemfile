@@ -1,2 +1,7 @@
 source 'https://rubygems.org'
-gem 'capifony', '~> 2.8.1'
+
+group :development do
+  gem "capistrano", "~> 3.5"
+  gem 'capistrano-symfony', '~> 1.0.0.rc1'
+  gem 'capistrano-ssh-doctor', '~> 1.0'
+end
