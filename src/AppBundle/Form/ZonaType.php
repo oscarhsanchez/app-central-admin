@@ -22,7 +22,6 @@ class ZonaType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $entity = array_key_exists('data', $options) ? $options['data'] : null;
-        $post = $this->getPost();
 
         $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) use ($builder){
             $data = $event->getData();

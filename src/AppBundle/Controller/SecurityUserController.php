@@ -15,6 +15,7 @@ use Vallas\ModelBundle\Entity\SecuritySubmodulePermission;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Vallas\ModelBundle\Entity\User;
 use Vallas\ModelBundle\Entity\UserPais;
+use ESocial\AdminBundle\Annotation\FilterAware;
 
 /**
  * Class VallasUserController
@@ -158,6 +159,7 @@ class SecurityUserController extends BaseSecurityUserController {
         $entity->addUserPaise($userPais);
     }
 
+    /** @FilterAware(disableFilter="country_filter") */
     public function addAction(){
 
         $em = $this->getDoctrine()->getManager();
@@ -175,6 +177,7 @@ class SecurityUserController extends BaseSecurityUserController {
 
     }
 
+    /** @FilterAware(disableFilter="country_filter") */
     public function createAction(Request $request){
 
         $em = $this->getDoctrine()->getManager();
@@ -199,6 +202,7 @@ class SecurityUserController extends BaseSecurityUserController {
 
     }
 
+    /** @FilterAware(disableFilter="country_filter") */
     public function updateAction(Request $request, $token){
 
         $em = $this->getDoctrine()->getManager();
@@ -224,6 +228,7 @@ class SecurityUserController extends BaseSecurityUserController {
 
     }
 
+    /** @FilterAware(disableFilter="country_filter") */
     public function editAction($token){
 
         $em = $this->getDoctrine()->getManager();
