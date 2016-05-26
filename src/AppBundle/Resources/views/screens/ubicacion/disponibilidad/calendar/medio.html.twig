@@ -1,5 +1,5 @@
 <div id="calendar-medio" style="max-width: 900px; margin: 0 auto;">
-    {% render controller("AppBundle:UbicacionDisponibilidad:index", { 'month': "now"|date('m-Y'), 'medio': medio.pkMedio }) %}
+    {{ render(controller("AppBundle:UbicacionDisponibilidad:index", { 'month': "now"|date('m-Y'), 'medio': medio.pkMedio })) }}
 </div>
 <script type="text/javascript">
     function calendarMedioAction(action, params){

@@ -1,0 +1,30 @@
+{% set selectFunction = getVars.selectFunction is defined and getVars.selectFunction is not empty ? getVars.selectFunction : 'selectCliente' %}
+<table id="dt-cliente-list-select" class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'form.cliente.label.razon_social'|trans }}</th>
+        <th>{{ 'form.cliente.label.nombre_comercial'|trans }}</th>
+        <th>{{ 'form.label.actions'|trans }}</th>
+    </tr>
+    </thead>
+</table>
+<script type="text/javascript">
+    var cliente_list_select = null;
+    var cliente_list_select_table_columns = [
+        {"mData": "razon_social"},
+        {"mData": "nombre_comercial"},
+        {
+            "mData": function (source) {
+                return '<a class="btn btn-sm btn-primary" href="javascript:void(0)" onclick="closeThisPopup(this); {{ selectFunction }}(\''+encodeURIComponent(JSON.stringify(source))+'\', \'{{ getVars|json_encode|escape  }}\')">Select</a>';
+            }
+        }
+    ];
+    cliente_list_select = TableManaged.init(
+            '#dt-cliente-list-select',
+            '{{ url('cliente_list_json', getVars) }}',
+            null,
+            [],
+            cliente_list_select_table_columns,
+            '{{ url('datatables_i18n_fragment', { language: app.request.locale }) }}'
+    );
+</script>
