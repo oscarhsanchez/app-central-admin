@@ -18,6 +18,8 @@ set :file_permissions_paths, ["var"]
 
 set :composer_install_flags, "--prefer-dist --no-interaction --optimize-autoloader"
 
+before "deploy:updated", "deploy:set_permissions:chmod"
+
 namespace :deploy do
 
   after :restart, :clear_cache do
