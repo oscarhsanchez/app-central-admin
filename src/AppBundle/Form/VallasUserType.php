@@ -47,6 +47,12 @@ class VallasUserType extends ESocialSecurityUserType {
 
     }
 
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+    }
+
     public function getName(){
         return 'user';
     }

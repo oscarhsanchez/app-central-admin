@@ -32,7 +32,6 @@ class UbicacionType extends ESocialType {
 
         $data = array_key_exists('data', $options) ? $options['data'] : null;
         $em = $this->getManager();
-        $post = $this->getPost();
 
         if (!$options['formMedios']) {
 

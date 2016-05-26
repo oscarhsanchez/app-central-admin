@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-05-05T09:49:54Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
+  <file date="2016-05-26T18:30:50Z" source-language="en" target-language="es" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,7 +9,7 @@
       <trans-unit id="fba9e7e108cd15181a2a76c4d4701fff39e0e53d" resname="form.user.errors.password_mustmatch">
         <source>form.user.errors.password_mustmatch</source>
         <target state="new">form.user.errors.password_mustmatch</target>
-        <jms:reference-file line="29">AppBundle/Form/VallasUserPasswordType.php</jms:reference-file>
+        <jms:reference-file line="31">./src\AppBundle\Form\VallasUserPasswordType.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

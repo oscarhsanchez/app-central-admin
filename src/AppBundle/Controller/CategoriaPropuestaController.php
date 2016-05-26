@@ -202,4 +202,14 @@ class CategoriaPropuestaController extends VallasAdminController
         ));
     }
 
+    /**
+     * @Route("/select", name="categoria_propuesta_select")
+     * @Method("GET")
+     */
+    public function selectAction()
+    {
+        return $this->render('AppBundle:screens/categoria_propuesta:select.html.twig', array(
+            'getVars' => $this->getVar()
+        ));
+    }
 }

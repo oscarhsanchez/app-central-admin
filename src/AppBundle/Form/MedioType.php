@@ -25,7 +25,6 @@ class MedioType extends ESocialType {
         parent::buildForm($builder, $options);
 
         $entity = array_key_exists('data', $options) ? $options['data'] : null;
-        $post = $this->getPost();
 
         $builder->add('pk_medio', null, array('label' => 'form.medio.label.pk_medio', 'constraints' => array(new NotBlank())));
 

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'menu.title.restriccion'|trans }}{% endblock %}
+{% block page_breadcrumb %}
+    <li>
+        <strong><a href="{{ path('restriccion_list') }}">{{ 'menu.title.restriccion'|trans }}</a></strong>
+    </li>
+    <li class="active">
+        <strong>{% if entity is defined and entity.pkRestriccion is not empty %}{{ entity.pkRestriccion }}{% else %}{{ 'restriccion.buttons.add'|trans }}{% endif %}</strong>
+    </li>
+{% endblock %}
+
+{% block body %}
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{% if entity is defined and entity.pkRestriccion is not empty %}{{ entity.pkRestriccion }}{% else %}{{ 'restriccion.buttons.add'|trans }}{% endif %}</h5>
+        </div>
+        <div class="ibox-content">
+
+            {% include 'ESocialUtilBundle:flash-messages:_flash.messages.html.twig' %}
+            {% include 'ESocialUtilBundle:flash-messages:_form.errors.html.twig' %}
+
+            {{ form_start(form, { method: 'POST', action: entity is defined and entity.pkRestriccion is not empty ? path('restriccion_update', {id: entity.token }) : path('restriccion_create') }) }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>{{ 'screens.restriccion.text.restriccion_categoria'|trans }}</legend>
+                        {{ form_row(form.cliente, { select_href: path('cliente_select', { type: 'cliente'}) }) }}
+                        {{ form_row(form.categoriaRestriccion, { select_href: path('categoria_propuesta_select', { type: 'categoriaRestriccion'}) }) }}
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>{{ 'screens.restriccion.text.restriccion_cliente'|trans }}</legend>
+                        {{ form_row(form.categoria, { select_href: path('categoria_propuesta_select', { type: 'categoria'}) }) }}
+                        {{ form_row(form.clienteRestriccion, { select_href: path('cliente_select', { type: 'clienteRestriccion'}) }) }}
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset>
+                <legend>{{ 'screens.restriccion.text.ubicacion'|trans }}</legend>
+                {{ form_row(form.ubicacion, { select_href: path('ubicacion_select') }) }}
+            </fieldset>
+
+                <div class="clearfix">
+                    {{ form_row(form.save) }}
+                </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        function selectUbicacion(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            $("#restriccion_ubicacion").val(obj.token);
+            $("#select-input-group-restriccion_ubicacion").html(text3Dots(obj.ubicacion, 30));
+        }
+        function selectCliente(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#restriccion_"+objVars.type).val(obj.token);
+            $("#select-input-group-restriccion_"+objVars.type).html(text3Dots(obj.razon_social, 30));
+        }
+        function selectCategoriaPropuesta(data, vars){
+            var jsonData = decodeURIComponent(data);
+            var obj = JSON.parse(jsonData);
+            var objVars = JSON.parse(vars);
+            $("#restriccion_"+objVars.type).val(obj.token);
+            $("#select-input-group-restriccion_"+objVars.type).html(text3Dots(obj.nombre, 30));
+        }
+    </script>
+{% endblock %}

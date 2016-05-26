@@ -12,6 +12,10 @@
 /app/phpunit.xml
 app/cache
 app/logs
+BD/
+.idea/
+web/media/
+web/uploads/
 var/cache
 var/logs
 tmp
