@@ -1,5 +1,4 @@
 /app/config/parameters.yml
-/bin/
 /build/
 /composer.phar
 /vendor/
@@ -17,3 +16,6 @@ BD/
 .idea/
 web/media/
 web/uploads/
+var/cache
+var/logs
+tmp

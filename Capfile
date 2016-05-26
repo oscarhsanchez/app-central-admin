@@ -1,4 +1,5 @@
-load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+require "capistrano/setup"
+require "capistrano/deploy"
+require "capistrano/symfony"
 
-require 'capifony_symfony2'
-load 'app/config/deploy'
+Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
