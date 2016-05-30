@@ -11,10 +11,10 @@ set :log_level, :debug
 set :keep_releases, 3
 
 set :linked_files, ["app/config/parameters.yml"]
-set :linked_dirs, ["var"]
-set :permission_method, :chmod
+set :linked_dirs, ["var", "web/media", "web/uploads", "tmp"]
+set :permission_method, :acl
 set :file_permissions_users, ["www-data"]
-set :file_permissions_paths, ["var"]
+set :file_permissions_paths, ["var", "web/media", "web/uploads", "tmp"]
 
 set :composer_install_flags, "--prefer-dist --no-interaction --optimize-autoloader"
 
