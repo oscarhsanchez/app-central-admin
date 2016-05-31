@@ -2982,7 +2982,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:vallas/vallas-model-bundle.git",
-                "reference": "51a0602666fdf3add5eefde9054bda51be22b35a"
+                "reference": "205bfae0110bab38974ff33ed15e3e341b6e0c37"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -3016,7 +3016,7 @@
             ],
             "description": "Common ESocial model bundle",
             "homepage": "https://bitbucket.org/esocialtech/vallas-model-bundle.git",
-            "time": "2016-05-25 14:27:16"
+            "time": "2016-05-31 08:10:13"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
