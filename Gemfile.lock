@@ -34,6 +34,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano (~> 3.5)
+  capistrano-file-permissions
   capistrano-ssh-doctor (~> 1.0)
   capistrano-symfony (~> 1.0.0.rc1)
 
