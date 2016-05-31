@@ -26,14 +26,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <fieldset>
-                        <legend>{{ 'screens.restriccion.text.restriccion_categoria'|trans }}</legend>
+                        <legend>{{ 'screens.restriccion.text.restriccion_cliente'|trans }}</legend>
                         {{ form_row(form.cliente, { select_href: path('cliente_select', { type: 'cliente'}) }) }}
                         {{ form_row(form.categoriaRestriccion, { select_href: path('categoria_propuesta_select', { type: 'categoriaRestriccion'}) }) }}
                     </fieldset>
                 </div>
                 <div class="col-md-6">
                     <fieldset>
-                        <legend>{{ 'screens.restriccion.text.restriccion_cliente'|trans }}</legend>
+                        <legend>{{ 'screens.restriccion.text.restriccion_categoria'|trans }}</legend>
                         {{ form_row(form.categoria, { select_href: path('categoria_propuesta_select', { type: 'categoria'}) }) }}
                         {{ form_row(form.clienteRestriccion, { select_href: path('cliente_select', { type: 'clienteRestriccion'}) }) }}
                     </fieldset>

@@ -3,7 +3,7 @@
 
 {{ form_start(form, { method: 'POST', attr: { onsubmit: 'sendAjaxPopupForm(this); return false;' } , action: entity is defined and entity.pkAgrupacionDetalle is not empty ? path('agrupacion_medio_detalle_update', {id: entity.token }) : path('agrupacion_medio_detalle_create', { agrupacion_medio_id: entity.agrupacionMedio.token }) }) }}
 
-{{ form_row(form.medio, { select_href: path('medio_select') }) }}
+{{ form_row(form.medio, { select_href: path('medio_select', { ubicacion: entity.agrupacionMedio.ubicacion.pkUbicacion }) }) }}
 {{ form_row(form.factor_agrupacion) }}
 
 {{ form_end(form) }}
