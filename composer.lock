@@ -217,7 +217,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/4a9f909f73a2f70be8cd8cdd5b72ce376f21db26",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/46a476a6ac1f614442c7e4b1a6dca44f0b34f892",
                 "reference": "4a9f909f73a2f70be8cd8cdd5b72ce376f21db26",
                 "shasum": ""
             },
@@ -356,7 +356,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1c6f63dff60f1f8c073087833edae2da96d37287",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c664ce7fe233a0724e4b1e22b35b6fe4c9594b1f",
                 "reference": "1c6f63dff60f1f8c073087833edae2da96d37287",
                 "shasum": ""
             },
@@ -770,7 +770,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b3aa8254e480926adeb2a2df30a0b0ac8328d639",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/1c2b7c968561f2e319117d7860c88e8c0cad3c7a",
                 "reference": "b3aa8254e480926adeb2a2df30a0b0ac8328d639",
                 "shasum": ""
             },
@@ -846,7 +846,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-admin-bundle.git",
-                "reference": "b7a62aeb532289bb2fc8747ec789a2f26903e71b"
+                "reference": "8e3121d91744d5f7cd0a42cc77a733b6df215c6a"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -887,7 +887,7 @@
             ],
             "description": "Common ESocial Admin bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-admin-bundle.git",
-            "time": "2016-05-25 14:26:52"
+            "time": "2016-05-30 10:30:25"
         },
         {
             "name": "esocial/esocial-model-bundle",
@@ -933,7 +933,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-security-bundle.git",
-                "reference": "e6243cc66cc23f3d736c6f73ea4868c18d67fe21"
+                "reference": "ac64dba42218f6ec6a887fa7aa3425383cb04c82"
             },
             "require": {
                 "esocial/esocial-admin-bundle": "dev-devel",
@@ -965,7 +965,7 @@
             "keywords": [
                 "esocial security bundle"
             ],
-            "time": "2016-05-25 14:26:14"
+            "time": "2016-05-26 15:23:43"
         },
         {
             "name": "esocial/esocial-utils-bundle",
@@ -974,7 +974,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-utils-bundle.git",
-                "reference": "acdea1c150d78c579d7589abf57aadc5d1dad4ba"
+                "reference": "d1b1b48c0779b720be6b7d789d575055cb14cc35"
             },
             "require": {
                 "aws/aws-sdk-php": "2.*",
@@ -1006,7 +1006,7 @@
             "keywords": [
                 "util bundle"
             ],
-            "time": "2016-05-23 12:21:27"
+            "time": "2016-05-26 15:24:26"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1077,7 +1077,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/abb35b94ed8ec78a504c9e1a2cd803d85d3ffad9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/d1fccc6335b74beca94525551cacc06b256ed261",
                 "reference": "abb35b94ed8ec78a504c9e1a2cd803d85d3ffad9",
                 "shasum": ""
             },
@@ -1509,7 +1509,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/427a06e7c25d0fa1fbd37bf0325d9d3eb2dc383a",
+                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/79d24dbd62ab7eba4973d677c5af31aca24adc1d",
                 "reference": "427a06e7c25d0fa1fbd37bf0325d9d3eb2dc383a",
                 "shasum": ""
             },
@@ -1836,7 +1836,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ba9d57a96b3a2499599b2ca93a32f3ed955b269c",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/39aeecefaeacb43b7315399f37aee63b34930ec1",
                 "reference": "ba9d57a96b3a2499599b2ca93a32f3ed955b269c",
                 "shasum": ""
             },
@@ -2341,7 +2341,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/fbbcefd7821edfaa31a48712bba0960979243c1c",
                 "reference": "e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00",
                 "shasum": ""
             },
@@ -2459,7 +2459,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/67f0d2b927796648c5c38cedb7a2c8f1cf14e7dc",
                 "reference": "dff51f72b0706335131b00a7f49606168c582594",
                 "shasum": ""
             },
@@ -2742,7 +2742,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/90dcd92691a0c45e0b7e84d15e3d23254778683f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/7b7c9b86a1acf9ed89715e9e765e1ec6111a8caa",
                 "reference": "90dcd92691a0c45e0b7e84d15e3d23254778683f",
                 "shasum": ""
             },
@@ -2982,7 +2982,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:vallas/vallas-model-bundle.git",
-                "reference": "51a0602666fdf3add5eefde9054bda51be22b35a"
+                "reference": "205bfae0110bab38974ff33ed15e3e341b6e0c37"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -3016,7 +3016,7 @@
             ],
             "description": "Common ESocial model bundle",
             "homepage": "https://bitbucket.org/esocialtech/vallas-model-bundle.git",
-            "time": "2016-05-25 14:27:16"
+            "time": "2016-05-31 08:10:13"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -3316,7 +3316,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/2923d1caea6e93553872866badd7f554c2f1d18d",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/127c5515609fc1155cbce4b1a8a5f0a5d588a529",
                 "reference": "2923d1caea6e93553872866badd7f554c2f1d18d",
                 "shasum": ""
             },
@@ -3431,7 +3431,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/09395c66079bab8f8a5bb47a4a802ef918f1a312",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/ae8552781fa192c76424a317ded046bc7a886338",
                 "reference": "09395c66079bab8f8a5bb47a4a802ef918f1a312",
                 "shasum": ""
             },
