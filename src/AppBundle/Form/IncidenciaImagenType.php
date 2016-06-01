@@ -43,6 +43,11 @@ class IncidenciaImagenType extends ESocialType {
         return 'incidencia_img';
     }
 
+    public function getBlockPrefix()
+    {
+        return 'incidencia_img';
+    }
+
     public function configureOptions(OptionsResolver $resolver){
 
         parent::configureOptions($resolver);

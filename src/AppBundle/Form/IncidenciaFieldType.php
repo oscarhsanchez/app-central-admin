@@ -115,6 +115,11 @@ class IncidenciaFieldType extends ESocialType {
         return 'incidencia';
     }
 
+    public function getBlockPrefix()
+    {
+        return 'incidencia';
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

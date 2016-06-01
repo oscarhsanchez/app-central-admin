@@ -124,6 +124,11 @@ class OrdenTrabajoFieldType extends ESocialType {
         return 'work_order';
     }
 
+    public function getBlockPrefix()
+    {
+        return 'work_order';
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

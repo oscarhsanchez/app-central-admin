@@ -42,6 +42,11 @@ class UbicacionImagenType extends ESocialType {
         return 'ubicacion_img';
     }
 
+    public function getBlockPrefix()
+    {
+        return 'ubicacion_img';
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

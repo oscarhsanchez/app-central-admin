@@ -44,6 +44,11 @@ class OrdenTrabajoImagenType extends ESocialType {
         return 'work_order_img';
     }
 
+    public function getBlockPrefix()
+    {
+        return 'work_order_img';
+    }
+
     public function configureOptions(OptionsResolver $resolver){
 
         parent::configureOptions($resolver);
