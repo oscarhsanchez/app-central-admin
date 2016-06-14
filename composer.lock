@@ -846,7 +846,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-admin-bundle.git",
-                "reference": "8e3121d91744d5f7cd0a42cc77a733b6df215c6a"
+                "reference": "04096495fbfcfb193fc09db1cd737a86b63f923c"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -887,7 +887,7 @@
             ],
             "description": "Common ESocial Admin bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-admin-bundle.git",
-            "time": "2016-05-30 10:30:25"
+            "time": "2016-06-14 08:44:27"
         },
         {
             "name": "esocial/esocial-model-bundle",
