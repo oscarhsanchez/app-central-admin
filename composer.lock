@@ -973,7 +973,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-utils-bundle.git",
-                "reference": "d1b1b48c0779b720be6b7d789d575055cb14cc35"
+                "reference": "1fc5f3bcbab0e5e90c7a1783ec63c07bcc336b77"
             },
             "require": {
                 "aws/aws-sdk-php": "2.*",
@@ -1005,7 +1005,7 @@
             "keywords": [
                 "util bundle"
             ],
-            "time": "2016-05-26 15:24:26"
+            "time": "2016-06-13 08:34:48"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
