@@ -210,8 +210,7 @@ class SecurityUserController extends BaseSecurityUserController {
         $esocialAdminUserType = $this->getEsocialAdminUserType();
 
         $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
-        $roles = $entity->getRoles();
-        $this->prepareRolePermissions($entity, count($roles)> 0 ? $roles[0] : null);
+        $this->prepareRolePermissions($entity);
 
         $form = $this->createForm($esocialAdminUserType, $entity);
 
@@ -236,8 +235,7 @@ class SecurityUserController extends BaseSecurityUserController {
         $esocialAdminUserType = $this->getEsocialAdminUserType();
         $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
 
-        $roles = $entity->getRoles();
-        $this->prepareRolePermissions($entity, count($roles)> 0 ? $roles[0] : null);
+        $this->prepareRolePermissions($entity);
 
         $form = $this->createForm($esocialAdminUserType, $entity);
 
