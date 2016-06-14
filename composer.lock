@@ -933,10 +933,9 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-security-bundle.git",
-                "reference": "ac64dba42218f6ec6a887fa7aa3425383cb04c82"
+                "reference": "8c55f281b746395570fa79de81d368bb014711a5"
             },
             "require": {
-                "esocial/esocial-admin-bundle": "dev-devel",
                 "esocial/esocial-model-bundle": "dev-devel",
                 "php": ">=5.3.9"
             },
@@ -965,7 +964,7 @@
             "keywords": [
                 "esocial security bundle"
             ],
-            "time": "2016-05-26 15:23:43"
+            "time": "2016-06-14 08:43:31"
         },
         {
             "name": "esocial/esocial-utils-bundle",
