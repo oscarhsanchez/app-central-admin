@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c28fdf5762074bde03dcca197346de2",
-    "content-hash": "503af927b7fd12644e821310cbfa3404",
+    "hash": "85b7954f219c4eb332ef52c931a9471e",
+    "content-hash": "b12705bc31c911b04eccebe469f56c46",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -846,7 +846,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-admin-bundle.git",
-                "reference": "04096495fbfcfb193fc09db1cd737a86b63f923c"
+                "reference": "bc585c91db8bae7558e663be15ef96bf1d3af816"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -887,7 +887,7 @@
             ],
             "description": "Common ESocial Admin bundle",
             "homepage": "https://bitbucket.org/esocialtech/esocial-admin-bundle.git",
-            "time": "2016-06-14 08:44:27"
+            "time": "2016-06-15 08:55:49"
         },
         {
             "name": "esocial/esocial-model-bundle",
@@ -933,7 +933,7 @@
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:esocialtech/esocial-security-bundle.git",
-                "reference": "8c55f281b746395570fa79de81d368bb014711a5"
+                "reference": "168324f0c222ca0442a6daa7b946ec941da99232"
             },
             "require": {
                 "esocial/esocial-model-bundle": "dev-devel",
@@ -964,7 +964,7 @@
             "keywords": [
                 "esocial security bundle"
             ],
-            "time": "2016-06-14 08:43:31"
+            "time": "2016-06-15 11:54:39"
         },
         {
             "name": "esocial/esocial-utils-bundle",
@@ -3490,7 +3490,7 @@
         "doctrine/doctrine-fixtures-bundle": 20,
         "hautelook/alice-bundle": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.9"
