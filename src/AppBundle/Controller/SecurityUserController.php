@@ -97,153 +97,44 @@ class SecurityUserController extends BaseSecurityUserController {
 
     }
 
-    /**
-     * @Route("/{token}/edit/password", name="admin_user_password_edit", options={"expose"=true})
-     * @Method("GET")
-     */
-    public function editPasswordAction($token){
+    public function initEntity($entity){
 
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
+        parent::initEntity($entity);
 
-        $form = $this->createForm('AppBundle\Form\VallasUserPasswordType', $entity);
-
-        return $this->render('AppBundle:screens/user:form_password.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
-
+        if (!$entity->getId()) {
+            $userPais = new UserPais();
+            $userPais->setUser($entity);
+            $userPais->setPais($this->getSessionCountry());
+            $entity->addUserPaise($userPais);
+        }
     }
 
-    /**
-     * @Route("/{token}/update/password", name="admin_user_password_update")
-     * @Method("POST")
-     */
-    public function updatePasswordAction(Request $request, $token){
-
+    /* OVERWRITE THIS FUNCTION WITH NEEDED */
+    public function getEntityByToken($token){
         $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token);
-        $form = $this->createForm('AppBundle\Form\VallasUserPasswordType', $entity);
-
-        $boolSaved = false;
-
-        if ($request->getMethod() == 'POST'){
-
-            $form->handleRequest($request);
-
-            if ($form->isValid()){
-                Database::saveEntity($em, $entity);
-                $boolSaved = true;
-            }
-        }
-
-        if ($boolSaved){
-            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('form.notice.saved_success'));
-            return $this->redirect($this->generateUrl('admin_user_password_edit', array('token' => $entity->getToken())));
-        }else{
-            $this->get('session')->getFlashBag()->add('error', $this->get('translator')->trans('form.notice.saved_error'));
-        }
-
-        return $this->render('AppBundle:screens/user:form_password.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
-
-    }
-
-    private function initEntity($entity){
-        $userPais = new UserPais();
-        $userPais->setUser($entity);
-        $userPais->setPais($this->getSessionCountry());
-        $entity->addUserPaise($userPais);
+        return $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
     }
 
     /** @FilterAware(disableFilter="country_filter") */
     public function addAction(){
-
-        $em = $this->getDoctrine()->getManager();
-        $esocialAdminUserClass = $this->getESocialAdminUserClass();
-        $esocialAdminUserType = $this->getEsocialAdminUserType();
-
-        $entity = new $esocialAdminUserClass();
-        $this->initEntity($entity);
-        $form = $this->createForm($esocialAdminUserType, $entity);
-
-        return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView()
-        ));
-
+        return parent::addAction();
     }
 
     /** @FilterAware(disableFilter="country_filter") */
     public function createAction(Request $request){
-
-        $em = $this->getDoctrine()->getManager();
-        $esocialAdminUserClass = $this->getESocialAdminUserClass();
-        $esocialAdminUserType = $this->getEsocialAdminUserType();
-
-        $entity = new $esocialAdminUserClass();
-        $this->initEntity($entity);
-        $form = $this->createForm($esocialAdminUserType, $entity);
-
-        $boolSaved = $this->saveAction($request, $entity, array(), $form);
-
-        if ($boolSaved){
-            Database::saveEntity($em, $entity);
-            return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
-        }
-
-        return $this->render('ESocialAdminBundle:screens/user:form.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
+        return parent::createAction($request);
 
     }
 
     /** @FilterAware(disableFilter="country_filter") */
     public function updateAction(Request $request, $token){
-
-        $em = $this->getDoctrine()->getManager();
-
-        $esocialAdminUserType = $this->getEsocialAdminUserType();
-
-        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
-        $this->prepareRolePermissions($entity);
-
-        $form = $this->createForm($esocialAdminUserType, $entity);
-
-        $boolSaved = $this->saveAction($request, $entity, array(), $form);
-
-        if ($boolSaved){
-            Database::saveEntity($em, $entity);
-            return $this->redirect($this->generateUrl('esocial_admin_user_edit', array('token' => $entity->getToken())));
-        }
-
-        return $this->render('ESocialSecurityBundle:screens/user:form.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
+        return parent::updateAction($request, $token);
 
     }
 
     /** @FilterAware(disableFilter="country_filter") */
     public function editAction($token){
-
-        $em = $this->getDoctrine()->getManager();
-        $esocialAdminUserType = $this->getEsocialAdminUserType();
-        $entity = $em->getRepository($this->getESocialAdminUserClass())->getOneByToken($token, array('user_paises' => null));
-
-        $this->prepareRolePermissions($entity);
-
-        $form = $this->createForm($esocialAdminUserType, $entity);
-
-        return $this->render('ESocialSecurityBundle:screens/user:form.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
-
+        return parent::editAction($token);
     }
 
     public function saveAction(Request $request, $entity, $params_original, $form){
