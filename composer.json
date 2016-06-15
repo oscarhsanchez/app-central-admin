@@ -94,5 +94,6 @@
           "url" : "git@bitbucket.org:vallas/vallas-model-bundle.git"
       }
   ],
-  "minimum-stability": "dev"
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }
